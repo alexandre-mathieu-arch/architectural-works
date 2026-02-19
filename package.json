@@ -1,0 +1,20 @@
+{
+  "name": "atelier-archi",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.11.2",
+    "@nuxt/image": "^2.0.0",
+    "@nuxt/ui": "^4.4.0",
+    "@tailwindcss/vite": "^4.2.0",
+    "better-sqlite3": "^12.6.2",
+    "nuxt": "^4.3.1",
+    "tailwindcss": "^4.2.0"
+  }
+}
