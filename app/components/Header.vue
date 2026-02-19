@@ -23,6 +23,8 @@
           :key="link.to" 
           :to="link.to"
           class="u-header-link"
+          :class="{ 'text-gray-600': activeLink === link.label }"
+          @click="handleLinkClick(link.label)"
           @mouseenter="emit('linkHover', link.label)"
           @mouseleave="emit('linkHover', '')"
         >
@@ -38,6 +40,7 @@
         color="black"
         class="font-medium p-0 hover:bg-transparent text-[21px] uppercase tracking-wide"
         style="font-family: var(--font-dm-sans);"
+        @click="handleLinkClick('Langue')"
         @mouseenter="emit('linkHover', 'Langue')"
         @mouseleave="emit('linkHover', '')"
       />
@@ -46,7 +49,16 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(['linkHover'])
+import { ref } from 'vue';
+
+const emit = defineEmits(['linkClick', 'linkHover'])
+
+const activeLink = ref('');
+
+const handleLinkClick = (label: string) => {
+  activeLink.value = label;
+  emit('linkClick', label);
+};
 
 const links = [{
   label: 'PROJETS',

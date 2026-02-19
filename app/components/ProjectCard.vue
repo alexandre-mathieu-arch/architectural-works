@@ -8,8 +8,8 @@
         <div class="relative w-full aspect-square">
           <!-- Image -->
           <NuxtImg
-            v-if="project.image"
-            :src="project.image"
+            v-if="displayImage"
+            :src="displayImage"
             :alt="project.title"
             class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0"
           />
@@ -41,13 +41,25 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
 const props = defineProps<{
   project: {
     path: string;
     title: string;
     description: string;
-    image?: string;
+    image?: string; // Old single image field
+    images?: string[]; // New multiple images field
     tags?: string[];
   };
 }>();
+
+console.log('Project data in ProjectCard:', props.project);
+
+const displayImage = computed(() => {
+  if (props.project.images && props.project.images.length > 0) {
+    return props.project.images[0];
+  }
+  return props.project.image;
+});
 </script>

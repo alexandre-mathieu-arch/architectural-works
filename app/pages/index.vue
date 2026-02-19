@@ -1,9 +1,9 @@
 <template>
   <NuxtLayout name="home">
-    <!-- Hero plein écran -->
-    <div class="relative w-full h-full">
+    <!-- Hero avec marges -->
+    <div class="relative w-[90vw] lg:w-[60vw] mx-auto h-full">
       <img
-        src="/hero.jpg"
+        src="/001.jpg"
         alt="Atelier Archi"
         class="absolute inset-0 w-full h-full object-cover"
       />
@@ -16,7 +16,7 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'home', // Use the new home layout
-  title: 'Accueil' // Title for the PageTitle component
+  title: 'Atelier Kerswell'
 })
 </script>
 

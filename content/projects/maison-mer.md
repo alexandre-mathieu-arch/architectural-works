@@ -1,5 +1,7 @@
 ---
-image: "/images/projects/maison-mer.jpg"
+images:
+  - "/images/projects/maison-mer.jpg"
+  - "/images/projects/maison-mer.jpg"
 title: "Maison Mer"
 date: 2026-02-10
 draft: false

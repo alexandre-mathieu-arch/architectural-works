@@ -1,13 +1,11 @@
 <template>
   <div>
-    <Header @linkHover="handleLinkHover" />
+    <Header @linkClick="handleLinkClick" />
     
     <div 
-      v-if="currentRoute.path === '/' && hoveredTitle"
-      class="w-[90vw] lg:w-[60vw] mx-auto px-0 absolute left-1/2 -translate-x-1/2 z-40"
-      :style="{ top: `calc(var(--header-height) + 10px)` }"
+      class="w-[90vw] lg:w-[60vw] mx-auto px-0"
     >
-      <PageTitle :title="hoveredTitle" />
+      <PageTitle :title="displayedTitle" />
     </div>
 
     <main class="w-[90vw] lg:w-[60vw] mx-auto px-0">
@@ -19,19 +17,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import Header from '~/components/Header.vue';
 import PageTitle from '~/components/PageTitle.vue';
 import TheFooter from '~/components/TheFooter.vue';
 
 const route = useRoute();
-const currentRoute = computed(() => route); // Make route reactive for comparison
+const clickedTitle = ref(''); 
 
-const hoveredTitle = ref('');
+// Initialize clickedTitle with the current page's meta title on component mount/route change
+watch(() => route.meta.title, (newTitle) => {
+  if (newTitle) {
+    clickedTitle.value = newTitle as string;
+    console.log('WATCH route.meta.title:', clickedTitle.value);
+  }
+}, { immediate: true }); // immediate: true ensures it runs on initial load
 
-const handleLinkHover = (title: string) => {
-  hoveredTitle.value = title;
+const handleLinkClick = (title: string) => {
+  clickedTitle.value = title;
+  console.log('handleLinkClick:', clickedTitle.value);
 };
+
+const displayedTitle = computed(() => {
+  const title = clickedTitle.value || (route.meta.title as string) || '';
+  console.log('displayedTitle computed:', title);
+  return title;
+});
 </script>
 
 <style scoped>
