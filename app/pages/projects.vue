@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-8 pb-12">
+  <div class="pt-16 pb-12">
 
     <div v-if="filteredProjects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <ProjectCard v-for="project in filteredProjects" :key="project.path" :project="project" />
