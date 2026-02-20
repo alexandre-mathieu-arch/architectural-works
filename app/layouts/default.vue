@@ -5,7 +5,7 @@
     <div 
       class="w-[95%] lg:w-[60%] mx-auto px-0"
     >
-      <PageTitle :title="displayedTitle" />
+      <PageTitle :title="displayedTitle" :show-filters="route.meta.showFilters === true" />
     </div>
 
     <main class="w-[95%] lg:w-[60%] mx-auto px-0">

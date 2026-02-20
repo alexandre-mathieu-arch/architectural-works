@@ -3,7 +3,7 @@
     <h1 class="text-4xl md:text-6xl lg:text-[86px] font-bold uppercase leading-none" style="font-family: var(--font-dm-sans);">
       {{ title }}
     </h1>
-    <div v-if="title?.toUpperCase() === 'PROJETS'" class="flex flex-wrap gap-4 mt-4">
+    <div v-if="showFilters && title?.toUpperCase() === 'PROJETS'" class="flex flex-wrap gap-4 mt-4">
       <UDropdown :items="[['Typologie 1', 'Typologie 2']]">
         <UButton class="font-bold text-[12px] uppercase" style="font-family: var(--font-dm-sans);" color="gray" variant="ghost" label="Typologie" trailing-icon="i-heroicons-chevron-down-20-solid" />
       </UDropdown>
@@ -25,6 +25,7 @@ import { defineProps, watch } from 'vue';
 
 const props = defineProps<{
   title: string;
+  showFilters?: boolean;
 }>();
 
 watch(() => props.title, (newTitle) => {

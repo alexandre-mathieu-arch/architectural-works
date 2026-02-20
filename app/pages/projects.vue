@@ -15,7 +15,8 @@ import ProjectCard from '~/components/ProjectCard.vue';
 
 definePageMeta({
   layout: 'default',
-  title: 'Projets' // Title for the PageTitle component
+  title: 'Projets', // Title for the PageTitle component
+  showFilters: true
 });
 
 const { data: projects } = await useAsyncData('projects', () =>
