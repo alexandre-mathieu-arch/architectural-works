@@ -1,12 +1,10 @@
 <template>
-  <NuxtLayout name="default">
-    <div class="pt-8 pb-12">
-      <div class="space-y-12">
-        <!-- Future content for News -->
-        <p class="text-gray-500 italic">Les actualités seront bientôt disponibles...</p>
-      </div>
+  <div class="pt-8 pb-12">
+    <div class="space-y-12">
+      <!-- Future content for News -->
+      <p class="text-gray-500 italic">Les actualités seront bientôt disponibles...</p>
     </div>
-  </NuxtLayout>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -1,4 +1,10 @@
-html, body, * {
+html, body {
+  cursor: none !important;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+}
+
+* {
   cursor: none !important;
 }
 

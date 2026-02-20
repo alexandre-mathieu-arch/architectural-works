@@ -1,6 +1,8 @@
 <template>
   <NuxtRouteAnnouncer />
-  <NuxtPage />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
   <CustomCursor />
 </template>
 

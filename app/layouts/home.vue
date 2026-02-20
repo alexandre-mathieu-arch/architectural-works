@@ -1,14 +1,16 @@
 <template>
-  <div class="h-screen relative">
+  <div class="h-screen relative overflow-hidden">
     <Header @linkClick="handleLinkClick" @linkHover="handleLinkHover" class="fixed top-0 left-0 w-full z-50"/>
     
     <!-- PageTitle Overlay -->
     <div 
       v-if="displayedTitle"
-      class="w-[90vw] lg:w-[60vw] mx-auto px-0 absolute left-1/2 -translate-x-1/2 z-40 bg-transparent"
+      class="w-full absolute left-0 z-40 bg-transparent"
       :style="{ top: `calc(var(--header-height) + 10px)` }"
     >
-      <PageTitle :title="displayedTitle" />
+      <div class="w-[95%] lg:w-[60%] mx-auto px-0">
+        <PageTitle :title="displayedTitle" />
+      </div>
     </div>
 
     <!-- Main Content (Hero) -->
@@ -17,7 +19,9 @@
     </main>
 
     <!-- Footer Overlay -->
-    <TheFooter class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90vw] lg:w-[60vw] px-0 pt-4 border-t border-black z-40 bg-transparent" />
+    <div class="absolute bottom-0 left-0 w-full z-40 bg-transparent">
+      <TheFooter class="pt-4 border-t border-black" />
+    </div>
   </div>
 </template>
 

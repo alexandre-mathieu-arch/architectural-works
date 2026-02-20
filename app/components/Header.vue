@@ -3,7 +3,7 @@
     class="bg-white border-b border-black backdrop-blur-none"
     :ui="{
       wrapper: 'bg-white relative z-50',
-      container: 'w-[90vw] lg:w-[60vw] mx-auto px-0 flex justify-between items-center border-b border-black',
+      container: 'w-[95%] lg:w-[60%] mx-auto px-0 flex justify-between items-center border-b border-black',
       button: {
         base: 'hidden'
       }

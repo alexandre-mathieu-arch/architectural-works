@@ -1,15 +1,13 @@
 <template>
-  <NuxtLayout name="default">
-    <div class="pt-8 pb-12">
+  <div class="pt-8 pb-12">
 
-      <div v-if="projects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <ProjectCard v-for="project in projects" :key="project.path" :project="project" />
-      </div>
-      <div v-else class="text-center py-20">
-        <p class="text-gray-500">No projects found.</p>
-      </div>
+    <div v-if="projects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <ProjectCard v-for="project in projects" :key="project.path" :project="project" />
     </div>
-  </NuxtLayout>
+    <div v-else class="text-center py-20">
+      <p class="text-gray-500">No projects found.</p>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

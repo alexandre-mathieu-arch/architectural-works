@@ -3,12 +3,12 @@
     <Header @linkClick="handleLinkClick" />
     
     <div 
-      class="w-[90vw] lg:w-[60vw] mx-auto px-0"
+      class="w-[95%] lg:w-[60%] mx-auto px-0"
     >
       <PageTitle :title="displayedTitle" />
     </div>
 
-    <main class="w-[90vw] lg:w-[60vw] mx-auto px-0">
+    <main class="w-[95%] lg:w-[60%] mx-auto px-0">
       <slot />
     </main>
 

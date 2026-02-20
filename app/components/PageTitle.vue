@@ -1,10 +1,10 @@
 <template>
   <div class="pb-4 bg-transparent">
-    <h1 class="text-[86px] font-bold uppercase" style="font-family: var(--font-dm-sans);">
+    <h1 class="text-4xl md:text-6xl lg:text-[86px] font-bold uppercase leading-none" style="font-family: var(--font-dm-sans);">
       {{ title }}
     </h1>
-    <div v-if="title === 'Projets'" class="flex gap-4 mt-4">
-      <UDropdown :items="[['Typologie 1', 'Typologie 2'], ['Taille 1', 'Taille 2'], ['Année 1', 'Année 2'], ['Nom 1', 'Nom 2']]">
+    <div v-if="title?.toUpperCase() === 'PROJETS'" class="flex flex-wrap gap-4 mt-4">
+      <UDropdown :items="[['Typologie 1', 'Typologie 2']]">
         <UButton class="font-bold text-[12px] uppercase" style="font-family: var(--font-dm-sans);" color="gray" variant="ghost" label="Typologie" trailing-icon="i-heroicons-chevron-down-20-solid" />
       </UDropdown>
       <UDropdown :items="[['Taille 1', 'Taille 2']]">
