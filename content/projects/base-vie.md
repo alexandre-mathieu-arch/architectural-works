@@ -8,5 +8,5 @@ images:
 description: "Structure modulaire innovante pour les environnements extrêmes, alliant robustesse technique et confort de vie."
 typologies: ["Bureaux"]
 tailles: ["L"]
-pays: ["Antarctique"]
+pays: ["France"]
 ---

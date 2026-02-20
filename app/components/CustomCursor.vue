@@ -1,8 +1,8 @@
 <template>
   <div
-    v-if="mounted"
+    v-if="mounted && !isHidden"
     ref="cursor"
-    class="fixed z-50 rounded-full bg-black pointer-events-none transition-transform duration-75 ease-out"
+    class="fixed z-[9999] rounded-full bg-black pointer-events-none transition-transform duration-75 ease-out"
     :style="{
       left: `${x}px`,
       top: `${y}px`,
@@ -14,7 +14,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const isHidden = computed(() => route.meta.hideCustomCursor === true);
 
 const x = ref(0);
 const y = ref(0);

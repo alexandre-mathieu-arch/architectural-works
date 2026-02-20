@@ -1,9 +1,9 @@
 <template>
   <UHeader 
-    class="bg-white border-b border-black backdrop-blur-none"
+    class="bg-white backdrop-blur-none border-none shadow-none"
     :ui="{
-      wrapper: 'bg-white relative z-50',
-      container: 'max-w-[1200px] mx-auto px-5 flex justify-between items-center border-b border-black h-[var(--header-height)]',
+      wrapper: 'bg-white relative z-50 border-none shadow-none',
+      container: 'w-full max-w-[1160px] mx-auto flex justify-between items-center h-[var(--header-height)] border-b border-black',
       button: {
         base: 'hidden'
       }

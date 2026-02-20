@@ -1,11 +1,7 @@
 html, body {
-  cursor: none !important;
+  cursor: none;
   overflow-x: hidden;
   scrollbar-gutter: stable;
-}
-
-* {
-  cursor: none !important;
 }
 
 @import "tailwindcss";

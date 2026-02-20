@@ -17,6 +17,11 @@ export default defineContentConfig({
         typologies: z.array(z.string()).optional(),
         tailles: z.array(z.string()).optional(),
         pays: z.array(z.string()).optional(),
+        lieu: z.string().optional(),
+        surface: z.string().optional(),
+        cout: z.string().optional(),
+        phase: z.string().optional(),
+        statut: z.string().optional(),
       })
     }),
   },
