@@ -1,12 +1,12 @@
 <template>
-  <div class="pb-4 bg-transparent">
+  <div class="pb-2 bg-transparent">
     <h1 class="text-4xl md:text-6xl lg:text-[86px] font-bold uppercase leading-none" style="font-family: var(--font-dm-sans);">
       {{ title }}
     </h1>
     
-    <div v-if="showFilters && title?.toUpperCase() === 'PROJETS'" class="mt-8">
+    <div v-if="showFilters && title?.toUpperCase() === 'PROJETS'" class="mt-4">
       <!-- Accordion Buttons -->
-      <div class="flex flex-wrap gap-x-8 gap-y-4 border-b border-black pb-4">
+      <div class="flex flex-wrap gap-x-8 gap-y-4 border-b border-black pb-2">
         <button 
           v-for="filter in filters" 
           :key="filter.id"
@@ -49,7 +49,7 @@
         leave-from-class="transform scale-100 opacity-100"
         leave-to-class="transform scale-95 opacity-0"
       >
-        <div v-if="activeMenu" class="py-6 border-b border-black">
+        <div v-if="activeMenu" class="py-4 border-b border-black">
           <div class="flex flex-wrap gap-4">
             <!-- Options for Typology -->
             <template v-if="activeMenu === 'typology'">
@@ -155,7 +155,7 @@
       </Transition>
 
       <!-- Active Filter Pills -->
-      <div v-if="hasActiveFilters" class="flex flex-wrap gap-2 mt-4">
+      <div v-if="hasActiveFilters" class="flex flex-wrap gap-2 mt-2">
         <span v-if="selectedTypology" class="text-[11px] uppercase bg-gray-100 px-2 py-0.5 rounded flex items-center gap-1 text-black">
           Typologie: {{ selectedTypology }}
           <svg viewBox="0 0 20 20" fill="currentColor" class="w-3 h-3 cursor-pointer" @click="selectedTypology = null">

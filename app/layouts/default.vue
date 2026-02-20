@@ -12,7 +12,7 @@
       <slot />
     </main>
 
-    <TheFooter class="py-8 mt-16 border-t border-black" />
+    <TheFooter class="py-8 mt-8 border-t border-black" />
   </div>
 </template>
 
