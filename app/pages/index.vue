@@ -1,12 +1,14 @@
 <template>
   <!-- Hero avec marges -->
-  <div class="relative w-[95%] lg:w-[60%] mx-auto h-full">
-    <img
-      src="/001.jpg"
-      alt="Atelier Archi"
-      class="absolute inset-0 w-full h-full object-cover"
-    />
-    <div class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center gap-6">
+  <div class="relative max-w-[1200px] mx-auto px-5 h-full">
+    <div class="absolute inset-y-0 left-5 right-5 overflow-hidden">
+      <img
+        src="/001.jpg"
+        alt="Atelier Archi"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center gap-6">
+      </div>
     </div>
   </div>
 </template>

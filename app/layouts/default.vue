@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="relative min-h-screen">
     <Header @linkClick="handleLinkClick" />
     
     <div 
-      class="w-[95%] lg:w-[60%] mx-auto px-0"
+      class="max-w-[1200px] mx-auto px-5"
     >
       <PageTitle :title="displayedTitle" :show-filters="route.meta.showFilters === true" />
     </div>
 
-    <main class="w-[95%] lg:w-[60%] mx-auto px-0">
+    <main class="max-w-[1200px] mx-auto px-5">
       <slot />
     </main>
 
@@ -29,19 +29,19 @@ const clickedTitle = ref('');
 watch(() => route.meta.title, (newTitle) => {
   if (newTitle) {
     clickedTitle.value = newTitle as string;
-    console.log('WATCH route.meta.title:', clickedTitle.value);
   }
-}, { immediate: true }); // immediate: true ensures it runs on initial load
+}, { immediate: true }); 
 
 const handleLinkClick = (title: string) => {
   clickedTitle.value = title;
-  console.log('handleLinkClick:', clickedTitle.value);
 };
 
 const displayedTitle = computed(() => {
-  const title = clickedTitle.value || (route.meta.title as string) || '';
-  console.log('displayedTitle computed:', title);
-  return title;
+  // Priority: 
+  // 1. Manually clicked link title
+  // 2. Dynamic title set in route meta by the page (for [...slug].vue)
+  // 3. Static title set in definePageMeta
+  return clickedTitle.value || (route.meta.dynamicTitle as string) || (route.meta.title as string) || '';
 });
 </script>
 

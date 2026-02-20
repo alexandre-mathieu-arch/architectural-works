@@ -7,7 +7,7 @@
       v-if="displayedTitle"
       class="w-full absolute top-0 left-0 z-40 bg-transparent pointer-events-none"
     >
-      <div class="w-[95%] lg:w-[60%] mx-auto px-0 pt-[var(--header-height)] pointer-events-auto">
+      <div class="max-w-[1200px] mx-auto px-5 pt-[var(--header-height)] pointer-events-auto">
         <PageTitle :title="displayedTitle" />
       </div>
     </div>

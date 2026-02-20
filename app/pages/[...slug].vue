@@ -15,6 +15,13 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
+// Update route meta with project title so it's picked up by PageTitle in layout
+watchEffect(() => {
+  if (page.value) {
+    route.meta.dynamicTitle = page.value.title;
+  }
+});
+
 // Handle both single image and multiple images
 const images = computed(() => {
   if (page.value) {
@@ -32,11 +39,6 @@ const images = computed(() => {
 <template>
   <div v-if="page" class="project-container">
     <div class="project-page">
-      <header class="project-header">
-        <h1>{{ page.title }}</h1>
-        <p v-if="page.description">{{ page.description }}</p>
-      </header>
-
       <div class="project-gallery" v-if="images.length > 0">
         <ImageCarousel :images="images" />
       </div>
