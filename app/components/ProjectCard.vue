@@ -2,7 +2,7 @@
   <NuxtLink :to="project.path">
     <UCard 
       class="h-full flex flex-col hover:ring-2 hover:ring-primary-500 transition-all duration-300 group relative overflow-hidden"
-      :ui="{ body: { padding: 'p-0' }, header: { padding: 'p-0', base: 'relative overflow-hidden' }, footer: { padding: 'p-4' } }"
+      :ui="{ body: { padding: 'p-0' }, header: { padding: 'p-0', base: 'relative overflow-hidden' } }"
     >
       <template #header>
         <div class="relative w-full aspect-square">
@@ -18,32 +18,33 @@
             <UIcon name="i-heroicons-photo" class="w-12 h-12 text-gray-400" />
           </div>
           
-          <!-- Titre affiché au survol -->
-          <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-between">
-            <div>
-              <h3 class="text-[21px] font-bold text-black uppercase" style="font-family: var(--font-dm-sans);">{{ project.title }}</h3>
-              <div class="flex flex-wrap gap-1 mt-2">
-                <span v-for="t in project.typologies" :key="t" class="text-[10px] uppercase border border-black px-2 py-0.5 rounded-full font-bold">
-                  {{ t }}
-                </span>
-              </div>
-            </div>
-            <div v-if="project.tailles?.length" class="text-[14px] font-bold uppercase">
-              Taille: {{ project.tailles.join(', ') }}
+          <!-- Infos affichées au survol -->
+          <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-0 flex flex-col justify-start">
+            <!-- Titre en haut à gauche sans marge -->
+            <h3 class="text-[21px] font-bold text-black uppercase m-0 p-0 leading-none" style="font-family: var(--font-dm-sans);">{{ project.title }}</h3>
+            
+            <div class="flex flex-col items-start gap-2 w-full mt-2">
+              <!-- Typologies -->
+              <span v-for="t in project.typologies" :key="t" class="text-[10px] uppercase border border-black px-2 py-0.5 font-bold ml-0">
+                {{ t }}
+              </span>
+
+              <!-- Année -->
+              <span v-if="project.date" class="text-[10px] uppercase border border-black px-2 py-0.5 font-bold">
+                {{ new Date(project.date).getFullYear() }}
+              </span>
+
+              <!-- Tailles -->
+              <span v-for="s in project.tailles" :key="s" class="text-[10px] uppercase border border-black px-2 py-0.5 font-bold">
+                {{ s }}
+              </span>
+
+              <!-- Pays -->
+              <span v-for="c in project.pays" :key="c" class="text-[10px] uppercase border border-black px-2 py-0.5 font-bold">
+                {{ c }}
+              </span>
             </div>
           </div>
-        </div>
-      </template>
-
-      <div class="flex-1 px-4 py-3">
-        <p class="text-gray-500 dark:text-gray-400 mt-2 line-clamp-2 text-sm">{{ project.description }}</p>
-      </div>
-
-      <template v-if="project.tags?.length" #footer>
-        <div class="flex flex-wrap gap-2">
-          <UBadge v-for="tag in project.tags" :key="tag" variant="subtle" size="xs" class="capitalize">
-            {{ tag }}
-          </UBadge>
         </div>
       </template>
     </UCard>
@@ -63,6 +64,8 @@ const props = defineProps<{
     tags?: string[];
     typologies?: string[];
     tailles?: string[];
+    pays?: string[];
+    date?: string | Date;
   };
 }>();
 

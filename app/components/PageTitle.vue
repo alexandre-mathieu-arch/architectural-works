@@ -55,7 +55,7 @@
             <template v-if="activeMenu === 'typology'">
               <button 
                 @click="selectedTypology = null; activeMenu = null"
-                class="px-4 py-1 border border-black rounded-full text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                class="px-4 py-1 border border-black text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
                 :class="{ 'bg-black text-white': selectedTypology === null }"
               >
                 Toutes
@@ -64,7 +64,7 @@
                 v-for="opt in typologyOptions" 
                 :key="opt"
                 @click="selectedTypology = opt; activeMenu = null"
-                class="px-4 py-1 border border-black rounded-full text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                class="px-4 py-1 border border-black text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
                 :class="{ 'bg-black text-white': selectedTypology === opt }"
               >
                 {{ opt }}
@@ -75,7 +75,7 @@
             <template v-if="activeMenu === 'size'">
               <button 
                 @click="selectedSize = null; activeMenu = null"
-                class="px-4 py-1 border border-black rounded-full text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                class="px-4 py-1 border border-black text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
                 :class="{ 'bg-black text-white': selectedSize === null }"
               >
                 Toutes
@@ -84,7 +84,7 @@
                 v-for="opt in sizeOptions" 
                 :key="opt"
                 @click="selectedSize = opt; activeMenu = null"
-                class="px-4 py-1 border border-black rounded-full text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                class="px-4 py-1 border border-black text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
                 :class="{ 'bg-black text-white': selectedSize === opt }"
               >
                 {{ opt }}
@@ -95,7 +95,7 @@
             <template v-if="activeMenu === 'year'">
               <button 
                 @click="selectedYear = null; activeMenu = null"
-                class="px-4 py-1 border border-black rounded-full text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                class="px-4 py-1 border border-black text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
                 :class="{ 'bg-black text-white': selectedYear === null }"
               >
                 Toutes
@@ -104,8 +104,28 @@
                 v-for="opt in yearOptions" 
                 :key="opt"
                 @click="selectedYear = opt; activeMenu = null"
-                class="px-4 py-1 border border-black rounded-full text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                class="px-4 py-1 border border-black text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
                 :class="{ 'bg-black text-white': selectedYear === opt }"
+              >
+                {{ opt }}
+              </button>
+            </template>
+
+            <!-- Options for Pays -->
+            <template v-if="activeMenu === 'country'">
+              <button 
+                @click="selectedCountry = null; activeMenu = null"
+                class="px-4 py-1 border border-black text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                :class="{ 'bg-black text-white': selectedCountry === null }"
+              >
+                Tous
+              </button>
+              <button 
+                v-for="opt in countryOptions" 
+                :key="opt"
+                @click="selectedCountry = opt; activeMenu = null"
+                class="px-4 py-1 border border-black text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                :class="{ 'bg-black text-white': selectedCountry === opt }"
               >
                 {{ opt }}
               </button>
@@ -115,7 +135,7 @@
             <template v-if="activeMenu === 'name'">
               <button 
                 @click="selectedProjectTitle = null; activeMenu = null"
-                class="px-4 py-1 border border-black rounded-full text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                class="px-4 py-1 border border-black text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
                 :class="{ 'bg-black text-white': selectedProjectTitle === null }"
               >
                 Tous
@@ -124,7 +144,7 @@
                 v-for="opt in projectTitleOptions" 
                 :key="opt"
                 @click="selectedProjectTitle = opt; activeMenu = null"
-                class="px-4 py-1 border border-black rounded-full text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                class="px-4 py-1 border border-black text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
                 :class="{ 'bg-black text-white': selectedProjectTitle === opt }"
               >
                 {{ opt }}
@@ -151,6 +171,12 @@
         <span v-if="selectedYear" class="text-[11px] uppercase bg-gray-100 px-2 py-0.5 rounded flex items-center gap-1 text-black">
           Année: {{ selectedYear }}
           <svg viewBox="0 0 20 20" fill="currentColor" class="w-3 h-3 cursor-pointer" @click="selectedYear = null">
+            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </span>
+        <span v-if="selectedCountry" class="text-[11px] uppercase bg-gray-100 px-2 py-0.5 rounded flex items-center gap-1 text-black">
+          Pays: {{ selectedCountry }}
+          <svg viewBox="0 0 20 20" fill="currentColor" class="w-3 h-3 cursor-pointer" @click="selectedCountry = null">
             <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
           </svg>
         </span>
@@ -195,6 +221,7 @@ const filters = computed(() => [
   { id: 'typology', label: selectedTypology.value || 'Typologie' },
   { id: 'size', label: selectedSize.value || 'Taille' },
   { id: 'year', label: selectedYear.value || 'Année' },
+  { id: 'country', label: selectedCountry.value || 'Pays' },
   { id: 'name', label: selectedProjectTitle.value || 'Nom' }
 ]);
 
