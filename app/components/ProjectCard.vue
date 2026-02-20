@@ -19,8 +19,18 @@
           </div>
           
           <!-- Titre affiché au survol -->
-          <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4">
-            <h3 class="text-[21px] font-bold text-black uppercase" style="font-family: var(--font-dm-sans);">{{ project.title }}</h3>
+          <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-between">
+            <div>
+              <h3 class="text-[21px] font-bold text-black uppercase" style="font-family: var(--font-dm-sans);">{{ project.title }}</h3>
+              <div class="flex flex-wrap gap-1 mt-2">
+                <span v-for="t in project.typologies" :key="t" class="text-[10px] uppercase border border-black px-2 py-0.5 rounded-full font-bold">
+                  {{ t }}
+                </span>
+              </div>
+            </div>
+            <div v-if="project.tailles?.length" class="text-[14px] font-bold uppercase">
+              Taille: {{ project.tailles.join(', ') }}
+            </div>
           </div>
         </div>
       </template>
@@ -48,13 +58,13 @@ const props = defineProps<{
     path: string;
     title: string;
     description: string;
-    image?: string; // Old single image field
-    images?: string[]; // New multiple images field
+    image?: string;
+    images?: string[];
     tags?: string[];
+    typologies?: string[];
+    tailles?: string[];
   };
 }>();
-
-console.log('Project data in ProjectCard:', props.project);
 
 const displayImage = computed(() => {
   if (props.project.images && props.project.images.length > 0) {

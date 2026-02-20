@@ -111,21 +111,23 @@
               </button>
             </template>
 
-            <!-- Options for Sort -->
-            <template v-if="activeMenu === 'sort'">
+            <!-- Options for Nom (Project Titles) -->
+            <template v-if="activeMenu === 'name'">
               <button 
-                @click="sortBy = 'Nom'; activeMenu = null"
+                @click="selectedProjectTitle = null; activeMenu = null"
                 class="px-4 py-1 border border-black rounded-full text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
-                :class="{ 'bg-black text-white': sortBy === 'Nom' }"
+                :class="{ 'bg-black text-white': selectedProjectTitle === null }"
               >
-                Nom (A-Z)
+                Tous
               </button>
               <button 
-                @click="sortBy = 'Date'; activeMenu = null"
+                v-for="opt in projectTitleOptions" 
+                :key="opt"
+                @click="selectedProjectTitle = opt; activeMenu = null"
                 class="px-4 py-1 border border-black rounded-full text-[13px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
-                :class="{ 'bg-black text-white': sortBy === 'Date' }"
+                :class="{ 'bg-black text-white': selectedProjectTitle === opt }"
               >
-                Date (Récent)
+                {{ opt }}
               </button>
             </template>
           </div>
@@ -152,6 +154,12 @@
             <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
           </svg>
         </span>
+        <span v-if="selectedProjectTitle" class="text-[11px] uppercase bg-gray-100 px-2 py-0.5 rounded flex items-center gap-1 text-black">
+          Projet: {{ selectedProjectTitle }}
+          <svg viewBox="0 0 20 20" fill="currentColor" class="w-3 h-3 cursor-pointer" @click="selectedProjectTitle = null">
+            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </span>
       </div>
     </div>
   </div>
@@ -171,11 +179,13 @@ const {
   selectedSize, 
   selectedYear, 
   selectedCountry, 
+  selectedProjectTitle,
   sortBy,
   typologyOptions,
   sizeOptions,
   yearOptions,
   countryOptions,
+  projectTitleOptions,
   resetFilters
 } = useProjectFilters();
 
@@ -185,7 +195,7 @@ const filters = computed(() => [
   { id: 'typology', label: selectedTypology.value || 'Typologie' },
   { id: 'size', label: selectedSize.value || 'Taille' },
   { id: 'year', label: selectedYear.value || 'Année' },
-  { id: 'sort', label: sortBy.value }
+  { id: 'name', label: selectedProjectTitle.value || 'Nom' }
 ]);
 
 const toggleMenu = (id: string) => {
@@ -197,7 +207,7 @@ const toggleMenu = (id: string) => {
 };
 
 const hasActiveFilters = computed(() => {
-  return selectedTypology.value || selectedSize.value || selectedYear.value || selectedCountry.value;
+  return selectedTypology.value || selectedSize.value || selectedYear.value || selectedCountry.value || selectedProjectTitle.value;
 });
 
 watch(() => props.title, (newTitle) => {

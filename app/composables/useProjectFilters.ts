@@ -5,18 +5,21 @@ export const useProjectFilters = () => {
   const selectedSize = useState<string | null>('filter-size', () => null)
   const selectedYear = useState<string | null>('filter-year', () => null)
   const selectedCountry = useState<string | null>('filter-country', () => null)
-  const sortBy = useState<string>('filter-sort', () => 'Nom')
+  const selectedProjectTitle = useState<string | null>('filter-title', () => null)
+  const sortBy = useState<string>('filter-sort', () => 'Date')
 
   const typologyOptions = useState<string[]>('opt-typology', () => [])
   const sizeOptions = useState<string[]>('opt-size', () => [])
   const yearOptions = useState<string[]>('opt-year', () => [])
   const countryOptions = useState<string[]>('opt-country', () => [])
+  const projectTitleOptions = useState<string[]>('opt-titles', () => [])
 
   const resetFilters = () => {
     selectedTypology.value = null
     selectedSize.value = null
     selectedYear.value = null
     selectedCountry.value = null
+    selectedProjectTitle.value = null
   }
 
   return {
@@ -24,11 +27,13 @@ export const useProjectFilters = () => {
     selectedSize,
     selectedYear,
     selectedCountry,
+    selectedProjectTitle,
     sortBy,
     typologyOptions,
     sizeOptions,
     yearOptions,
     countryOptions,
+    projectTitleOptions,
     resetFilters
   }
 }

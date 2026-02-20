@@ -5,6 +5,9 @@ images:
   - "/images/projects/avenue-de-la-marne/avenue-de-la-marne.jpg"
 date: "2023-01-15"
 tags: ["fondateur", "béton"]
+typologies: ["Culturel"]
+tailles: ["S"]
+pays: ["France"]
 ---
 # Project Alpha
 
