@@ -3,12 +3,11 @@
     class="bg-white border-b border-black backdrop-blur-none"
     :ui="{
       wrapper: 'bg-white relative z-50',
-      container: 'w-[95%] lg:w-[60%] mx-auto px-0 flex justify-between items-center border-b border-black',
+      container: 'w-[95%] lg:w-[60%] mx-auto px-0 flex justify-between items-center border-b border-black h-[var(--header-height)]',
       button: {
         base: 'hidden'
       }
     }"
-    style="--header-height: 70px;"
   >
     <template #logo>
       <NuxtLink to="/" class="font-bold text-[21px] tracking-tighter text-black uppercase whitespace-nowrap" style="font-family: var(--font-dm-sans);">

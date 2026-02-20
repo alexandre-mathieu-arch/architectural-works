@@ -5,10 +5,9 @@
     <!-- PageTitle Overlay -->
     <div 
       v-if="displayedTitle"
-      class="w-full absolute left-0 z-40 bg-transparent"
-      :style="{ top: `calc(var(--header-height) + 10px)` }"
+      class="w-full absolute top-0 left-0 z-40 bg-transparent pointer-events-none"
     >
-      <div class="w-[95%] lg:w-[60%] mx-auto px-0">
+      <div class="w-[95%] lg:w-[60%] mx-auto px-0 pt-[var(--header-height)] pointer-events-auto">
         <PageTitle :title="displayedTitle" />
       </div>
     </div>
