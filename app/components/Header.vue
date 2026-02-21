@@ -6,6 +6,16 @@
           <NuxtLink 
             to="/" 
             class="font-bold text-[21px] tracking-tighter text-[#121212] whitespace-nowrap u-header-link"
+            @click="handleLinkClick('Home')"
+            @mouseenter="emit('linkHover', 'Home')"
+            @mouseleave="emit('linkHover', '')"
+          >
+            Home
+          </NuxtLink>
+
+          <NuxtLink 
+            to="/agence" 
+            class="font-bold text-[21px] tracking-tighter text-[#121212] whitespace-nowrap u-header-link"
             @click="handleLinkClick('Atelier')"
             @mouseenter="emit('linkHover', 'Atelier')"
             @mouseleave="emit('linkHover', '')"
