@@ -1,9 +1,9 @@
 <template>
   <div id="wrapper">
-    <Header @linkClick="handleLinkClick" />
+    <Header @linkClick="handleLinkClick" @linkHover="handleLinkHover" />
     <div :style="{ paddingTop: 'var(--header-height)' }">
       <div 
-        class="main-container"
+        class="main-container min-h-[120px]"
       >
         <PageTitle :title="displayedTitle" :show-filters="route.meta.showFilters === true" />
       </div>
@@ -23,33 +23,37 @@ import PageTitle from '~/components/PageTitle.vue';
 import TheFooter from '~/components/TheFooter.vue';
 
 const route = useRoute();
-// This ref can hold a simple string or a title object
+const hoveredTitle = ref<string | object>('');
 const clickedTitle = ref<string | object>(''); 
 
-// This watcher now primarily resets the clicked/hovered title upon route changes.
 watch(() => route.fullPath, () => {
   clickedTitle.value = '';
+  hoveredTitle.value = '';
 }, { immediate: true }); 
 
 const handleLinkClick = (title: string) => {
   clickedTitle.value = title;
+  hoveredTitle.value = title;
+};
+
+const handleLinkHover = (title: string) => {
+  hoveredTitle.value = title;
 };
 
 const displayedTitle = computed(() => {
-  // Priority order for displaying a title:
-  // 1. A title from a user click/hover (overrides everything).
+  // Priority: hover > click > route meta
+  if (hoveredTitle.value) {
+    return hoveredTitle.value;
+  }
   if (clickedTitle.value) {
     return clickedTitle.value;
   }
-  // 2. A dynamic title set by a specific page's logic.
   if (route.meta.dynamicTitle) {
     return route.meta.dynamicTitle;
   }
-  // 3. The static title defined in the page's `definePageMeta`.
   if (route.meta.title) {
     return route.meta.title;
   }
-  // 4. Fallback to an empty string.
   return '';
 });
 </script>

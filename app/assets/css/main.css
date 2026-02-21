@@ -40,7 +40,7 @@ header a[href="https://ui.nuxt.com"] {
 
 @media (min-width: 1280px) {
   :root {
-    --main-padding: 18.5%;
+    --main-padding: 12%;
   }
 }
 
