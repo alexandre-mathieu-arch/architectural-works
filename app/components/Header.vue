@@ -5,7 +5,7 @@
         <nav class="flex items-center gap-[50px]">
           <NuxtLink 
             to="/" 
-            class="font-bold text-[21px] tracking-tighter text-black whitespace-nowrap u-header-link"
+            class="font-bold text-[21px] tracking-tighter text-[#121212] whitespace-nowrap u-header-link"
             @click="handleLinkClick('Atelier')"
             @mouseenter="emit('linkHover', 'Atelier')"
             @mouseleave="emit('linkHover', '')"
@@ -29,7 +29,7 @@
           <UButton
             :label="currentLang"
             variant="ghost"
-            color="black"
+            color="[#121212]"
             class="font-medium p-0 hover:bg-transparent text-[21px] tracking-wide u-header-link"
             style="font-family: var(--font-dm-sans);"
             @click="toggleLang"
@@ -77,7 +77,7 @@ const links = [{
 @reference "../assets/css/main.css";
 
 .u-header-link {
-  @apply font-medium text-black hover:text-gray-600 tracking-wide text-[21px] transition-colors;
+  @apply font-medium text-[#121212] hover:text-gray-600 tracking-wide text-[21px] transition-colors;
   font-family: var(--font-dm-sans);
 }
 

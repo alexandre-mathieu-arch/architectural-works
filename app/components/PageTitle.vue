@@ -16,12 +16,12 @@
     
     <div v-if="showFilters && (typeof title === 'string' ? title?.toUpperCase() === 'PROJETS' : title?.main?.toUpperCase() === 'PROJETS')" class="mt-4 relative">
       <!-- Accordion Buttons -->
-      <div class="flex flex-wrap gap-x-8 gap-y-4 border-b border-black pb-2">
+      <div class="flex flex-wrap gap-x-8 gap-y-4 border-b border-[#121212] pb-2">
         <button 
           v-for="filter in filters" 
           :key="filter.id"
           @click="toggleMenu(filter.id)"
-          class="flex items-center gap-2 font-bold text-[14px] transition-colors hover:text-gray-500 text-black"
+          class="flex items-center gap-2 font-bold text-[14px] transition-colors hover:text-gray-500 text-[#121212]"
           style="font-family: var(--font-dm-sans);"
           :class="{ 'text-gray-400': activeMenu === filter.id }"
         >
@@ -60,14 +60,14 @@
           leave-from-class="opacity-100 translate-y-0"
           leave-to-class="opacity-0 -translate-y-2"
         >
-          <div v-if="activeMenu" class="absolute top-0 left-0 w-full z-30 bg-[rgb(248,248,248)] py-2 border-b border-black">
+          <div v-if="activeMenu" class="absolute top-0 left-0 w-full z-30 bg-[rgb(248,248,248)] py-2 border-b border-[#121212]">
             <div class="flex flex-wrap gap-2">
               <!-- Options for Typology -->
               <template v-if="activeMenu === 'typology'">
                 <button 
                   @click="selectedTypology = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
-                  :class="{ 'bg-black text-white': selectedTypology === null }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[11px] font-medium hover:bg-[#121212] hover:text-white transition-colors"
+                  :class="{ 'bg-[#121212] text-white': selectedTypology === null }"
                 >
                   Toutes
                 </button>
@@ -75,8 +75,8 @@
                   v-for="opt in typologyOptions" 
                   :key="opt"
                   @click="selectedTypology = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
-                  :class="{ 'bg-black text-white': selectedTypology === opt }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[11px] font-medium hover:bg-[#121212] hover:text-white transition-colors"
+                  :class="{ 'bg-[#121212] text-white': selectedTypology === opt }"
                 >
                   {{ opt }}
                 </button>
@@ -86,8 +86,8 @@
               <template v-if="activeMenu === 'size'">
                 <button 
                   @click="selectedSize = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
-                  :class="{ 'bg-black text-white': selectedSize === null }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[11px] font-medium hover:bg-[#121212] hover:text-white transition-colors"
+                  :class="{ 'bg-[#121212] text-white': selectedSize === null }"
                 >
                   Toutes
                 </button>
@@ -95,8 +95,8 @@
                   v-for="opt in sizeOptions" 
                   :key="opt"
                   @click="selectedSize = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
-                  :class="{ 'bg-black text-white': selectedSize === opt }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[11px] font-medium hover:bg-[#121212] hover:text-white transition-colors"
+                  :class="{ 'bg-[#121212] text-white': selectedSize === opt }"
                 >
                   {{ opt }}
                 </button>
@@ -106,8 +106,8 @@
               <template v-if="activeMenu === 'year'">
                 <button 
                   @click="selectedYear = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
-                  :class="{ 'bg-black text-white': selectedYear === null }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[11px] font-medium hover:bg-[#121212] hover:text-white transition-colors"
+                  :class="{ 'bg-[#121212] text-white': selectedYear === null }"
                 >
                   Toutes
                 </button>
@@ -115,8 +115,8 @@
                   v-for="opt in yearOptions" 
                   :key="opt"
                   @click="selectedYear = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
-                  :class="{ 'bg-black text-white': selectedYear === opt }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[11px] font-medium hover:bg-[#121212] hover:text-white transition-colors"
+                  :class="{ 'bg-[#121212] text-white': selectedYear === opt }"
                 >
                   {{ opt }}
                 </button>
@@ -126,8 +126,8 @@
               <template v-if="activeMenu === 'country'">
                 <button 
                   @click="selectedCountry = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
-                  :class="{ 'bg-black text-white': selectedCountry === null }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[11px] font-medium hover:bg-[#121212] hover:text-white transition-colors"
+                  :class="{ 'bg-[#121212] text-white': selectedCountry === null }"
                 >
                   Tous
                 </button>
@@ -135,8 +135,8 @@
                   v-for="opt in countryOptions" 
                   :key="opt"
                   @click="selectedCountry = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
-                  :class="{ 'bg-black text-white': selectedCountry === opt }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[11px] font-medium hover:bg-[#121212] hover:text-white transition-colors"
+                  :class="{ 'bg-[#121212] text-white': selectedCountry === opt }"
                 >
                   {{ opt }}
                 </button>
@@ -146,8 +146,8 @@
               <template v-if="activeMenu === 'name'">
                 <button 
                   @click="selectedProjectTitle = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
-                  :class="{ 'bg-black text-white': selectedProjectTitle === null }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[11px] font-medium hover:bg-[#121212] hover:text-white transition-colors"
+                  :class="{ 'bg-[#121212] text-white': selectedProjectTitle === null }"
                 >
                   Tous
                 </button>
@@ -155,8 +155,8 @@
                   v-for="opt in projectTitleOptions" 
                   :key="opt"
                   @click="selectedProjectTitle = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
-                  :class="{ 'bg-black text-white': selectedProjectTitle === opt }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[11px] font-medium hover:bg-[#121212] hover:text-white transition-colors"
+                  :class="{ 'bg-[#121212] text-white': selectedProjectTitle === opt }"
                 >
                   {{ opt }}
                 </button>
