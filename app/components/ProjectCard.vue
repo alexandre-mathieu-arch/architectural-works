@@ -19,7 +19,7 @@
           </div>
           
           <!-- Infos affichées au survol sur fond blanc -->
-          <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-0 flex flex-col justify-start">
+          <div class="absolute inset-0 bg-[rgb(248,248,248)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-0 flex flex-col justify-start">
             <!-- Titre en haut à gauche sans marge -->
             <h3 class="text-[21px] font-bold text-black uppercase m-0 p-0 leading-none" style="font-family: var(--font-dm-sans);">{{ project.title }}</h3>
             

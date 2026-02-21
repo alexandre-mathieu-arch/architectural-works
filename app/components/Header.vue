@@ -1,53 +1,47 @@
 <template>
-  <UHeader 
-    class="bg-white backdrop-blur-none border-none shadow-none"
-    :ui="{
-      wrapper: 'bg-white relative z-50 border-none shadow-none',
-      container: 'main-container',
-      // Removed button: { base: 'hidden' } to let UHeader handle responsive toggle
-    }"
-    :toggle="true"
-  >
-    <template #logo></template>
+  <header class="bg-[rgb(248,248,248)] relative z-50">
+    <div class="main-container">
+      <div class="flex justify-center items-center h-[var(--header-height)] w-full">
+        <nav class="flex items-center gap-[50px]">
+          <NuxtLink 
+            to="/" 
+            class="font-bold text-[21px] tracking-tighter text-black uppercase whitespace-nowrap u-header-link"
+            @click="handleLinkClick('ATELIER')"
+            @mouseenter="emit('linkHover', 'ATELIER')"
+            @mouseleave="emit('linkHover', '')"
+          >
+            ATELIER
+          </NuxtLink>
 
-    <div class="flex justify-center items-center h-[var(--header-height)] w-full">
-      <nav class="flex items-center gap-[50px]">
-        <NuxtLink 
-          to="/" 
-          class="font-bold text-[21px] tracking-tighter text-black uppercase whitespace-nowrap u-header-link"
-          @click="handleLinkClick('ATELIER')"
-          @mouseenter="emit('linkHover', 'ATELIER')"
-          @mouseleave="emit('linkHover', '')"
-        >
-          ATELIER
-        </NuxtLink>
+          <NuxtLink 
+            v-for="link in links" 
+            :key="link.to" 
+            :to="link.to"
+            class="u-header-link"
+            :class="{ 'text-gray-600': activeLink === link.label }"
+            @click="handleLinkClick(link.label)"
+            @mouseenter="emit('linkHover', link.label)"
+            @mouseleave="emit('linkHover', '')"
+          >
+            {{ link.label }}
+          </NuxtLink>
 
-        <NuxtLink 
-          v-for="link in links" 
-          :key="link.to" 
-          :to="link.to"
-          class="u-header-link"
-          :class="{ 'text-gray-600': activeLink === link.label }"
-          @click="handleLinkClick(link.label)"
-          @mouseenter="emit('linkHover', link.label)"
-          @mouseleave="emit('linkHover', '')"
-        >
-          {{ link.label }}
-        </NuxtLink>
-
-        <UButton
-          :label="currentLang"
-          variant="ghost"
-          color="black"
-          class="font-medium p-0 hover:bg-transparent text-[21px] uppercase tracking-wide u-header-link"
-          style="font-family: var(--font-dm-sans);"
-          @click="toggleLang"
-          @mouseenter="emit('linkHover', 'Langue')"
-          @mouseleave="emit('linkHover', '')"
-        />
-      </nav>
+          <UButton
+            :label="currentLang"
+            variant="ghost"
+            color="black"
+            class="font-medium p-0 hover:bg-transparent text-[21px] uppercase tracking-wide u-header-link"
+            style="font-family: var(--font-dm-sans);"
+            @click="toggleLang"
+            @mouseenter="emit('linkHover', 'Langue')"
+            @mouseleave="emit('linkHover', '')"
+          />
+        </nav>
+      </div>
     </div>
-  </UHeader>
+    <!-- Note: The hamburger menu functionality from UHeader is now removed.
+         It would need to be re-implemented manually if required for mobile. -->
+  </header>
 </template>
 
 <script setup lang="ts">

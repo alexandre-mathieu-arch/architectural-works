@@ -60,7 +60,7 @@
           leave-from-class="opacity-100 translate-y-0"
           leave-to-class="opacity-0 -translate-y-2"
         >
-          <div v-if="activeMenu" class="absolute top-0 left-0 w-full z-30 bg-white py-2 border-b border-black">
+          <div v-if="activeMenu" class="absolute top-0 left-0 w-full z-30 bg-[rgb(248,248,248)] py-2 border-b border-black">
             <div class="flex flex-wrap gap-2">
               <!-- Options for Typology -->
               <template v-if="activeMenu === 'typology'">

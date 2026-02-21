@@ -3,6 +3,7 @@ html, body {
   cursor: none;
   overflow-x: hidden;
   scrollbar-gutter: stable;
+  background-color: rgb(248, 248, 248); /* Very light gray */
 }
 
 /* Force hide Nuxt UI default logo */
