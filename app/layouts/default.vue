@@ -1,17 +1,17 @@
 <template>
   <div id="wrapper">
     <Header @linkClick="handleLinkClick" />
-    
-    <div 
-      class="main-container"
-    >
-      <PageTitle :title="displayedTitle" :show-filters="route.meta.showFilters === true" />
+    <div :style="{ paddingTop: 'var(--header-height)' }">
+      <div 
+        class="main-container"
+      >
+        <PageTitle :title="displayedTitle" :show-filters="route.meta.showFilters === true" />
+      </div>
+
+      <main class="main-container">
+        <slot />
+      </main>
     </div>
-
-    <main class="main-container">
-      <slot />
-    </main>
-
     <TheFooter class="py-8 mt-8" />
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-[rgb(248,248,248)] relative z-50">
+  <header class="bg-[rgb(248,248,248)] fixed top-0 left-0 right-0 z-50">
     <div class="main-container">
       <div class="flex justify-center items-center h-[var(--header-height)] w-full">
         <nav class="flex items-center gap-[50px]">

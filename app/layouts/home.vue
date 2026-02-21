@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper" class="h-screen overflow-hidden">
-    <Header @linkClick="handleLinkClick" @linkHover="handleLinkHover" class="absolute top-0 left-0 w-full z-50"/>
+    <Header @linkClick="handleLinkClick" @linkHover="handleLinkHover" />
     
     <!-- PageTitle Overlay -->
     <div 
