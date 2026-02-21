@@ -5,12 +5,12 @@
         <nav class="flex items-center gap-[50px]">
           <NuxtLink 
             to="/" 
-            class="font-bold text-[21px] tracking-tighter text-black uppercase whitespace-nowrap u-header-link"
-            @click="handleLinkClick('ATELIER')"
-            @mouseenter="emit('linkHover', 'ATELIER')"
+            class="font-bold text-[21px] tracking-tighter text-black whitespace-nowrap u-header-link"
+            @click="handleLinkClick('Atelier')"
+            @mouseenter="emit('linkHover', 'Atelier')"
             @mouseleave="emit('linkHover', '')"
           >
-            ATELIER
+            Atelier
           </NuxtLink>
 
           <NuxtLink 
@@ -30,7 +30,7 @@
             :label="currentLang"
             variant="ghost"
             color="black"
-            class="font-medium p-0 hover:bg-transparent text-[21px] uppercase tracking-wide u-header-link"
+            class="font-medium p-0 hover:bg-transparent text-[21px] tracking-wide u-header-link"
             style="font-family: var(--font-dm-sans);"
             @click="toggleLang"
             @mouseenter="emit('linkHover', 'Langue')"
@@ -62,13 +62,13 @@ const toggleLang = () => {
 };
 
 const links = [{
-  label: 'PROJETS',
+  label: 'Projets',
   to: '/projects'
 }, {
-  label: 'CORPUS',
+  label: 'Corpus',
   to: '/corpus'
 }, {
-  label: 'ART',
+  label: 'Art',
   to: '/art'
 }]
 </script>
@@ -77,7 +77,7 @@ const links = [{
 @reference "../assets/css/main.css";
 
 .u-header-link {
-  @apply font-medium text-black hover:text-gray-600 uppercase tracking-wide text-[21px] transition-colors;
+  @apply font-medium text-black hover:text-gray-600 tracking-wide text-[21px] transition-colors;
   font-family: var(--font-dm-sans);
 }
 

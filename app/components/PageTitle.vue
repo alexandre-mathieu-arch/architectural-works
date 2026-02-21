@@ -1,15 +1,15 @@
 <template>
   <div class="pb-2 bg-transparent relative">
     <template v-if="typeof title === 'object' && title !== null">
-      <h1 class="text-4xl md:text-6xl lg:text-[86px] font-bold uppercase leading-none" style="font-family: var(--font-dm-sans);">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-none" style="font-family: var(--font-dm-sans);">
         {{ title.main }}
       </h1>
-      <h2 v-if="title.sub" class="text-[21px] font-bold uppercase" style="font-family: var(--font-dm-sans);">
+      <h2 v-if="title.sub" class="text-[21px] font-bold" style="font-family: var(--font-dm-sans);">
         {{ title.sub }}
       </h2>
     </template>
     <template v-else>
-      <h1 class="text-4xl md:text-6xl lg:text-[86px] font-bold uppercase leading-none" style="font-family: var(--font-dm-sans);">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-none" style="font-family: var(--font-dm-sans);">
         {{ title }}
       </h1>
     </template>
@@ -21,7 +21,7 @@
           v-for="filter in filters" 
           :key="filter.id"
           @click="toggleMenu(filter.id)"
-          class="flex items-center gap-2 font-bold text-[14px] uppercase transition-colors hover:text-gray-500 text-black"
+          class="flex items-center gap-2 font-bold text-[14px] transition-colors hover:text-gray-500 text-black"
           style="font-family: var(--font-dm-sans);"
           :class="{ 'text-gray-400': activeMenu === filter.id }"
         >
@@ -40,7 +40,7 @@
         <button 
           v-if="hasActiveFilters"
           @click="resetFilters"
-          class="ml-auto flex items-center gap-1 font-bold text-[14px] uppercase text-red-600 hover:text-red-800 transition-colors"
+          class="ml-auto flex items-center gap-1 font-bold text-[14px] text-red-600 hover:text-red-800 transition-colors"
           style="font-family: var(--font-dm-sans);"
         >
           <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -66,7 +66,7 @@
               <template v-if="activeMenu === 'typology'">
                 <button 
                   @click="selectedTypology = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
                   :class="{ 'bg-black text-white': selectedTypology === null }"
                 >
                   Toutes
@@ -75,7 +75,7 @@
                   v-for="opt in typologyOptions" 
                   :key="opt"
                   @click="selectedTypology = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
                   :class="{ 'bg-black text-white': selectedTypology === opt }"
                 >
                   {{ opt }}
@@ -86,7 +86,7 @@
               <template v-if="activeMenu === 'size'">
                 <button 
                   @click="selectedSize = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
                   :class="{ 'bg-black text-white': selectedSize === null }"
                 >
                   Toutes
@@ -95,7 +95,7 @@
                   v-for="opt in sizeOptions" 
                   :key="opt"
                   @click="selectedSize = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
                   :class="{ 'bg-black text-white': selectedSize === opt }"
                 >
                   {{ opt }}
@@ -106,7 +106,7 @@
               <template v-if="activeMenu === 'year'">
                 <button 
                   @click="selectedYear = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
                   :class="{ 'bg-black text-white': selectedYear === null }"
                 >
                   Toutes
@@ -115,7 +115,7 @@
                   v-for="opt in yearOptions" 
                   :key="opt"
                   @click="selectedYear = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
                   :class="{ 'bg-black text-white': selectedYear === opt }"
                 >
                   {{ opt }}
@@ -126,7 +126,7 @@
               <template v-if="activeMenu === 'country'">
                 <button 
                   @click="selectedCountry = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
                   :class="{ 'bg-black text-white': selectedCountry === null }"
                 >
                   Tous
@@ -135,7 +135,7 @@
                   v-for="opt in countryOptions" 
                   :key="opt"
                   @click="selectedCountry = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
                   :class="{ 'bg-black text-white': selectedCountry === opt }"
                 >
                   {{ opt }}
@@ -146,7 +146,7 @@
               <template v-if="activeMenu === 'name'">
                 <button 
                   @click="selectedProjectTitle = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
                   :class="{ 'bg-black text-white': selectedProjectTitle === null }"
                 >
                   Tous
@@ -155,7 +155,7 @@
                   v-for="opt in projectTitleOptions" 
                   :key="opt"
                   @click="selectedProjectTitle = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-black/50 text-[11px] uppercase font-medium hover:bg-black hover:text-white transition-colors"
+                  class="px-2 py-0.5 border border-black/50 text-[11px] font-medium hover:bg-black hover:text-white transition-colors"
                   :class="{ 'bg-black text-white': selectedProjectTitle === opt }"
                 >
                   {{ opt }}

@@ -179,7 +179,6 @@ const goBack = () => {
   color: white;
   font-family: var(--font-dm-sans);
   font-weight: bold;
-  text-transform: uppercase;
   font-size: 14px;
   cursor: pointer !important;
   opacity: 0.8;
@@ -197,7 +196,6 @@ const goBack = () => {
 .project-title {
   font-size: 48px;
   font-weight: bold;
-  text-transform: uppercase;
   line-height: 1;
   margin-bottom: 8px;
   font-family: var(--font-dm-sans);
@@ -205,7 +203,6 @@ const goBack = () => {
 
 .project-location {
   font-size: 18px;
-  text-transform: uppercase;
   opacity: 0.8;
   font-weight: 500;
 }
@@ -241,7 +238,6 @@ const goBack = () => {
   border: none;
   color: white;
   font-weight: bold;
-  text-transform: uppercase;
   font-size: 14px;
   cursor: pointer !important;
   padding: 0;
@@ -260,7 +256,6 @@ const goBack = () => {
   justify-content: space-between;
   margin-bottom: 8px;
   font-size: 13px;
-  text-transform: uppercase;
 }
 
 .info-row:last-child { margin-bottom: 0; }

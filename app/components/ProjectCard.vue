@@ -5,7 +5,7 @@
       :ui="{ body: { padding: 'p-0' }, header: { padding: 'p-0', base: 'relative overflow-hidden' } }"
     >
       <template #header>
-        <div class="relative w-full aspect-square">
+        <div class="relative w-full aspect-[2/3]">
           <!-- Image qui disparait au survol -->
           <NuxtImg
             v-if="displayImage"
@@ -18,29 +18,29 @@
             <UIcon name="i-heroicons-photo" class="w-12 h-12 text-gray-400" />
           </div>
           
-          <!-- Infos affichées au survol sur fond blanc -->
+          <!-- Infos affichées au survol -->
           <div class="absolute inset-0 bg-[rgb(248,248,248)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-0 flex flex-col justify-start">
             <!-- Titre en haut à gauche sans marge -->
-            <h3 class="text-[21px] font-bold text-black uppercase m-0 p-0 leading-none" style="font-family: var(--font-dm-sans);">{{ project.title }}</h3>
+            <h3 class="text-[21px] font-bold text-black m-0 p-0 leading-none" style="font-family: var(--font-dm-sans);">{{ project.title }}</h3>
             
             <div class="flex flex-col items-start gap-2 w-full mt-2">
               <!-- Typologies -->
-              <span v-for="t in project.typologies" :key="t" class="text-[10px] uppercase border border-black px-2 py-0.5 font-bold ml-0">
+              <span v-for="t in project.typologies" :key="t" class="text-[10px] border border-black px-2 py-0.5 font-bold ml-0">
                 {{ t }}
               </span>
 
               <!-- Année -->
-              <span v-if="project.date" class="text-[10px] uppercase border border-black px-2 py-0.5 font-bold">
+              <span v-if="project.date" class="text-[10px] border border-black px-2 py-0.5 font-bold">
                 {{ new Date(project.date).getFullYear() }}
               </span>
 
               <!-- Tailles -->
-              <span v-for="s in project.tailles" :key="s" class="text-[10px] uppercase border border-black px-2 py-0.5 font-bold">
+              <span v-for="s in project.tailles" :key="s" class="text-[10px] border border-black px-2 py-0.5 font-bold">
                 {{ s }}
               </span>
 
               <!-- Pays -->
-              <span v-for="c in project.pays" :key="c" class="text-[10px] uppercase border border-black px-2 py-0.5 font-bold">
+              <span v-for="c in project.pays" :key="c" class="text-[10px] border border-black px-2 py-0.5 font-bold">
                 {{ c }}
               </span>
             </div>

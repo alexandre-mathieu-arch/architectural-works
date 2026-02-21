@@ -16,7 +16,7 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'home', // Use the new home layout
-  title: { main: 'AVEL', sub: "ATELIER D'ARCHITECTURE" }
+  title: { main: 'Avel', sub: "Atelier d'architecture" }
 })
 </script>
 
