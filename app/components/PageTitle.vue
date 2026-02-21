@@ -1,10 +1,20 @@
 <template>
   <div class="pb-2 bg-transparent relative">
-    <h1 class="text-4xl md:text-6xl lg:text-[86px] font-bold uppercase leading-none" style="font-family: var(--font-dm-sans);">
-      {{ title }}
-    </h1>
+    <template v-if="typeof title === 'object' && title !== null">
+      <h1 class="text-4xl md:text-6xl lg:text-[86px] font-bold uppercase leading-none" style="font-family: var(--font-dm-sans);">
+        {{ title.main }}
+      </h1>
+      <h2 v-if="title.sub" class="text-[21px] font-bold uppercase" style="font-family: var(--font-dm-sans);">
+        {{ title.sub }}
+      </h2>
+    </template>
+    <template v-else>
+      <h1 class="text-4xl md:text-6xl lg:text-[86px] font-bold uppercase leading-none" style="font-family: var(--font-dm-sans);">
+        {{ title }}
+      </h1>
+    </template>
     
-    <div v-if="showFilters && title?.toUpperCase() === 'PROJETS'" class="mt-4 relative">
+    <div v-if="showFilters && (typeof title === 'string' ? title?.toUpperCase() === 'PROJETS' : title?.main?.toUpperCase() === 'PROJETS')" class="mt-4 relative">
       <!-- Accordion Buttons -->
       <div class="flex flex-wrap gap-x-8 gap-y-4 border-b border-black pb-2">
         <button 
@@ -164,7 +174,7 @@ import { ref, defineProps, watch, computed } from 'vue';
 import { useProjectFilters } from '~/composables/useProjectFilters';
 
 const props = defineProps<{
-  title: string;
+  title: string | { main: string; sub?: string };
   showFilters?: boolean;
 }>();
 

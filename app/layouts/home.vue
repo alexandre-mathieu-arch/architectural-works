@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen relative">
+  <div id="wrapper" class="h-screen overflow-hidden">
     <Header @linkClick="handleLinkClick" @linkHover="handleLinkHover" class="absolute top-0 left-0 w-full z-50"/>
     
     <!-- PageTitle Overlay -->
@@ -7,7 +7,7 @@
       v-if="displayedTitle"
       class="w-full absolute top-0 left-0 z-40 bg-transparent pointer-events-none"
     >
-      <div class="max-w-[1200px] mx-auto px-5 pt-[var(--header-height)] pointer-events-auto">
+      <div class="main-container pt-[var(--header-height)] pointer-events-auto">
         <PageTitle :title="displayedTitle" />
       </div>
     </div>
@@ -19,7 +19,7 @@
 
     <!-- Footer Overlay -->
     <div class="absolute bottom-0 left-0 w-full z-40 bg-transparent">
-      <TheFooter class="pt-4 border-t border-black" />
+      <TheFooter class="pt-4" />
     </div>
   </div>
 </template>
@@ -31,14 +31,13 @@ import PageTitle from '~/components/PageTitle.vue';
 import TheFooter from '~/components/TheFooter.vue';
 
 const route = useRoute();
-const hoveredTitle = ref('');
-const clickedTitle = ref('');
+const hoveredTitle = ref<string | object>('');
+const clickedTitle = ref<string | object>('');
 
-// Initialize clickedTitle with the current page's meta title on component mount/route change
-watch(() => route.meta.title, (newTitle) => {
-  if (newTitle) {
-    clickedTitle.value = newTitle as string;
-  }
+// Reset titles on route change
+watch(() => route.fullPath, () => {
+  clickedTitle.value = '';
+  hoveredTitle.value = '';
 }, { immediate: true });
 
 const handleLinkHover = (title: string) => {
@@ -50,7 +49,19 @@ const handleLinkClick = (title: string) => {
   hoveredTitle.value = title; 
 };
 
-const displayedTitle = computed(() => hoveredTitle.value || clickedTitle.value);
+const displayedTitle = computed(() => {
+  // Priority: hover, then click, then static meta
+  if (hoveredTitle.value) {
+    return hoveredTitle.value;
+  }
+  if (clickedTitle.value) {
+    return clickedTitle.value;
+  }
+  if (route.meta.title) {
+    return route.meta.title;
+  }
+  return '';
+});
 </script>
 
 <style scoped>

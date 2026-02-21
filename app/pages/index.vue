@@ -1,7 +1,7 @@
 <template>
   <!-- Hero avec marges -->
-  <div class="relative max-w-[1200px] mx-auto px-5 h-full">
-    <div class="absolute inset-y-0 left-5 right-5 overflow-hidden">
+  <div class="relative main-container h-full">
+    <div class="w-full h-full overflow-hidden relative">
       <img
         src="/001.jpg"
         alt="Atelier Archi"
@@ -16,7 +16,7 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'home', // Use the new home layout
-  title: 'Atelier Kerswell'
+  title: { main: 'AVEL', sub: "ATELIER D'ARCHITECTURE" }
 })
 </script>
 

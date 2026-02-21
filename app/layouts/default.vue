@@ -1,18 +1,18 @@
 <template>
-  <div class="relative min-h-screen">
+  <div id="wrapper">
     <Header @linkClick="handleLinkClick" />
     
     <div 
-      class="max-w-[1200px] mx-auto px-5"
+      class="main-container"
     >
       <PageTitle :title="displayedTitle" :show-filters="route.meta.showFilters === true" />
     </div>
 
-    <main class="max-w-[1200px] mx-auto px-5">
+    <main class="main-container">
       <slot />
     </main>
 
-    <TheFooter class="py-8 mt-8 border-t border-black" />
+    <TheFooter class="py-8 mt-8" />
   </div>
 </template>
 
@@ -23,13 +23,12 @@ import PageTitle from '~/components/PageTitle.vue';
 import TheFooter from '~/components/TheFooter.vue';
 
 const route = useRoute();
-const clickedTitle = ref(''); 
+// This ref can hold a simple string or a title object
+const clickedTitle = ref<string | object>(''); 
 
-// Initialize clickedTitle with the current page's meta title on component mount/route change
-watch(() => route.meta.title, (newTitle) => {
-  if (newTitle) {
-    clickedTitle.value = newTitle as string;
-  }
+// This watcher now primarily resets the clicked/hovered title upon route changes.
+watch(() => route.fullPath, () => {
+  clickedTitle.value = '';
 }, { immediate: true }); 
 
 const handleLinkClick = (title: string) => {
@@ -37,11 +36,21 @@ const handleLinkClick = (title: string) => {
 };
 
 const displayedTitle = computed(() => {
-  // Priority: 
-  // 1. Manually clicked link title
-  // 2. Dynamic title set in route meta by the page (for [...slug].vue)
-  // 3. Static title set in definePageMeta
-  return clickedTitle.value || (route.meta.dynamicTitle as string) || (route.meta.title as string) || '';
+  // Priority order for displaying a title:
+  // 1. A title from a user click/hover (overrides everything).
+  if (clickedTitle.value) {
+    return clickedTitle.value;
+  }
+  // 2. A dynamic title set by a specific page's logic.
+  if (route.meta.dynamicTitle) {
+    return route.meta.dynamicTitle;
+  }
+  // 3. The static title defined in the page's `definePageMeta`.
+  if (route.meta.title) {
+    return route.meta.title;
+  }
+  // 4. Fallback to an empty string.
+  return '';
 });
 </script>
 

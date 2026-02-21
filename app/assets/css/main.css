@@ -1,4 +1,5 @@
 html, body {
+  height: 100%;
   cursor: none;
   overflow-x: hidden;
   scrollbar-gutter: stable;
@@ -11,4 +12,31 @@ html, body {
 :root {
   --font-dm-sans: 'DM Sans', sans-serif;
   --header-height: 45px;
+  --main-padding: 20px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --main-padding: 10%;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --main-padding: 18.5%;
+  }
+}
+
+.main-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--main-padding);
+  padding-right: var(--main-padding);
+}
+
+#wrapper {
+  position: relative;
+  min-height: 100%;
+  margin-bottom: -40px;
 }

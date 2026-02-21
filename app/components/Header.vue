@@ -3,20 +3,27 @@
     class="bg-white backdrop-blur-none border-none shadow-none"
     :ui="{
       wrapper: 'bg-white relative z-50 border-none shadow-none',
-      container: 'w-full max-w-[1160px] mx-auto flex justify-between items-center h-[var(--header-height)] border-b border-black',
+      container: 'main-container',
       button: {
         base: 'hidden'
       }
     }"
+    :toggle="false"
   >
-    <template #logo>
-      <NuxtLink to="/" class="font-bold text-[21px] tracking-tighter text-black uppercase whitespace-nowrap" style="font-family: var(--font-dm-sans);">
-        Alexandre Mathieu
-      </NuxtLink>
-    </template>
+    <template #logo></template>
 
-    <template #default>
-      <nav class="hidden lg:flex items-center gap-6">
+    <div class="flex justify-center items-center h-[var(--header-height)] w-full">
+      <nav class="flex items-center gap-[50px]">
+        <NuxtLink 
+          to="/" 
+          class="font-bold text-[21px] tracking-tighter text-black uppercase whitespace-nowrap u-header-link"
+          @click="handleLinkClick('ATELIER')"
+          @mouseenter="emit('linkHover', 'ATELIER')"
+          @mouseleave="emit('linkHover', '')"
+        >
+          ATELIER
+        </NuxtLink>
+
         <NuxtLink 
           v-for="link in links" 
           :key="link.to" 
@@ -29,34 +36,37 @@
         >
           {{ link.label }}
         </NuxtLink>
-      </nav>
-    </template>
 
-    <template #right>
-      <UButton
-        label="EN"
-        variant="ghost"
-        color="black"
-        class="font-medium p-0 hover:bg-transparent text-[21px] uppercase tracking-wide"
-        style="font-family: var(--font-dm-sans);"
-        @click="handleLinkClick('Langue')"
-        @mouseenter="emit('linkHover', 'Langue')"
-        @mouseleave="emit('linkHover', '')"
-      />
-    </template>
+        <UButton
+          :label="currentLang"
+          variant="ghost"
+          color="black"
+          class="font-medium p-0 hover:bg-transparent text-[21px] uppercase tracking-wide u-header-link"
+          style="font-family: var(--font-dm-sans);"
+          @click="toggleLang"
+          @mouseenter="emit('linkHover', 'Langue')"
+          @mouseleave="emit('linkHover', '')"
+        />
+      </nav>
+    </div>
   </UHeader>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const emit = defineEmits(['linkClick', 'linkHover'])
+const emit = defineEmits(['linkClick', 'linkHover']);
 
 const activeLink = ref('');
+const currentLang = ref('EN');
 
 const handleLinkClick = (label: string) => {
   activeLink.value = label;
   emit('linkClick', label);
+};
+
+const toggleLang = () => {
+  currentLang.value = currentLang.value === 'EN' ? 'FR' : 'EN';
 };
 
 const links = [{
@@ -68,9 +78,6 @@ const links = [{
 }, {
   label: 'ACTUALITÉS',
   to: '/news'
-}, {
-  label: 'AGENCE',
-  to: '/agence'
 }]
 </script>
 
