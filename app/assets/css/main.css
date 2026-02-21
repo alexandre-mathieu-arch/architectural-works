@@ -5,6 +5,11 @@ html, body {
   scrollbar-gutter: stable;
 }
 
+/* Force hide Nuxt UI default logo */
+header a[href="https://ui.nuxt.com"] {
+  display: none !important;
+}
+
 @import "tailwindcss";
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');

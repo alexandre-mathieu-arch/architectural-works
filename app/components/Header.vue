@@ -4,11 +4,9 @@
     :ui="{
       wrapper: 'bg-white relative z-50 border-none shadow-none',
       container: 'main-container',
-      button: {
-        base: 'hidden'
-      }
+      // Removed button: { base: 'hidden' } to let UHeader handle responsive toggle
     }"
-    :toggle="false"
+    :toggle="true"
   >
     <template #logo></template>
 
@@ -76,8 +74,8 @@ const links = [{
   label: 'CORPUS',
   to: '/corpus'
 }, {
-  label: 'ACTUALITÉS',
-  to: '/news'
+  label: 'ART',
+  to: '/art'
 }]
 </script>
 
