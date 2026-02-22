@@ -4,7 +4,7 @@ date: 2026-02-10
 draft: false
 tags: ["design", "2026"]
 images:
-  - "/images/projects/avenue-de-la-marne/avenue-de-la-marne.jpg"
+  - "/images/projects/avenue-de-la-marne/200.jpg"
 description: "Les murs sont épais, pétris de terre et de chaux. Ils possèdent cette texture organique qui semble avoir capturé la chaleur du jour pour la restituer, avec une générosité lente, à la fraîcheur des nuits berbères."
 typologies: ["Résidentiel"]
 tailles: ["M"]
