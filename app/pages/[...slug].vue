@@ -3,7 +3,6 @@ import ImageCarousel from '~/components/ImageCarousel.vue'
 
 definePageMeta({
   layout: false, // Remove global layout for immersive experience
-  hideCustomCursor: true
 })
 
 const route = useRoute()
@@ -177,7 +176,6 @@ const goBack = () => {
   background: none;
   border: none;
   color: white;
-  font-family: var(--font-lato);
   font-weight: bold;
   font-size: 14px;
   cursor: pointer !important;
@@ -198,7 +196,6 @@ const goBack = () => {
   font-weight: bold;
   line-height: 1;
   margin-bottom: 8px;
-  font-family: var(--font-lato);
 }
 
 .project-location {
@@ -216,7 +213,6 @@ const goBack = () => {
   background: none;
   border: none;
   color: white;
-  font-family: var(--font-lato);
   font-weight: bold;
   font-size: 16px;
   cursor: pointer !important;

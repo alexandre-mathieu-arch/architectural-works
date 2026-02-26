@@ -25,9 +25,12 @@
 </template>
 
 <script setup lang="ts">
+import { computed, onMounted, onUnmounted } from 'vue';
+
 const props = defineProps<{
   images: string[]
   modelValue: number
+  autoplay?: number
 }>()
 
 const emit = defineEmits(['update:modelValue'])
@@ -44,11 +47,25 @@ const next = () => {
 const prev = () => {
   currentIndex.value = (currentIndex.value - 1 + props.images.length) % props.images.length
 }
+
+let intervalId: ReturnType<typeof setInterval> | null = null
+
+onMounted(() => {
+  if (props.autoplay) {
+    intervalId = setInterval(next, props.autoplay)
+  }
+})
+
+onUnmounted(() => {
+  if (intervalId) {
+    clearInterval(intervalId)
+  }
+})
 </script>
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 2s ease-in-out;
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;

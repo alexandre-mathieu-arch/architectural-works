@@ -5,7 +5,7 @@
       :ui="{ body: { padding: 'p-0' }, header: { padding: 'p-0', base: 'relative overflow-hidden' } }"
     >
       <template #header>
-        <div class="relative w-full aspect-[2/3]">
+        <div class="relative w-full aspect-square">
           <!-- Image qui disparait au survol -->
           <NuxtImg
             v-if="displayImage"
@@ -21,7 +21,7 @@
           <!-- Infos affichées au survol -->
           <div class="absolute inset-0 bg-[rgb(248,248,248)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-0 flex flex-col justify-start">
             <!-- Titre en haut à gauche sans marge -->
-            <h3 class="text-[21px] font-bold text-[#121212] m-0 p-0 leading-none" style="font-family: var(--font-dm-sans);">{{ project.title }}</h3>
+            <h3 class="text-[21px] font-bold text-[#121212] m-0 p-0 leading-none">{{ project.title }}</h3>
             
             <div class="flex flex-col items-start gap-2 w-full mt-2">
               <!-- Typologies -->

@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-[rgb(248,248,248)] fixed top-0 left-0 right-0 z-50">
+  <header class="fixed top-0 left-0 right-0 z-50">
     <div class="main-container h-[var(--header-height)] flex items-center gap-[20px]">
       <!-- Logo -->
       <NuxtLink 
@@ -48,7 +48,6 @@
           variant="ghost"
           color="[#121212]"
           class="font-medium p-0 hover:bg-transparent text-[21px] tracking-wide u-header-link mr-[-16px]"
-          style="font-family: var(--font-dm-sans);"
           @click="toggleLang"
           @mouseenter="emit('linkHover', 'Langue')"
           @mouseleave="emit('linkHover', '')"
@@ -95,7 +94,6 @@
           variant="ghost"
           color="[#121212]"
           class="font-medium p-0 hover:bg-transparent text-[30px] tracking-wide u-header-link"
-          style="font-family: var(--font-dm-sans);"
           @click="toggleLang"
         />
       </div>
@@ -147,7 +145,6 @@ const links = [{
 
 .u-header-link {
   @apply font-medium text-[#121212] hover:text-gray-600 tracking-wide text-[21px] transition-colors;
-  font-family: var(--font-dm-sans);
   letter-spacing: 0.2em;
 }
 
