@@ -6,7 +6,6 @@ images:
   - "/images/projects/cormier/cormier-int-01.png"
   - "/images/projects/cormier/cormier(4).jpg"
 date: "2021"
-1
 tags: ["rénovation", "maison"]
 typologies: ["Résidentiel"]
 tailles: ["S"]
