@@ -14,31 +14,33 @@ header a[href="https://ui.nuxt.com"] {
 
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 0.5s ease;
+  transition: all 0.4s ease;
 }
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
+  filter: blur(0.5rem);
+  transform: translateY(1rem);
 }
 
 @import "tailwindcss";
 
 
 :root {
-  --font-primary: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-primary: system-ui, sans-serif;
   --header-height: 45px;
   --main-padding: 20px;
 }
 
 @media (min-width: 768px) {
   :root {
-    --main-padding: 10%;
+    --main-padding: 6%;
   }
 }
 
 @media (min-width: 1280px) {
   :root {
-    --main-padding: 12%;
+    --main-padding: 8%;
   }
 }
 

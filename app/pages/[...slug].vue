@@ -45,24 +45,19 @@ const goBack = () => {
 </script>
 
 <template>
-  <div v-if="page" class="immersive-project-page">
-    <!-- Main Immersive Background (Carousel) -->
-    <div class="background-carousel">
-      <ImageCarousel :images="images" v-model="currentImageIndex" />
-    </div>
-
-    <!-- UI Overlay -->
-    <div class="ui-overlay">
-      <!-- Top Bar: Back Button -->
-      <div class="top-bar">
-        <button @click="goBack" class="back-button pointer-events-auto">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+  <div v-if="page" class="flex h-screen bg-white text-black">
+    <!-- Sidebar Section -->
+    <div class="w-3/12 h-screen flex flex-col p-8 overflow-y-auto">
+      <!-- Back Button -->
+      <div class="flex-shrink-0 mb-8">
+        <button @click="goBack" class="back-button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" class="w-5 h-5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           [retour]
         </button>
       </div>
 
-      <!-- Left Sidebar: Project Info -->
-      <div class="sidebar pointer-events-auto">
+      <!-- Scrollable Content -->
+      <div class="flex-grow overflow-y-auto pr-4">
         <header class="project-info-header">
           <h1 class="project-title">{{ page.title }}</h1>
           <div class="project-location">
@@ -71,10 +66,10 @@ const goBack = () => {
           </div>
         </header>
 
-        <!-- Numeric Navigation (Moved here) -->
+        <!-- Numeric Navigation -->
         <div class="numeric-nav-sidebar mt-8" v-if="images.length > 1">
-          <button 
-            v-for="(img, index) in images" 
+          <button
+            v-for="(img, index) in images"
             :key="index"
             @click="currentImageIndex = index"
             class="nav-number"
@@ -88,9 +83,9 @@ const goBack = () => {
         <div class="project-details-dropdown mt-4">
           <button @click="showInfoDropdown = !showInfoDropdown" class="info-toggle">
             [infos.]
-            <svg 
-              viewBox="0 0 20 20" 
-              fill="currentColor" 
+            <svg
+              viewBox="0 0 20 20"
+              fill="currentColor"
               class="w-4 h-4 transition-transform duration-200"
               :class="{ 'rotate-180': showInfoDropdown }"
             >
@@ -129,56 +124,26 @@ const goBack = () => {
         </div>
       </div>
     </div>
+    
+    <!-- Carousel Section -->
+    <div class="w-9/12 h-screen relative p-4">
+      <ImageCarousel :images="images" v-model="currentImageIndex" />
+    </div>
   </div>
 </template>
 
 <style scoped>
-.immersive-project-page {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  overflow: hidden;
-  color: white;
-  cursor: auto !important;
-}
-
-/* Ensure UI elements use standard cursor */
-.pointer-events-auto {
-  cursor: auto !important;
-}
-
-.background-carousel {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.ui-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  pointer-events: none;
-  background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 40%, transparent 100%);
-  padding: 40px;
-}
-
-.top-bar {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 40px;
-}
-
+/* Scoped styles are largely the same, but simplified as we removed the overlay */
 .back-button {
   display: flex;
   align-items: center;
   gap: 8px;
   background: none;
   border: none;
-  color: white;
+  color: black;
   font-weight: bold;
   font-size: 14px;
-  cursor: pointer !important;
+  cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.3s;
 }
@@ -187,21 +152,20 @@ const goBack = () => {
   opacity: 1;
 }
 
-.sidebar {
-  max-width: 400px;
-}
-
 .project-title {
-  font-size: 48px;
+  font-size: 22px; /* Adjusted for smaller column */
+  text-transform: uppercase;
   font-weight: bold;
-  line-height: 1;
+  line-height: 1.1;
   margin-bottom: 8px;
+  color: black; /* Explicitly set for clarity */
 }
 
 .project-location {
-  font-size: 18px;
+  font-size: 16px;
   opacity: 0.8;
   font-weight: 500;
+  color: black; /* Explicitly set for clarity */
 }
 
 .numeric-nav-sidebar {
@@ -212,10 +176,10 @@ const goBack = () => {
 .nav-number {
   background: none;
   border: none;
-  color: white;
+  color: black;
   font-weight: bold;
   font-size: 16px;
-  cursor: pointer !important;
+  cursor: pointer;
   opacity: 0.5;
   transition: opacity 0.3s;
   padding: 0;
@@ -232,19 +196,19 @@ const goBack = () => {
   gap: 8px;
   background: none;
   border: none;
-  color: white;
+  color: black;
   font-weight: bold;
   font-size: 14px;
-  cursor: pointer !important;
+  cursor: pointer;
   padding: 0;
 }
 
 .info-content {
   margin-top: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
   padding: 15px;
-  border-left: 2px solid white;
+  border-left: 2px solid black; /* Changed border color */
+  background: rgba(0, 0, 0, 0.05); /* Light background for content */
+  backdrop-filter: blur(5px);
 }
 
 .info-row {
@@ -252,8 +216,8 @@ const goBack = () => {
   justify-content: space-between;
   margin-bottom: 8px;
   font-size: 13px;
+  color: black; /* Explicitly set for clarity */
 }
-
 .info-row:last-child { margin-bottom: 0; }
 
 .label { opacity: 0.6; }
@@ -262,22 +226,18 @@ const goBack = () => {
 .project-description {
   font-size: 15px;
   line-height: 1.6;
-  max-height: 40vh;
-  overflow-y: auto;
-  padding-right: 10px;
-  scrollbar-width: thin;
-  scrollbar-color: white transparent;
+  color: black; /* Explicitly set for clarity */
 }
 
-/* Custom scrollbar for description */
-.project-description::-webkit-scrollbar {
-  width: 2px;
+/* Custom scrollbar for sidebar */
+.w-3\/12::-webkit-scrollbar {
+  width: 4px;
 }
-.project-description::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.1);
+.w-3\/12::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1); /* Darker track for light background */
 }
-.project-description::-webkit-scrollbar-thumb {
-  background: white;
+.w-3\/12::-webkit-scrollbar-thumb {
+  background: black; /* Darker thumb for light background */
 }
 
 /* Transitions */

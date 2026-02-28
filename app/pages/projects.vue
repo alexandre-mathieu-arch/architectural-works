@@ -1,8 +1,8 @@
 <template>
-  <div class="pt-24 pb-12">
+  <div class="pt-0 pb-0">
 
-    <div v-if="filteredProjects?.length" class="grid grid-cols-12 gap-4">
-      <ProjectCard v-for="project in filteredProjects" :key="project.path" :project="project" class="col-span-2" />
+    <div v-if="filteredProjects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-1">
+      <ProjectCard v-for="project in filteredProjects" :key="project.path" :project="project" />
     </div>
     <div v-else class="text-center py-20">
       <p class="text-gray-500">Aucun projet ne correspond à votre sélection.</p>

@@ -5,7 +5,7 @@
       :ui="{ body: { padding: 'p-0' }, header: { padding: 'p-0', base: 'relative overflow-hidden' } }"
     >
       <template #header>
-        <div class="relative w-full aspect-square">
+        <div class="relative w-full aspect-[3/4]">
           <!-- Image qui disparait au survol -->
           <NuxtImg
             v-if="displayImage"

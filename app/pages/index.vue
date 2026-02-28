@@ -1,23 +1,23 @@
 <template>
   <div class="w-full h-screen">
-    <ImageCarousel
-      :images="images"
-      v-model="currentImageIndex"
-      :autoplay="10000"
-    />
+    <NuxtLink to="/projects" class="w-full h-full block">
+      <NuxtImg
+        v-if="randomImage"
+        :src="randomImage"
+        class="w-full h-full object-cover"
+      />
+    </NuxtLink>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import ImageCarousel from '~/components/ImageCarousel.vue';
+import { ref, onMounted } from 'vue';
 
 definePageMeta({
   layout: 'home',
   title: { main: 'Avel', sub: "Atelier d'architecture" }
 })
 
-const currentImageIndex = ref(0);
 const images = [
   '/images/projects/avenue-de-la-marne/200.jpg',
   '/images/projects/cormier/cormier-ext.png',
@@ -25,6 +25,13 @@ const images = [
   '/images/projects/villa-atlas/villa-atlas.png',
   '/images/projects/cormier/cormier-facade.jpg',
 ];
+
+const randomImage = ref<string | null>(null);
+
+onMounted(() => {
+  const randomIndex = Math.floor(Math.random() * images.length);
+  randomImage.value = images[randomIndex];
+});
 </script>
 
 <style scoped>

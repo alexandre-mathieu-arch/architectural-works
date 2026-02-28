@@ -1,6 +1,6 @@
 <template>
   <header class="fixed top-0 left-0 right-0 z-50">
-    <div class="main-container h-[var(--header-height)] flex items-center gap-[20px]">
+    <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] px-[var(--main-padding)]">
       <!-- Logo -->
       <NuxtLink 
         to="/" 
@@ -157,10 +157,11 @@ const links = [{
 }
 
 /* Base style for main-container to handle mobile padding */
-.main-container {
-  padding-left: 12%; /* Set left margin to 12% */
-  padding-right: 12%; /* Set right margin to 12% */
-}
+/* Removed explicit padding from .main-container in Header.vue */
+/* .main-container {
+  padding-left: 12%; 
+  padding-right: 12%;
+} */
 
 /* Adjust desktop navigation gap for smaller screens if needed, though Tailwind's md:gap should handle */
 @media (min-width: 768px) {
