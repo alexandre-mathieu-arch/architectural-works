@@ -9,7 +9,7 @@
         @mouseenter="emit('linkHover', 'Home')"
         @mouseleave="emit('linkHover', '')"
       >
-        Mon Logo
+        Soñj
       </NuxtLink>
 
       <!-- Search Bar (Desktop) -->
@@ -225,16 +225,27 @@ const links = [{
 @reference "../assets/css/main.css";
 
 .u-header-link {
-  @apply font-medium text-[#121212] hover:text-gray-600 tracking-wide text-[12px] transition-colors;
+  @apply font-medium text-[#121212] hover:text-gray-600 tracking-wide text-[12px] transition-colors relative;
   letter-spacing: 0.2em;
 }
 
 .logo-link {
+  @apply relative;
   letter-spacing: 0.2em;
 }
 
 .router-link-active {
-  @apply text-gray-400;
+  @apply text-[#121212] font-bold opacity-100;
+}
+
+.router-link-active::before {
+  content: "~";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #121212;
+  font-size: 14px;
 }
 
 /* Base style for main-container to handle mobile padding */

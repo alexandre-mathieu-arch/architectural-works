@@ -2,9 +2,11 @@
 title: "Maison C"
 description: "Extension et rénovation complete d'une maison neo bretonne à La Trinité-sur-Mer."
 images:
+  - "/images/projects/cormier/cormier-facade.jpg"
   - "/images/projects/cormier/cormier-ext.png"
   - "/images/projects/cormier/cormier-int-01.png"
   - "/images/projects/cormier/cormier(4).jpg"
+  - "/images/projects/cormier/avenue-de-la-marne.jpg"
 date: "2021"
 tags: ["rénovation", "maison"]
 typologies: ["Résidentiel"]

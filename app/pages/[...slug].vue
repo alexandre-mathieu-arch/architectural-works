@@ -54,6 +54,19 @@ const goBack = () => {
           <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" class="w-4 h-4"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           [retour]
         </button>
+
+        <!-- Numeric Navigation -->
+        <div class="numeric-nav-sidebar mt-4" v-if="images.length > 1">
+          <button
+            v-for="(img, index) in images"
+            :key="index"
+            @click="currentImageIndex = index"
+            class="nav-number"
+            :class="{ active: currentImageIndex === index }"
+          >
+            {{ index + 1 }}
+          </button>
+        </div>
       </div>
 
       <!-- Scrollable Content -->
@@ -65,20 +78,10 @@ const goBack = () => {
             <span v-if="page.lieu && page.pays">, </span>
             <span v-if="page.pays">{{ Array.isArray(page.pays) ? page.pays.join(', ') : page.pays }}</span>
           </div>
+          <div class="project-year" v-if="page.date">
+            {{ new Date(page.date).getFullYear() }}
+          </div>
         </header>
-
-        <!-- Numeric Navigation -->
-        <div class="numeric-nav-sidebar mt-8" v-if="images.length > 1">
-          <button
-            v-for="(img, index) in images"
-            :key="index"
-            @click="currentImageIndex = index"
-            class="nav-number"
-            :class="{ active: currentImageIndex === index }"
-          >
-            {{ index + 1 }}
-          </button>
-        </div>
 
         <!-- Dropdown Details -->
         <div class="project-details-dropdown mt-4">
@@ -140,26 +143,35 @@ const goBack = () => {
   gap: 8px;
   background: none;
   border: none;
-  color: black;
+  color: #000000;
   font-weight: normal;
-  font-size: 11px;
+  font-size: 18px;
   cursor: pointer;
   transition: opacity 0.3s;
   padding: 0;
 }
 
 .project-title {
-  font-size: 22px;
-  font-weight: normal;
+  font-size: 24px;
+  font-weight: bold;
   line-height: 1.1;
+  letter-spacing: 0.05em;
   margin-bottom: 4px;
-  color: black;
+  color: #000000;
 }
 
 .project-location {
-  font-size: 15px;
+  font-size: 24px;
   font-weight: normal;
-  color: black;
+  letter-spacing: 0.05rem;
+  color: #000000;
+}
+
+.project-year {
+  font-size: 16px;
+  font-weight: normal;
+  color: #000000;
+  margin-top: 4px;
 }
 
 .numeric-nav-sidebar {
@@ -170,9 +182,9 @@ const goBack = () => {
 .nav-number {
   background: none;
   border: none;
-  color: black;
+  color: #000000;
   font-weight: normal;
-  font-size: 10px;
+  font-size: 13px;
   cursor: pointer;
   transition: opacity 0.3s;
   padding: 0;
@@ -193,9 +205,9 @@ const goBack = () => {
   gap: 8px;
   background: none;
   border: none;
-  color: black;
+  color: #000000;
   font-weight: normal;
-  font-size: 11px;
+  font-size: 18px;
   cursor: pointer;
   padding: 0;
 }
@@ -208,20 +220,21 @@ const goBack = () => {
 
 .info-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 12px;
   margin-bottom: 4px;
-  font-size: 10px;
-  color: black;
+  font-size: 13px;
+  color: #000000;
 }
 .info-row:last-child { margin-bottom: 0; }
 
-.label { font-weight: normal; }
+.label { font-weight: normal; min-width: 60px; }
 .value { font-weight: normal; }
 
 .project-description {
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.5;
-  color: black;
+  color: #000000;
   text-align: left;
 }
 

@@ -1,17 +1,20 @@
 ---
-title: "Villa Atlas"
-date: 2026-02-10
+title: "La Prise"
+date: 2018-01-01
 draft: false
-tags: ["luxe", "montagne"]
+tags: ["Design"]
 images:
   - "/images/projects/villa-atlas/villa-atlas.png"
-description: "Une villa d'exception nichée dans les contreforts de l'Atlas, mariant luxe contemporain et techniques de construction ancestrales. Le projet explore la matérialité de la terre crue et du béton banché dans un dialogue constant avec le paysage aride."
-typologies: ["Résidentiel"]
-tailles: ["XL"]
-pays: ["Maroc"]
-lieu: "Imlil"
-surface: "650 m²"
-cout: "2.4 M€"
-phase: "Livré"
-statut: "Réalisé"
+  - "/images/projects/villa-atlas/villa-cn.01.png"
+description: "Projet de fin d'étude à l'École d'Architecture de Nantes. Exploration des limites entre structure et paysage."
+typologies: ["Scolaire"]
+tailles: ["M"]
+pays: ["France"]
+lieu: "Nantes"
+ecole: "École d'Architecture de Nantes"
+surface: "nc"
+cout: "nc"
+phase: "Prototype"
+statut: "Conceptuel"
 ---
+

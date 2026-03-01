@@ -15,22 +15,30 @@ import { ref, onMounted } from 'vue';
 
 definePageMeta({
   layout: 'home',
-  title: { main: 'Avel', sub: "Atelier d'architecture" }
+  title: { main: 'Soñj', sub: "architecture & design" }
 })
 
-const images = [
-  '/images/projects/avenue-de-la-marne/200.jpg',
-  '/images/projects/cormier/cormier-ext.png',
-  '/images/projects/portaledge/portaledge.png',
-  '/images/projects/villa-atlas/villa-atlas.png',
-  '/images/projects/cormier/cormier-facade.jpg',
-];
+const { data: projects } = await useAsyncData('home-projects', () => {
+  return queryCollection('content')
+    .where('path', 'LIKE', '/projects/%')
+    .all()
+})
 
 const randomImage = ref<string | null>(null);
 
 onMounted(() => {
-  const randomIndex = Math.floor(Math.random() * images.length);
-  randomImage.value = images[randomIndex];
+  if (projects.value) {
+    // Collect all images from all projects
+    const allImages = projects.value.flatMap(project => {
+      const imgs = project.images || project.image || []
+      return Array.isArray(imgs) ? imgs : [imgs]
+    }).filter(img => typeof img === 'string' && img.length > 0)
+
+    if (allImages.length > 0) {
+      const randomIndex = Math.floor(Math.random() * allImages.length);
+      randomImage.value = allImages[randomIndex];
+    }
+  }
 });
 </script>
 

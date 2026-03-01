@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper" class="h-screen overflow-hidden">
-    <Header @linkClick="handleLinkClick" @linkHover="handleLinkHover" />
+    <!-- Header removed for immersive Hero experience -->
     
     <!-- PageTitle Overlay -->
     <div 
@@ -8,7 +8,9 @@
       class="w-full absolute top-0 left-0 z-40 bg-transparent pointer-events-none"
     >
       <div class="main-container pt-[var(--header-height)] pointer-events-auto">
-        <PageTitle :title="displayedTitle" />
+        <NuxtLink to="/projects" class="block">
+          <PageTitle :title="displayedTitle" />
+        </NuxtLink>
       </div>
     </div>
 
