@@ -26,21 +26,39 @@ header a[href="https://ui.nuxt.com"] {
 @import "tailwindcss";
 
 
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../font/Satoshi-Variable.woff2') format('woff2-variations'),
+       url('../font/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../font/Satoshi-VariableItalic.woff2') format('woff2-variations'),
+       url('../font/Satoshi-VariableItalic.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: italic;
+}
+
 :root {
-  --font-primary: system-ui, sans-serif;
+  --font-primary: 'Satoshi', sans-serif;
   --header-height: 45px;
   --main-padding: 20px;
 }
 
 @media (min-width: 768px) {
   :root {
-    --main-padding: 6%;
+    --main-padding: 2%;
   }
 }
 
 @media (min-width: 1280px) {
   :root {
-    --main-padding: 8%;
+    --main-padding: 5%;
   }
 }
 

@@ -1,6 +1,7 @@
 ---
 title: "Av. de La Marne"
 date: 2026-02-10
+ratio: "4/3"
 draft: false
 tags: ["design", "2026"]
 images: ["/images/projects/avenue-de-la-marne/av-marne.png", "/images/projects/avenue-de-la-marne/200.jpg"]

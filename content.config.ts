@@ -22,6 +22,7 @@ export default defineContentConfig({
         cout: z.string().optional(),
         phase: z.string().optional(),
         statut: z.string().optional(),
+        ratio: z.string().optional(),
       })
     }),
   },

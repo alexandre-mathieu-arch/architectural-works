@@ -47,11 +47,11 @@ const goBack = () => {
 <template>
   <div v-if="page" class="flex h-screen bg-white text-black">
     <!-- Sidebar Section -->
-    <div class="w-3/12 h-screen flex flex-col p-8 overflow-y-auto">
+    <div class="w-3/12 h-screen flex flex-col pt-4 px-8 pb-8 overflow-y-auto">
       <!-- Back Button -->
       <div class="flex-shrink-0 mb-8">
         <button @click="goBack" class="back-button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" class="w-5 h-5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" class="w-4 h-4"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           [retour]
         </button>
       </div>
@@ -61,8 +61,9 @@ const goBack = () => {
         <header class="project-info-header">
           <h1 class="project-title">{{ page.title }}</h1>
           <div class="project-location">
-            <span v-if="page.lieu">{{ page.lieu }}&nbsp;</span>
-            <span v-if="page.pays">{{ Array.isArray(page.pays) ? page.pays.join(' ') : page.pays }}</span>
+            <span v-if="page.lieu">{{ page.lieu }}</span>
+            <span v-if="page.lieu && page.pays">, </span>
+            <span v-if="page.pays">{{ Array.isArray(page.pays) ? page.pays.join(', ') : page.pays }}</span>
           </div>
         </header>
 
@@ -133,7 +134,6 @@ const goBack = () => {
 </template>
 
 <style scoped>
-/* Scoped styles are largely the same, but simplified as we removed the overlay */
 .back-button {
   display: flex;
   align-items: center;
@@ -141,31 +141,25 @@ const goBack = () => {
   background: none;
   border: none;
   color: black;
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: normal;
+  font-size: 11px;
   cursor: pointer;
-  opacity: 0.8;
   transition: opacity 0.3s;
-}
-
-.back-button:hover {
-  opacity: 1;
+  padding: 0;
 }
 
 .project-title {
-  font-size: 22px; /* Adjusted for smaller column */
-  text-transform: uppercase;
-  font-weight: bold;
+  font-size: 22px;
+  font-weight: normal;
   line-height: 1.1;
-  margin-bottom: 8px;
-  color: black; /* Explicitly set for clarity */
+  margin-bottom: 4px;
+  color: black;
 }
 
 .project-location {
-  font-size: 16px;
-  opacity: 0.8;
-  font-weight: 500;
-  color: black; /* Explicitly set for clarity */
+  font-size: 15px;
+  font-weight: normal;
+  color: black;
 }
 
 .numeric-nav-sidebar {
@@ -177,17 +171,20 @@ const goBack = () => {
   background: none;
   border: none;
   color: black;
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: normal;
+  font-size: 10px;
   cursor: pointer;
-  opacity: 0.5;
   transition: opacity 0.3s;
   padding: 0;
 }
 
 .nav-number.active {
+  font-weight: bold;
   opacity: 1;
-  text-decoration: underline;
+}
+
+.nav-number:not(.active) {
+  opacity: 0.3;
 }
 
 .info-toggle {
@@ -197,47 +194,46 @@ const goBack = () => {
   background: none;
   border: none;
   color: black;
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: normal;
+  font-size: 11px;
   cursor: pointer;
   padding: 0;
 }
 
 .info-content {
-  margin-top: 16px;
-  padding: 15px;
-  border-left: 2px solid black; /* Changed border color */
-  background: rgba(0, 0, 0, 0.05); /* Light background for content */
-  backdrop-filter: blur(5px);
+  margin-top: 8px;
+  padding: 0;
+  background: white;
 }
 
 .info-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 13px;
-  color: black; /* Explicitly set for clarity */
+  margin-bottom: 4px;
+  font-size: 10px;
+  color: black;
 }
 .info-row:last-child { margin-bottom: 0; }
 
-.label { opacity: 0.6; }
-.value { font-weight: bold; }
+.label { font-weight: normal; }
+.value { font-weight: normal; }
 
 .project-description {
-  font-size: 15px;
-  line-height: 1.6;
-  color: black; /* Explicitly set for clarity */
+  font-size: 11px;
+  line-height: 1.5;
+  color: black;
+  text-align: left;
 }
 
 /* Custom scrollbar for sidebar */
 .w-3\/12::-webkit-scrollbar {
-  width: 4px;
+  width: 2px;
 }
 .w-3\/12::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.1); /* Darker track for light background */
+  background: white;
 }
 .w-3\/12::-webkit-scrollbar-thumb {
-  background: black; /* Darker thumb for light background */
+  background: black;
 }
 
 /* Transitions */
