@@ -16,14 +16,17 @@
     
     <div v-if="showFilters && (typeof title === 'string' ? title?.toUpperCase() === 'PROJETS' : title?.main?.toUpperCase() === 'PROJETS')" class="mt-4 relative">
       <!-- Accordion Buttons -->
-      <div class="flex flex-wrap gap-x-8 gap-y-4 border-b border-[#121212] pb-2">
+      <div class="flex flex-wrap gap-x-8 gap-y-4 border-b border-[#121212]/30 pb-2">
         <button 
           v-for="filter in filters" 
           :key="filter.id"
           @click="toggleMenu(filter.id)"
-          class="flex items-center gap-2 font-bold text-[14px] transition-colors hover:text-gray-500 text-[#121212]"
+          class="flex items-center gap-2 font-bold text-[14px] transition-colors hover:text-gray-500"
           style="font-family: var(--font-dm-sans);"
-          :class="{ 'text-gray-400': activeMenu === filter.id }"
+          :class="[
+            activeMenu === filter.id ? 'text-gray-400' : 'text-[#121212]',
+            (filter.id === 'typology' && selectedTypology) ? '!text-[#8B5CF6]' : ''
+          ]"
         >
           <span>{{ filter.label }}</span>
           <svg 
@@ -60,7 +63,7 @@
           leave-from-class="opacity-100 translate-y-0"
           leave-to-class="opacity-0 -translate-y-2"
         >
-          <div v-if="activeMenu" class="absolute top-0 left-0 w-full z-30 bg-[rgb(248,248,248)] py-2 border-b border-[#121212]">
+          <div v-if="activeMenu" class="absolute top-0 left-0 w-full z-30 bg-[rgb(248,248,248)] py-2 border-b border-[#121212]/30">
             <div class="flex flex-wrap gap-2">
               <!-- Options for Typology -->
               <template v-if="activeMenu === 'typology'">
