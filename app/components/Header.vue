@@ -4,7 +4,7 @@
       <!-- Logo -->
       <NuxtLink 
         to="/" 
-        class="font-bold text-[21px] tracking-tighter text-[#121212] whitespace-nowrap logo-link"
+        class="font-bold text-[12px] tracking-tighter text-[#121212] whitespace-nowrap logo-link"
         @click="handleLinkClick('Home')"
         @mouseenter="emit('linkHover', 'Home')"
         @mouseleave="emit('linkHover', '')"
@@ -13,15 +13,54 @@
       </NuxtLink>
 
       <!-- Search Bar (Desktop) -->
-      <UInput 
-        v-model="searchTerm" 
-        placeholder="Rechercher..." 
-        icon="i-heroicons-magnifying-glass-20-solid" 
-        class="hidden md:block w-48 header-search-input"
-        color="[#121212]"
-        variant="none"
-        size="md"
-      />
+      <div class="hidden md:flex items-center relative">
+        <div 
+          class="flex items-center transition-all duration-300 ease-in-out overflow-hidden"
+          :class="isSearchExpanded ? 'w-64 opacity-100' : 'w-0 opacity-0'"
+        >
+          <UInput 
+            ref="searchInput"
+            v-model="searchTerm" 
+            placeholder="Rechercher..." 
+            icon="i-heroicons-magnifying-glass-20-solid" 
+            class="w-full header-search-input"
+            color="[#121212]"
+            variant="none"
+            size="md"
+            @blur="handleSearchBlur"
+          />
+        </div>
+        <button 
+          v-if="!isSearchExpanded"
+          @click="isSearchExpanded = true"
+          class="p-1 text-[#121212] hover:text-gray-600 transition-colors flex items-center justify-center"
+        >
+          <UIcon name="i-heroicons-magnifying-glass-20-solid" class="w-5 h-5" />
+        </button>
+
+        <!-- Search Results Dropdown -->
+        <div 
+          v-if="isSearchExpanded && searchTerm && searchResults.length > 0" 
+          class="absolute top-full mt-2 left-0 w-64 bg-white border border-gray-100 shadow-xl z-[100] max-h-80 overflow-y-auto"
+        >
+          <NuxtLink 
+            v-for="result in searchResults" 
+            :key="result.path" 
+            :to="result.path"
+            class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-50 last:border-0 group"
+            @click="clearSearch"
+          >
+            <div class="text-[12px] font-bold text-[#121212] uppercase tracking-wider group-hover:text-gray-600 transition-colors">{{ result.title }}</div>
+            <div v-if="result.description" class="text-[10px] text-gray-400 mt-1 line-clamp-1">{{ result.description }}</div>
+          </NuxtLink>
+        </div>
+        <div 
+          v-else-if="isSearchExpanded && searchTerm && !isSearching" 
+          class="absolute top-full mt-2 left-0 w-64 bg-white border border-gray-100 p-4 shadow-xl z-[100] text-[10px] text-gray-400 uppercase tracking-widest text-center"
+        >
+          Aucun résultat
+        </div>
+      </div>
       
       <!-- Large Space -->
       <div class="flex-grow"></div>
@@ -47,7 +86,7 @@
           :label="currentLang"
           variant="ghost"
           color="[#121212]"
-          class="font-medium p-0 hover:bg-transparent text-[21px] tracking-wide u-header-link mr-[-16px]"
+          class="font-medium p-0 hover:bg-transparent text-[12px] tracking-wide u-header-link mr-[-16px]"
           @click="toggleLang"
           @mouseenter="emit('linkHover', 'Langue')"
           @mouseleave="emit('linkHover', '')"
@@ -102,7 +141,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch, nextTick, computed } from 'vue';
 import { UInput } from '#components'; // Import UInput
 
 const emit = defineEmits(['linkClick', 'linkHover']);
@@ -111,6 +150,48 @@ const activeLink = ref('');
 const currentLang = ref('EN');
 const isMenuOpen = ref(false); // State for mobile menu
 const searchTerm = ref(''); // Reactive search term
+const isSearchExpanded = ref(false);
+const searchInput = ref<any>(null);
+const isSearching = ref(false);
+
+const { data: allContent } = await useAsyncData('all-site-content', () =>
+  queryCollection('content')
+    .select('path', 'title', 'description')
+    .where('draft', '<>', true)
+    .all()
+);
+
+const searchResults = computed(() => {
+  if (!searchTerm.value || !allContent.value) return [];
+  const query = searchTerm.value.toLowerCase().trim();
+  return allContent.value.filter(item => 
+    item.title?.toLowerCase().includes(query) || 
+    item.description?.toLowerCase().includes(query)
+  ).slice(0, 10); // Limit to 10 results
+});
+
+const handleSearchBlur = () => {
+  // Delay blurring to allow clicking results
+  setTimeout(() => {
+    if (searchTerm.value === '') {
+      isSearchExpanded.value = false;
+    }
+  }, 200);
+};
+
+const clearSearch = () => {
+  searchTerm.value = '';
+  isSearchExpanded.value = false;
+};
+
+watch(isSearchExpanded, (newValue) => {
+  if (newValue) {
+    nextTick(() => {
+      const input = searchInput.value?.$el?.querySelector('input');
+      if (input) input.focus();
+    });
+  }
+});
 
 const handleLinkClick = (label: string) => {
   activeLink.value = label;
@@ -144,7 +225,7 @@ const links = [{
 @reference "../assets/css/main.css";
 
 .u-header-link {
-  @apply font-medium text-[#121212] hover:text-gray-600 tracking-wide text-[21px] transition-colors;
+  @apply font-medium text-[#121212] hover:text-gray-600 tracking-wide text-[12px] transition-colors;
   letter-spacing: 0.2em;
 }
 
@@ -166,7 +247,7 @@ const links = [{
 /* Adjust desktop navigation gap for smaller screens if needed, though Tailwind's md:gap should handle */
 @media (min-width: 768px) {
   .u-header-link {
-    font-size: 21px; /* Ensure desktop font size */
+    font-size: 12px; /* Ensure desktop font size */
   }
 }
 

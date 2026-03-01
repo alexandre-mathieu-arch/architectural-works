@@ -19,31 +19,9 @@
           </div>
           
           <!-- Infos affichées au survol -->
-          <div class="absolute inset-0 bg-[rgb(248,248,248)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-0 flex flex-col justify-start">
-            <!-- Titre en haut à gauche sans marge -->
-            <h3 class="text-[21px] font-bold text-[#121212] m-0 p-0 leading-none">{{ project.title }}</h3>
-            
-            <div class="flex flex-col items-start gap-2 w-full mt-2">
-              <!-- Typologies -->
-              <span v-for="t in project.typologies" :key="t" class="text-[10px] border border-[#121212] px-2 py-0.5 font-bold ml-0">
-                {{ t }}
-              </span>
-
-              <!-- Année -->
-              <span v-if="project.date" class="text-[10px] border border-[#121212] px-2 py-0.5 font-bold">
-                {{ new Date(project.date).getFullYear() }}
-              </span>
-
-              <!-- Tailles -->
-              <span v-for="s in project.tailles" :key="s" class="text-[10px] border border-[#121212] px-2 py-0.5 font-bold">
-                {{ s }}
-              </span>
-
-              <!-- Pays -->
-              <span v-for="c in project.pays" :key="c" class="text-[10px] border border-[#121212] px-2 py-0.5 font-bold">
-                {{ c }}
-              </span>
-            </div>
+          <div class="absolute inset-0 bg-[rgb(248,248,248)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex items-center justify-center text-center">
+            <!-- Titre centré -->
+            <h3 class="text-sm font-bold text-[#121212] uppercase tracking-wider">{{ project.title }}</h3>
           </div>
         </div>
       </template>
