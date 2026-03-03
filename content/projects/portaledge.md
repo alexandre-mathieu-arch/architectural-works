@@ -1,6 +1,6 @@
 ---
 title: "Studio Portaledge"
-date: 2026-02-10
+date: 2019
 draft: false
 images:
   - "/images/projects/portaledge/studiotetu.jpg"

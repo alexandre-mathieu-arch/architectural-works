@@ -6,7 +6,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' }
+    pageTransition: { name: 'page', mode: 'out-in' },
+    viewTransition: true
   },
 
   modules: ['@nuxt/content', '@nuxt/image', '@nuxt/ui'],

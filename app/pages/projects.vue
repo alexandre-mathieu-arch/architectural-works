@@ -92,11 +92,16 @@ const filteredProjects = computed(() => {
     return matchTypology && matchSize && matchCountry && matchYear && matchTitle;
   });
 
-  // Simple sorting by date (latest first) or title
-  if (sortBy.value === 'Date') {
-      result.sort((a, b) => new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime());
-  } else if (sortBy.value === 'Nom') {
+  // Always sort: Default to Date (latest first)
+  if (sortBy.value === 'Nom') {
       result.sort((a, b) => a.title.localeCompare(b.title));
+  } else {
+      // Default and 'Date' sorting
+      result.sort((a, b) => {
+        const dateA = new Date(a.date || 0).getTime();
+        const dateB = new Date(b.date || 0).getTime();
+        return dateB - dateA;
+      });
   }
 
   return result;

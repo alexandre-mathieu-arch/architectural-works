@@ -1,8 +1,8 @@
 ---
 title: "Gros"
-date: 2026-02-10
+date: 2017
 draft: false
-tags: ["design", "2026"]
+tags: ["design", "2017"]
 images:
   - "/images/projects/base-vie/base-vie.png"
 description: "Structure modulaire innovante pour les environnements extrêmes, alliant robustesse technique et confort de vie."

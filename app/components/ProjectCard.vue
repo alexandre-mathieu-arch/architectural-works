@@ -21,8 +21,12 @@
             </div>
             
             <!-- Infos affichées au survol (uniquement sur la zone de l'image) -->
-            <div class="absolute inset-0 bg-[rgb(248,248,248)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex items-center justify-center text-center">
-              <h3 class="text-sm font-bold text-[#121212] uppercase tracking-wider">{{ project.title }}</h3>
+            <div class="absolute inset-0 bg-[rgb(248,248,248)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-10 flex flex-col justify-center items-start text-left">
+              <h3 class="text-[15px] font-medium text-[#121212] tracking-[0.1em] mb-2">{{ project.title }}</h3>
+              <p class="text-[12px] font-light text-[#121212] tracking-[0.1em] mb-0.5">{{ projectYear }}</p>
+              <p class="text-[12px] font-light text-[#121212] tracking-[0.1em]">
+                {{ formattedLocation }}
+              </p>
             </div>
           </div>
         </div>
@@ -45,7 +49,9 @@ const props = defineProps<{
     typologies?: string[];
     tailles?: string[];
     pays?: string[];
-    date?: string | Date;
+    lieu?: string;
+    region?: string;
+    date?: string | number | Date;
     ratio?: string;
   };
 }>();
@@ -55,6 +61,29 @@ const displayImage = computed(() => {
     return props.project.images[0];
   }
   return props.project.image;
+});
+
+const formattedLocation = computed(() => {
+  const parts = [];
+  if (props.project.lieu) parts.push(props.project.lieu);
+  if (props.project.region) parts.push(props.project.region);
+  if (props.project.pays && props.project.pays.length > 0) {
+    parts.push(props.project.pays.join(', '));
+  }
+  return parts.join(', ');
+});
+
+const projectYear = computed(() => {
+  const d = props.project.date;
+  if (!d) return '';
+  
+  if (typeof d === 'number' || (typeof d === 'string' && /^\d{4}$/.test(d))) {
+    return d.toString();
+  }
+  
+  const dateObj = new Date(d);
+  if (isNaN(dateObj.getTime())) return d.toString();
+  return dateObj.getFullYear().toString();
 });
 </script>
 

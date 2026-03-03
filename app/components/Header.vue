@@ -3,84 +3,85 @@
     <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] px-[var(--main-padding)]">
       <!-- Logo -->
       <NuxtLink 
-        to="/" 
+        to="/agence" 
         class="font-bold text-[12px] tracking-tighter text-[#121212] whitespace-nowrap logo-link"
-        @click="handleLinkClick('Home')"
-        @mouseenter="emit('linkHover', 'Home')"
+        @click="handleLinkClick('Studio Soñj')"
+        @mouseenter="emit('linkHover', 'Studio Soñj')"
         @mouseleave="emit('linkHover', '')"
       >
         Soñj
       </NuxtLink>
 
-      <!-- Search Bar (Desktop) -->
-      <div class="hidden md:flex items-center relative">
-        <div 
-          class="flex items-center transition-all duration-300 ease-in-out overflow-hidden"
-          :class="isSearchExpanded ? 'w-64 opacity-100' : 'w-0 opacity-0'"
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-[50px] ml-10">
+        <NuxtLink 
+          v-for="link in links" 
+          :key="link.to" 
+          :to="link.to"
+          class="u-header-link"
+          :class="{ 'text-gray-600': activeLink === link.label }"
+          @click="handleLinkClick(link.label)"
+          @mouseenter="emit('linkHover', link.label)"
+          @mouseleave="emit('linkHover', '')"
         >
-          <UInput 
-            ref="searchInput"
-            v-model="searchTerm" 
-            placeholder="Rechercher..." 
-            icon="i-heroicons-magnifying-glass-20-solid" 
-            class="w-full header-search-input"
-            color="[#121212]"
-            variant="none"
-            size="md"
-            @blur="handleSearchBlur"
-          />
-        </div>
-        <button 
-          v-if="!isSearchExpanded"
-          @click="isSearchExpanded = true"
-          class="p-1 text-[#121212] hover:text-gray-600 transition-colors flex items-center justify-center"
-        >
-          <UIcon name="i-heroicons-magnifying-glass-20-solid" class="w-5 h-5" />
-        </button>
-
-        <!-- Search Results Dropdown -->
-        <div 
-          v-if="isSearchExpanded && searchTerm && searchResults.length > 0" 
-          class="absolute top-full mt-2 left-0 w-64 bg-white border border-gray-100 shadow-xl z-[100] max-h-80 overflow-y-auto"
-        >
-          <NuxtLink 
-            v-for="result in searchResults" 
-            :key="result.path" 
-            :to="result.path"
-            class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-50 last:border-0 group"
-            @click="clearSearch"
-          >
-            <div class="text-[12px] font-bold text-[#121212] uppercase tracking-wider group-hover:text-gray-600 transition-colors">{{ result.title }}</div>
-            <div v-if="result.description" class="text-[10px] text-gray-400 mt-1 line-clamp-1">{{ result.description }}</div>
-          </NuxtLink>
-        </div>
-        <div 
-          v-else-if="isSearchExpanded && searchTerm && !isSearching" 
-          class="absolute top-full mt-2 left-0 w-64 bg-white border border-gray-100 p-4 shadow-xl z-[100] text-[10px] text-gray-400 uppercase tracking-widest text-center"
-        >
-          Aucun résultat
-        </div>
-      </div>
+          {{ link.label }}
+        </NuxtLink>
+      </nav>
       
       <!-- Large Space -->
       <div class="flex-grow"></div>
 
-      <!-- Desktop Navigation & Lang Toggle -->
-      <div class="hidden md:flex items-center gap-[50px]"> <!-- Wrapper for navigation and language -->
-        <nav class="flex items-center gap-[50px]"> <!-- Navigation Links -->
-          <NuxtLink 
-            v-for="link in links" 
-            :key="link.to" 
-            :to="link.to"
-            class="u-header-link"
-            :class="{ 'text-gray-600': activeLink === link.label }"
-            @click="handleLinkClick(link.label)"
-            @mouseenter="emit('linkHover', link.label)"
-            @mouseleave="emit('linkHover', '')"
+      <!-- Desktop Search Bar & Lang Toggle -->
+      <div class="hidden md:flex items-center gap-[50px]">
+        <!-- Search Bar -->
+        <div class="flex items-center relative">
+          <div 
+            class="flex items-center transition-all duration-300 ease-in-out overflow-hidden"
+            :class="isSearchExpanded ? 'w-64 opacity-100' : 'w-0 opacity-0'"
           >
-            {{ link.label }}
-          </NuxtLink>
-        </nav>
+            <UInput 
+              ref="searchInput"
+              v-model="searchTerm" 
+              placeholder="Rechercher..." 
+              icon="i-heroicons-magnifying-glass-20-solid" 
+              class="w-full header-search-input"
+              color="[#121212]"
+              variant="none"
+              size="md"
+              @blur="handleSearchBlur"
+            />
+          </div>
+          <button 
+            v-if="!isSearchExpanded"
+            @click="isSearchExpanded = true"
+            class="p-1 text-[#121212] hover:text-gray-600 transition-colors flex items-center justify-center"
+          >
+            <UIcon name="i-heroicons-magnifying-glass-20-solid" class="w-5 h-5" />
+          </button>
+
+          <!-- Search Results Dropdown -->
+          <div 
+            v-if="isSearchExpanded && searchTerm && searchResults.length > 0" 
+            class="absolute top-full mt-2 right-0 w-64 bg-white border border-gray-100 shadow-xl z-[100] max-h-80 overflow-y-auto"
+          >
+            <NuxtLink 
+              v-for="result in searchResults" 
+              :key="result.path" 
+              :to="result.path"
+              class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-50 last:border-0 group"
+              @click="clearSearch"
+            >
+              <div class="text-[12px] font-bold text-[#121212] uppercase tracking-wider group-hover:text-gray-600 transition-colors">{{ result.title }}</div>
+              <div v-if="result.description" class="text-[10px] text-gray-400 mt-1 line-clamp-1">{{ result.description }}</div>
+            </NuxtLink>
+          </div>
+          <div 
+            v-else-if="isSearchExpanded && searchTerm && !isSearching" 
+            class="absolute top-full mt-2 right-0 w-64 bg-white border border-gray-100 p-4 shadow-xl z-[100] text-[10px] text-gray-400 uppercase tracking-widest text-center"
+          >
+            Aucun résultat
+          </div>
+        </div>
 
         <UButton
           :label="currentLang"
@@ -207,9 +208,6 @@ const toggleMenu = () => {
 };
 
 const links = [{
-  label: 'Atelier',
-  to: '/agence'
-}, {
   label: 'Projets',
   to: '/projects'
 }, {

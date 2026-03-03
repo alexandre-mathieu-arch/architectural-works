@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-screen">
-    <NuxtLink to="/projects" class="w-full h-full block">
+    <NuxtLink to="/agence" replace class="w-full h-full block">
       <NuxtImg
         v-if="randomImage"
         :src="randomImage"

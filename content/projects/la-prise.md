@@ -1,6 +1,6 @@
 ---
 title: "La Prise"
-date: 2018-01-01
+date: 2018
 draft: false
 tags: ["Design"]
 images:

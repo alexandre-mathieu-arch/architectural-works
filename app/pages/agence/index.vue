@@ -30,7 +30,7 @@ const { data: page } = await useAsyncData('agence-index', () => {
 
 definePageMeta({
   layout: 'default',
-  title: "L'Agence" // Title for the PageTitle component
+  title: "Studio Soñj" // Title for the PageTitle component
 })
 </script>
 

@@ -7,7 +7,7 @@ images:
   - "/images/projects/cormier/cormier-ext.png"
   - "/images/projects/cormier/cormier(4).jpg"
   - "/images/projects/cormier/avenue-de-la-marne.jpg"
-date: "2021"
+date: 2020
 tags: ["rénovation", "maison"]
 typologies: ["Résidentiel"]
 tailles: ["S"]

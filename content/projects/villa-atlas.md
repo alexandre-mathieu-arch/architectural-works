@@ -1,6 +1,6 @@
 ---
 title: "Villa Atlas"
-date: 2026-02-10
+date: 2024
 ratio: "4/3"
 draft: false
 tags: ["luxe", "montagne"]
