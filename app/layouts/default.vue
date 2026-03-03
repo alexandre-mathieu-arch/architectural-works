@@ -8,11 +8,11 @@
         <PageTitle :title="displayedTitle" :show-filters="route.meta.showFilters === true" />
       </div>
 
-      <main class="main-container">
+      <main class="main-container pb-24">
         <slot />
       </main>
     </div>
-    <TheFooter class="py-8 mt-8" />
+    <TheFooter />
   </div>
 </template>
 
