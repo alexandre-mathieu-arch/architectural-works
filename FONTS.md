@@ -33,7 +33,7 @@ Ce document répertorie les styles typographiques utilisés sur l'ensemble du si
 
 ### Footer
 - **Texte** : "Contact"
-- **Police** : Satoshi (ou Lato si défini)
+- **Police** : Satoshi
 - **Taille** : `21px`
 - **Graisse** : `font-bold` (700)
 - **Espacement (Tracking)** : `tighter`
@@ -48,7 +48,7 @@ Ce document répertorie les styles typographiques utilisés sur l'ensemble du si
 
 ## 3. Titres de Pages (Composant PageTitle)
 - **Titre Principal (H1)** :
-  - **Police** : Satoshi (ou DM Sans si défini)
+  - **Police** : Satoshi
   - **Taille** : 
     - Mobile : `30px` (text-3xl)
     - Tablette : `36px` (md:text-4xl)
@@ -76,20 +76,21 @@ Ce document répertorie les styles typographiques utilisés sur l'ensemble du si
 
 ## 5. Page Projets
 ### Barre de filtres (Dropdowns)
-- **Taille** : `14px`
+- **Taille** : `15px`
 - **Graisse** : `font-bold` (700)
 ### Options des menus (Dropdown items)
-- **Taille** : `11px`
+- **Taille** : `14px`
 - **Graisse** : `font-medium` (500)
 ### Grille de projets (ProjectCard) - Au survol
 - **Nom du projet** :
   - **Taille** : `15px`
   - **Graisse** : `font-medium` (500)
-  - **Espacement** : `tracking-[0.1em]`
+  - **Casse** : Normale (identique au fichier .md)
+  - **Espacement (Tracking)** : `0.1em`
 - **Année & Localisation** :
   - **Taille** : `12px`
   - **Graisse** : `font-light` (300)
-  - **Espacement** : `tracking-[0.1em]`
+  - **Espacement (Tracking)** : `0.1em`
 
 ---
 

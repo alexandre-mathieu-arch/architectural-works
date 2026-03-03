@@ -71,17 +71,16 @@
               class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-50 last:border-0 group"
               @click="clearSearch"
             >
-              <div class="text-[12px] font-bold text-[#121212] uppercase tracking-wider group-hover:text-gray-600 transition-colors">{{ result.title }}</div>
+              <div class="text-[12px] font-bold text-[#121212] tracking-wider group-hover:text-gray-600 transition-colors">{{ result.title }}</div>
               <div v-if="result.description" class="text-[10px] text-gray-400 mt-1 line-clamp-1">{{ result.description }}</div>
             </NuxtLink>
-          </div>
-          <div 
+            </div>
+            <div 
             v-else-if="isSearchExpanded && searchTerm && !isSearching" 
-            class="absolute top-full mt-2 right-0 w-64 bg-white border border-gray-100 p-4 shadow-xl z-[100] text-[10px] text-gray-400 uppercase tracking-widest text-center"
-          >
+            class="absolute top-full mt-2 right-0 w-64 bg-white border border-gray-100 p-4 shadow-xl z-[100] text-[10px] text-gray-400 tracking-widest text-center"
+            >
             Aucun résultat
-          </div>
-        </div>
+            </div>        </div>
 
         <UButton
           :label="currentLang"

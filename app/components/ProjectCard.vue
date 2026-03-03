@@ -5,7 +5,7 @@
       :ui="{ body: { padding: 'p-0' }, header: { padding: 'p-0', base: 'relative overflow-hidden' } }"
     >
       <template #header>
-        <div class="relative w-full aspect-square flex items-center justify-center p-0.5">
+        <div class="relative w-full aspect-square flex items-center justify-start">
           <!-- Conteneur de l'image avec son ratio spécifique -->
           <div :class="['relative transition-all duration-300 group-hover:scale-[1.01]', project.ratio === '4/3' ? 'w-full aspect-[4/3]' : 'h-full aspect-[3/4]']">
             <!-- Image qui disparait au survol -->
@@ -22,7 +22,7 @@
             
             <!-- Infos affichées au survol (uniquement sur la zone de l'image) -->
             <div class="absolute inset-0 bg-[rgb(248,248,248)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-10 flex flex-col justify-center items-start text-left">
-              <h3 class="text-[15px] font-medium text-[#121212] tracking-[0.1em] mb-2">{{ project.title }}</h3>
+              <h3 class="text-[15px] font-medium text-[#121212] tracking-[0.1em] mb-2 normal-case">{{ project.title }}</h3>
               <p class="text-[12px] font-light text-[#121212] tracking-[0.1em] mb-0.5">{{ projectYear }}</p>
               <p class="text-[12px] font-light text-[#121212] tracking-[0.1em]">
                 {{ formattedLocation }}
