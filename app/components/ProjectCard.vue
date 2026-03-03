@@ -1,7 +1,7 @@
 <template>
   <NuxtLink :to="project.path">
     <UCard 
-      class="h-full flex flex-col transition-all duration-300 group relative"
+      class="h-full flex flex-col transition-all duration-300 group relative border-none shadow-none bg-transparent"
       :ui="{ body: { padding: 'p-0' }, header: { padding: 'p-0', base: 'relative overflow-hidden' } }"
     >
       <template #header>
