@@ -105,7 +105,7 @@ const goBack = () => {
         <!-- Static Info Section directly below description -->
         <div class="mt-8">
           <div class="info-toggle mb-2">
-            [infos.]
+            Infos.
           </div>
           <div class="info-content">
             <div v-if="page.surface" class="info-row">
