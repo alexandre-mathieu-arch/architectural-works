@@ -24,7 +24,6 @@ watchEffect(() => {
 });
 
 const currentImageIndex = ref(0)
-const showInfoDropdown = ref(false)
 
 // Handle both single image and multiple images
 const images = computed(() => {
@@ -95,47 +94,36 @@ const goBack = () => {
           </div>
         </header>
 
-        <!-- Dropdown Details -->
-        <div class="project-details-dropdown mt-4">
-          <button @click="showInfoDropdown = !showInfoDropdown" class="info-toggle">
-            [infos.]
-            <svg
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              class="w-4 h-4 transition-transform duration-200"
-              :class="{ 'rotate-180': showInfoDropdown }"
-            >
-              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-            </svg>
-          </button>
-
-          <Transition name="expand">
-            <div v-if="showInfoDropdown" class="info-content">
-              <div v-if="page.surface" class="info-row">
-                <span class="label">Surface:</span>
-                <span class="value">{{ page.surface }}</span>
-              </div>
-              <div v-if="page.cout" class="info-row">
-                <span class="label">Coût:</span>
-                <span class="value">{{ page.cout }}</span>
-              </div>
-              <div v-if="page.phase" class="info-row">
-                <span class="label">Phase:</span>
-                <span class="value">{{ page.phase }}</span>
-              </div>
-              <div v-if="page.statut" class="info-row">
-                <span class="label">Statut:</span>
-                <span class="value">{{ page.statut }}</span>
-              </div>
-            </div>
-          </Transition>
-        </div>
-
         <!-- Always visible description -->
         <div class="project-description mt-8">
           <p v-if="page.description">{{ page.description }}</p>
           <div class="content-renderer mt-4">
             <ContentRenderer :value="page" />
+          </div>
+        </div>
+
+        <!-- Static Info Section directly below description -->
+        <div class="mt-8">
+          <div class="info-toggle mb-2">
+            [infos.]
+          </div>
+          <div class="info-content">
+            <div v-if="page.surface" class="info-row">
+              <span class="label">Surface:</span>
+              <span class="value">{{ page.surface }}</span>
+            </div>
+            <div v-if="page.cout" class="info-row">
+              <span class="label">Coût:</span>
+              <span class="value">{{ page.cout }}</span>
+            </div>
+            <div v-if="page.phase" class="info-row">
+              <span class="label">Phase:</span>
+              <span class="value">{{ page.phase }}</span>
+            </div>
+            <div v-if="page.statut" class="info-row">
+              <span class="label">Statut:</span>
+              <span class="value">{{ page.statut }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -265,16 +253,5 @@ const goBack = () => {
 }
 .w-3\/12::-webkit-scrollbar-thumb {
   background: black;
-}
-
-/* Transitions */
-.expand-enter-active, .expand-leave-active {
-  transition: all 0.3s ease;
-  max-height: 200px;
-  overflow: hidden;
-}
-.expand-enter-from, .expand-leave-to {
-  max-height: 0;
-  opacity: 0;
 }
 </style>
