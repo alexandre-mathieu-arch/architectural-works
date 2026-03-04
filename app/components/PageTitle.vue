@@ -1,18 +1,22 @@
 <template>
   <div class="pb-2 bg-transparent relative">
-    <template v-if="typeof title === 'object' && title !== null">
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-none" style="font-family: var(--font-dm-sans);">
-        {{ title.main }}
-      </h1>
-      <h2 v-if="title.sub" class="text-[21px] font-bold" style="font-family: var(--font-dm-sans);">
-        {{ title.sub }}
-      </h2>
-    </template>
-    <template v-else>
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-none" style="font-family: var(--font-dm-sans);">
-        {{ title }}
-      </h1>
-    </template>
+    <Transition name="title-fade" mode="out-in">
+      <div :key="titleKey">
+        <template v-if="typeof title === 'object' && title !== null">
+          <h1 class="u-h1">
+            {{ title.main }}
+          </h1>
+          <h2 v-if="title.sub" class="u-h2">
+            {{ title.sub }}
+          </h2>
+        </template>
+        <template v-else>
+          <h1 class="u-h1">
+            {{ title }}
+          </h1>
+        </template>
+      </div>
+    </Transition>
     
     <div v-if="showFilters && (typeof title === 'string' ? title?.toUpperCase() === 'PROJETS' : title?.main?.toUpperCase() === 'PROJETS')" class="mt-2 relative">
       <!-- Accordion Buttons -->
@@ -21,8 +25,7 @@
           v-for="filter in filters" 
           :key="filter.id"
           @click="toggleMenu(filter.id)"
-          class="flex items-center justify-between gap-2 font-bold text-[15px] transition-colors hover:text-gray-500"
-          style="font-family: var(--font-dm-sans);"
+          class="flex items-center justify-between gap-2 u-h4 transition-colors hover:text-gray-500"
           :class="[
             activeMenu === filter.id ? 'text-gray-400' : 'text-[#121212]',
             (filter.id === 'typology' && selectedTypology) ? '!text-[#8B5CF6]' : '',
@@ -44,8 +47,7 @@
         <button 
           v-if="hasActiveFilters"
           @click="resetFilters"
-          class="ml-auto flex items-center gap-1 font-bold text-[15px] text-red-600 hover:text-red-800 transition-colors"
-          style="font-family: var(--font-dm-sans);"
+          class="ml-auto flex items-center gap-1 u-h4 text-red-600 hover:text-red-800 transition-colors"
         >
           <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
             <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
@@ -196,6 +198,13 @@ const {
   projectTitleOptions,
   resetFilters
 } = useProjectFilters();
+
+const titleKey = computed(() => {
+  if (typeof props.title === 'object' && props.title !== null) {
+    return props.title.main + (props.title.sub || '');
+  }
+  return props.title;
+});
 
 const activeMenu = ref<string | null>(null);
 

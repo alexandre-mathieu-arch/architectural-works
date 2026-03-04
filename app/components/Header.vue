@@ -1,10 +1,10 @@
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50">
+  <header class="fixed top-0 left-0 right-0 z-50 border-b border-[#121212]">
     <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] px-[var(--main-padding)]">
       <!-- Logo -->
       <NuxtLink 
         to="/agence" 
-        class="font-bold text-[12px] tracking-tighter text-[#121212] whitespace-nowrap logo-link"
+        class="text-[#121212] whitespace-nowrap u-h4"
         @click="handleLinkClick('Studio Soñj')"
         @mouseenter="emit('linkHover', 'Studio Soñj')"
         @mouseleave="emit('linkHover', '')"
@@ -18,7 +18,7 @@
           v-for="link in links" 
           :key="link.to" 
           :to="link.to"
-          class="u-header-link"
+          class="u-h4 font-medium transition-colors hover:text-gray-600 text-[#121212]"
           :class="{ 'text-gray-600': activeLink === link.label }"
           @click="handleLinkClick(link.label)"
           @mouseenter="emit('linkHover', link.label)"
@@ -86,7 +86,7 @@
           :label="currentLang"
           variant="ghost"
           color="[#121212]"
-          class="font-medium p-0 hover:bg-transparent text-[12px] tracking-wide u-header-link mr-[-16px]"
+          class="p-0 hover:bg-transparent u-h4 font-medium transition-colors hover:text-gray-600 mr-[-16px]"
           @click="toggleLang"
           @mouseenter="emit('linkHover', 'Langue')"
           @mouseleave="emit('linkHover', '')"
@@ -121,7 +121,7 @@
           v-for="link in links" 
           :key="link.to" 
           :to="link.to"
-          class="u-header-link font-bold text-[30px]"
+          class="u-h4 font-bold text-[30px]"
           :class="{ 'text-gray-600': activeLink === link.label }"
           @click="handleLinkClick(link.label); isMenuOpen = false"
         >
@@ -132,7 +132,7 @@
           :label="currentLang"
           variant="ghost"
           color="[#121212]"
-          class="font-medium p-0 hover:bg-transparent text-[30px] tracking-wide u-header-link"
+          class="p-0 hover:bg-transparent u-h4 font-bold text-[30px]"
           @click="toggleLang"
         />
       </div>
@@ -221,16 +221,6 @@ const links = [{
 <style scoped>
 @reference "../assets/css/main.css";
 
-.u-header-link {
-  @apply font-medium text-[#121212] hover:text-gray-600 tracking-wide text-[12px] transition-colors relative;
-  letter-spacing: 0.2em;
-}
-
-.logo-link {
-  @apply relative;
-  letter-spacing: 0.2em;
-}
-
 .router-link-active {
   @apply text-[#121212] font-bold opacity-100;
 }
@@ -243,20 +233,6 @@ const links = [{
   transform: translateX(-50%);
   color: #121212;
   font-size: 14px;
-}
-
-/* Base style for main-container to handle mobile padding */
-/* Removed explicit padding from .main-container in Header.vue */
-/* .main-container {
-  padding-left: 12%; 
-  padding-right: 12%;
-} */
-
-/* Adjust desktop navigation gap for smaller screens if needed, though Tailwind's md:gap should handle */
-@media (min-width: 768px) {
-  .u-header-link {
-    font-size: 12px; /* Ensure desktop font size */
-  }
 }
 
 .header-search-input .icon {

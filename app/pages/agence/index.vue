@@ -1,7 +1,7 @@
 <template>
   <div class="pt-8 pb-12">
     <div v-if="page" class="prose dark:prose-invert max-w-none">
-      <div class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-12">
+      <div class="mb-12">
         <ContentRenderer :value="page" />
       </div>
 

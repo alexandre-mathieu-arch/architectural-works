@@ -45,7 +45,7 @@ const goBack = () => {
 </script>
 
 <template>
-  <div v-if="page" class="flex h-screen bg-white text-black">
+  <div v-if="page" class="flex h-screen bg-[rgb(248,248,248)] text-black">
     <!-- Sidebar Section -->
     <div class="w-3/12 h-screen flex flex-col pt-4 px-8 pb-8 overflow-y-auto">
       <!-- Back Button -->
@@ -72,13 +72,25 @@ const goBack = () => {
       <!-- Scrollable Content -->
       <div class="flex-grow overflow-y-auto pr-4">
         <header class="project-info-header">
-          <h1 class="project-title">{{ page.title }}</h1>
-          <div class="project-location">
+          <h2 
+            class="u-h2 font-extrabold mb-2"
+            :style="{ viewTransitionName: 'title-' + page.path.replace(/\//g, '-') }"
+          >
+            {{ page.title }}
+          </h2>
+          <div 
+            class="project-location u-h2"
+            :style="{ viewTransitionName: 'location-' + page.path.replace(/\//g, '-') }"
+          >
             <span v-if="page.lieu">{{ page.lieu }}</span>
             <span v-if="page.lieu && page.pays">, </span>
             <span v-if="page.pays">{{ Array.isArray(page.pays) ? page.pays.join(', ') : page.pays }}</span>
           </div>
-          <div class="project-year" v-if="page.date">
+          <div 
+            class="project-year" 
+            v-if="page.date"
+            :style="{ viewTransitionName: 'year-' + page.path.replace(/\//g, '-') }"
+          >
             {{ new Date(page.date).getFullYear() }}
           </div>
         </header>
@@ -131,7 +143,7 @@ const goBack = () => {
     
     <!-- Carousel Section -->
     <div class="w-9/12 h-screen relative p-4">
-      <ImageCarousel :images="images" v-model="currentImageIndex" />
+      <ImageCarousel :images="images" v-model="currentImageIndex" :id="page.path" />
     </div>
   </div>
 </template>
@@ -144,32 +156,33 @@ const goBack = () => {
   background: none;
   border: none;
   color: #000000;
-  font-weight: normal;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 12px;
   cursor: pointer;
   transition: opacity 0.3s;
   padding: 0;
 }
 
 .project-title {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 25px;
+  font-weight: 600;
   line-height: 1.1;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   margin-bottom: 4px;
   color: #000000;
 }
 
 .project-location {
-  font-size: 24px;
-  font-weight: normal;
-  letter-spacing: 0.05rem;
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
   color: #000000;
 }
 
 .project-year {
   font-size: 16px;
-  font-weight: normal;
+  font-weight: 400;
+  letter-spacing: 0.2em;
   color: #000000;
   margin-top: 4px;
 }
@@ -183,15 +196,15 @@ const goBack = () => {
   background: none;
   border: none;
   color: #000000;
-  font-weight: normal;
-  font-size: 13px;
+  font-weight: 500;
+  font-size: 12px;
   cursor: pointer;
   transition: opacity 0.3s;
   padding: 0;
 }
 
 .nav-number.active {
-  font-weight: bold;
+  font-weight: 700;
   opacity: 1;
 }
 
@@ -206,8 +219,8 @@ const goBack = () => {
   background: none;
   border: none;
   color: #000000;
-  font-weight: normal;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 12px;
   cursor: pointer;
   padding: 0;
 }
@@ -223,7 +236,7 @@ const goBack = () => {
   justify-content: flex-start;
   gap: 12px;
   margin-bottom: 4px;
-  font-size: 13px;
+  font-size: 12px;
   color: #000000;
 }
 .info-row:last-child { margin-bottom: 0; }
@@ -233,9 +246,14 @@ const goBack = () => {
 
 .project-description {
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.1;
   color: #000000;
   text-align: left;
+}
+
+.project-description :deep(p) {
+  margin-bottom: 1em;
+  line-height: 1.1;
 }
 
 /* Custom scrollbar for sidebar */

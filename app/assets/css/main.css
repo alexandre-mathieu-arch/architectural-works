@@ -14,37 +14,48 @@ header a[href="https://ui.nuxt.com"] {
 
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
-  filter: blur(1rem);
+  filter: blur(8px);
+}
+
+.title-fade-enter-active,
+.title-fade-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.title-fade-enter-from,
+.title-fade-leave-to {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(4px);
 }
 
 @import "tailwindcss";
 
 
 @font-face {
-  font-family: 'Satoshi';
-  src: url('../font/Satoshi-Variable.woff2') format('woff2-variations'),
-       url('../font/Satoshi-Variable.woff2') format('woff2');
-  font-weight: 300 900;
+  font-family: 'Supreme';
+  src: url('../font/Supreme-Variable.woff2') format('woff2-variations'),
+       url('../font/Supreme-Variable.woff2') format('woff2');
+  font-weight: 100 800;
   font-display: swap;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Satoshi';
-  src: url('../font/Satoshi-VariableItalic.woff2') format('woff2-variations'),
-       url('../font/Satoshi-VariableItalic.woff2') format('woff2');
-  font-weight: 300 900;
+  font-family: 'Supreme';
+  src: url('../font/Supreme-VariableItalic.woff2') format('woff2-variations'),
+       url('../font/Supreme-VariableItalic.woff2') format('woff2');
+  font-weight: 100 800;
   font-display: swap;
   font-style: italic;
 }
 
 :root {
-  --font-primary: 'Satoshi', sans-serif;
+  --font-primary: 'Supreme', sans-serif;
   --header-height: 45px;
   --main-padding: 20px;
 }
@@ -74,3 +85,48 @@ header a[href="https://ui.nuxt.com"] {
   min-height: 100%;
   margin-bottom: -40px;
 }
+
+/* Typography Rationalization */
+@utility u-h1 {
+  @apply text-[28px] md:text-[34px] lg:text-[46px] font-bold leading-none;
+  font-family: var(--font-primary);
+}
+
+@utility u-h2 {
+  @apply text-[21px] md:text-[25px] font-bold leading-none;
+  letter-spacing: 0.2em;
+  font-family: var(--font-primary);
+}
+
+@utility u-sub-link {
+  @apply font-medium text-[#121212] hover:text-gray-400 tracking-widest text-[21px] transition-colors uppercase;
+  letter-spacing: 0.2em;
+}
+
+@utility u-h3 {
+  @apply text-[15px] font-bold tracking-[0.1em];
+  font-family: var(--font-primary);
+}
+
+@utility u-h4 {
+  @apply text-[13px] font-bold;
+  letter-spacing: 0.2em;
+  font-family: var(--font-primary);
+}
+
+@utility u-body {
+  @apply text-[16px] font-normal leading-[1.1] text-[#121212];
+  font-family: var(--font-primary);
+}
+
+@utility u-legend {
+  @apply text-[12px] font-light tracking-[0.1em];
+  font-family: var(--font-primary);
+}
+
+/* Prose overrides for Markdown content */
+.prose h1 { @apply u-h1; }
+.prose h2 { @apply u-h2 mb-4; }
+.prose h3 { @apply u-h3 mb-2; }
+.prose h4 { @apply u-h4 mb-2; }
+.prose p, .prose li { @apply u-body mb-4; }

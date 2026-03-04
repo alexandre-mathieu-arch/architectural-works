@@ -5,6 +5,7 @@
         :key="currentIndex"
         :src="images[currentIndex]"
         class="w-full h-full object-cover absolute inset-0"
+        :style="id && currentIndex === 0 ? { viewTransitionName: 'image-' + id.replace(/\//g, '-') } : {}"
       />
     </Transition>
 
@@ -31,6 +32,7 @@ const props = defineProps<{
   images: string[]
   modelValue: number
   autoplay?: number
+  id?: string
 }>()
 
 const emit = defineEmits(['update:modelValue'])
@@ -79,7 +81,7 @@ onUnmounted(() => {
 .slide-left-leave-active,
 .slide-right-enter-active,
 .slide-right-leave-active {
-  transition: transform 0.4s ease;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slide-left-enter-from {

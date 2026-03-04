@@ -14,6 +14,7 @@
               :src="displayImage"
               :alt="project.title"
               class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0"
+              :style="{ viewTransitionName: 'image-' + project.path.replace(/\//g, '-') }"
             />
             <!-- Placeholder si pas d'image -->
             <div v-else class="absolute inset-0 w-full h-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
@@ -22,9 +23,22 @@
             
             <!-- Infos affichées au survol (uniquement sur la zone de l'image) -->
             <div class="absolute inset-0 bg-[rgb(248,248,248)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-10 flex flex-col justify-center items-start text-left">
-              <h3 class="text-[15px] font-medium text-[#121212] tracking-[0.1em] mb-2 normal-case">{{ project.title }}</h3>
-              <p class="text-[12px] font-light text-[#121212] tracking-[0.1em] mb-0.5">{{ projectYear }}</p>
-              <p class="text-[12px] font-light text-[#121212] tracking-[0.1em]">
+              <h3 
+                class="text-[15px] font-medium text-[#121212] tracking-[0.1em] mb-2 normal-case"
+                :style="{ viewTransitionName: 'title-' + project.path.replace(/\//g, '-') }"
+              >
+                {{ project.title }}
+              </h3>
+              <p 
+                class="text-[12px] font-light text-[#121212] tracking-[0.1em] mb-0.5"
+                :style="{ viewTransitionName: 'year-' + project.path.replace(/\//g, '-') }"
+              >
+                {{ projectYear }}
+              </p>
+              <p 
+                class="text-[12px] font-light text-[#121212] tracking-[0.1em]"
+                :style="{ viewTransitionName: 'location-' + project.path.replace(/\//g, '-') }"
+              >
                 {{ formattedLocation }}
               </p>
             </div>
