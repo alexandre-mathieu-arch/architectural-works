@@ -1,5 +1,10 @@
 <template>
-  <NuxtLink :to="project.path" class="block w-full">
+  <NuxtLink 
+    :to="project.path" 
+    class="block w-full"
+    @mouseenter="setHoveredProject(project.title)"
+    @mouseleave="setHoveredProject(null)"
+  >
     <div class="relative w-full aspect-square overflow-hidden group">
       <!-- Image qui remplit toute la zone -->
       <NuxtImg
@@ -15,9 +20,9 @@
       </div>
       
       <!-- Infos affichées au survol -->
-      <div class="absolute inset-0 bg-[rgb(248,248,248)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-10 flex flex-col justify-center items-start text-left z-10">
+      <div class="absolute inset-0 bg-[#F4F4F0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-10 flex flex-col justify-center items-start text-left z-10">
         <h3 
-          class="text-[15px] font-medium text-[#121212] tracking-[0.1em] mb-2 normal-case"
+          class="u-h3 mb-2 normal-case"
           :style="{ viewTransitionName: 'title-' + project.path.replace(/\//g, '-') }"
         >
           {{ project.title }}
@@ -41,6 +46,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+
+const { setHoveredProject } = useHoverProject();
 
 const props = defineProps<{
   project: {

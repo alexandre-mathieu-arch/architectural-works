@@ -79,13 +79,14 @@ Les filtres situés sous le titre principal de la page Projets suivent ces règl
     - **Transition** : `duration-300` sur la couleur et la bordure.
 
 - **Panneau d'options (Panel)** :
-    - **Position** : Absolue (`absolute top-0 left-0`).
+    - **Position** : Relative (pousse la grille vers le bas lors de l'ouverture).
     - **Largeur** : S'aligne sur la largeur des boutons trigger et de la première colonne :
         - `w-full` (mobile)
         - `md:w-[calc((100%-4px)/2)]` (tablette)
         - `xl:w-[calc((100%-8px)/3)]` (desktop)
     - **Fond** : Transparent.
     - **Padding** : Aucun (`p-0`). Les pills touchent les triggers.
+    - **Marges** : Un `mb-10` (40px) est appliqué au conteneur du panneau pour créer de l'espace avec la grille lorsqu'il est ouvert.
     - **Bordure** : Pas de bordure basse.
     - **Transition d'entrée/sortie** : Opacité et translation verticale de `8px` (`-translate-y-2` vers `translate-y-0`).
 
@@ -95,6 +96,7 @@ Les filtres situés sous le titre principal de la page Projets suivent ces règl
     - **Espacement** : Aucun espacement entre les options (`-ml-[1px] -mt-[1px]` pour superposer les bordures).
     - **Padding** : `px-2 py-0.5`.
     - **État Sélectionné** : Fond `#121212` et texte blanc.
+    - **Transition** : `duration-500` avec `ease-in-out` pour un changement de couleur adouci.
 
 - **Logique de filtrage** :
     - **Catégories** : Typologie, Taille, Année, Pays.
@@ -110,6 +112,7 @@ La grille d'affichage des projets utilise les caractéristiques suivantes :
     - **Tablette / Petit Desktop (md)** : 2 colonnes (`md:grid-cols-2`)
     - **Large Desktop (xl)** : 3 colonnes (`xl:grid-cols-3`)
 - **Gouttière (Gaps)** : Espacement minimal de `4px` (`gap-1`).
+- **Marges** : Un `mt-10` (40px) constant est appliqué au-dessus de la grille.
 - **Alignement** : Les items sont centrés verticalement (`items-center`).
 
 ### Détails des Cartes (`ProjectCard.vue`)

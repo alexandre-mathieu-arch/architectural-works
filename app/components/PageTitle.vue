@@ -11,9 +11,18 @@
           </h2>
         </template>
         <template v-else>
-          <h1 class="u-h1">
-            {{ title }}
-          </h1>
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 relative">
+            <div class="col-start-1 flex justify-between items-baseline">
+              <h1 class="u-h1">
+                {{ title }}
+              </h1>
+              
+              <!-- Hovered project title: baseline-aligned and right-aligned in the 1st column -->
+              <span v-if="hoveredProjectTitle" class="u-h2 text-[#121212] transition-opacity duration-300">
+                {{ hoveredProjectTitle }}
+              </span>
+            </div>
+          </div>
         </template>
       </div>
     </Transition>
@@ -25,10 +34,10 @@
           v-for="filter in filters" 
           :key="filter.id"
           @click="toggleMenu(filter.id)"
-          class="flex-shrink-0 flex-auto flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 hover:border-[#121212] hover:text-gray-500 -ml-[1px] -mt-[1px]"
+          class="flex-shrink-0 flex-auto flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 hover:border-indigo-500 hover:text-indigo-500 -ml-[1px] -mt-[1px]"
           :class="[
-            activeMenu === filter.id ? 'text-gray-400 border-gray-400 z-50' : 'text-[#121212]',
-            (filter.id === 'typology' && selectedTypology) ? '!text-[#8B5CF6] !border-[#8B5CF6] z-50' : '',
+            activeMenu === filter.id ? 'text-indigo-500 border-indigo-500 z-50' : 'text-[#121212]',
+            (filter.id === 'typology' && selectedTypology) ? '!text-indigo-500 !border-indigo-500 z-50' : '',
           ]"
         >
           <span>{{ filter.label }}</span>
@@ -80,8 +89,8 @@
               <template v-if="activeMenu === 'typology'">
                 <button 
                   @click="selectedTypology = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-[#121212] hover:text-white transition-colors -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-[#121212] text-white': selectedTypology === null }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedTypology === null }"
                 >
                   Toutes
                 </button>
@@ -89,8 +98,8 @@
                   v-for="opt in typologyOptions" 
                   :key="opt"
                   @click="selectedTypology = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-[#121212] hover:text-white transition-colors -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-[#121212] text-white': selectedTypology === opt }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedTypology === opt }"
                 >
                   {{ opt }}
                 </button>
@@ -100,8 +109,8 @@
               <template v-if="activeMenu === 'size'">
                 <button 
                   @click="selectedSize = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-[#121212] hover:text-white transition-colors -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-[#121212] text-white': selectedSize === null }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedSize === null }"
                 >
                   Toutes
                 </button>
@@ -109,8 +118,8 @@
                   v-for="opt in sizeOptions" 
                   :key="opt"
                   @click="selectedSize = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-[#121212] hover:text-white transition-colors -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-[#121212] text-white': selectedSize === opt }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedSize === opt }"
                 >
                   {{ opt }}
                 </button>
@@ -120,8 +129,8 @@
               <template v-if="activeMenu === 'year'">
                 <button 
                   @click="selectedYear = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-[#121212] hover:text-white transition-colors -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-[#121212] text-white': selectedYear === null }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedYear === null }"
                 >
                   Toutes
                 </button>
@@ -129,8 +138,8 @@
                   v-for="opt in yearOptions" 
                   :key="opt"
                   @click="selectedYear = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-[#121212] hover:text-white transition-colors -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-[#121212] text-white': selectedYear === opt }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedYear === opt }"
                 >
                   {{ opt }}
                 </button>
@@ -140,8 +149,8 @@
               <template v-if="activeMenu === 'country'">
                 <button 
                   @click="selectedCountry = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-[#121212] hover:text-white transition-colors -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-[#121212] text-white': selectedCountry === null }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedCountry === null }"
                 >
                   Tous
                 </button>
@@ -149,8 +158,8 @@
                   v-for="opt in countryOptions" 
                   :key="opt"
                   @click="selectedCountry = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-[#121212] hover:text-white transition-colors -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-[#121212] text-white': selectedCountry === opt }"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedCountry === opt }"
                 >
                   {{ opt }}
                 </button>
@@ -166,6 +175,8 @@
 <script setup lang="ts">
 import { ref, defineProps, watch, computed } from 'vue';
 import { useProjectFilters } from '~/composables/useProjectFilters';
+
+const { hoveredProjectTitle } = useHoverProject();
 
 const props = defineProps<{
   title: string | { main: string; sub?: string };

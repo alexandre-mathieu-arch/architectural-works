@@ -27,7 +27,7 @@
           {{ link.label }}
         </NuxtLink>
       </nav>
-      
+
       <!-- Large Space -->
       <div class="flex-grow"></div>
 
@@ -143,6 +143,8 @@
 <script setup lang="ts">
 import { ref, watch, nextTick, computed } from 'vue';
 import { UInput } from '#components'; // Import UInput
+
+const { hoveredProjectTitle } = useHoverProject();
 
 const emit = defineEmits(['linkClick', 'linkHover']);
 
