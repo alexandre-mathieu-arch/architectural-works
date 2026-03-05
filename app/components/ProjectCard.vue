@@ -1,51 +1,41 @@
 <template>
-  <NuxtLink :to="project.path">
-    <UCard 
-      class="h-full flex flex-col transition-all duration-300 group relative border-none shadow-none bg-transparent"
-      :ui="{ body: { padding: 'p-0' }, header: { padding: 'p-0', base: 'relative overflow-hidden' } }"
-    >
-      <template #header>
-        <div class="relative w-full aspect-square flex items-center justify-start">
-          <!-- Conteneur de l'image avec son ratio spécifique -->
-          <div :class="['relative transition-all duration-300 group-hover:scale-[1.01]', project.ratio === '4/3' ? 'w-full aspect-[4/3]' : 'h-full aspect-[3/4]']">
-            <!-- Image qui disparait au survol -->
-            <NuxtImg
-              v-if="displayImage"
-              :src="displayImage"
-              :alt="project.title"
-              class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0"
-              :style="{ viewTransitionName: 'image-' + project.path.replace(/\//g, '-') }"
-            />
-            <!-- Placeholder si pas d'image -->
-            <div v-else class="absolute inset-0 w-full h-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
-              <UIcon name="i-heroicons-photo" class="w-12 h-12 text-gray-400" />
-            </div>
-            
-            <!-- Infos affichées au survol (uniquement sur la zone de l'image) -->
-            <div class="absolute inset-0 bg-[rgb(248,248,248)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-10 flex flex-col justify-center items-start text-left">
-              <h3 
-                class="text-[15px] font-medium text-[#121212] tracking-[0.1em] mb-2 normal-case"
-                :style="{ viewTransitionName: 'title-' + project.path.replace(/\//g, '-') }"
-              >
-                {{ project.title }}
-              </h3>
-              <p 
-                class="text-[12px] font-light text-[#121212] tracking-[0.1em] mb-0.5"
-                :style="{ viewTransitionName: 'year-' + project.path.replace(/\//g, '-') }"
-              >
-                {{ projectYear }}
-              </p>
-              <p 
-                class="text-[12px] font-light text-[#121212] tracking-[0.1em]"
-                :style="{ viewTransitionName: 'location-' + project.path.replace(/\//g, '-') }"
-              >
-                {{ formattedLocation }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </template>
-    </UCard>
+  <NuxtLink :to="project.path" class="block w-full">
+    <div class="relative w-full aspect-square overflow-hidden group">
+      <!-- Image qui remplit toute la zone -->
+      <NuxtImg
+        v-if="displayImage"
+        :src="displayImage"
+        :alt="project.title"
+        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        :style="{ viewTransitionName: 'image-' + project.path.replace(/\//g, '-') }"
+      />
+      <!-- Placeholder si pas d'image -->
+      <div v-else class="absolute inset-0 w-full h-full bg-gray-100 flex items-center justify-center">
+        <UIcon name="i-heroicons-photo" class="w-12 h-12 text-gray-400" />
+      </div>
+      
+      <!-- Infos affichées au survol -->
+      <div class="absolute inset-0 bg-[rgb(248,248,248)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-10 flex flex-col justify-center items-start text-left z-10">
+        <h3 
+          class="text-[15px] font-medium text-[#121212] tracking-[0.1em] mb-2 normal-case"
+          :style="{ viewTransitionName: 'title-' + project.path.replace(/\//g, '-') }"
+        >
+          {{ project.title }}
+        </h3>
+        <p 
+          class="text-[12px] font-light text-[#121212] tracking-[0.1em] mb-0.5"
+          :style="{ viewTransitionName: 'year-' + project.path.replace(/\//g, '-') }"
+        >
+          {{ projectYear }}
+        </p>
+        <p 
+          class="text-[12px] font-light text-[#121212] tracking-[0.1em]"
+          :style="{ viewTransitionName: 'location-' + project.path.replace(/\//g, '-') }"
+        >
+          {{ formattedLocation }}
+        </p>
+      </div>
+    </div>
   </NuxtLink>
 </template>
 

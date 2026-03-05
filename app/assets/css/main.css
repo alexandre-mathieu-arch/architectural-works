@@ -66,12 +66,12 @@ header a[href="https://ui.nuxt.com"] {
   --font-primary: 'Supreme', sans-serif;
   --font-body: 'Alpino', sans-serif;
   --header-height: 45px;
-  --main-padding: 20px;
+  --main-padding: 5%;
 }
 
 @media (min-width: 768px) {
   :root {
-    --main-padding: 2%;
+    --main-padding: 5%;
   }
 }
 
