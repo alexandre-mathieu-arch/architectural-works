@@ -11,7 +11,7 @@
         v-if="displayImage"
         :src="displayImage"
         :alt="project.title"
-        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        class="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:hue-rotate-90"
         :style="{ viewTransitionName: 'image-' + project.path.replace(/\//g, '-') }"
       />
       <!-- Placeholder si pas d'image -->
@@ -20,25 +20,27 @@
       </div>
       
       <!-- Infos affichées au survol -->
-      <div class="absolute inset-0 bg-[#F4F4F0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-10 flex flex-col justify-center items-start text-left z-10">
-        <h3 
-          class="u-h3 mb-2 normal-case"
-          :style="{ viewTransitionName: 'title-' + project.path.replace(/\//g, '-') }"
-        >
-          {{ project.title }}
-        </h3>
-        <p 
-          class="text-[12px] font-light text-[#121212] tracking-[0.1em] mb-0.5"
-          :style="{ viewTransitionName: 'year-' + project.path.replace(/\//g, '-') }"
-        >
-          {{ projectYear }}
-        </p>
-        <p 
-          class="text-[12px] font-light text-[#121212] tracking-[0.1em]"
-          :style="{ viewTransitionName: 'location-' + project.path.replace(/\//g, '-') }"
-        >
-          {{ formattedLocation }}
-        </p>
+      <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10">
+        <div class="absolute top-0 left-0 w-full border border-[#121212] p-2 flex items-baseline gap-3 bg-[#F4F4F0]/60 backdrop-blur-md overflow-hidden">
+          <h3 
+            class="u-h3 normal-case whitespace-nowrap"
+            :style="{ viewTransitionName: 'title-' + project.path.replace(/\//g, '-') }"
+          >
+            {{ project.title }}
+          </h3>
+          <p 
+            class="text-[12px] font-light text-[#121212] tracking-[0.1em] whitespace-nowrap"
+            :style="{ viewTransitionName: 'year-' + project.path.replace(/\//g, '-') }"
+          >
+            {{ projectYear }}
+          </p>
+          <p 
+            class="text-[12px] font-light text-[#121212] tracking-[0.1em] whitespace-nowrap overflow-hidden text-ellipsis"
+            :style="{ viewTransitionName: 'location-' + project.path.replace(/\//g, '-') }"
+          >
+            {{ formattedLocation }}
+          </p>
+        </div>
       </div>
     </div>
   </NuxtLink>
