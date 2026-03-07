@@ -1,7 +1,7 @@
 <template>
   <div 
     class="pb-2 relative z-30"
-    :class="{ 'sticky top-[var(--header-height)] bg-[#F4F4F0] -mx-[var(--main-padding)] px-[var(--main-padding)] pt-2': showFilters }"
+    :class="{ 'sticky top-[var(--header-height)] bg-[#F4F4F0] -mx-[var(--main-padding)] px-[var(--main-padding)]': showFilters }"
   >
     <!-- Title Section -->
     <div style="view-transition-name: page-title-container;">
