@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-8 pb-12">
+  <div class="pt-0 pb-12">
     <div class="space-y-12">
       <!-- Future content for Art -->
       <p class="text-gray-500 italic">La section Art sera bientôt disponible...</p>

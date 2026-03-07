@@ -1,7 +1,10 @@
 <template>
-  <div class="pb-2 bg-transparent relative -mt-[10px]">
+  <div 
+    class="pb-2 relative z-30"
+    :class="{ 'sticky top-[var(--header-height)] bg-[#F4F4F0] -mx-[var(--main-padding)] px-[var(--main-padding)] pt-2': showFilters }"
+  >
     <!-- Title Section -->
-    <div>
+    <div style="view-transition-name: page-title-container;">
       <h1 class="u-h1">
         {{ typeof title === 'object' && title !== null ? title.main : title }}
       </h1>
@@ -27,12 +30,15 @@
     
     <div v-if="showFilters" class="mt-[5px] relative">
       <!-- Accordion Buttons Container aligned with the first column -->
-      <div class="flex flex-nowrap md:overflow-visible relative z-40 w-full md:w-[calc((100%-4px)/2)] xl:w-[calc((100%-8px)/3)] overflow-x-auto scrollbar-hide">
+      <div 
+        class="flex flex-nowrap md:overflow-visible relative z-40 w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-64px)/3)] overflow-x-auto scrollbar-hide"
+        style="view-transition-name: page-triggers;"
+      >
         <button 
           v-for="filter in filters" 
           :key="filter.id"
           @click="!readonlyFilters ? toggleMenu(filter.id) : null"
-          class="flex-shrink-0 flex-auto flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -ml-[1px] -mt-[1px]"
+          class="flex-shrink-0 flex-auto flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -ml-[1px] -mt-[1px] bg-[#F4F4F0]"
           :class="[
             activeMenu === filter.id ? 'text-indigo-500 border-indigo-500 z-50' : 'text-[#121212]',
             (filter.id === 'typology' && selectedTypology) ? '!text-indigo-500 !border-indigo-500 z-50' : '',
@@ -65,7 +71,7 @@
         <button 
           v-if="hasActiveFilters"
           @click="resetFilters"
-          class="ml-auto flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 -mt-[1px] -ml-[1px]"
+          class="ml-auto flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 text-red-600 bg-[#F4F4F0] hover:bg-red-600 hover:text-white transition-all duration-300 -mt-[1px] -ml-[1px]"
           title="Réinitialiser les filtres"
         >
           <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -75,7 +81,7 @@
       </div>
 
       <!-- Accordion Panels (Absolute positioning to prevent layout shift) -->
-      <div class="relative w-full md:w-[calc((100%-4px)/2)] xl:w-[calc((100%-8px)/3)]">
+      <div class="relative w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-64px)/3)]">
         <Transition
           enter-active-class="transition duration-200 ease-out"
           enter-from-class="opacity-0 -translate-y-2"
@@ -90,7 +96,7 @@
               <template v-if="activeMenu === 'typology'">
                 <button 
                   @click="selectedTypology = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#F4F4F0] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
                   :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedTypology === null }"
                 >
                   Toutes
@@ -99,7 +105,7 @@
                   v-for="opt in typologyOptions" 
                   :key="opt"
                   @click="selectedTypology = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#F4F4F0] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
                   :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedTypology === opt }"
                 >
                   {{ opt }}
@@ -110,7 +116,7 @@
               <template v-if="activeMenu === 'size'">
                 <button 
                   @click="selectedSize = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#F4F4F0] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
                   :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedSize === null }"
                 >
                   Toutes
@@ -119,7 +125,7 @@
                   v-for="opt in sizeOptions" 
                   :key="opt"
                   @click="selectedSize = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#F4F4F0] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
                   :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedSize === opt }"
                 >
                   {{ opt }}
@@ -130,7 +136,7 @@
               <template v-if="activeMenu === 'year'">
                 <button 
                   @click="selectedYear = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#F4F4F0] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
                   :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedYear === null }"
                 >
                   Toutes
@@ -139,7 +145,7 @@
                   v-for="opt in yearOptions" 
                   :key="opt"
                   @click="selectedYear = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#F4F4F0] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
                   :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedYear === opt }"
                 >
                   {{ opt }}
@@ -150,7 +156,7 @@
               <template v-if="activeMenu === 'country'">
                 <button 
                   @click="selectedCountry = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#F4F4F0] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
                   :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedCountry === null }"
                 >
                   Tous
@@ -159,7 +165,7 @@
                   v-for="opt in countryOptions" 
                   :key="opt"
                   @click="selectedCountry = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
+                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#F4F4F0] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
                   :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedCountry === opt }"
                 >
                   {{ opt }}

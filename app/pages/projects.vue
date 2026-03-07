@@ -1,7 +1,7 @@
 <template>
   <div class="pt-0 pb-0">
 
-    <div v-if="filteredProjects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-1 items-center mt-[20px]">
+    <div v-if="filteredProjects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 items-center mt-[35px]">
       <ProjectCard v-for="project in filteredProjects" :key="project.path" :project="project" />
     </div>
     <div v-else class="text-center py-20">

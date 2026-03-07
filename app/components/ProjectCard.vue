@@ -11,7 +11,7 @@
         v-if="displayImage"
         :src="displayImage"
         :alt="project.title"
-        class="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:hue-rotate-90"
+        class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 group-hover:hue-rotate-180"
         :style="{ viewTransitionName: 'image-' + project.path.replace(/\//g, '-') }"
       />
       <!-- Placeholder si pas d'image -->
@@ -21,7 +21,7 @@
       
       <!-- Infos affichées au survol -->
       <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10">
-        <div class="absolute top-0 left-0 w-full border border-[#121212] p-2 flex items-baseline gap-3 bg-[#F4F4F0]/60 backdrop-blur-md overflow-hidden">
+        <div class="absolute top-0 left-0 w-full border border-[#121212] px-2 h-[30px] flex items-center gap-3 bg-[#F4F4F0] overflow-hidden">
           <h3 
             class="u-h3 normal-case whitespace-nowrap"
             :style="{ viewTransitionName: 'title-' + project.path.replace(/\//g, '-') }"

@@ -1,5 +1,5 @@
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50">
+  <header class="fixed top-0 left-0 right-0 z-50 bg-[#F4F4F0]">
     <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] px-[var(--main-padding)]">
       <!-- Logo -->
       <NuxtLink 
