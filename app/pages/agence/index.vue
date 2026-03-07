@@ -3,12 +3,12 @@
     <!-- Triggers for Agence section -->
     <div class="sticky top-[var(--header-height)] z-40 bg-[#FFFFFF] pt-2 pb-2 -mt-[5px]">
       <div 
-        class="flex flex-nowrap md:overflow-visible relative w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] overflow-x-auto scrollbar-hide"
+        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8"
         style="view-transition-name: page-triggers;"
       >
         <button 
           @click="toggleSection('pratique')" 
-          class="flex-shrink-0 flex-auto flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -ml-[1px] -mt-[1px] text-[#121212] hover:border-indigo-500 hover:text-indigo-500"
+          class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -mt-[1px] text-[#121212] hover:border-indigo-500 hover:text-indigo-500 bg-[#FFFFFF] w-full"
           :class="{ 'text-indigo-500 border-indigo-500 z-50': isSectionActive('pratique') }"
         >
           <span>Pratique</span>
@@ -18,7 +18,7 @@
         </button>
         <button 
           @click="toggleSection('equipe')" 
-          class="flex-shrink-0 flex-auto flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -ml-[1px] -mt-[1px] text-[#121212] hover:border-indigo-500 hover:text-indigo-500"
+          class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -mt-[1px] text-[#121212] hover:border-indigo-500 hover:text-indigo-500 bg-[#FFFFFF] w-full"
           :class="{ 'text-indigo-500 border-indigo-500 z-50': isSectionActive('equipe') }"
         >
           <span>Équipes</span>

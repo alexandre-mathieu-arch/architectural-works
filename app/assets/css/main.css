@@ -152,3 +152,50 @@ header a[href="https://ui.nuxt.com"] {
 .prose h3 { @apply u-h3 mb-2; }
 .prose h4 { @apply u-h4 mb-2; }
 .prose p, .prose li { @apply u-body mb-4; }
+
+/* View Transitions animations */
+::view-transition-group(project-description),
+::view-transition-group(project-carousel) {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-next::view-transition-old(project-description),
+.transition-next::view-transition-old(project-carousel) {
+  animation: slide-out-to-left 0.6s forwards;
+}
+
+.transition-next::view-transition-new(project-description),
+.transition-next::view-transition-new(project-carousel) {
+  animation: slide-in-from-right 0.6s forwards;
+}
+
+.transition-prev::view-transition-old(project-description),
+.transition-prev::view-transition-old(project-carousel) {
+  animation: slide-out-to-right 0.6s forwards;
+}
+
+.transition-prev::view-transition-new(project-description),
+.transition-prev::view-transition-new(project-carousel) {
+  animation: slide-in-from-left 0.6s forwards;
+}
+
+@keyframes slide-out-to-left {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-30px); opacity: 0; }
+}
+
+@keyframes slide-in-from-right {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-out-to-right {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(30px); opacity: 0; }
+}
+
+@keyframes slide-in-from-left {
+  from { transform: translateX(-30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}

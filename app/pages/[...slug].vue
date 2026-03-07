@@ -54,44 +54,46 @@ const images = computed(() => {
 </script>
 
 <template>
-  <div v-if="page" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-1">
-    <!-- First column: Info / Description -->
-    <div class="col-start-1">
-      <div class="project-description pr-4">
-        <p v-if="page.description" class="u-body mb-8">{{ page.description }}</p>
-        <div class="content-renderer">
-          <ContentRenderer :value="page" class="prose max-w-none" />
-        </div>
-        
-        <!-- Static Info Section -->
-        <div class="mt-8 border-t border-[#121212]/10 pt-4">
-          <div class="u-h4 mb-4 uppercase tracking-widest">Détails</div>
-          <div class="space-y-2">
-            <div v-if="page.surface" class="flex gap-4 u-legend uppercase">
-              <span class="w-20 opacity-50">Surface:</span>
-              <span>{{ page.surface }}</span>
-            </div>
-            <div v-if="page.cout" class="flex gap-4 u-legend uppercase">
-              <span class="w-20 opacity-50">Coût:</span>
-              <span>{{ page.cout }}</span>
-            </div>
-            <div v-if="page.phase" class="flex gap-4 u-legend uppercase">
-              <span class="w-20 opacity-50">Phase:</span>
-              <span>{{ page.phase }}</span>
-            </div>
-            <div v-if="page.statut" class="flex gap-4 u-legend uppercase">
-              <span class="w-20 opacity-50">Statut:</span>
-              <span>{{ page.statut }}</span>
+  <div v-if="page" class="h-[calc(100vh-var(--header-height))] overflow-hidden">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 h-full">
+      <!-- First column: Info / Description (Scrollable if needed but inside fixed layout) -->
+      <div class="col-start-1 h-full overflow-y-auto scrollbar-hide pt-[45px]" style="view-transition-name: project-description;">
+        <div class="project-description pb-24">
+          <p v-if="page.description" class="u-body mb-8">{{ page.description }}</p>
+          <div class="content-renderer">
+            <ContentRenderer :value="page" class="prose max-w-none" />
+          </div>
+          
+          <!-- Static Info Section -->
+          <div class="mt-8 border-t border-[#121212]/10 pt-4">
+            <div class="u-h4 mb-4 uppercase tracking-widest">Détails</div>
+            <div class="space-y-2">
+              <div v-if="page.surface" class="flex gap-4 u-legend uppercase">
+                <span class="w-20 opacity-50">Surface:</span>
+                <span>{{ page.surface }}</span>
+              </div>
+              <div v-if="page.cout" class="flex gap-4 u-legend uppercase">
+                <span class="w-20 opacity-50">Coût:</span>
+                <span>{{ page.cout }}</span>
+              </div>
+              <div v-if="page.phase" class="flex gap-4 u-legend uppercase">
+                <span class="w-20 opacity-50">Phase:</span>
+                <span>{{ page.phase }}</span>
+              </div>
+              <div v-if="page.statut" class="flex gap-4 u-legend uppercase">
+                <span class="w-20 opacity-50">Statut:</span>
+                <span>{{ page.statut }}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    
-    <!-- Carousel Section: Occupies column 2 and 3 -->
-    <div class="md:col-span-1 xl:col-span-2 relative -mt-[10px] p-1">
-      <div class="w-full aspect-square md:aspect-square xl:aspect-[2/1]">
-        <ImageCarousel :images="images" v-model="currentImageIndex" :id="page.path" />
+      
+      <!-- Carousel Section: Fixed and covering PageTitle -->
+      <div class="hidden md:block md:col-span-1 xl:col-span-3 fixed right-[var(--main-padding)] top-[var(--header-height)] bottom-24 left-[calc(var(--main-padding)+25%+24px)] xl:left-[calc(var(--main-padding)+((100%-2*(var(--main-padding)))-96px)/4+32px)] z-40 bg-white" style="view-transition-name: project-carousel;">
+        <div class="w-full h-full pt-[5px]">
+          <ImageCarousel :images="images" v-model="currentImageIndex" :id="page.path" />
+        </div>
       </div>
     </div>
   </div>

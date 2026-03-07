@@ -1,6 +1,6 @@
 <template>
   <header class="fixed top-0 left-0 right-0 z-50 bg-[#FFFFFF]">
-    <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] px-[var(--main-padding)]">
+    <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] px-[var(--main-padding)] relative">
       <!-- Logo -->
       <NuxtLink 
         to="/agence" 
@@ -13,19 +13,53 @@
       </NuxtLink>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center gap-[50px] ml-10">
-        <NuxtLink 
-          v-for="link in links" 
-          :key="link.to" 
-          :to="link.to"
-          class="u-h4 font-medium transition-colors hover:text-gray-600 text-[#121212]"
-          :class="{ 'text-gray-600': activeLink === link.label }"
-          @click="handleLinkClick(link.label)"
-          @mouseenter="emit('linkHover', link.label)"
-          @mouseleave="emit('linkHover', '')"
-        >
-          {{ link.label }}
-        </NuxtLink>
+      <nav class="hidden md:flex items-center ml-10 flex-grow">
+        <template v-if="isProjectPage">
+          <!-- All navigation buttons grouped above the carousel (left-aligned to it) -->
+          <div class="flex items-center gap-12 fixed left-[calc(var(--main-padding)+50%+16px)] xl:left-[calc(var(--main-padding)+((100%-2*(var(--main-padding)))-96px)/4+32px)]">
+            <NuxtLink to="/projects" class="u-h4 font-medium transition-colors hover:text-gray-600 text-[#121212] mr-4">
+              [retour]
+            </NuxtLink>
+            
+            <div class="flex items-center gap-8">
+              <NuxtLink 
+                v-if="prevProject" 
+                :to="prevProject.path" 
+                class="u-h4 font-medium transition-colors hover:text-gray-600 text-[#121212]"
+                @click="setTransitionDirection('prev')"
+              >
+                &lt;prec
+              </NuxtLink>
+              <span v-else class="u-h4 font-medium text-gray-300 cursor-default">&lt;prec</span>
+
+              <NuxtLink 
+                v-if="nextProject" 
+                :to="nextProject.path" 
+                class="u-h4 font-medium transition-colors hover:text-gray-600 text-[#121212]"
+                @click="setTransitionDirection('next')"
+              >
+                suiv&gt;
+              </NuxtLink>
+              <span v-else class="u-h4 font-medium text-gray-300 cursor-default">suiv&gt;</span>
+            </div>
+          </div>
+        </template>
+        <template v-else>
+          <div class="flex items-center gap-[50px]">
+            <NuxtLink 
+              v-for="link in links" 
+              :key="link.to" 
+              :to="link.to"
+              class="u-h4 font-medium transition-colors hover:text-gray-600 text-[#121212]"
+              :class="{ 'text-gray-600': activeLink === link.label }"
+              @click="handleLinkClick(link.label)"
+              @mouseenter="emit('linkHover', link.label)"
+              @mouseleave="emit('linkHover', '')"
+            >
+              {{ link.label }}
+            </NuxtLink>
+          </div>
+        </template>
       </nav>
 
       <!-- Large Space -->
@@ -86,7 +120,7 @@
           :label="currentLang"
           variant="ghost"
           color="[#121212]"
-          class="p-0 hover:bg-transparent u-h4 font-medium transition-colors hover:text-gray-600 mr-[-16px]"
+          class="p-0 hover:bg-transparent u-h4 font-medium transition-colors hover:text-gray-600"
           @click="toggleLang"
           @mouseenter="emit('linkHover', 'Langue')"
           @mouseleave="emit('linkHover', '')"
@@ -158,10 +192,42 @@ const isSearching = ref(false);
 
 const { data: allContent } = await useAsyncData('all-site-content', () =>
   queryCollection('content')
-    .select('path', 'title', 'description')
+    .select('path', 'title', 'description', 'date')
     .where('draft', '<>', true)
     .all()
 );
+
+const route = useRoute();
+const isProjectPage = computed(() => route.path.startsWith('/projects/'));
+
+const projects = computed(() => {
+  if (!allContent.value) return [];
+  return allContent.value
+    .filter(item => item.path.startsWith('/projects/'))
+    .sort((a, b) => {
+      const dateA = new Date(a.date || 0).getTime();
+      const dateB = new Date(b.date || 0).getTime();
+      return dateB - dateA;
+    });
+});
+
+const currentProjectIndex = computed(() => {
+  return projects.value.findIndex(p => p.path === route.path);
+});
+
+const prevProject = computed(() => {
+  if (currentProjectIndex.value > 0) {
+    return projects.value[currentProjectIndex.value - 1];
+  }
+  return null;
+});
+
+const nextProject = computed(() => {
+  if (currentProjectIndex.value < projects.value.length - 1) {
+    return projects.value[currentProjectIndex.value + 1];
+  }
+  return null;
+});
 
 const searchResults = computed(() => {
   if (!searchTerm.value || !allContent.value) return [];
@@ -192,6 +258,22 @@ watch(isSearchExpanded, (newValue) => {
       const input = searchInput.value?.$el?.querySelector('input');
       if (input) input.focus();
     });
+  }
+});
+
+const setTransitionDirection = (direction: 'next' | 'prev') => {
+  if (import.meta.client) {
+    document.documentElement.classList.remove('transition-next', 'transition-prev');
+    document.documentElement.classList.add(`transition-${direction}`);
+  }
+};
+
+watch(() => route.path, () => {
+  if (import.meta.client) {
+    // Small delay to ensure the transition has started/finished
+    setTimeout(() => {
+      document.documentElement.classList.remove('transition-next', 'transition-prev');
+    }, 1000);
   }
 });
 

@@ -4,48 +4,53 @@
     :class="{ 'sticky top-[var(--header-height)] bg-[#FFFFFF] -mx-[var(--main-padding)] px-[var(--main-padding)]': showFilters }"
   >
     <!-- Title Section -->
-    <div style="view-transition-name: page-title-container;">
+    <div v-if="!hideMainTitle" style="view-transition-name: page-title-container;">
       <h1 class="u-h1">
         {{ typeof title === 'object' && title !== null ? title.main : title }}
       </h1>
       <h2 v-if="typeof title === 'object' && title !== null && title.sub" class="u-h2">
         {{ title.sub }}
       </h2>
+    </div>
 
-      <div class="min-h-[32px] flex items-end -mt-[5px]"> <!-- Spacer to prevent layout jump -->
-        <Transition
-          enter-active-class="transition duration-300 ease-out"
-          enter-from-class="opacity-0 translate-y-2"
-          enter-to-class="opacity-100 translate-y-0"
-          leave-active-class="transition duration-200 ease-in"
-          leave-from-class="opacity-100 translate-y-0"
-          leave-to-class="opacity-0 translate-y-2"
+    <div class="min-h-[32px] flex items-end -mt-[5px]"> <!-- Spacer to prevent layout jump -->
+      <Transition
+        enter-active-class="transition duration-300 ease-out"
+        enter-from-class="opacity-0 translate-y-2"
+        enter-to-class="opacity-100 translate-y-0"
+        leave-active-class="transition duration-200 ease-in"
+        leave-from-class="opacity-100 translate-y-0"
+        leave-to-class="opacity-0 translate-y-2"
+      >
+        <div 
+          v-if="hoveredProjectTitle" 
+          :key="hoveredProjectTitle"
+          class="text-[20px] font-bold leading-none text-[#121212] whitespace-nowrap overflow-hidden text-ellipsis w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)]"
+          style="view-transition-name: project-title-continuity;"
         >
-          <div v-if="hoveredProjectTitle" class="text-[20px] font-bold leading-none text-[#121212] whitespace-nowrap overflow-hidden text-ellipsis w-full">
-            {{ hoveredProjectTitle }}
-          </div>
-        </Transition>
-      </div>
+          {{ hoveredProjectTitle }}
+        </div>
+      </Transition>
     </div>
     
     <div v-if="showFilters" class="mt-[5px] relative" ref="filterContainer">
-      <!-- Accordion Buttons Container aligned with the first column -->
+      <!-- Grid aligned triggers -->
       <div 
-        class="flex flex-nowrap md:overflow-visible relative z-40 w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] overflow-x-auto scrollbar-hide"
+        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-start"
         style="view-transition-name: page-triggers;"
       >
         <button 
           v-for="filter in filters" 
           :key="filter.id"
           @click="!readonlyFilters ? toggleMenu(filter.id) : null"
-          class="flex-shrink-0 flex-auto flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -ml-[1px] -mt-[1px] bg-[#FFFFFF]"
+          class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -mt-[1px] bg-[#FFFFFF] w-full"
           :class="[
             activeMenu === filter.id ? 'text-indigo-500 border-indigo-500 z-50' : 'text-[#121212]',
-            (filter.id === 'typology' && selectedTypology) ? '!text-indigo-500 !border-indigo-500 z-50' : '',
+            ((filter.id === 'typology' && selectedTypology) || (filter.id === 'year' && selectedYear) || (filter.id === 'country' && selectedCountry)) ? '!text-indigo-500 !border-indigo-500 z-50' : '',
             readonlyFilters ? 'cursor-default pointer-events-none' : 'hover:border-indigo-500 hover:text-indigo-500'
           ]"
         >
-          <span>{{ filter.label }}</span>
+          <span class="truncate pr-4">{{ filter.label }}</span>
           <!-- Icon + / - (hidden if readonly) -->
           <template v-if="!readonlyFilters">
             <svg 
@@ -67,22 +72,25 @@
           </template>
         </button>
 
-        <!-- Reset Button (X in a red frame) -->
-        <button 
-          v-if="hasActiveFilters"
-          @click="resetFilters"
-          class="ml-auto flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 text-red-600 bg-[#FFFFFF] hover:bg-red-600 hover:text-white transition-all duration-300 -mt-[1px] -ml-[1px]"
-          title="Réinitialiser les filtres"
-        >
-          <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-          </svg>
-        </button>
+        <!-- Reset Button -->
+        <div class="flex justify-end xl:col-start-4">
+          <button 
+            v-if="hasActiveFilters"
+            @click="resetFilters"
+            class="flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 text-red-600 bg-[#FFFFFF] hover:bg-red-600 hover:text-white transition-all duration-300 -mt-[1px]"
+            title="Réinitialiser les filtres"
+          >
+            <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+              <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       <!-- Accordion Panels (Absolute positioning to prevent layout shift) -->
-      <div class="relative w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)]">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 absolute left-0 right-0 top-full mt-[-1px]">
         <Transition
+          mode="out-in"
           enter-active-class="transition duration-200 ease-out"
           enter-from-class="opacity-0 -translate-y-2"
           enter-to-class="opacity-100 translate-y-0"
@@ -90,7 +98,16 @@
           leave-from-class="opacity-100 translate-y-0"
           leave-to-class="opacity-0 -translate-y-2"
         >
-          <div v-if="activeMenu" :key="activeMenu" class="absolute top-0 left-0 w-full z-30">
+          <div 
+            v-if="activeMenu" 
+            :key="activeMenu"
+            class="w-full z-30"
+            :class="{
+              'xl:col-start-1': activeMenu === 'typology',
+              'xl:col-start-2': activeMenu === 'year',
+              'xl:col-start-3': activeMenu === 'country'
+            }"
+          >
             <div class="flex flex-wrap">
               <!-- Options for Typology -->
               <template v-if="activeMenu === 'typology'">
@@ -107,26 +124,6 @@
                   @click="selectedTypology = opt; activeMenu = null"
                   class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
                   :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedTypology === opt }"
-                >
-                  {{ opt }}
-                </button>
-              </template>
-
-              <!-- Options for Size -->
-              <template v-if="activeMenu === 'size'">
-                <button 
-                  @click="selectedSize = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedSize === null }"
-                >
-                  Toutes
-                </button>
-                <button 
-                  v-for="opt in sizeOptions" 
-                  :key="opt"
-                  @click="selectedSize = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedSize === opt }"
                 >
                   {{ opt }}
                 </button>
@@ -190,6 +187,7 @@ const props = defineProps<{
   title: string | { main: string; sub?: string };
   showFilters?: boolean;
   readonlyFilters?: boolean;
+  hideMainTitle?: boolean;
 }>();
 
 const filterContainer = ref<HTMLElement | null>(null);
@@ -208,13 +206,6 @@ const {
   projectTitleOptions,
   resetFilters
 } = useProjectFilters();
-
-const titleKey = computed(() => {
-  if (typeof props.title === 'object' && props.title !== null) {
-    return props.title.main + (props.title.sub || '');
-  }
-  return props.title;
-});
 
 const activeMenu = ref<string | null>(null);
 
@@ -277,9 +268,5 @@ const toggleMenu = (id: string) => {
 
 const hasActiveFilters = computed(() => {
   return selectedTypology.value || selectedSize.value || selectedYear.value || selectedCountry.value || selectedProjectTitle.value;
-});
-
-watch(() => props.title, (newTitle) => {
-  console.log('PageTitle received title:', newTitle);
 });
 </script>

@@ -4,9 +4,10 @@
     <div :style="{ paddingTop: 'var(--header-height)' }">
       <main class="main-container pb-24">
         <PageTitle 
-          :title="displayedTitle" 
+          :title="pageTitle" 
           :show-filters="route.meta.showFilters === true" 
           :readonly-filters="route.meta.readonlyFilters === true"
+          :hide-main-title="route.path.startsWith('/projects/')"
         />
         <slot />
       </main>
@@ -22,8 +23,19 @@ import PageTitle from '~/components/PageTitle.vue';
 import TheFooter from '~/components/TheFooter.vue';
 
 const route = useRoute();
+const { resetFilters } = useProjectFilters();
 const hoveredTitle = ref<string | object>('');
 const clickedTitle = ref<string | object>(''); 
+
+// Smart Reset: Clear filters if navigating away from projects section
+watch(() => route.path, (newPath, oldPath) => {
+  const isFromProjects = oldPath?.startsWith('/projects') || oldPath === '/';
+  const isToProjects = newPath.startsWith('/projects');
+  
+  if (isFromProjects && !isToProjects) {
+    resetFilters();
+  }
+});
 
 watch(() => route.fullPath, () => {
   clickedTitle.value = '';
@@ -59,6 +71,9 @@ const displayedTitle = computed(() => {
   }
   return '';
 });
+
+// Alias for PageTitle component prop
+const pageTitle = displayedTitle;
 </script>
 
 <style scoped>

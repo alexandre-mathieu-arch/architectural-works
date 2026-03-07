@@ -61,15 +61,22 @@ const prev = () => {
   }
 }
 
+const handleKeydown = (e: KeyboardEvent) => {
+  if (e.key === 'ArrowRight') next();
+  if (e.key === 'ArrowLeft') prev();
+}
+
 let intervalId: ReturnType<typeof setInterval> | null = null
 
 onMounted(() => {
+  window.addEventListener('keydown', handleKeydown);
   if (props.autoplay) {
     intervalId = setInterval(next, props.autoplay)
   }
 })
 
 onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
   if (intervalId) {
     clearInterval(intervalId)
   }

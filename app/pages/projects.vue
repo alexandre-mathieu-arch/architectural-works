@@ -7,16 +7,28 @@
         
         <!-- Cas spécial pour le 6ème projet (index 5, 11, 17...) -->
         <template v-if="index % 6 === 5">
-          <!-- Colonne 2 : Vide avec bordure -->
-          <div class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212]">
-          </div>
+          <!-- Colonne 2 : Vide avec bordure cliquable -->
+          <NuxtLink 
+            to="/contact" 
+            class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212]"
+          >
+            <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="u-h3 text-gray-400 normal-case">Démarrer un projet ?</span>
+            </div>
+          </NuxtLink>
           
           <!-- Colonne 3 : Le projet -->
           <ProjectCard :project="project" />
           
-          <!-- Colonne 4 : Vide avec bordure -->
-          <div class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212]">
-          </div>
+          <!-- Colonne 4 : Vide avec bordure cliquable -->
+          <NuxtLink 
+            to="/contact" 
+            class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212]"
+          >
+            <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="u-h3 text-gray-400 normal-case">Démarrer un projet ?</span>
+            </div>
+          </NuxtLink>
         </template>
 
         <!-- Projets normaux (1, 2, 3, 4 et 5 du cycle) -->
