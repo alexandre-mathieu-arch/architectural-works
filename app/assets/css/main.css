@@ -1,7 +1,8 @@
 html, body {
   height: 100%;
-  background-color: #F4F4F0; /* Requested background color */
+  background-color: #FFFFFF; /* Pure white variant */
   font-family: var(--font-primary);
+  @apply subpixel-antialiased;
 }
 
 /* Force hide Nuxt UI default logo */
@@ -52,16 +53,26 @@ header a[href="https://ui.nuxt.com"] {
 }
 
 @font-face {
-  font-family: 'Alpino';
-  src: url('../font/Alpino-Variable.woff2') format('woff2-variations');
-  font-weight: 100 800;
+  font-family: 'Satoshi';
+  src: url('../font/Satoshi-Variable.woff2') format('woff2-variations'),
+       url('../font/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 100 900;
   font-display: swap;
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../font/Satoshi-VariableItalic.woff2') format('woff2-variations'),
+       url('../font/Satoshi-VariableItalic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: italic;
+}
+
 :root {
   --font-primary: 'Supreme', sans-serif;
-  --font-body: 'Alpino', sans-serif;
+  --font-body: 'Satoshi', sans-serif;
   --header-height: 45px;
   --main-padding: 5%;
 }
@@ -126,7 +137,7 @@ header a[href="https://ui.nuxt.com"] {
 }
 
 @utility u-body {
-  @apply text-[16px] font-normal leading-[1.1] text-[#121212];
+  @apply text-[16px] font-normal leading-[1.1] text-[#121212] subpixel-antialiased;
   font-family: var(--font-body);
 }
 

@@ -1,8 +1,30 @@
 <template>
   <div class="pt-0 pb-0">
 
-    <div v-if="filteredProjects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 items-center mt-[35px]">
-      <ProjectCard v-for="project in filteredProjects" :key="project.path" :project="project" />
+    <div v-if="filteredProjects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 items-center mt-[35px]">
+      <template v-for="(project, index) in filteredProjects" :key="project.path">
+        <!-- Cycle de 6 : 4 pleins, 1 normal, 1 vide, 1 normal, 1 vide -->
+        
+        <!-- Cas spécial pour le 6ème projet (index 5, 11, 17...) -->
+        <template v-if="index % 6 === 5">
+          <!-- Colonne 2 : Vide avec bordure -->
+          <div class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212]">
+          </div>
+          
+          <!-- Colonne 3 : Le projet -->
+          <ProjectCard :project="project" />
+          
+          <!-- Colonne 4 : Vide avec bordure -->
+          <div class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212]">
+          </div>
+        </template>
+
+        <!-- Projets normaux (1, 2, 3, 4 et 5 du cycle) -->
+        <ProjectCard 
+          v-else 
+          :project="project" 
+        />
+      </template>
     </div>
     <div v-else class="text-center py-20">
       <p class="text-gray-500">Aucun projet ne correspond à votre sélection.</p>

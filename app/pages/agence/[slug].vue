@@ -1,9 +1,9 @@
 <template>
   <div v-if="page" class="pt-0 pb-12">
     <!-- Triggers for Agence section -->
-    <div class="sticky top-[var(--header-height)] z-40 bg-[#F4F4F0] pt-2 pb-2 -mt-[5px]">
+    <div class="sticky top-[var(--header-height)] z-40 bg-[#FFFFFF] pt-2 pb-2 -mt-[5px]">
       <div 
-        class="flex flex-nowrap md:overflow-visible relative w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-64px)/3)] overflow-x-auto scrollbar-hide"
+        class="flex flex-nowrap md:overflow-visible relative w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] overflow-x-auto scrollbar-hide"
         style="view-transition-name: page-triggers;"
       >
         <NuxtLink 
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="mt-12 prose dark:prose-invert max-w-none">
+    <div class="mt-12 prose dark:prose-invert max-w-none w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)]">
       <ContentRenderer :value="page" />
     </div>
   </div>

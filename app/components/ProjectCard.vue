@@ -4,6 +4,7 @@
     class="block w-full"
     @mouseenter="setHoveredProject(project)"
     @mouseleave="setHoveredProject(null)"
+    @click="addVisited(project.path)"
   >
     <div class="relative w-full aspect-square overflow-hidden group">
       <!-- Image qui remplit toute la zone -->
@@ -12,6 +13,7 @@
         :src="displayImage"
         :alt="project.title"
         class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 group-hover:hue-rotate-180"
+        :class="{ 'hue-rotate-180': isVisited(project.path) }"
         :style="{ viewTransitionName: 'image-' + project.path.replace(/\//g, '-') }"
       />
       <!-- Placeholder si pas d'image -->
@@ -21,7 +23,7 @@
       
       <!-- Infos affichées au survol -->
       <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10">
-        <div class="absolute top-0 left-0 w-full border border-[#121212] px-2 h-[30px] flex items-center gap-3 bg-[#F4F4F0] overflow-hidden">
+        <div class="absolute top-0 left-0 w-full border border-[#121212]/30 px-2 h-[30px] flex items-center gap-3 bg-[#FFFFFF] overflow-hidden">
           <h3 
             class="u-h3 normal-case whitespace-nowrap"
             :style="{ viewTransitionName: 'title-' + project.path.replace(/\//g, '-') }"
@@ -48,8 +50,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useVisitedProjects } from '~/composables/useVisitedProjects';
 
 const { setHoveredProject } = useHoverProject();
+const { addVisited, isVisited } = useVisitedProjects();
 
 const props = defineProps<{
   project: {
