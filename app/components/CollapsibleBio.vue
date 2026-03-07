@@ -1,10 +1,10 @@
 <template>
   <div class="collapsible-bio mb-[10px]">
     <button 
-      @click="isOpen = !isOpen" 
+      @click="toggleLocal" 
       class="u-h3 flex items-center gap-4 text-left hover:text-indigo-500 transition-colors duration-300 w-full group tracking-widest"
     >
-      <span class="transition-transform duration-300 group-hover:translate-x-1">{{ name }}</span>
+      <span>{{ name }}</span>
       <svg 
         viewBox="0 0 20 20" 
         fill="currentColor" 
@@ -29,13 +29,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
+import { useAgenceState } from '~/composables/useAgenceState'
 
-defineProps<{
-  name: string
+const props = defineProps<{
+  name: string,
+  slug?: string
 }>()
 
+const { activeSections, isSectionActive } = useAgenceState()
 const isOpen = ref(false)
+
+const toggleLocal = () => {
+  isOpen.value = !isOpen.value
+}
+
+// Sync with global state if slug is provided
+if (props.slug) {
+  watch(activeSections, () => {
+    isOpen.value = isSectionActive(props.slug!)
+  }, { immediate: true })
+}
 </script>
 
 <style scoped>

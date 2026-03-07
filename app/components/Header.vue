@@ -217,6 +217,9 @@ const links = [{
 }, {
   label: 'Art',
   to: '/art'
+}, {
+  label: 'À propos',
+  to: '/about'
 }]
 </script>
 

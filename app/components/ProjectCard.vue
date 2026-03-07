@@ -12,8 +12,12 @@
         v-if="displayImage"
         :src="displayImage"
         :alt="project.title"
-        class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 group-hover:hue-rotate-180"
-        :class="{ 'hue-rotate-180': isVisited(project.path) }"
+        class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
+        :class="[
+          isVisited(project.path) 
+            ? 'hue-rotate-180 group-hover:hue-rotate-0' 
+            : 'group-hover:hue-rotate-180'
+        ]"
         :style="{ viewTransitionName: 'image-' + project.path.replace(/\//g, '-') }"
       />
       <!-- Placeholder si pas d'image -->
