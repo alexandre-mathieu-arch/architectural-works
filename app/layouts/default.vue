@@ -2,13 +2,12 @@
   <div id="wrapper">
     <Header @linkClick="handleLinkClick" @linkHover="handleLinkHover" />
     <div :style="{ paddingTop: 'var(--header-height)' }">
-      <div 
-        class="main-container min-h-[120px]"
-      >
-        <PageTitle :title="displayedTitle" :show-filters="route.meta.showFilters === true" />
-      </div>
-
       <main class="main-container pb-24">
+        <PageTitle 
+          :title="displayedTitle" 
+          :show-filters="route.meta.showFilters === true" 
+          :readonly-filters="route.meta.readonlyFilters === true"
+        />
         <slot />
       </main>
     </div>
@@ -47,6 +46,10 @@ const displayedTitle = computed(() => {
   }
   if (clickedTitle.value) {
     return clickedTitle.value;
+  }
+  // NEW: Always show 'Projets' for project pages
+  if (route.path.startsWith('/projects')) {
+    return 'Projets';
   }
   if (route.meta.dynamicTitle) {
     return route.meta.dynamicTitle;

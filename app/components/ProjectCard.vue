@@ -2,7 +2,7 @@
   <NuxtLink 
     :to="project.path" 
     class="block w-full"
-    @mouseenter="setHoveredProject(project.title)"
+    @mouseenter="setHoveredProject(project)"
     @mouseleave="setHoveredProject(null)"
   >
     <div class="relative w-full aspect-square overflow-hidden group">

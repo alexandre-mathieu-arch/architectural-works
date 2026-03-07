@@ -94,7 +94,7 @@ header a[href="https://ui.nuxt.com"] {
 
 /* Typography Rationalization */
 @utility u-h1 {
-  @apply text-[28px] md:text-[34px] lg:text-[46px] font-bold leading-none;
+  @apply text-[28px] md:text-[34px] lg:text-[40px] font-bold leading-none;
   font-family: var(--font-primary);
   
   @screen lg {
