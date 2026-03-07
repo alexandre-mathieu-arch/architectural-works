@@ -28,6 +28,13 @@ export const useVisitedProjects = () => {
     return visitedProjects.value.has(path)
   }
 
+  const clearVisited = () => {
+    visitedProjects.value.clear()
+    if (import.meta.client) {
+      localStorage.removeItem('visited-projects')
+    }
+  }
+
   // Load on initial composable call if in client
   if (import.meta.client && visitedProjects.value.size === 0) {
     loadVisited()
@@ -36,6 +43,7 @@ export const useVisitedProjects = () => {
   return {
     visitedProjects,
     addVisited,
-    isVisited
+    isVisited,
+    clearVisited
   }
 }

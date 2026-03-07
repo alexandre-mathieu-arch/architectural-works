@@ -1,8 +1,5 @@
 ---
-title: 'Composition Alpha'
-description: 'Acrylique sur toile.'
-technique: 'Acrylique'
-year: 2024
-dimensions: '100x100cm'
-image: '/images/art/alpha.jpg'
+title: Nu au graphite
+description: Étude de nu au graphite.
+image: /images/art/nu-graphite.jpg
 ---

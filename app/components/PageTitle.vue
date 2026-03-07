@@ -3,29 +3,32 @@
     class="pb-2 relative z-30"
     :class="{ 'sticky top-[var(--header-height)] bg-[#FFFFFF] -mx-[var(--main-padding)] px-[var(--main-padding)]': showFilters }"
   >
-    <!-- Title Section -->
-    <div v-if="!hideMainTitle" style="view-transition-name: page-title-container;">
-      <h1 class="u-h1">
-        {{ typeof title === 'object' && title !== null ? title.main : title }}
-      </h1>
-      <h2 v-if="typeof title === 'object' && title !== null && title.sub" class="u-h2">
-        {{ title.sub }}
-      </h2>
+    <!-- Title Section: Fixed height to maintain project title position -->
+    <div class="min-h-[40px] md:min-h-[48px] lg:min-h-[55px]">
+      <div v-if="!hideMainTitle" style="view-transition-name: page-title-container;">
+        <h1 class="u-h1">
+          {{ typeof title === 'object' && title !== null ? title.main : title }}
+        </h1>
+        <h2 v-if="typeof title === 'object' && title !== null && title.sub" class="u-h2">
+          {{ title.sub }}
+        </h2>
+      </div>
     </div>
 
-    <div class="min-h-[32px] flex items-end -mt-[5px]"> <!-- Spacer to prevent layout jump -->
+    <!-- Project Title Slot: Stays at the exact same Y position on both pages -->
+    <div class="h-[40px] relative -mt-2"> 
       <Transition
         enter-active-class="transition duration-300 ease-out"
-        enter-from-class="opacity-0 translate-y-2"
+        enter-from-class="opacity-0 translate-y-1"
         enter-to-class="opacity-100 translate-y-0"
-        leave-active-class="transition duration-200 ease-in"
-        leave-from-class="opacity-100 translate-y-0"
-        leave-to-class="opacity-0 translate-y-2"
+        leave-active-class="transition duration-200 ease-in absolute top-0 left-0"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0 -translate-y-1"
       >
         <div 
           v-if="hoveredProjectTitle" 
           :key="hoveredProjectTitle"
-          class="text-[20px] font-bold leading-none text-[#121212] whitespace-nowrap overflow-hidden text-ellipsis w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)]"
+          class="text-[20px] font-bold leading-none text-[#121212] whitespace-nowrap overflow-hidden text-ellipsis w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] h-full flex items-center"
           style="view-transition-name: project-title-continuity;"
         >
           {{ hoveredProjectTitle }}
@@ -72,8 +75,20 @@
           </template>
         </button>
 
-        <!-- Reset Button -->
-        <div class="flex justify-end xl:col-start-4">
+        <!-- Reset Buttons Column -->
+        <div class="flex justify-end xl:col-start-4 gap-2">
+          <!-- Reveal Colors Button (Magic Wand) -->
+          <button 
+            v-if="visitedProjects.size > 0 && !readonlyFilters"
+            @click="clearVisited"
+            class="flex items-center gap-2 px-3 h-[30px] border border-indigo-500/30 text-indigo-500 bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-all duration-300 -mt-[1px] u-h4"
+            title="Révéler les couleurs d'origine"
+          >
+            <UIcon name="i-heroicons-sparkles" class="w-4 h-4" />
+            <span class="hidden lg:inline">Révéler</span>
+          </button>
+
+          <!-- Reset Filters Button -->
           <button 
             v-if="hasActiveFilters"
             @click="resetFilters"
@@ -87,16 +102,16 @@
         </div>
       </div>
 
-      <!-- Accordion Panels (Absolute positioning to prevent layout shift) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 absolute left-0 right-0 top-full mt-[-1px]">
+      <!-- Accordion Panels (Minimalist Ribbon Version) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 absolute left-0 right-0 top-full mt-2">
         <Transition
           mode="out-in"
-          enter-active-class="transition duration-200 ease-out"
-          enter-from-class="opacity-0 -translate-y-2"
-          enter-to-class="opacity-100 translate-y-0"
-          leave-active-class="transition duration-150 ease-in"
-          leave-from-class="opacity-100 translate-y-0"
-          leave-to-class="opacity-0 -translate-y-2"
+          enter-active-class="transition duration-300 ease-out"
+          enter-from-class="opacity-0 translate-x-4"
+          enter-to-class="opacity-100 translate-x-0"
+          leave-active-class="transition duration-200 ease-in"
+          leave-from-class="opacity-100 translate-x-0"
+          leave-to-class="opacity-0 -translate-x-4"
         >
           <div 
             v-if="activeMenu" 
@@ -108,13 +123,13 @@
               'xl:col-start-3': activeMenu === 'country'
             }"
           >
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap gap-x-6 gap-y-2 py-2">
               <!-- Options for Typology -->
               <template v-if="activeMenu === 'typology'">
                 <button 
                   @click="selectedTypology = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedTypology === null }"
+                  class="u-h4 transition-colors duration-300"
+                  :class="selectedTypology === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'"
                 >
                   Toutes
                 </button>
@@ -122,8 +137,8 @@
                   v-for="opt in typologyOptions" 
                   :key="opt"
                   @click="selectedTypology = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedTypology === opt }"
+                  class="u-h4 transition-colors duration-300 text-left"
+                  :class="selectedTypology === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'"
                 >
                   {{ opt }}
                 </button>
@@ -133,8 +148,8 @@
               <template v-if="activeMenu === 'year'">
                 <button 
                   @click="selectedYear = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedYear === null }"
+                  class="u-h4 transition-colors duration-300"
+                  :class="selectedYear === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'"
                 >
                   Toutes
                 </button>
@@ -142,8 +157,8 @@
                   v-for="opt in yearOptions" 
                   :key="opt"
                   @click="selectedYear = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedYear === opt }"
+                  class="u-h4 transition-colors duration-300 text-left"
+                  :class="selectedYear === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'"
                 >
                   {{ opt }}
                 </button>
@@ -153,8 +168,8 @@
               <template v-if="activeMenu === 'country'">
                 <button 
                   @click="selectedCountry = null; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedCountry === null }"
+                  class="u-h4 transition-colors duration-300"
+                  :class="selectedCountry === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'"
                 >
                   Tous
                 </button>
@@ -162,8 +177,8 @@
                   v-for="opt in countryOptions" 
                   :key="opt"
                   @click="selectedCountry = opt; activeMenu = null"
-                  class="px-2 py-0.5 border border-[#121212]/50 text-[14px] font-medium bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-colors duration-500 ease-in-out -ml-[1px] -mt-[1px]"
-                  :class="{ 'bg-indigo-500 text-white border-indigo-500': selectedCountry === opt }"
+                  class="u-h4 transition-colors duration-300 text-left"
+                  :class="selectedCountry === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'"
                 >
                   {{ opt }}
                 </button>
@@ -180,8 +195,10 @@
 import { ref, defineProps, watch, computed, onMounted, onUnmounted } from 'vue';
 import { useProjectFilters } from '~/composables/useProjectFilters';
 import { useHoverProject } from '~/composables/useHoverProject';
+import { useVisitedProjects } from '~/composables/useVisitedProjects';
 
 const { hoveredProject, hoveredProjectTitle } = useHoverProject();
+const { clearVisited, visitedProjects } = useVisitedProjects();
 
 const props = defineProps<{
   title: string | { main: string; sub?: string };
@@ -236,6 +253,18 @@ const filters = computed(() => {
       const dateObj = new Date(d);
       if (!isNaN(dateObj.getTime())) hpYear = dateObj.getFullYear().toString();
     }
+  }
+
+  // If readonly mode (Project Detail), we condense everything into one label for the first trigger
+  if (props.readonlyFilters) {
+    const parts = [];
+    if (hp?.typologies?.[0]) parts.push(hp.typologies[0]);
+    if (hpYear) parts.push(hpYear);
+    if (hp?.pays?.[0]) parts.push(hp.pays[0]);
+    
+    return [
+      { id: 'info', label: parts.join(', ') || 'Information' }
+    ];
   }
 
   return [
