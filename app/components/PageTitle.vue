@@ -28,7 +28,7 @@
       </div>
     </div>
     
-    <div v-if="showFilters" class="mt-[5px] relative">
+    <div v-if="showFilters" class="mt-[5px] relative" ref="filterContainer">
       <!-- Accordion Buttons Container aligned with the first column -->
       <div 
         class="flex flex-nowrap md:overflow-visible relative z-40 w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-64px)/3)] overflow-x-auto scrollbar-hide"
@@ -52,7 +52,7 @@
               v-if="activeMenu !== filter.id"
               viewBox="0 0 20 20" 
               fill="currentColor" 
-              class="w-4 h-4 flex-shrink-0"
+              class="w-4 h-4 flex-shrink-0 pointer-events-none"
             >
               <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
             </svg>
@@ -60,7 +60,7 @@
               v-else
               viewBox="0 0 20 20" 
               fill="currentColor" 
-              class="w-4 h-4 flex-shrink-0"
+              class="w-4 h-4 flex-shrink-0 pointer-events-none"
             >
               <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h12.5a.75.75 0 010 1.5H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
             </svg>
@@ -180,7 +180,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, watch, computed } from 'vue';
+import { ref, defineProps, watch, computed, onMounted, onUnmounted } from 'vue';
 import { useProjectFilters } from '~/composables/useProjectFilters';
 import { useHoverProject } from '~/composables/useHoverProject';
 
@@ -191,6 +191,8 @@ const props = defineProps<{
   showFilters?: boolean;
   readonlyFilters?: boolean;
 }>();
+
+const filterContainer = ref<HTMLElement | null>(null);
 
 const { 
   selectedTypology, 
@@ -215,6 +217,20 @@ const titleKey = computed(() => {
 });
 
 const activeMenu = ref<string | null>(null);
+
+const handleClickOutside = (event: MouseEvent) => {
+  if (filterContainer.value && !filterContainer.value.contains(event.target as Node)) {
+    activeMenu.value = null;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside);
+});
 
 const filters = computed(() => {
   const hp = hoveredProject.value;
