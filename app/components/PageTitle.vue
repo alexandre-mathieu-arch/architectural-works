@@ -1,6 +1,6 @@
 <template>
   <div 
-    class="pb-2 relative z-30"
+    class="pb-0 relative z-30"
     :class="{ 'sticky top-[var(--header-height)] bg-[#FFFFFF] -mx-[var(--main-padding)] px-[var(--main-padding)]': showFilters }"
   >
     <!-- Title Section: Fixed height to maintain project title position -->
@@ -36,7 +36,7 @@
       </Transition>
     </div>
     
-    <div v-if="showFilters" class="mt-[5px] relative" ref="filterContainer">
+    <div v-if="showFilters" class="mt-0 relative" ref="filterContainer">
       <!-- Grid aligned triggers -->
       <div 
         class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-start"

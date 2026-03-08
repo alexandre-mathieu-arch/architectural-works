@@ -1,8 +1,8 @@
 <template>
-  <div v-if="page" class="h-[calc(100vh-var(--header-height))] overflow-hidden relative">
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 h-full">
-      <!-- First column: Info / Description (Scrollable internally) -->
-      <div class="col-span-1 h-full overflow-y-auto scrollbar-hide pt-[45px]" style="view-transition-name: project-description;">
+  <div v-if="page" class="relative">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+      <!-- First column: Info / Description -->
+      <div class="col-span-1 pt-0 z-10" style="view-transition-name: project-description;">
         <div class="project-description pb-24">
           <p v-if="page.description" class="u-body mb-8">{{ page.description }}</p>
           <div class="content-renderer">
@@ -34,9 +34,9 @@
         </div>
       </div>
       
-      <!-- Carousel Section: Absolute positioned inside the relative grid container -->
-      <div class="hidden md:block md:col-span-1 xl:col-span-3 h-full relative z-40">
-        <div class="absolute inset-0 top-[45px] mb-24 bg-white">
+      <!-- Carousel Section: Sticky to pass over elements -->
+      <div class="hidden md:block md:col-span-1 xl:col-span-3 h-[calc(100vh-var(--header-height)-120px)] sticky top-[calc(var(--header-height)+55px)] z-40">
+        <div class="absolute inset-0 bg-white">
           <ImageCarousel :images="images" v-model="currentImageIndex" :id="page.path" />
         </div>
       </div>
