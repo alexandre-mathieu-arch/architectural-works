@@ -1,7 +1,7 @@
 <template>
   <div class="pt-0 pb-0">
 
-    <div v-if="filteredProjects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 items-center mt-[15px]">
+    <div v-if="filteredProjects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 items-center mt-6">
       <template v-for="(project, index) in filteredProjects" :key="project.path">
         <!-- Cycle de 6 : 4 pleins, 1 normal, 1 vide, 1 normal, 1 vide -->
         

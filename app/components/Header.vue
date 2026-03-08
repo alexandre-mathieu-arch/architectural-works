@@ -312,16 +312,6 @@ const links = [{
   @apply text-[#121212] font-bold opacity-100;
 }
 
-.router-link-active::before {
-  content: "~";
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #121212;
-  font-size: 14px;
-}
-
 .header-search-input .icon {
   width: 21px;
   height: 21px;

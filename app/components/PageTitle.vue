@@ -1,22 +1,10 @@
 <template>
   <div 
-    class="pb-0 relative z-30"
-    :class="{ 'sticky top-[var(--header-height)] bg-[#FFFFFF] -mx-[var(--main-padding)] px-[var(--main-padding)]': showFilters }"
+    class="pb-10 relative z-30"
+    :class="{ 'sticky top-[var(--header-height)] bg-[#FFFFFF] -mx-[var(--main-padding)] px-[var(--main-padding)]': showFilters || $slots.triggers }"
   >
-    <!-- Title Section: Fixed height to maintain project title position -->
-    <div class="min-h-[40px] md:min-h-[48px] lg:min-h-[55px]">
-      <div v-if="!hideMainTitle" style="view-transition-name: page-title-container;">
-        <h1 class="u-h1">
-          {{ typeof title === 'object' && title !== null ? title.main : title }}
-        </h1>
-        <h2 v-if="typeof title === 'object' && title !== null && title.sub" class="u-h2">
-          {{ title.sub }}
-        </h2>
-      </div>
-    </div>
-
-    <!-- Project Title Slot: Stays at the exact same Y position on both pages -->
-    <div class="h-[40px] relative -mt-2"> 
+    <!-- Project Title Slot: Permanent height to avoid folding effect -->
+    <div class="h-[40px] relative"> 
       <Transition
         enter-active-class="transition duration-300 ease-out"
         enter-from-class="opacity-0 translate-y-1"
@@ -26,81 +14,85 @@
         leave-to-class="opacity-0 -translate-y-1"
       >
         <div 
-          v-if="hoveredProjectTitle" 
-          :key="hoveredProjectTitle"
+          v-if="hoveredProjectTitle || (hideMainTitle && title)" 
+          :key="hoveredProjectTitle || (typeof title === 'string' ? title : '')"
           class="text-[20px] font-bold leading-none text-[#121212] whitespace-nowrap overflow-hidden text-ellipsis w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] h-full flex items-center"
           style="view-transition-name: project-title-continuity;"
         >
-          {{ hoveredProjectTitle }}
+          {{ hoveredProjectTitle || (hideMainTitle ? (typeof title === 'string' ? title : '') : '') }}
         </div>
       </Transition>
     </div>
     
-    <div v-if="showFilters" class="mt-0 relative" ref="filterContainer">
-      <!-- Grid aligned triggers -->
-      <div 
-        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-start"
-        style="view-transition-name: page-triggers;"
-      >
-        <button 
-          v-for="filter in filters" 
-          :key="filter.id"
-          @click="!readonlyFilters ? toggleMenu(filter.id) : null"
-          class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -mt-[1px] bg-[#FFFFFF] w-full"
-          :class="[
-            activeMenu === filter.id ? 'text-indigo-500 border-indigo-500 z-50' : 'text-[#121212]',
-            ((filter.id === 'typology' && selectedTypology) || (filter.id === 'year' && selectedYear) || (filter.id === 'country' && selectedCountry)) ? '!text-indigo-500 !border-indigo-500 z-50' : '',
-            readonlyFilters ? 'cursor-default pointer-events-none' : 'hover:border-indigo-500 hover:text-indigo-500'
-          ]"
+    <div v-if="showFilters || $slots.triggers" class="mt-0 relative" ref="filterContainer">
+      <!-- Custom triggers slot -->
+      <slot name="triggers">
+        <!-- Grid aligned triggers -->
+        <div 
+          v-if="showFilters"
+          class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-start"
+          style="view-transition-name: page-triggers;"
         >
-          <span class="truncate pr-4">{{ filter.label }}</span>
-          <!-- Icon + / - (hidden if readonly) -->
-          <template v-if="!readonlyFilters">
-            <svg 
-              v-if="activeMenu !== filter.id"
-              viewBox="0 0 20 20" 
-              fill="currentColor" 
-              class="w-4 h-4 flex-shrink-0 pointer-events-none"
-            >
-              <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-            </svg>
-            <svg 
-              v-else
-              viewBox="0 0 20 20" 
-              fill="currentColor" 
-              class="w-4 h-4 flex-shrink-0 pointer-events-none"
-            >
-              <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h12.5a.75.75 0 010 1.5H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
-            </svg>
-          </template>
-        </button>
-
-        <!-- Reset Buttons Column -->
-        <div class="flex justify-end xl:col-start-4 gap-2">
-          <!-- Reveal Colors Button (Magic Wand) -->
           <button 
-            v-if="visitedProjects.size > 0 && !readonlyFilters"
-            @click="clearVisited"
-            class="flex items-center gap-2 px-3 h-[30px] border border-indigo-500/30 text-indigo-500 bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-all duration-300 -mt-[1px] u-h4"
-            title="Révéler les couleurs d'origine"
+            v-for="filter in filters" 
+            :key="filter.id"
+            @click="!readonlyFilters ? toggleMenu(filter.id) : null"
+            class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -mt-[1px] bg-[#FFFFFF] w-full"
+            :class="[
+              activeMenu === filter.id ? 'text-indigo-500 border-indigo-500 z-50' : 'text-[#121212]',
+              ((filter.id === 'typology' && selectedTypology) || (filter.id === 'year' && selectedYear) || (filter.id === 'country' && selectedCountry)) ? '!text-indigo-500 !border-indigo-500 z-50' : '',
+              readonlyFilters ? 'cursor-default pointer-events-none' : 'hover:border-indigo-500 hover:text-indigo-500'
+            ]"
           >
-            <UIcon name="i-heroicons-sparkles" class="w-4 h-4" />
-            <span class="hidden lg:inline">Révéler</span>
+            <span class="truncate pr-4">{{ filter.label }}</span>
+            <!-- Icon + / - (hidden if readonly) -->
+            <template v-if="!readonlyFilters">
+              <svg 
+                v-if="activeMenu !== filter.id"
+                viewBox="0 0 20 20" 
+                fill="currentColor" 
+                class="w-4 h-4 flex-shrink-0 pointer-events-none"
+              >
+                <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+              </svg>
+              <svg 
+                v-else
+                viewBox="0 0 20 20" 
+                fill="currentColor" 
+                class="w-4 h-4 flex-shrink-0 pointer-events-none"
+              >
+                <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h12.5a.75.75 0 010 1.5H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+              </svg>
+            </template>
           </button>
 
-          <!-- Reset Filters Button -->
-          <button 
-            v-if="hasActiveFilters"
-            @click="resetFilters"
-            class="flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 text-red-600 bg-[#FFFFFF] hover:bg-red-600 hover:text-white transition-all duration-300 -mt-[1px]"
-            title="Réinitialiser les filtres"
-          >
-            <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-              <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-            </svg>
-          </button>
+          <!-- Reset Buttons Column -->
+          <div class="flex justify-end xl:col-start-4 gap-2">
+            <!-- Reveal Colors Button (Magic Wand) -->
+            <button 
+              v-if="visitedProjects.size > 0 && !readonlyFilters"
+              @click="clearVisited"
+              class="flex items-center gap-2 px-3 h-[30px] border border-indigo-500/30 text-indigo-500 bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-all duration-300 -mt-[1px] u-h4"
+              title="Révéler les couleurs d'origine"
+            >
+              <UIcon name="i-heroicons-sparkles" class="w-4 h-4" />
+              <span class="hidden lg:inline">Révéler</span>
+            </button>
+
+            <!-- Reset Filters Button -->
+            <button 
+              v-if="hasActiveFilters"
+              @click="resetFilters"
+              class="flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 text-red-600 bg-[#FFFFFF] hover:bg-red-600 hover:text-white transition-all duration-300 -mt-[1px]"
+              title="Réinitialiser les filtres"
+            >
+              <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 101.06 1.06L10 11.06l3.72 3.72a.75.75 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
+      </slot>
 
       <!-- Accordion Panels (Minimalist Ribbon Version) -->
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 absolute left-0 right-0 top-full mt-2">

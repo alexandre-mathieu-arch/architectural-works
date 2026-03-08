@@ -63,20 +63,18 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
+const { setHoveredProject } = useHoverProject();
 watchEffect(() => {
   if (page.value) {
     route.meta.dynamicTitle = page.value.title;
+    setHoveredProject(page.value as any);
   }
 });
 
-const { setHoveredProject } = useHoverProject();
 onMounted(() => {
   if (page.value) {
-    setHoveredProject(page.value);
+    setHoveredProject(page.value as any);
   }
-});
-onUnmounted(() => {
-  setHoveredProject(null);
 });
 
 const currentImageIndex = ref(0)

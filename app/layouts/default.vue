@@ -24,6 +24,7 @@ import TheFooter from '~/components/TheFooter.vue';
 
 const route = useRoute();
 const { resetFilters } = useProjectFilters();
+const { setHoveredProject } = useHoverProject();
 const hoveredTitle = ref<string | object>('');
 const clickedTitle = ref<string | object>(''); 
 
@@ -34,6 +35,7 @@ watch(() => route.path, (newPath, oldPath) => {
   
   if (isFromProjects && !isToProjects) {
     resetFilters();
+    setHoveredProject(null);
   }
 });
 
@@ -52,20 +54,24 @@ const handleLinkHover = (title: string) => {
 };
 
 const displayedTitle = computed(() => {
-  // Priority: hover > click > route meta
+  // Priority: hover > click > dynamic project title > static Projets for grid
   if (hoveredTitle.value) {
     return hoveredTitle.value;
   }
   if (clickedTitle.value) {
     return clickedTitle.value;
   }
-  // NEW: Always show 'Projets' for project pages
+  
+  // For project detail pages, show the project title
+  if (route.path.startsWith('/projects/') && route.meta.dynamicTitle) {
+    return route.meta.dynamicTitle;
+  }
+  
+  // For the projects grid or any projects page
   if (route.path.startsWith('/projects')) {
     return 'Projets';
   }
-  if (route.meta.dynamicTitle) {
-    return route.meta.dynamicTitle;
-  }
+  
   if (route.meta.title) {
     return route.meta.title;
   }
