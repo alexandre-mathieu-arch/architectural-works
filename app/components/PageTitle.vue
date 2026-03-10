@@ -1,10 +1,13 @@
 <template>
   <div 
-    class="pb-10 relative z-30"
-    :class="{ 'sticky top-[var(--header-height)] bg-[#FFFFFF] -mx-[var(--main-padding)] px-[var(--main-padding)]': showFilters || $slots.triggers }"
+    class="relative z-30"
+    :class="[
+      noSticky ? 'pb-[18px]' : 'pb-8',
+      { 'sticky top-[var(--header-height)] bg-[#FFFFFF] -mx-[var(--main-padding)] px-[var(--main-padding)]': (showFilters || $slots.triggers) && !noSticky }
+    ]"
   >
     <!-- Project Title Slot: Permanent height to avoid folding effect -->
-    <div class="h-[40px] relative"> 
+    <div class="h-[40px] relative flex items-center"> 
       <Transition
         enter-active-class="transition duration-300 ease-out"
         enter-from-class="opacity-0 translate-y-1"
@@ -17,58 +20,95 @@
           v-if="hoveredProjectTitle || (hideMainTitle && title)" 
           :key="hoveredProjectTitle || (typeof title === 'string' ? title : '')"
           class="text-[20px] font-bold leading-none text-[#121212] whitespace-nowrap overflow-hidden text-ellipsis w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] h-full flex items-center"
-          style="view-transition-name: project-title-continuity;"
+          :style="{ viewTransitionName: route.path.startsWith('/projects/') ? 'title-' + route.path.replace(/\//g, '-') : 'project-title-continuity' }"
         >
           {{ hoveredProjectTitle || (hideMainTitle ? (typeof title === 'string' ? title : '') : '') }}
         </div>
       </Transition>
     </div>
     
-    <div v-if="showFilters || $slots.triggers" class="mt-0 relative" ref="filterContainer">
+    <div v-if="showFilters || $slots.triggers || noSticky" class="mt-0 relative" ref="filterContainer">
       <!-- Custom triggers slot -->
       <slot name="triggers">
         <!-- Grid aligned triggers -->
         <div 
-          v-if="showFilters"
           class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-start"
           style="view-transition-name: page-triggers;"
         >
-          <button 
-            v-for="filter in filters" 
-            :key="filter.id"
-            @click="!readonlyFilters ? toggleMenu(filter.id) : null"
-            class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -mt-[1px] bg-[#FFFFFF] w-full"
-            :class="[
-              activeMenu === filter.id ? 'text-indigo-500 border-indigo-500 z-50' : 'text-[#121212]',
-              ((filter.id === 'typology' && selectedTypology) || (filter.id === 'year' && selectedYear) || (filter.id === 'country' && selectedCountry)) ? '!text-indigo-500 !border-indigo-500 z-50' : '',
-              readonlyFilters ? 'cursor-default pointer-events-none' : 'hover:border-indigo-500 hover:text-indigo-500'
-            ]"
-          >
-            <span class="truncate pr-4">{{ filter.label }}</span>
-            <!-- Icon + / - (hidden if readonly) -->
-            <template v-if="!readonlyFilters">
-              <svg 
-                v-if="activeMenu !== filter.id"
-                viewBox="0 0 20 20" 
-                fill="currentColor" 
-                class="w-4 h-4 flex-shrink-0 pointer-events-none"
+          <!-- Standard Filters (Grid) or Project Info (Detail) -->
+          <template v-if="showFilters">
+            <button 
+              v-for="filter in filters" 
+              :key="filter.id"
+              @click="!readonlyFilters ? toggleMenu(filter.id) : null"
+              class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -mt-[1px] bg-[#FFFFFF] w-full"
+              :class="[
+                activeMenu === filter.id ? 'text-indigo-500 border-indigo-500 z-50' : 'text-[#121212]',
+                ((filter.id === 'typology' && selectedTypology) || (filter.id === 'year' && selectedYear) || (filter.id === 'country' && selectedCountry)) ? '!text-indigo-500 !border-indigo-500 z-50' : '',
+                readonlyFilters ? 'cursor-default pointer-events-none' : 'hover:border-indigo-500 hover:text-indigo-500'
+              ]"
+            >
+              <span class="truncate pr-4">{{ filter.label }}</span>
+              <template v-if="!readonlyFilters">
+                <svg v-if="activeMenu !== filter.id" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 flex-shrink-0 pointer-events-none">
+                  <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                </svg>
+                <svg v-else viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 flex-shrink-0 pointer-events-none">
+                  <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h12.5a.75.75 0 010 1.5H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+                </svg>
+              </template>
+            </button>
+          </template>
+
+          <!-- Project Navigation Triggers (Specific to Detail Page) -->
+          <template v-if="noSticky">
+            <!-- Column 2: Sequence Counter -->
+            <div class="h-[30px] flex items-center">
+              <SequenceCounter
+                v-if="totalImages > 0"
+                :model-value="carouselCurrentImageIndex"
+                :total="totalImages"
+                @update:model-value="newIndex => setCurrentImageIndex(newIndex)"
+              />
+            </div>
+
+            <!-- Column 3: Project Navigation -->
+            <div class="h-[30px] flex items-center justify-end xl:justify-start gap-6 xl:col-start-3">
+              <NuxtLink 
+                to="/projects" 
+                class="u-h4 font-medium transition-all hover:text-black hover:font-extrabold text-[#121212] mr-4"
               >
-                <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-              </svg>
-              <svg 
-                v-else
-                viewBox="0 0 20 20" 
-                fill="currentColor" 
-                class="w-4 h-4 flex-shrink-0 pointer-events-none"
+                retour
+              </NuxtLink>
+
+              <NuxtLink 
+                v-if="prevProject" 
+                :to="prevProject.path" 
+                class="u-h4 font-medium transition-all hover:text-black hover:font-extrabold text-[#121212]"
+                @click="setTransitionDirection('prev')"
               >
-                <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h12.5a.75.75 0 010 1.5H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
-              </svg>
-            </template>
-          </button>
+                &lt;
+              </NuxtLink>
+              <span v-else class="u-h4 font-medium text-gray-300 cursor-default">&lt;</span>
+
+              <NuxtLink to="/projects" class="u-h4 font-medium transition-all hover:text-black hover:font-extrabold text-[#121212]">
+                projects
+              </NuxtLink>
+              
+              <NuxtLink 
+                v-if="nextProject" 
+                :to="nextProject.path" 
+                class="u-h4 font-medium transition-all hover:text-black hover:font-extrabold text-[#121212]"
+                @click="setTransitionDirection('next')"
+              >
+                &gt;
+              </NuxtLink>
+              <span v-else class="u-h4 font-medium text-gray-300 cursor-default">&gt;</span>
+            </div>
+          </template>
 
           <!-- Reset Buttons Column -->
           <div class="flex justify-end xl:col-start-4 gap-2">
-            <!-- Reveal Colors Button (Magic Wand) -->
             <button 
               v-if="visitedProjects.size > 0 && !readonlyFilters"
               @click="clearVisited"
@@ -79,7 +119,6 @@
               <span class="hidden lg:inline">Révéler</span>
             </button>
 
-            <!-- Reset Filters Button -->
             <button 
               v-if="hasActiveFilters"
               @click="resetFilters"
@@ -116,64 +155,17 @@
             }"
           >
             <div class="flex flex-wrap gap-x-6 gap-y-2 py-2">
-              <!-- Options for Typology -->
               <template v-if="activeMenu === 'typology'">
-                <button 
-                  @click="selectedTypology = null; activeMenu = null"
-                  class="u-h4 transition-colors duration-300"
-                  :class="selectedTypology === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'"
-                >
-                  Toutes
-                </button>
-                <button 
-                  v-for="opt in typologyOptions" 
-                  :key="opt"
-                  @click="selectedTypology = opt; activeMenu = null"
-                  class="u-h4 transition-colors duration-300 text-left"
-                  :class="selectedTypology === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'"
-                >
-                  {{ opt }}
-                </button>
+                <button @click="selectedTypology = null; activeMenu = null" class="u-h4 transition-colors duration-300" :class="selectedTypology === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'">Toutes</button>
+                <button v-for="opt in typologyOptions" :key="opt" @click="selectedTypology = opt; activeMenu = null" class="u-h4 transition-colors duration-300 text-left" :class="selectedTypology === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'">{{ opt }}</button>
               </template>
-
-              <!-- Options for Year -->
               <template v-if="activeMenu === 'year'">
-                <button 
-                  @click="selectedYear = null; activeMenu = null"
-                  class="u-h4 transition-colors duration-300"
-                  :class="selectedYear === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'"
-                >
-                  Toutes
-                </button>
-                <button 
-                  v-for="opt in yearOptions" 
-                  :key="opt"
-                  @click="selectedYear = opt; activeMenu = null"
-                  class="u-h4 transition-colors duration-300 text-left"
-                  :class="selectedYear === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'"
-                >
-                  {{ opt }}
-                </button>
+                <button @click="selectedYear = null; activeMenu = null" class="u-h4 transition-colors duration-300" :class="selectedYear === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'">Toutes</button>
+                <button v-for="opt in yearOptions" :key="opt" @click="selectedYear = opt; activeMenu = null" class="u-h4 transition-colors duration-300 text-left" :class="selectedYear === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'">{{ opt }}</button>
               </template>
-
-              <!-- Options for Pays -->
               <template v-if="activeMenu === 'country'">
-                <button 
-                  @click="selectedCountry = null; activeMenu = null"
-                  class="u-h4 transition-colors duration-300"
-                  :class="selectedCountry === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'"
-                >
-                  Tous
-                </button>
-                <button 
-                  v-for="opt in countryOptions" 
-                  :key="opt"
-                  @click="selectedCountry = opt; activeMenu = null"
-                  class="u-h4 transition-colors duration-300 text-left"
-                  :class="selectedCountry === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'"
-                >
-                  {{ opt }}
-                </button>
+                <button @click="selectedCountry = null; activeMenu = null" class="u-h4 transition-colors duration-300" :class="selectedCountry === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'">Tous</button>
+                <button v-for="opt in countryOptions" :key="opt" @click="selectedCountry = opt; activeMenu = null" class="u-h4 transition-colors duration-300 text-left" :class="selectedCountry === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'">{{ opt }}</button>
               </template>
             </div>
           </div>
@@ -188,16 +180,64 @@ import { ref, defineProps, watch, computed, onMounted, onUnmounted } from 'vue';
 import { useProjectFilters } from '~/composables/useProjectFilters';
 import { useHoverProject } from '~/composables/useHoverProject';
 import { useVisitedProjects } from '~/composables/useVisitedProjects';
+import { useCarouselState } from '~/composables/useCarouselState';
+import SequenceCounter from '~/components/SequenceCounter.vue';
 
 const { hoveredProject, hoveredProjectTitle } = useHoverProject();
 const { clearVisited, visitedProjects } = useVisitedProjects();
+const { currentImageIndex: carouselCurrentImageIndex, totalImages, setCurrentImageIndex } = useCarouselState();
 
 const props = defineProps<{
   title: string | { main: string; sub?: string };
   showFilters?: boolean;
   readonlyFilters?: boolean;
   hideMainTitle?: boolean;
+  noSticky?: boolean;
 }>();
+
+const route = useRoute();
+
+const { data: allContent } = await useAsyncData('all-projects-nav', () =>
+  queryCollection('content')
+    .select('path', 'title', 'date')
+    .where('path', 'LIKE', '/projects/%')
+    .where('draft', '<>', true)
+    .all()
+);
+
+const projects = computed(() => {
+  if (!allContent.value) return [];
+  return [...allContent.value].sort((a, b) => {
+    const dateA = new Date(a.date || 0).getTime();
+    const dateB = new Date(b.date || 0).getTime();
+    return dateB - dateA;
+  });
+});
+
+const currentProjectIndex = computed(() => {
+  return projects.value.findIndex(p => p.path === route.path);
+});
+
+const prevProject = computed(() => {
+  if (currentProjectIndex.value > 0) {
+    return projects.value[currentProjectIndex.value - 1];
+  }
+  return null;
+});
+
+const nextProject = computed(() => {
+  if (currentProjectIndex.value < projects.value.length - 1) {
+    return projects.value[currentProjectIndex.value + 1];
+  }
+  return null;
+});
+
+const setTransitionDirection = (direction: 'next' | 'prev') => {
+  if (import.meta.client) {
+    document.documentElement.classList.remove('transition-next', 'transition-prev');
+    document.documentElement.classList.add(`transition-${direction}`);
+  }
+};
 
 const filterContainer = ref<HTMLElement | null>(null);
 

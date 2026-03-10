@@ -12,22 +12,20 @@ header a[href="https://ui.nuxt.com"] {
 
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
-  filter: blur(8px);
 }
 
 .title-fade-enter-active,
 .title-fade-leave-active {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .title-fade-enter-from,
 .title-fade-leave-to {
   opacity: 0;
-  filter: blur(8px);
   transform: translateY(4px);
 }
 
@@ -154,30 +152,36 @@ header a[href="https://ui.nuxt.com"] {
 .prose p, .prose li { @apply u-body mb-4; }
 
 /* View Transitions animations */
-::view-transition-group(project-description),
-::view-transition-group(project-carousel) {
-  animation-duration: 0.6s;
+::view-transition-group(*) {
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Transition Timing for all view transitions */
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 0.8s;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .transition-next::view-transition-old(project-description),
 .transition-next::view-transition-old(project-carousel) {
-  animation: slide-out-to-left 0.6s forwards;
+  animation: slide-out-to-left 0.8s forwards;
 }
 
 .transition-next::view-transition-new(project-description),
 .transition-next::view-transition-new(project-carousel) {
-  animation: slide-in-from-right 0.6s forwards;
+  animation: slide-in-from-right 0.8s forwards;
 }
 
 .transition-prev::view-transition-old(project-description),
 .transition-prev::view-transition-old(project-carousel) {
-  animation: slide-out-to-right 0.6s forwards;
+  animation: slide-out-to-right 0.8s forwards;
 }
 
 .transition-prev::view-transition-new(project-description),
 .transition-prev::view-transition-new(project-carousel) {
-  animation: slide-in-from-left 0.6s forwards;
+  animation: slide-in-from-left 0.8s forwards;
 }
 
 @keyframes slide-out-to-left {

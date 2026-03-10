@@ -4,62 +4,29 @@
       <!-- Logo -->
       <NuxtLink 
         to="/agence" 
-        class="text-[#121212] whitespace-nowrap u-h4"
+        class="text-[#121212] whitespace-nowrap u-h4 font-light tracking-[0.5em] logo-link"
         @click="handleLinkClick('Studio Soñj')"
         @mouseenter="emit('linkHover', 'Studio Soñj')"
         @mouseleave="emit('linkHover', '')"
       >
-        Soñj
+        Alexandre MATHIEU
       </NuxtLink>
 
       <!-- Desktop Navigation -->
       <nav class="hidden md:flex items-center ml-10 flex-grow">
-        <template v-if="isProjectPage">
-          <!-- All navigation buttons grouped above the carousel (left-aligned to it) -->
-          <div class="flex items-center gap-12 fixed left-[calc(var(--main-padding)+50%+16px)] xl:left-[calc(var(--main-padding)+((100%-2*(var(--main-padding)))-96px)/4+32px)]">
-            <NuxtLink to="/projects" class="u-h4 font-medium transition-colors hover:text-gray-600 text-[#121212] mr-4">
-              [retour]
-            </NuxtLink>
-            
-            <div class="flex items-center gap-8">
-              <NuxtLink 
-                v-if="prevProject" 
-                :to="prevProject.path" 
-                class="u-h4 font-medium transition-colors hover:text-gray-600 text-[#121212]"
-                @click="setTransitionDirection('prev')"
-              >
-                &lt;prec
-              </NuxtLink>
-              <span v-else class="u-h4 font-medium text-gray-300 cursor-default">&lt;prec</span>
-
-              <NuxtLink 
-                v-if="nextProject" 
-                :to="nextProject.path" 
-                class="u-h4 font-medium transition-colors hover:text-gray-600 text-[#121212]"
-                @click="setTransitionDirection('next')"
-              >
-                suiv&gt;
-              </NuxtLink>
-              <span v-else class="u-h4 font-medium text-gray-300 cursor-default">suiv&gt;</span>
-            </div>
-          </div>
-        </template>
-        <template v-else>
-          <div class="flex items-center gap-[50px]">
-            <NuxtLink 
-              v-for="link in links" 
-              :key="link.to" 
-              :to="link.to"
-              class="u-h4 font-medium transition-colors hover:text-gray-600 text-[#121212]"
-              :class="{ 'text-gray-600': activeLink === link.label }"
-              @click="handleLinkClick(link.label)"
-              @mouseenter="emit('linkHover', link.label)"
-              @mouseleave="emit('linkHover', '')"
-            >
-              {{ link.label }}
-            </NuxtLink>
-          </div>
-        </template>
+        <div class="flex items-center gap-[50px]">
+          <NuxtLink 
+            v-for="link in links" 
+            :key="link.to" 
+            :to="link.to"
+            class="u-h4 font-medium transition-all hover:text-black hover:font-extrabold text-[#121212]"
+            @click="handleLinkClick(link.label)"
+            @mouseenter="emit('linkHover', link.label)"
+            @mouseleave="emit('linkHover', '')"
+          >
+            {{ link.label }}
+          </NuxtLink>
+        </div>
       </nav>
 
       <!-- Large Space -->
@@ -88,7 +55,7 @@
           <button 
             v-if="!isSearchExpanded"
             @click="isSearchExpanded = true"
-            class="p-1 text-[#121212] hover:text-gray-600 transition-colors flex items-center justify-center"
+            class="p-1 text-[#121212] hover:text-black hover:font-extrabold transition-all flex items-center justify-center"
           >
             <UIcon name="i-heroicons-magnifying-glass-20-solid" class="w-5 h-5" />
           </button>
@@ -105,7 +72,7 @@
               class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-50 last:border-0 group"
               @click="clearSearch"
             >
-              <div class="text-[12px] font-bold text-[#121212] tracking-wider group-hover:text-gray-600 transition-colors">{{ result.title }}</div>
+              <div class="text-[12px] font-bold text-[#121212] tracking-wider group-hover:text-black transition-colors">{{ result.title }}</div>
               <div v-if="result.description" class="text-[10px] text-gray-400 mt-1 line-clamp-1">{{ result.description }}</div>
             </NuxtLink>
             </div>
@@ -120,7 +87,7 @@
           :label="currentLang"
           variant="ghost"
           color="[#121212]"
-          class="p-0 hover:bg-transparent u-h4 font-medium transition-colors hover:text-gray-600"
+          class="p-0 hover:bg-transparent u-h4 font-medium transition-all hover:text-black hover:font-extrabold"
           @click="toggleLang"
           @mouseenter="emit('linkHover', 'Langue')"
           @mouseleave="emit('linkHover', '')"
@@ -176,7 +143,8 @@
 
 <script setup lang="ts">
 import { ref, watch, nextTick, computed } from 'vue';
-import { UInput } from '#components'; // Import UInput
+import { UInput } from '#components';
+import { useHoverProject } from '~/composables/useHoverProject';
 
 const { hoveredProjectTitle } = useHoverProject();
 
@@ -198,36 +166,6 @@ const { data: allContent } = await useAsyncData('all-site-content', () =>
 );
 
 const route = useRoute();
-const isProjectPage = computed(() => route.path.startsWith('/projects/'));
-
-const projects = computed(() => {
-  if (!allContent.value) return [];
-  return allContent.value
-    .filter(item => item.path.startsWith('/projects/'))
-    .sort((a, b) => {
-      const dateA = new Date(a.date || 0).getTime();
-      const dateB = new Date(b.date || 0).getTime();
-      return dateB - dateA;
-    });
-});
-
-const currentProjectIndex = computed(() => {
-  return projects.value.findIndex(p => p.path === route.path);
-});
-
-const prevProject = computed(() => {
-  if (currentProjectIndex.value > 0) {
-    return projects.value[currentProjectIndex.value - 1];
-  }
-  return null;
-});
-
-const nextProject = computed(() => {
-  if (currentProjectIndex.value < projects.value.length - 1) {
-    return projects.value[currentProjectIndex.value + 1];
-  }
-  return null;
-});
 
 const searchResults = computed(() => {
   if (!searchTerm.value || !allContent.value) return [];
@@ -261,22 +199,6 @@ watch(isSearchExpanded, (newValue) => {
   }
 });
 
-const setTransitionDirection = (direction: 'next' | 'prev') => {
-  if (import.meta.client) {
-    document.documentElement.classList.remove('transition-next', 'transition-prev');
-    document.documentElement.classList.add(`transition-${direction}`);
-  }
-};
-
-watch(() => route.path, () => {
-  if (import.meta.client) {
-    // Small delay to ensure the transition has started/finished
-    setTimeout(() => {
-      document.documentElement.classList.remove('transition-next', 'transition-prev');
-    }, 1000);
-  }
-});
-
 const handleLinkClick = (label: string) => {
   activeLink.value = label;
   emit('linkClick', label);
@@ -299,17 +221,18 @@ const links = [{
 }, {
   label: 'Art',
   to: '/art'
-}, {
-  label: 'À propos',
-  to: '/about'
 }]
 </script>
 
 <style scoped>
 @reference "../assets/css/main.css";
 
-.router-link-active {
-  @apply text-[#121212] font-bold opacity-100;
+.router-link-active:not(.logo-link) {
+  @apply text-black font-extrabold text-[15px] opacity-100;
+}
+
+.logo-link.router-link-active {
+  @apply font-light text-[#121212];
 }
 
 .header-search-input .icon {

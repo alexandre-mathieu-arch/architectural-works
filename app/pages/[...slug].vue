@@ -1,9 +1,12 @@
 <template>
   <div v-if="page" class="relative">
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 pt-0">
       <!-- First column: Info / Description -->
-      <div class="col-span-1 pt-0 z-10" style="view-transition-name: project-description;">
-        <div class="project-description pb-24">
+      <div 
+        class="col-span-1 pt-0 z-10" 
+        style="view-transition-name: project-description;"
+      >
+        <div class="project-description pb-24 pr-4">
           <p v-if="page.description" class="u-body mb-8">{{ page.description }}</p>
           <div class="content-renderer">
             <ContentRenderer :value="page" class="prose max-w-none" />
@@ -34,10 +37,10 @@
         </div>
       </div>
       
-      <!-- Carousel Section: Sticky to pass over elements -->
-      <div class="hidden md:block md:col-span-1 xl:col-span-3 h-[calc(100vh-var(--header-height)-120px)] sticky top-[calc(var(--header-height)+55px)] z-40">
-        <div class="absolute inset-0 bg-white">
-          <ImageCarousel :images="images" v-model="currentImageIndex" :id="page.path" />
+      <!-- Carousel Section: Natural flow -->
+      <div class="hidden md:block md:col-span-1 xl:col-span-3 z-40">
+        <div class="relative w-full aspect-[4/3] bg-white">
+          <ImageCarousel :images="images" :model-value="currentImageIndex" @update:model-value="setCurrentImageIndex" :id="page.path" />
         </div>
       </div>
     </div>
@@ -47,6 +50,7 @@
 <script setup lang="ts">
 import ImageCarousel from '~/components/ImageCarousel.vue'
 import { useProjectFilters } from '~/composables/useProjectFilters';
+import { useCarouselState } from '~/composables/useCarouselState';
 
 definePageMeta({
   layout: 'default',
@@ -77,7 +81,7 @@ onMounted(() => {
   }
 });
 
-const currentImageIndex = ref(0)
+const { currentImageIndex, setCurrentImageIndex, setTotalImages } = useCarouselState();
 
 const images = computed(() => {
   if (page.value) {
@@ -90,6 +94,11 @@ const images = computed(() => {
   }
   return []
 })
+
+// Sync images length with global state
+watch(images, (newImages) => {
+  setTotalImages(newImages.length);
+}, { immediate: true });
 </script>
 
 <style scoped>

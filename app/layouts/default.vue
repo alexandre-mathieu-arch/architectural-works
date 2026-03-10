@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    <Header @linkClick="handleLinkClick" @linkHover="handleLinkHover" />
+    <Header v-if="!route.path.startsWith('/projects/')" @linkClick="handleLinkClick" @linkHover="handleLinkHover" />
     <div :style="{ paddingTop: 'var(--header-height)' }">
       <main class="main-container pb-24">
         <PageTitle 
@@ -8,6 +8,7 @@
           :show-filters="route.meta.showFilters === true" 
           :readonly-filters="route.meta.readonlyFilters === true"
           :hide-main-title="route.path.startsWith('/projects/')"
+          :no-sticky="route.path.startsWith('/projects/')"
         />
         <slot />
       </main>
