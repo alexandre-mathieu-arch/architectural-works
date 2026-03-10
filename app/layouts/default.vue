@@ -21,7 +21,9 @@
 import { ref, computed, watch } from 'vue';
 import Header from '~/components/Header.vue';
 import PageTitle from '~/components/PageTitle.vue';
-import TheFooter from '~/components/TheFooter.vue';
+import { useProjectFilters } from '~/composables/useProjectFilters';
+import { useHoverProject } from '~/composables/useHoverProject';
+import { useVisitedProjects } from '~/composables/useVisitedProjects';
 
 const route = useRoute();
 const { resetFilters } = useProjectFilters();
@@ -82,7 +84,3 @@ const displayedTitle = computed(() => {
 // Alias for PageTitle component prop
 const pageTitle = displayedTitle;
 </script>
-
-<style scoped>
-
-</style>
