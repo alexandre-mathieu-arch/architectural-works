@@ -3,7 +3,7 @@
     class="relative z-30"
     :class="[
       noSticky ? 'pb-[18px]' : 'pb-8',
-      { 'sticky top-[var(--header-height)] bg-white/30 backdrop-blur-md -mx-[var(--main-padding)] px-[var(--main-padding)]': (showFilters || $slots.triggers) && !noSticky }
+      { 'sticky top-[var(--header-height)] bg-white dark:bg-[#121212] transition-colors duration-300 -mx-[var(--main-padding)] px-[var(--main-padding)]': (showFilters || $slots.triggers) && !noSticky }
     ]"
   >
     <!-- Project Title Slot: Permanent height to avoid folding effect -->
@@ -19,7 +19,7 @@
         <div 
           v-if="hoveredProjectTitle || (hideMainTitle && title)" 
           :key="hoveredProjectTitle || (typeof title === 'string' ? title : '')"
-          class="text-[20px] font-bold leading-none text-[#121212] whitespace-nowrap overflow-hidden text-ellipsis w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] h-full flex items-center"
+          class="text-[20px] font-bold leading-none text-[#121212] dark:text-white whitespace-nowrap overflow-hidden text-ellipsis w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] h-full flex items-center"
           :style="{ viewTransitionName: route.path.startsWith('/projects/') ? 'title-' + route.path.replace(/\//g, '-') : 'project-title-continuity' }"
         >
           {{ hoveredProjectTitle || (hideMainTitle ? (typeof title === 'string' ? title : '') : '') }}
@@ -41,11 +41,11 @@
               v-for="filter in filters" 
               :key="filter.id"
               @click="!readonlyFilters ? toggleMenu(filter.id) : null"
-              class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -mt-[1px] bg-transparent w-full"
+              class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 dark:border-white/20 -mt-[1px] bg-transparent w-full"
               :class="[
-                activeMenu === filter.id ? 'text-indigo-500 border-indigo-500 z-50' : 'text-[#121212]',
+                activeMenu === filter.id ? 'text-indigo-500 border-indigo-500 z-50' : 'text-[#121212] dark:text-white',
                 ((filter.id === 'typology' && selectedTypology) || (filter.id === 'year' && selectedYear) || (filter.id === 'country' && selectedCountry)) ? '!text-indigo-500 !border-indigo-500 z-50' : '',
-                readonlyFilters ? 'cursor-default pointer-events-none' : 'hover:border-indigo-500 hover:text-indigo-500'
+                readonlyFilters ? 'cursor-default pointer-events-none' : 'hover:border-indigo-500 hover:text-indigo-500 dark:hover:border-indigo-400 dark:hover:text-indigo-400'
               ]"
             >
               <span class="truncate pr-4">{{ filter.label }}</span>
@@ -76,7 +76,7 @@
             <div class="h-[30px] flex items-center justify-end xl:justify-start gap-6 xl:col-start-3">
               <NuxtLink 
                 to="/projects" 
-                class="u-h4 font-medium transition-all hover:text-black hover:font-extrabold text-[#121212] mr-4"
+                class="u-h4 font-medium transition-all hover:text-black dark:hover:text-white hover:font-extrabold text-[#121212] dark:text-white mr-4"
               >
                 retour
               </NuxtLink>
@@ -84,26 +84,26 @@
               <NuxtLink 
                 v-if="prevProject" 
                 :to="prevProject.path" 
-                class="u-h4 font-medium transition-all hover:text-black hover:font-extrabold text-[#121212]"
+                class="u-h4 font-medium transition-all hover:text-black dark:hover:text-white hover:font-extrabold text-[#121212] dark:text-white"
                 @click="setTransitionDirection('prev')"
               >
                 &lt;
               </NuxtLink>
-              <span v-else class="u-h4 font-medium text-gray-300 cursor-default">&lt;</span>
+              <span v-else class="u-h4 font-medium text-gray-300 dark:text-gray-600 cursor-default">&lt;</span>
 
-              <NuxtLink to="/projects" class="u-h4 font-medium transition-all hover:text-black hover:font-extrabold text-[#121212]">
+              <NuxtLink to="/projects" class="u-h4 font-medium transition-all hover:text-black dark:hover:text-white hover:font-extrabold text-[#121212] dark:text-white">
                 projects
               </NuxtLink>
               
               <NuxtLink 
                 v-if="nextProject" 
                 :to="nextProject.path" 
-                class="u-h4 font-medium transition-all hover:text-black hover:font-extrabold text-[#121212]"
+                class="u-h4 font-medium transition-all hover:text-black dark:hover:text-white hover:font-extrabold text-[#121212] dark:text-white"
                 @click="setTransitionDirection('next')"
               >
                 &gt;
               </NuxtLink>
-              <span v-else class="u-h4 font-medium text-gray-300 cursor-default">&gt;</span>
+              <span v-else class="u-h4 font-medium text-gray-300 dark:text-gray-600 cursor-default">&gt;</span>
             </div>
           </template>
 
@@ -112,7 +112,7 @@
             <button 
               v-if="visitedProjects.size > 0 && !readonlyFilters"
               @click="clearVisited"
-              class="flex items-center gap-2 px-3 h-[30px] border border-indigo-500/30 text-indigo-500 bg-transparent hover:border-indigo-500 hover:bg-indigo-500 hover:text-white transition-all duration-300 -mt-[1px] u-h4"
+              class="flex items-center gap-2 px-3 h-[30px] border border-indigo-500/30 dark:border-indigo-400/30 text-indigo-500 dark:text-indigo-400 bg-transparent hover:border-indigo-500 dark:hover:border-indigo-400 hover:bg-indigo-500 dark:hover:bg-indigo-400 hover:text-white transition-all duration-300 -mt-[1px] u-h4"
               title="Révéler les couleurs d'origine"
             >
               <UIcon name="i-heroicons-sparkles" class="w-4 h-4" />
@@ -122,7 +122,7 @@
             <button 
               v-if="hasActiveFilters"
               @click="resetFilters"
-              class="flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 text-red-600 bg-transparent hover:border-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 -mt-[1px]"
+              class="flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 dark:border-red-400/30 text-red-600 dark:text-red-400 bg-transparent hover:bg-red-600 dark:hover:bg-red-500 hover:text-white transition-all duration-300 -mt-[1px]"
               title="Réinitialiser les filtres"
             >
               <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -159,7 +159,7 @@
                 <button 
                   @click="selectedTypology = null; activeMenu = null" 
                   class="u-h4 h-[30px] flex items-center px-3 border transition-all duration-300 text-left w-full bg-transparent" 
-                  :class="selectedTypology === null ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 border-transparent hover:border-indigo-500/30 hover:text-indigo-500'"
+                  :class="selectedTypology === null ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 dark:text-white/60 border-transparent hover:border-indigo-500/30 dark:hover:border-indigo-400/30 hover:text-indigo-500 dark:hover:text-indigo-400'"
                 >
                   Toutes
                 </button>
@@ -168,7 +168,7 @@
                   :key="opt" 
                   @click="selectedTypology = opt; activeMenu = null" 
                   class="u-h4 h-[30px] flex items-center px-3 border transition-all duration-300 text-left w-full bg-transparent" 
-                  :class="selectedTypology === opt ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 border-transparent hover:border-indigo-500/30 hover:text-indigo-500'"
+                  :class="selectedTypology === opt ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 dark:text-white/60 border-transparent hover:border-indigo-500/30 dark:hover:border-indigo-400/30 hover:text-indigo-500 dark:hover:text-indigo-400'"
                 >
                   {{ opt }}
                 </button>
@@ -177,7 +177,7 @@
                 <button 
                   @click="selectedYear = null; activeMenu = null" 
                   class="u-h4 h-[30px] flex items-center px-3 border transition-all duration-300 text-left w-full bg-transparent" 
-                  :class="selectedYear === null ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 border-transparent hover:border-indigo-500/30 hover:text-indigo-500'"
+                  :class="selectedYear === null ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 dark:text-white/60 border-transparent hover:border-indigo-500/30 dark:hover:border-indigo-400/30 hover:text-indigo-500 dark:hover:text-indigo-400'"
                 >
                   Toutes
                 </button>
@@ -186,7 +186,7 @@
                   :key="opt" 
                   @click="selectedYear = opt; activeMenu = null" 
                   class="u-h4 h-[30px] flex items-center px-3 border transition-all duration-300 text-left w-full bg-transparent" 
-                  :class="selectedYear === opt ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 border-transparent hover:border-indigo-500/30 hover:text-indigo-500'"
+                  :class="selectedYear === opt ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 dark:text-white/60 border-transparent hover:border-indigo-500/30 dark:hover:border-indigo-400/30 hover:text-indigo-500 dark:hover:text-indigo-400'"
                 >
                   {{ opt }}
                 </button>
@@ -195,7 +195,7 @@
                 <button 
                   @click="selectedCountry = null; activeMenu = null" 
                   class="u-h4 h-[30px] flex items-center px-3 border transition-all duration-300 text-left w-full bg-transparent" 
-                  :class="selectedCountry === null ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 border-transparent hover:border-indigo-500/30 hover:text-indigo-500'"
+                  :class="selectedCountry === null ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 dark:text-white/60 border-transparent hover:border-indigo-500/30 dark:hover:border-indigo-400/30 hover:text-indigo-500 dark:hover:text-indigo-400'"
                 >
                   Tous
                 </button>
@@ -204,7 +204,7 @@
                   :key="opt" 
                   @click="selectedCountry = opt; activeMenu = null" 
                   class="u-h4 h-[30px] flex items-center px-3 border transition-all duration-300 text-left w-full bg-transparent" 
-                  :class="selectedCountry === opt ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 border-transparent hover:border-indigo-500/30 hover:text-indigo-500'"
+                  :class="selectedCountry === opt ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 dark:text-white/60 border-transparent hover:border-indigo-500/30 dark:hover:border-indigo-400/30 hover:text-indigo-500 dark:hover:text-indigo-400'"
                 >
                   {{ opt }}
                 </button>

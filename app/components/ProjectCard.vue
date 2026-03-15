@@ -27,21 +27,21 @@
       
       <!-- Infos affichées au survol -->
       <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10">
-        <div class="absolute top-0 left-0 w-full border border-[#121212]/30 px-2 h-[30px] flex items-center gap-3 bg-[#FFFFFF] overflow-hidden">
+        <div class="absolute top-0 left-0 w-full border border-[#121212]/30 dark:border-white/20 px-2 h-[30px] flex items-center gap-3 bg-white dark:bg-[#121212] overflow-hidden">
           <h3 
-            class="u-h3 normal-case whitespace-nowrap"
+            class="u-h3 normal-case dark:text-white whitespace-nowrap"
             :style="{ viewTransitionName: 'title-' + project.path.replace(/\//g, '-') }"
           >
             {{ project.title }}
           </h3>
           <p 
-            class="text-[12px] font-light text-[#121212] tracking-[0.1em] whitespace-nowrap"
+            class="text-[12px] font-light text-[#121212] dark:text-gray-300 tracking-[0.1em] whitespace-nowrap"
             :style="{ viewTransitionName: 'year-' + project.path.replace(/\//g, '-') }"
           >
             {{ projectYear }}
           </p>
           <p 
-            class="text-[12px] font-light text-[#121212] tracking-[0.1em] whitespace-nowrap overflow-hidden text-ellipsis"
+            class="text-[12px] font-light text-[#121212] dark:text-gray-400 tracking-[0.1em] whitespace-nowrap overflow-hidden text-ellipsis"
             :style="{ viewTransitionName: 'location-' + project.path.replace(/\//g, '-') }"
           >
             {{ formattedLocation }}

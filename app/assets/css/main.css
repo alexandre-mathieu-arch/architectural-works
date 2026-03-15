@@ -1,8 +1,22 @@
 html, body {
   height: 100%;
-  background-color: #FFFFFF; /* Pure white variant */
+  @apply bg-white dark:bg-[#121212] transition-colors duration-300;
   font-family: var(--font-primary);
   @apply subpixel-antialiased;
+}
+
+@theme {
+  --color-primary-50: #EEF2FF;
+  --color-primary-100: #E0E7FF;
+  --color-primary-200: #C7D2FE;
+  --color-primary-300: #A5B4FC;
+  --color-primary-400: #818CF8;
+  --color-primary-500: #6366F1;
+  --color-primary-600: #4F46E5;
+  --color-primary-700: #4338CA;
+  --color-primary-800: #3730A3;
+  --color-primary-900: #312E81;
+  --color-primary-950: #1E1B4B;
 }
 
 /* Force hide Nuxt UI default logo */
@@ -103,44 +117,45 @@ header a[href="https://ui.nuxt.com"] {
 
 /* Typography Rationalization */
 @utility u-h1 {
-  @apply text-[28px] md:text-[34px] lg:text-[40px] font-bold leading-none;
+  @apply text-[28px] md:text-[34px] lg:text-[40px] font-bold leading-none dark:text-white;
   font-family: var(--font-primary);
   
   @screen lg {
     -webkit-text-stroke: 1px #121212;
+    .dark & { -webkit-text-stroke: 1px #FFFFFF; }
     color: transparent;
   }
 }
 
 @utility u-h2 {
-  @apply text-[21px] md:text-[25px] font-bold leading-none;
+  @apply text-[21px] md:text-[25px] font-bold leading-none dark:text-white;
   letter-spacing: 0.2em;
   font-family: var(--font-primary);
 }
 
 @utility u-sub-link {
-  @apply font-medium text-[#121212] hover:text-gray-400 tracking-widest text-[21px] transition-colors uppercase;
+  @apply font-medium text-[#121212] dark:text-white hover:text-gray-400 tracking-widest text-[21px] transition-colors uppercase;
   letter-spacing: 0.2em;
 }
 
 @utility u-h3 {
-  @apply text-[15px] font-bold tracking-[0.1em];
+  @apply text-[15px] font-bold tracking-[0.1em] dark:text-white;
   font-family: var(--font-primary);
 }
 
 @utility u-h4 {
-  @apply text-[13px] font-bold;
+  @apply text-[13px] font-bold dark:text-white;
   letter-spacing: 0.2em;
   font-family: var(--font-primary);
 }
 
 @utility u-body {
-  @apply text-[16px] font-normal leading-[1.1] text-[#121212] subpixel-antialiased;
+  @apply text-[16px] font-normal leading-[1.1] text-[#121212] dark:text-white subpixel-antialiased;
   font-family: var(--font-body);
 }
 
 @utility u-legend {
-  @apply text-[12px] font-light tracking-[0.1em];
+  @apply text-[12px] font-light tracking-[0.1em] dark:text-gray-400;
   font-family: var(--font-primary);
 }
 
@@ -150,6 +165,60 @@ header a[href="https://ui.nuxt.com"] {
 .prose h3 { @apply u-h3 mb-2; }
 .prose h4 { @apply u-h4 mb-2; }
 .prose p, .prose li { @apply u-body mb-4; }
+.dark .prose { @apply prose-invert; }
+
+/* View Transitions animations */
+::view-transition-group(*) {
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Transition Timing for all view transitions */
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-next::view-transition-old(project-description),
+.transition-next::view-transition-old(project-carousel) {
+  animation: slide-out-to-left 0.8s forwards;
+}
+
+.transition-next::view-transition-new(project-description),
+.transition-next::view-transition-new(project-carousel) {
+  animation: slide-in-from-right 0.8s forwards;
+}
+
+.transition-prev::view-transition-old(project-description),
+.transition-prev::view-transition-old(project-carousel) {
+  animation: slide-out-to-right 0.8s forwards;
+}
+
+.transition-prev::view-transition-new(project-description),
+.transition-prev::view-transition-new(project-carousel) {
+  animation: slide-in-from-left 0.8s forwards;
+}
+
+@keyframes slide-out-to-left {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-30px); opacity: 0; }
+}
+
+@keyframes slide-in-from-right {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-out-to-right {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(30px); opacity: 0; }
+}
+
+@keyframes slide-in-from-left {
+  from { transform: translateX(-30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
 
 /* View Transitions animations */
 ::view-transition-group(*) {
