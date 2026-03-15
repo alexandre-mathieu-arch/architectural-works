@@ -39,7 +39,7 @@
       
       <!-- Carousel Section: Natural flow -->
       <div class="hidden md:block md:col-span-1 xl:col-span-3 z-40">
-        <div class="relative w-full aspect-[4/3] bg-white">
+        <div class="relative w-full aspect-[16/9] bg-white">
           <ImageCarousel :images="images" :model-value="currentImageIndex" @update:model-value="setCurrentImageIndex" :id="page.path" />
         </div>
       </div>
