@@ -44,7 +44,7 @@ header a[href="https://ui.nuxt.com"] {
 }
 
 @import "tailwindcss";
-@import "@tailwindcss/typography";
+@plugin "@tailwindcss/typography";
 
 
 @font-face {
