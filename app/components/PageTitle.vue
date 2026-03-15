@@ -3,7 +3,7 @@
     class="relative z-30"
     :class="[
       noSticky ? 'pb-[18px]' : 'pb-8',
-      { 'sticky top-[var(--header-height)] bg-[#FFFFFF] -mx-[var(--main-padding)] px-[var(--main-padding)]': (showFilters || $slots.triggers) && !noSticky }
+      { 'sticky top-[var(--header-height)] bg-white/30 backdrop-blur-md -mx-[var(--main-padding)] px-[var(--main-padding)]': (showFilters || $slots.triggers) && !noSticky }
     ]"
   >
     <!-- Project Title Slot: Permanent height to avoid folding effect -->
@@ -41,7 +41,7 @@
               v-for="filter in filters" 
               :key="filter.id"
               @click="!readonlyFilters ? toggleMenu(filter.id) : null"
-              class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -mt-[1px] bg-[#FFFFFF] w-full"
+              class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -mt-[1px] bg-transparent w-full"
               :class="[
                 activeMenu === filter.id ? 'text-indigo-500 border-indigo-500 z-50' : 'text-[#121212]',
                 ((filter.id === 'typology' && selectedTypology) || (filter.id === 'year' && selectedYear) || (filter.id === 'country' && selectedCountry)) ? '!text-indigo-500 !border-indigo-500 z-50' : '',
@@ -112,7 +112,7 @@
             <button 
               v-if="visitedProjects.size > 0 && !readonlyFilters"
               @click="clearVisited"
-              class="flex items-center gap-2 px-3 h-[30px] border border-indigo-500/30 text-indigo-500 bg-[#FFFFFF] hover:bg-indigo-500 hover:text-white transition-all duration-300 -mt-[1px] u-h4"
+              class="flex items-center gap-2 px-3 h-[30px] border border-indigo-500/30 text-indigo-500 bg-transparent hover:border-indigo-500 hover:bg-indigo-500 hover:text-white transition-all duration-300 -mt-[1px] u-h4"
               title="Révéler les couleurs d'origine"
             >
               <UIcon name="i-heroicons-sparkles" class="w-4 h-4" />
@@ -122,7 +122,7 @@
             <button 
               v-if="hasActiveFilters"
               @click="resetFilters"
-              class="flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 text-red-600 bg-[#FFFFFF] hover:bg-red-600 hover:text-white transition-all duration-300 -mt-[1px]"
+              class="flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 text-red-600 bg-transparent hover:border-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 -mt-[1px]"
               title="Réinitialiser les filtres"
             >
               <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -154,18 +154,60 @@
               'xl:col-start-3': activeMenu === 'country'
             }"
           >
-            <div class="flex flex-wrap gap-x-6 gap-y-2 py-2">
+            <div class="flex flex-col gap-1 py-1">
               <template v-if="activeMenu === 'typology'">
-                <button @click="selectedTypology = null; activeMenu = null" class="u-h4 transition-colors duration-300" :class="selectedTypology === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'">Toutes</button>
-                <button v-for="opt in typologyOptions" :key="opt" @click="selectedTypology = opt; activeMenu = null" class="u-h4 transition-colors duration-300 text-left" :class="selectedTypology === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'">{{ opt }}</button>
+                <button 
+                  @click="selectedTypology = null; activeMenu = null" 
+                  class="u-h4 h-[30px] flex items-center px-3 border transition-all duration-300 text-left w-full bg-transparent" 
+                  :class="selectedTypology === null ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 border-transparent hover:border-indigo-500/30 hover:text-indigo-500'"
+                >
+                  Toutes
+                </button>
+                <button 
+                  v-for="opt in typologyOptions" 
+                  :key="opt" 
+                  @click="selectedTypology = opt; activeMenu = null" 
+                  class="u-h4 h-[30px] flex items-center px-3 border transition-all duration-300 text-left w-full bg-transparent" 
+                  :class="selectedTypology === opt ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 border-transparent hover:border-indigo-500/30 hover:text-indigo-500'"
+                >
+                  {{ opt }}
+                </button>
               </template>
               <template v-if="activeMenu === 'year'">
-                <button @click="selectedYear = null; activeMenu = null" class="u-h4 transition-colors duration-300" :class="selectedYear === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'">Toutes</button>
-                <button v-for="opt in yearOptions" :key="opt" @click="selectedYear = opt; activeMenu = null" class="u-h4 transition-colors duration-300 text-left" :class="selectedYear === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'">{{ opt }}</button>
+                <button 
+                  @click="selectedYear = null; activeMenu = null" 
+                  class="u-h4 h-[30px] flex items-center px-3 border transition-all duration-300 text-left w-full bg-transparent" 
+                  :class="selectedYear === null ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 border-transparent hover:border-indigo-500/30 hover:text-indigo-500'"
+                >
+                  Toutes
+                </button>
+                <button 
+                  v-for="opt in yearOptions" 
+                  :key="opt" 
+                  @click="selectedYear = opt; activeMenu = null" 
+                  class="u-h4 h-[30px] flex items-center px-3 border transition-all duration-300 text-left w-full bg-transparent" 
+                  :class="selectedYear === opt ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 border-transparent hover:border-indigo-500/30 hover:text-indigo-500'"
+                >
+                  {{ opt }}
+                </button>
               </template>
               <template v-if="activeMenu === 'country'">
-                <button @click="selectedCountry = null; activeMenu = null" class="u-h4 transition-colors duration-300" :class="selectedCountry === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'">Tous</button>
-                <button v-for="opt in countryOptions" :key="opt" @click="selectedCountry = opt; activeMenu = null" class="u-h4 transition-colors duration-300 text-left" :class="selectedCountry === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 hover:text-indigo-500'">{{ opt }}</button>
+                <button 
+                  @click="selectedCountry = null; activeMenu = null" 
+                  class="u-h4 h-[30px] flex items-center px-3 border transition-all duration-300 text-left w-full bg-transparent" 
+                  :class="selectedCountry === null ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 border-transparent hover:border-indigo-500/30 hover:text-indigo-500'"
+                >
+                  Tous
+                </button>
+                <button 
+                  v-for="opt in countryOptions" 
+                  :key="opt" 
+                  @click="selectedCountry = opt; activeMenu = null" 
+                  class="u-h4 h-[30px] flex items-center px-3 border transition-all duration-300 text-left w-full bg-transparent" 
+                  :class="selectedCountry === opt ? 'text-indigo-500 border-indigo-500' : 'text-[#121212]/60 border-transparent hover:border-indigo-500/30 hover:text-indigo-500'"
+                >
+                  {{ opt }}
+                </button>
               </template>
             </div>
           </div>
