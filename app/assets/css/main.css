@@ -44,6 +44,7 @@ header a[href="https://ui.nuxt.com"] {
 }
 
 @import "tailwindcss";
+@import "@tailwindcss/typography";
 
 
 @font-face {
@@ -122,8 +123,11 @@ header a[href="https://ui.nuxt.com"] {
   
   @screen lg {
     -webkit-text-stroke: 1px #121212;
-    .dark & { -webkit-text-stroke: 1px #FFFFFF; }
     color: transparent;
+    .dark & {
+      -webkit-text-stroke: 1px #FFFFFF;
+      color: transparent;
+    }
   }
 }
 
@@ -166,59 +170,6 @@ header a[href="https://ui.nuxt.com"] {
 .prose h4 { @apply u-h4 mb-2; }
 .prose p, .prose li { @apply u-body mb-4; }
 .dark .prose { @apply prose-invert; }
-
-/* View Transitions animations */
-::view-transition-group(*) {
-  animation-duration: 0.8s;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Global Transition Timing for all view transitions */
-::view-transition-old(*),
-::view-transition-new(*) {
-  animation-duration: 0.8s;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.transition-next::view-transition-old(project-description),
-.transition-next::view-transition-old(project-carousel) {
-  animation: slide-out-to-left 0.8s forwards;
-}
-
-.transition-next::view-transition-new(project-description),
-.transition-next::view-transition-new(project-carousel) {
-  animation: slide-in-from-right 0.8s forwards;
-}
-
-.transition-prev::view-transition-old(project-description),
-.transition-prev::view-transition-old(project-carousel) {
-  animation: slide-out-to-right 0.8s forwards;
-}
-
-.transition-prev::view-transition-new(project-description),
-.transition-prev::view-transition-new(project-carousel) {
-  animation: slide-in-from-left 0.8s forwards;
-}
-
-@keyframes slide-out-to-left {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(-30px); opacity: 0; }
-}
-
-@keyframes slide-in-from-right {
-  from { transform: translateX(30px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes slide-out-to-right {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(30px); opacity: 0; }
-}
-
-@keyframes slide-in-from-left {
-  from { transform: translateX(-30px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
 
 /* View Transitions animations */
 ::view-transition-group(*) {

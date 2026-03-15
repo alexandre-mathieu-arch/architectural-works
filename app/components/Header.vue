@@ -264,20 +264,3 @@ const links = [{
   height: 21px;
 }
 </style>
-
-<style scoped>
-@reference "../assets/css/main.css";
-
-.router-link-active:not(.logo-link) {
-  @apply text-black font-extrabold text-[15px] opacity-100;
-}
-
-.logo-link.router-link-active {
-  @apply font-light text-[#121212];
-}
-
-.header-search-input .icon {
-  width: 21px;
-  height: 21px;
-}
-</style>
