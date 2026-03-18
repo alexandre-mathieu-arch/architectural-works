@@ -148,18 +148,18 @@ header a[href="https://ui.nuxt.com"] {
 }
 
 @utility u-h4 {
-  @apply text-[13px] font-bold dark:text-white;
+  @apply text-[13px] font-normal dark:text-white;
   letter-spacing: 0.2em;
   font-family: var(--font-primary);
 }
 
 @utility u-body {
-  @apply text-[16px] font-normal leading-[1.1] text-[#121212] dark:text-white subpixel-antialiased;
+  @apply text-[15px] font-normal leading-[1.3] text-[#121212] dark:text-white subpixel-antialiased;
   font-family: var(--font-body);
 }
 
 @utility u-legend {
-  @apply text-[12px] font-light tracking-[0.1em] dark:text-gray-400;
+  @apply text-[12px] font-normal tracking-[0.1em] leading-tight text-[#121212] dark:text-white;
   font-family: var(--font-primary);
 }
 
@@ -202,6 +202,16 @@ header a[href="https://ui.nuxt.com"] {
 .transition-prev::view-transition-new(project-description),
 .transition-prev::view-transition-new(project-carousel) {
   animation: slide-in-from-left 0.8s forwards;
+}
+
+::view-transition-old(page-triggers),
+::view-transition-new(page-triggers) {
+  animation: fade-transition 0.4s ease-in-out;
+}
+
+@keyframes fade-transition {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes slide-out-to-left {

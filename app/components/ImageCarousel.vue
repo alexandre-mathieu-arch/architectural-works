@@ -4,7 +4,7 @@
       <img
         :key="currentIndex"
         :src="images[currentIndex]"
-        class="w-full h-full object-cover absolute inset-0"
+        class="w-full h-full object-contain absolute inset-0"
         :style="id && currentIndex === 0 ? { viewTransitionName: 'image-' + id.replace(/\//g, '-') } : {}"
       />
     </Transition>

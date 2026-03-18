@@ -6,31 +6,40 @@
         class="col-span-1 pt-0 z-10" 
         style="view-transition-name: project-description;"
       >
-        <div class="project-description pb-24 pr-4">
-          <p v-if="page.description" class="u-body mb-8">{{ page.description }}</p>
-          <div class="content-renderer">
-            <ContentRenderer :value="page" class="prose max-w-none" />
+        <div class="project-description min-h-[calc(100vh-var(--header-height)-120px)] flex flex-col pr-4">
+          <div class="flex-grow pb-24">
+            <p v-if="page.description" class="u-body mb-8">{{ page.description }}</p>
+            <div class="content-renderer">
+              <ContentRenderer :value="page" class="prose max-w-none" />
+            </div>
           </div>
           
           <!-- Static Info Section -->
-          <div class="mt-8 border-t border-[#121212]/10 pt-4">
-            <div class="u-h4 mb-4 uppercase tracking-widest">Détails</div>
-            <div class="space-y-2">
-              <div v-if="page.surface" class="flex gap-4 u-legend uppercase">
-                <span class="w-20 opacity-50">Surface:</span>
+          <div class="mt-8 border-t border-[#121212]/10 pt-4 pb-8">
+            <div class="space-y-1">
+              <div v-if="page.surface" class="flex gap-4 u-legend">
+                <span class="w-20">Surface:</span>
                 <span>{{ page.surface }}</span>
               </div>
-              <div v-if="page.cout" class="flex gap-4 u-legend uppercase">
-                <span class="w-20 opacity-50">Coût:</span>
+              <div v-if="page.cout" class="flex gap-4 u-legend">
+                <span class="w-20">Coût:</span>
                 <span>{{ page.cout }}</span>
               </div>
-              <div v-if="page.phase" class="flex gap-4 u-legend uppercase">
-                <span class="w-20 opacity-50">Phase:</span>
+              <div v-if="page.phase" class="flex gap-4 u-legend">
+                <span class="w-20">Phase:</span>
                 <span>{{ page.phase }}</span>
               </div>
-              <div v-if="page.statut" class="flex gap-4 u-legend uppercase">
-                <span class="w-20 opacity-50">Statut:</span>
+              <div v-if="page.statut" class="flex gap-4 u-legend">
+                <span class="w-20">Statut:</span>
                 <span>{{ page.statut }}</span>
+              </div>
+              <div v-if="page.materiaux" class="flex gap-4 u-legend">
+                <span class="w-20 text-nowrap">Matériaux:</span>
+                <span>{{ Array.isArray(page.materiaux) ? page.materiaux.join(', ') : page.materiaux }}</span>
+              </div>
+              <div v-if="page.collaboration" class="flex gap-4 u-legend">
+                <span class="w-20 text-nowrap">Collaboration:</span>
+                <span>{{ page.collaboration }}</span>
               </div>
             </div>
           </div>

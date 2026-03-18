@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-screen">
-    <NuxtLink to="/agence" replace class="w-full h-full block">
+    <NuxtLink to="/projects" replace class="w-full h-full block">
       <NuxtImg
         v-if="randomImage"
         :src="randomImage"
@@ -29,9 +29,31 @@ const randomImage = ref<string | null>(null);
 onMounted(() => {
   if (projects.value) {
     // Collect all images from all projects
+    // Filter images for the hero section automatically
+    const forbiddenKeywords = ['plan', 'coupe', 'section', 'schema', 'detail', 'chantier', 'process', 'sketch', 'dessin', 'rdc', 'r+', 'r-', 'axono', 'facade', 'façade']
+    
     const allImages = projects.value.flatMap(project => {
+      // Priority 1: Use 'heroImages' if you really want to force something manually
+      if (project.heroImages && Array.isArray(project.heroImages) && project.heroImages.length > 0) {
+        return project.heroImages
+      }
+
       const imgs = project.images || project.image || []
-      return Array.isArray(imgs) ? imgs : [imgs]
+      const imageList = Array.isArray(imgs) ? imgs : [imgs]
+      
+      // Smart Filter: Remove technical files and images with forbidden keywords
+      const cleanedImages = imageList.filter(img => {
+        if (typeof img !== 'string' || img.length === 0) return false
+        
+        const name = img.toLowerCase()
+        const isTechnical = forbiddenKeywords.some(keyword => name.includes(keyword))
+        const isSystemFile = name.includes(':zone.identifier') || name.endsWith('_original')
+        
+        return !isTechnical && !isSystemFile
+      })
+
+      // If we have clean photos, we take them. Otherwise, we don't put anything for this project
+      return cleanedImages
     }).filter(img => typeof img === 'string' && img.length > 0)
 
     if (allImages.length > 0) {

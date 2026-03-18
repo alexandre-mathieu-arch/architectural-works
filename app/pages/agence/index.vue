@@ -8,7 +8,7 @@
         >
           <button 
             @click="toggleSection('equipe')" 
-            class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -mt-[1px] text-[#121212] hover:border-indigo-500 hover:text-indigo-500 bg-[#FFFFFF] w-full"
+            class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212] dark:border-white -mt-[1px] text-[#121212] dark:text-white hover:border-indigo-500 hover:text-indigo-500 bg-[#FFFFFF] dark:bg-[#121212] w-full"
             :class="{ 'text-indigo-500 border-indigo-500 z-50': isSectionActive('equipe') }"
           >
             <span>Parcours</span>
@@ -18,7 +18,7 @@
           </button>
           <button 
             @click="toggleSection('pratique')" 
-            class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212]/30 -mt-[1px] text-[#121212] hover:border-indigo-500 hover:text-indigo-500 bg-[#FFFFFF] w-full"
+            class="flex items-center justify-between gap-1 u-h4 transition-all duration-300 px-2 sm:px-3 h-[30px] border border-[#121212] dark:border-white -mt-[1px] text-[#121212] dark:text-white hover:border-indigo-500 hover:text-indigo-500 bg-[#FFFFFF] dark:bg-[#121212] w-full"
             :class="{ 'text-indigo-500 border-indigo-500 z-50': isSectionActive('pratique') }"
           >
             <span>Pratique</span>
@@ -33,13 +33,23 @@
     <!-- Content in 2 columns aligned with triggers -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-[3px]">
       <!-- Column 1: Equipe -->
-      <div v-if="equipe" class="prose dark:prose-invert max-w-none">
-        <ContentRenderer :value="equipe" />
+      <div 
+        class="overflow-hidden transition-all duration-1000 ease-in-out"
+        :class="isSectionActive('equipe') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'"
+      >
+        <div v-if="equipe" class="prose dark:prose-invert max-w-none">
+          <ContentRenderer :value="equipe" />
+        </div>
       </div>
 
       <!-- Column 2: Pratique -->
-      <div v-if="pratique" class="prose dark:prose-invert max-w-none">
-        <ContentRenderer :value="pratique" />
+      <div 
+        class="overflow-hidden transition-all duration-1000 ease-in-out"
+        :class="isSectionActive('pratique') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'"
+      >
+        <div v-if="pratique" class="prose dark:prose-invert max-w-none">
+          <ContentRenderer :value="pratique" />
+        </div>
       </div>
 
       <!-- Empty columns for alignment -->
