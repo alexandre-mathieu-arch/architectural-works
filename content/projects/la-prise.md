@@ -3,9 +3,7 @@ title: "La Prise"
 date: 2018
 draft: false
 tags: ["Design"]
-images:
-  - "/images/projects/villa-atlas/villa-atlas.png"
-  - "/images/projects/villa-atlas/villa-cn.01.png"
+images: []
 description: "Projet de fin d'étude à l'École d'Architecture de Nantes. Exploration des limites entre structure et paysage."
 typologies: ["Scolaire"]
 tailles: ["M"]

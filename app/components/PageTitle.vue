@@ -32,7 +32,7 @@
       <slot name="triggers">
         <!-- Grid aligned triggers -->
         <div 
-          class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 items-start"
+          class="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 items-start"
           style="view-transition-name: page-triggers;"
         >
           <!-- Standard Filters (Grid) or Project Info (Detail) -->

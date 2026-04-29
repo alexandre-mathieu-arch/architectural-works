@@ -1,10 +1,10 @@
 <template>
   <header class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-[#121212] transition-colors duration-300">
-    <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] px-[var(--main-padding)] relative">
+    <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] relative">
       <!-- Logo -->
       <NuxtLink 
         to="/agence" 
-        class="text-[#121212] dark:text-white whitespace-nowrap u-h4 font-light tracking-[0.5em] logo-link"
+        class="text-[#121212] dark:text-white whitespace-nowrap u-h4 font-light tracking-[0.2em] md:tracking-[0.5em] logo-link"
         @click="handleLinkClick('Studio Soñj')"
         @mouseenter="emit('linkHover', 'Studio Soñj')"
         @mouseleave="emit('linkHover', '')"

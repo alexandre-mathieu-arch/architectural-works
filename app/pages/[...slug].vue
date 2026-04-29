@@ -1,13 +1,20 @@
 <template>
   <div v-if="page" class="relative">
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 pt-0">
+      <!-- Carousel Section: Natural flow - shown first on mobile -->
+      <div class="col-span-1 md:col-span-1 xl:col-span-3 z-40 order-1 md:order-2">
+        <div class="relative w-full aspect-[4/3] md:aspect-[16/9] bg-white">
+          <ImageCarousel :images="images" :model-value="currentImageIndex" @update:model-value="setCurrentImageIndex" :id="page.path" />
+        </div>
+      </div>
+
       <!-- First column: Info / Description -->
       <div 
-        class="col-span-1 pt-0 z-10" 
+        class="col-span-1 pt-0 z-10 order-2 md:order-1" 
         style="view-transition-name: project-description;"
       >
-        <div class="project-description min-h-[calc(100vh-var(--header-height)-120px)] flex flex-col pr-4">
-          <div class="flex-grow pb-24">
+        <div class="project-description min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)] flex flex-col pr-4">
+          <div class="flex-grow pb-12 md:pb-24">
             <p v-if="page.description" class="u-body mb-8">{{ page.description }}</p>
             <div class="content-renderer">
               <ContentRenderer :value="page" class="prose max-w-none" />
@@ -43,13 +50,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      
-      <!-- Carousel Section: Natural flow -->
-      <div class="hidden md:block md:col-span-1 xl:col-span-3 z-40">
-        <div class="relative w-full aspect-[16/9] bg-white">
-          <ImageCarousel :images="images" :model-value="currentImageIndex" @update:model-value="setCurrentImageIndex" :id="page.path" />
         </div>
       </div>
     </div>

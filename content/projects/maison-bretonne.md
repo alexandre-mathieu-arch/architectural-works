@@ -2,8 +2,8 @@
 title: "Maison B"
 description: "Extension et rénovation complete d'une maison neo bretonne à La Trinité-sur-Mer."
 images:
-  - "/images/projects/maison-bretonne/maison-bretonne-ext-web.png"
-  - "/images/projects/maison-bretonne/maison-bretonne-int.png"
+  - "/images/projects/maison-bretonne/maison-bretonne-ext.jpg"
+  - "/images/projects/maison-bretonne/maison-bretonne-int.jpg"
   - "/images/projects/maison-bretonne/maison-bretonne-avant.jpg"
   - "/images/projects/maison-bretonne/maison-bretonne-facade.jpg"
 date: 2020
