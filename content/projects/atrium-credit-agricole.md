@@ -5,7 +5,7 @@ ratio: "4/3"
 draft: false
 tags: ["bureaux", "aménagement", "design"]
 images:
-  - "/images/projects/Atrium-Crédit Agricole/PERSPECTIVE ATRIUM copie.jpg"
+  - "/images/projects/atrium-credit-agricole/perspective-atrium.jpg"
 description: "Au cœur de la rigueur orthogonale d'un siège bancaire, des structures organiques en toiles tendues créent une rupture inattendue. Un dialogue entre la géométrie réglée de l'espace et la fluidité de bulles programmatiques."
 typologies: ["Bureaux"]
 tailles: ["L"]

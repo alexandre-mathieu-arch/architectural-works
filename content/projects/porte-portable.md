@@ -5,7 +5,7 @@ ratio: "1/1"
 draft: false
 tags: ["design", "objet"]
 images:
-  - "/images/projects/Porte-portable/porte-portable-okume.jpg"
+  - "/images/projects/porte-portable/porte-portable-okume.jpg"
 description: "Support pour ordinateur portable en multiplis d'okoumé. Un design minimaliste et ergonomique favorisant la ventilation et le confort de travail."
 typologies: ["Objet"]
 tailles: ["S"]

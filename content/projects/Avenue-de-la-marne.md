@@ -5,7 +5,7 @@ ratio: "4/3"
 draft: false
 tags: ["design", "2021"]
 images: 
-  - "/images/projects/avenue-de-la-marne/av-marne-200-r+1.png"
+  - "/images/projects/avenue-de-la-marne/av-marne-200-r1.png"
   - "/images/projects/avenue-de-la-marne/av-marne-200-rdc.png"
   - "/images/projects/avenue-de-la-marne/av-marne-maquette.jpg"
   - "/images/projects/avenue-de-la-marne/av-marne-rendu-ext.jpg"
