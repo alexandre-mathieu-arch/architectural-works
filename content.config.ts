@@ -25,6 +25,7 @@ export default defineContentConfig({
         statut: z.string().optional(),
         ratio: z.string().optional(),
         collaboration: z.string().optional(),
+        logiciels: z.array(z.string()).or(z.string()).optional(),
         materiaux: z.array(z.string()).or(z.string()).optional(),
         systeme_constructif: z.array(z.string()).or(z.string()).optional(),
       })

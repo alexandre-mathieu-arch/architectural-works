@@ -44,6 +44,7 @@ header a[href="https://ui.nuxt.com"] {
 }
 
 @import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
 @plugin "@tailwindcss/typography";
 
 
@@ -114,6 +115,7 @@ header a[href="https://ui.nuxt.com"] {
   position: relative;
   min-height: 100%;
   margin-bottom: -40px;
+  @apply bg-white dark:bg-[#121212] transition-colors duration-300;
 }
 
 /* Typography Rationalization */

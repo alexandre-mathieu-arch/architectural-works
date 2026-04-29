@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 pt-0">
       <!-- Carousel Section: Natural flow - shown first on mobile -->
       <div class="col-span-1 md:col-span-1 xl:col-span-3 z-40 order-1 md:order-2">
-        <div class="relative w-full aspect-[4/3] md:aspect-[16/9] bg-white">
+        <div class="relative w-full aspect-[4/3] md:aspect-[16/9] bg-white dark:bg-[#121212] transition-colors duration-300">
           <ImageCarousel :images="images" :model-value="currentImageIndex" @update:model-value="setCurrentImageIndex" :id="page.path" />
         </div>
       </div>
@@ -47,6 +47,10 @@
               <div v-if="page.collaboration" class="flex gap-4 u-legend">
                 <span class="w-20 text-nowrap">Collaboration:</span>
                 <span>{{ page.collaboration }}</span>
+              </div>
+              <div v-if="page.logiciels" class="flex gap-4 u-legend">
+                <span class="w-20 text-nowrap">Logiciels:</span>
+                <span>{{ Array.isArray(page.logiciels) ? page.logiciels.join(', ') : page.logiciels }}</span>
               </div>
             </div>
           </div>

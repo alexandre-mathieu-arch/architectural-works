@@ -1,22 +1,22 @@
 <template>
   <NuxtLink 
     :to="project.path" 
-    class="block w-full"
+    class="block w-full group"
     @mouseenter="setHoveredProject(project)"
     @mouseleave="setHoveredProject(null)"
     @click="addVisited(project.path)"
   >
-    <div class="relative w-full aspect-square overflow-hidden group">
+    <div class="relative w-full aspect-square overflow-hidden">
       <!-- Image qui remplit toute la zone -->
       <NuxtImg
         v-if="displayImage"
         :src="displayImage"
         :alt="project.title"
-        class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
+        class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
         :class="[
           isVisited(project.path) 
-            ? 'hue-rotate-180 group-hover:hue-rotate-0' 
-            : 'group-hover:hue-rotate-180'
+            ? 'grayscale group-hover:grayscale-0' 
+            : 'grayscale-0'
         ]"
         :style="{ viewTransitionName: 'image-' + project.path.replace(/\//g, '-') }"
       />

@@ -167,7 +167,7 @@ import { useHoverProject } from '~/composables/useHoverProject';
 
 const colorMode = useColorMode();
 const toggleTheme = () => {
-  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
+  colorMode.preference = colorMode.preference === 'dark' ? 'light' : 'dark';
 };
 
 const { hoveredProjectTitle } = useHoverProject();

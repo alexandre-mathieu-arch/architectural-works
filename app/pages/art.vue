@@ -14,7 +14,7 @@
           v-if="item.image"
           :src="item.image"
           :alt="item.title"
-          class="w-full h-auto transition-all duration-700 group-hover:scale-105 group-hover:hue-rotate-15"
+          class="w-full h-auto transition-all duration-700 group-hover:scale-105"
         />
         
         <!-- Hover Info Overlay -->
