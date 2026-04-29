@@ -2,8 +2,8 @@
   <div v-if="page" class="relative">
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 pt-0">
       <!-- Carousel Section: Natural flow - shown first on mobile -->
-      <div class="col-span-1 md:col-span-1 xl:col-span-3 z-40 order-1 md:order-2">
-        <div class="relative w-full aspect-[4/3] md:aspect-[16/9] bg-white dark:bg-[#121212] transition-colors duration-300">
+      <div class="col-span-1 md:col-span-1 xl:col-span-3 z-10 order-1 md:order-2 -mx-[var(--main-padding)] md:mx-0">
+        <div class="relative w-full aspect-[4/3] md:aspect-[16/9] bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] transition-colors duration-300">
           <ImageCarousel :images="images" :model-value="currentImageIndex" @update:model-value="setCurrentImageIndex" :id="page.path" />
         </div>
       </div>

@@ -12,7 +12,14 @@ export default defineNuxtConfig({
   modules: ['@nuxt/content', '@nuxt/image', '@nuxt/ui'],
 
   colorMode: {
-    classSuffix: ''
+    classSuffix: '',
+    preference: 'system',
+    fallback: 'light',
+    modes: {
+      light: 'light',
+      dark: 'dark',
+      doux: 'doux'
+    }
   },
 
   devtools: { enabled: true },

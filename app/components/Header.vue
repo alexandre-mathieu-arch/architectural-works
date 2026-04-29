@@ -4,7 +4,7 @@
       <!-- Logo -->
       <NuxtLink 
         to="/agence" 
-        class="text-[#121212] dark:text-white whitespace-nowrap u-h4 font-light tracking-[0.2em] md:tracking-[0.5em] logo-link"
+        class="text-[#121212] dark:text-white whitespace-nowrap u-h4 logo-link"
         @click="handleLinkClick('Studio Soñj')"
         @mouseenter="emit('linkHover', 'Studio Soñj')"
         @mouseleave="emit('linkHover', '')"
@@ -19,7 +19,7 @@
             v-for="link in links" 
             :key="link.to" 
             :to="link.to"
-            class="u-h4 font-medium transition-all hover:text-black dark:hover:text-gray-300 hover:font-extrabold text-[#121212] dark:text-white"
+            class="u-h4 transition-all hover:text-black dark:hover:text-gray-300 text-[#121212] dark:text-white"
             @click="handleLinkClick(link.label)"
             @mouseenter="emit('linkHover', link.label)"
             @mouseleave="emit('linkHover', '')"
@@ -36,12 +36,13 @@
       <div class="hidden md:flex items-center gap-[40px]">
         <!-- Theme Toggle -->
         <button 
-          @click="toggleTheme" 
-          class="p-1 text-[#121212] dark:text-white hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors flex items-center justify-center"
-          :title="colorMode.value === 'dark' ? 'Passer au mode clair' : 'Passer au mode sombre'"
+          @click="cycleTheme" 
+          class="p-1 text-[#121212] dark:text-white transition-colors flex items-center justify-center hover:text-indigo-500 dark:hover:text-indigo-400"
+          :title="themeTitle"
         >
-          <UIcon v-if="colorMode.value === 'dark'" name="i-heroicons-sun" class="w-5 h-5" />
-          <UIcon v-else name="i-heroicons-moon" class="w-5 h-5" />
+          <UIcon v-if="colorMode.preference === 'dark'" name="i-heroicons-moon" class="w-5 h-5" />
+          <UIcon v-else-if="colorMode.preference === 'doux'" name="i-heroicons-sparkles" class="w-5 h-5" />
+          <UIcon v-else name="i-heroicons-sun" class="w-5 h-5" />
         </button>
 
         <!-- Search Bar -->
@@ -107,11 +108,12 @@
       <!-- Mobile Toggle Button -->
       <div class="md:hidden flex items-center gap-4">
         <button 
-          @click="toggleTheme" 
+          @click="cycleTheme" 
           class="p-1 text-[#121212] dark:text-white"
         >
-          <UIcon v-if="colorMode.value === 'dark'" name="i-heroicons-sun" class="w-5 h-5" />
-          <UIcon v-else name="i-heroicons-moon" class="w-5 h-5" />
+          <UIcon v-if="colorMode.preference === 'dark'" name="i-heroicons-moon" class="w-5 h-5" />
+          <UIcon v-else-if="colorMode.preference === 'doux'" name="i-heroicons-sparkles" class="w-5 h-5" />
+          <UIcon v-else name="i-heroicons-sun" class="w-5 h-5" />
         </button>
         <button 
           @click="toggleMenu" 
@@ -166,9 +168,18 @@ import { UInput } from '#components';
 import { useHoverProject } from '~/composables/useHoverProject';
 
 const colorMode = useColorMode();
-const toggleTheme = () => {
-  colorMode.preference = colorMode.preference === 'dark' ? 'light' : 'dark';
+const cycleTheme = () => {
+  const modes = ['light', 'dark', 'doux'];
+  const currentIndex = modes.indexOf(colorMode.preference);
+  const nextIndex = (currentIndex + 1) % modes.length;
+  colorMode.preference = modes[nextIndex];
 };
+
+const themeTitle = computed(() => {
+  if (colorMode.preference === 'light') return 'Passer au mode sombre';
+  if (colorMode.preference === 'dark') return 'Passer au mode doux';
+  return 'Passer au mode clair';
+});
 
 const { hoveredProjectTitle } = useHoverProject();
 
@@ -252,11 +263,19 @@ const links = [{
 @reference "../assets/css/main.css";
 
 .router-link-active:not(.logo-link) {
-  @apply text-black dark:text-white font-extrabold text-[15px] opacity-100;
+  @apply text-black dark:text-white opacity-100;
+}
+
+.doux .router-link-active:not(.logo-link) {
+  color: #4A4443;
 }
 
 .logo-link.router-link-active {
-  @apply font-light text-[#121212] dark:text-white;
+  @apply text-[#121212] dark:text-white;
+}
+
+.doux .logo-link {
+  color: #4A4443;
 }
 
 .header-search-input .icon {

@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-const activeSections = ref<Set<string>>(new Set())
+const activeSections = ref<Set<string>>(new Set(['equipe', 'pratique']))
 
 export const useAgenceState = () => {
   const toggleSection = (slug: string) => {

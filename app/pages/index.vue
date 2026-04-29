@@ -4,6 +4,8 @@
       <NuxtImg
         v-if="randomImage"
         :src="randomImage"
+        format="webp"
+        sizes="100vw"
         class="w-full h-full object-cover"
       />
     </NuxtLink>

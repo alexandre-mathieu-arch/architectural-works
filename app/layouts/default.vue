@@ -1,14 +1,14 @@
 <template>
   <div id="wrapper">
-    <Header v-if="!route.path.startsWith('/projects/')" @linkClick="handleLinkClick" @linkHover="handleLinkHover" />
+    <Header @linkClick="handleLinkClick" @linkHover="handleLinkHover" />
     <div :style="{ paddingTop: 'var(--header-height)' }">
       <main class="main-container pb-24">
         <PageTitle 
+          v-if="!route.meta.hideLayoutTitle"
           :title="pageTitle" 
           :show-filters="route.meta.showFilters === true" 
           :readonly-filters="route.meta.readonlyFilters === true"
           :hide-main-title="route.path.startsWith('/projects/')"
-          :no-sticky="route.path.startsWith('/projects/')"
         />
         <slot />
       </main>

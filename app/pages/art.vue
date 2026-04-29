@@ -14,6 +14,8 @@
           v-if="item.image"
           :src="item.image"
           :alt="item.title"
+          format="webp"
+          sizes="100vw sm:50vw lg:33vw xl:25vw"
           class="w-full h-auto transition-all duration-700 group-hover:scale-105"
         />
         
@@ -46,6 +48,8 @@
           <NuxtImg
             :src="selectedImage.image"
             :alt="selectedImage.title"
+            format="webp"
+            sizes="100vw md:90vw"
             class="max-w-full max-h-[85vh] object-contain shadow-2xl border border-[#121212]/10"
           />
           <div class="mt-6 text-center">

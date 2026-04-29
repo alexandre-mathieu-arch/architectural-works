@@ -1,9 +1,11 @@
 <template>
   <div class="carousel-container relative w-full h-full overflow-hidden">
     <Transition :name="transitionName">
-      <img
+      <NuxtImg
         :key="currentIndex"
         :src="images[currentIndex]"
+        format="webp"
+        sizes="100vw md:100vw"
         class="w-full h-full object-contain absolute inset-0"
         :style="id && currentIndex === 0 ? { viewTransitionName: 'image-' + id.replace(/\//g, '-') } : {}"
       />

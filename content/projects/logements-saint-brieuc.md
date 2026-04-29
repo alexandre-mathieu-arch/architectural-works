@@ -1,5 +1,5 @@
 ---
-title: "Logements à Saint-Brieuc"
+title: "Les 3 Frères"
 date: 2018
 ratio: "4/3"
 draft: false

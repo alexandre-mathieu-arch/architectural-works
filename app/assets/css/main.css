@@ -5,6 +5,11 @@ html, body {
   @apply subpixel-antialiased;
 }
 
+.doux body {
+  background-color: #E5E1E0; /* Gris Rosé Doux */
+  color: #4A4443;
+}
+
 @theme {
   --color-primary-50: #EEF2FF;
   --color-primary-100: #E0E7FF;
@@ -45,6 +50,7 @@ header a[href="https://ui.nuxt.com"] {
 
 @import "tailwindcss";
 @variant dark (&:where(.dark, .dark *));
+@variant doux (&:where(.doux, .doux *));
 @plugin "@tailwindcss/typography";
 
 
@@ -118,6 +124,12 @@ header a[href="https://ui.nuxt.com"] {
   @apply bg-white dark:bg-[#121212] transition-colors duration-300;
 }
 
+.doux #wrapper, 
+.doux header,
+.doux .sticky {
+  background-color: #E5E1E0 !important;
+}
+
 /* Typography Rationalization */
 @utility u-h1 {
   @apply text-[28px] md:text-[34px] lg:text-[40px] font-bold leading-none dark:text-white;
@@ -130,6 +142,10 @@ header a[href="https://ui.nuxt.com"] {
       -webkit-text-stroke: 1px #FFFFFF;
       color: transparent;
     }
+    .doux & {
+      -webkit-text-stroke: 1px #4A4443;
+      color: transparent;
+    }
   }
 }
 
@@ -137,32 +153,38 @@ header a[href="https://ui.nuxt.com"] {
   @apply text-[21px] md:text-[25px] font-bold leading-none dark:text-white;
   letter-spacing: 0.2em;
   font-family: var(--font-primary);
+  .doux & { color: #4A4443; }
 }
 
 @utility u-sub-link {
   @apply font-medium text-[#121212] dark:text-white hover:text-gray-400 tracking-widest text-[21px] transition-colors uppercase;
   letter-spacing: 0.2em;
+  .doux & { color: #4A4443; }
 }
 
 @utility u-h3 {
   @apply text-[15px] font-bold tracking-[0.1em] dark:text-white;
   font-family: var(--font-primary);
+  .doux & { color: #4A4443; }
 }
 
 @utility u-h4 {
   @apply text-[13px] font-normal dark:text-white;
   letter-spacing: 0.2em;
   font-family: var(--font-primary);
+  .doux & { color: #4A4443; }
 }
 
 @utility u-body {
   @apply text-[15px] font-normal leading-[1.3] text-[#121212] dark:text-white subpixel-antialiased;
   font-family: var(--font-body);
+  .doux & { color: #5B5453; }
 }
 
 @utility u-legend {
   @apply text-[12px] font-normal tracking-[0.1em] leading-tight text-[#121212] dark:text-white;
   font-family: var(--font-primary);
+  .doux & { color: #4A4443; }
 }
 
 /* Prose overrides for Markdown content */

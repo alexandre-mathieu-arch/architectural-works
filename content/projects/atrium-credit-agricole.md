@@ -1,5 +1,5 @@
 ---
-title: "Atrium pour un siège social de banque"
+title: "Atrium Organique"
 date: 2024
 ratio: "4/3"
 draft: false
@@ -17,8 +17,6 @@ logiciels: ["Rhinocéros 3D", "Grasshopper", "Bridge Archicad", "Twinmotion", "P
 ---
 
 ## Description
-
-Dans l'univers souvent austère et réglé d'un siège social de banque, ce projet d'aménagement d'atrium introduit une dimension inattendue, presque onirique. Là où l'on attend de la ligne droite et de la prévisibilité, surgissent des formes organiques, fluides et légères.
 
 Le projet s'articule autour de structures métalliques complexes sur lesquelles sont tendues des toiles translucides. Ces « bulles » programmatiques flottent dans l'espace, créant un contraste saisissant avec la trame orthogonale du bâtiment. Chaque bulle possède sa propre ambiance et sa propre fonction, offrant des espaces de réunion ou de détente confidentiels au sein du vaste volume de l'atrium.
 

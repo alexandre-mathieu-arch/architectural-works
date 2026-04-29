@@ -12,6 +12,8 @@
         v-if="displayImage"
         :src="displayImage"
         :alt="project.title"
+        format="webp"
+        sizes="100vw sm:50vw xl:25vw"
         class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
         :class="[
           isVisited(project.path) 
@@ -21,27 +23,27 @@
         :style="{ viewTransitionName: 'image-' + project.path.replace(/\//g, '-') }"
       />
       <!-- Placeholder si pas d'image -->
-      <div v-else class="absolute inset-0 w-full h-full bg-gray-100 flex items-center justify-center">
+      <div v-else class="absolute inset-0 w-full h-full bg-gray-100 dark:bg-gray-800 doux:bg-[#DED9D8] flex items-center justify-center">
         <UIcon name="i-heroicons-photo" class="w-12 h-12 text-gray-400" />
       </div>
       
       <!-- Infos affichées au survol -->
       <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10">
-        <div class="absolute top-0 left-0 w-full border border-[#121212]/30 dark:border-white/20 px-2 h-[30px] flex items-center gap-3 bg-white dark:bg-[#121212] overflow-hidden">
+        <div class="absolute top-0 left-0 w-full border border-[#121212]/30 dark:border-white/20 px-2 h-[30px] flex items-center gap-3 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] overflow-hidden">
           <h3 
-            class="u-h3 normal-case dark:text-white whitespace-nowrap"
+            class="u-h3 normal-case dark:text-white doux:text-[#4A4443] whitespace-nowrap overflow-hidden text-ellipsis flex-shrink"
             :style="{ viewTransitionName: 'title-' + project.path.replace(/\//g, '-') }"
           >
             {{ project.title }}
           </h3>
           <p 
-            class="text-[12px] font-light text-[#121212] dark:text-gray-300 tracking-[0.1em] whitespace-nowrap"
+            class="text-[12px] font-light text-[#121212] dark:text-gray-300 doux:text-[#4A4443]/70 tracking-[0.1em] whitespace-nowrap flex-shrink-0"
             :style="{ viewTransitionName: 'year-' + project.path.replace(/\//g, '-') }"
           >
             {{ projectYear }}
           </p>
           <p 
-            class="text-[12px] font-light text-[#121212] dark:text-gray-400 tracking-[0.1em] whitespace-nowrap overflow-hidden text-ellipsis"
+            class="text-[12px] font-light text-[#121212] dark:text-gray-400 doux:text-[#4A4443]/60 tracking-[0.1em] whitespace-nowrap overflow-hidden text-ellipsis flex-shrink-0"
             :style="{ viewTransitionName: 'location-' + project.path.replace(/\//g, '-') }"
           >
             {{ formattedLocation }}

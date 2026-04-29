@@ -1,5 +1,5 @@
 ---
-title: "Studio Portaledge"
+title: "Portaledge"
 date: 2019
 draft: false
 images:
