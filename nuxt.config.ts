@@ -2,10 +2,9 @@
 
 import tailwindcss from "@tailwindcss/vite";
 
-
-
 export default defineNuxtConfig({
   app: {
+    baseURL: '/architectural-works/',
     pageTransition: { name: 'page', mode: 'out-in' },
     viewTransition: true
   },
