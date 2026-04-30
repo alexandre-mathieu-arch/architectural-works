@@ -145,50 +145,17 @@
 
           <!-- Project Navigation Triggers (Specific to Detail Page) -->
           <template v-if="isProjectPage">
-            <!-- Column 2: Sequence Counter -->
+            <!-- Column 2: Sequence Navigation (Arrows + Counters) -->
             <div class="h-[30px] flex items-center">
               <SequenceCounter
                 v-if="totalImages > 0"
                 :model-value="carouselCurrentImageIndex"
                 :total="totalImages"
+                :prev-project="prevProject"
+                :next-project="nextProject"
                 @update:model-value="newIndex => setCurrentImageIndex(newIndex)"
+                @nav="direction => setTransitionDirection(direction)"
               />
-            </div>
-
-            <!-- Column 3: Project Navigation -->
-            <div class="h-[30px] flex items-center justify-end xl:justify-start xl:col-start-3">
-              <div class="flex items-center h-full border border-[#121212]/30 dark:border-white/20 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] -mt-[1px]">
-                <NuxtLink 
-                  to="/projects" 
-                  class="u-h4 h-full px-4 flex items-center transition-all duration-300 border-r border-[#121212]/10 dark:border-white/10 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
-                >
-                  retour
-                </NuxtLink>
-
-                <NuxtLink 
-                  v-if="prevProject" 
-                  :to="prevProject.path" 
-                  class="u-h4 h-full px-3 flex items-center transition-all duration-300 border-r border-[#121212]/10 dark:border-white/10 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
-                  @click="setTransitionDirection('prev')"
-                >
-                  &lt;
-                </NuxtLink>
-                <span v-else class="u-h4 h-full px-3 flex items-center border-r border-[#121212]/10 dark:border-white/10 text-gray-300 dark:text-gray-600 cursor-default">&lt;</span>
-
-                <NuxtLink to="/projects" class="u-h4 h-full px-4 flex items-center transition-all duration-300 border-r border-[#121212]/10 dark:border-white/10 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white">
-                  projets
-                </NuxtLink>
-                
-                <NuxtLink 
-                  v-if="nextProject" 
-                  :to="nextProject.path" 
-                  class="u-h4 h-full px-3 flex items-center transition-all duration-300 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
-                  @click="setTransitionDirection('next')"
-                >
-                  &gt;
-                </NuxtLink>
-                <span v-else class="u-h4 h-full px-3 flex items-center text-gray-300 dark:text-gray-600 cursor-default">&gt;</span>
-              </div>
             </div>
           </template>
 

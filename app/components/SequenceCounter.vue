@@ -1,10 +1,23 @@
 <template>
-  <div class="sequence-counter flex items-center h-[30px] border border-[#121212]/30 dark:border-white/20 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] -mt-[1px] overflow-x-auto whitespace-nowrap scrollbar-hide">
+  <div class="sequence-navigation flex items-center h-[30px] border border-[#121212]/30 dark:border-white/20 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] -mt-[1px] overflow-x-auto whitespace-nowrap scrollbar-hide">
+    <!-- Previous Project Button -->
+    <NuxtLink 
+      v-if="prevProject" 
+      :to="prevProject.path" 
+      class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center transition-all duration-300 border-r border-[#121212]/10 dark:border-white/10 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
+      @click="$emit('nav', 'prev')"
+      title="Projet précédent"
+    >
+      &lt;
+    </NuxtLink>
+    <span v-else class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center border-r border-[#121212]/10 dark:border-white/10 text-gray-300 dark:text-gray-600 cursor-default">&lt;</span>
+
+    <!-- Image Counter Buttons -->
     <button
       v-for="index in total"
       :key="index"
       @click="$emit('update:modelValue', index - 1)"
-      class="u-h4 h-full px-2 sm:px-3 flex-shrink-0 flex items-center justify-center transition-all duration-300 border-r border-[#121212]/10 dark:border-white/10 last:border-r-0 bg-transparent"
+      class="u-h4 h-full px-2 sm:px-3 flex-shrink-0 flex items-center justify-center transition-all duration-300 border-r border-[#121212]/10 dark:border-white/10 bg-transparent"
       :class="[
         modelValue === index - 1 
           ? 'font-bold text-[#121212] dark:text-white doux:text-[#4A4443] opacity-100' 
@@ -13,6 +26,18 @@
     >
       {{ index }}
     </button>
+
+    <!-- Next Project Button -->
+    <NuxtLink 
+      v-if="nextProject" 
+      :to="nextProject.path" 
+      class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center transition-all duration-300 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
+      @click="$emit('nav', 'next')"
+      title="Projet suivant"
+    >
+      &gt;
+    </NuxtLink>
+    <span v-else class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center text-gray-300 dark:text-gray-600 cursor-default">&gt;</span>
   </div>
 </template>
 
@@ -20,18 +45,20 @@
 defineProps<{
   modelValue: number;
   total: number;
+  prevProject?: any;
+  nextProject?: any;
 }>();
 
-defineEmits(['update:modelValue']);
+defineEmits(['update:modelValue', 'nav']);
 </script>
 
 <style scoped>
-.sequence-counter {
+.sequence-navigation {
   user-select: none;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-.sequence-counter::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+.sequence-navigation::-webkit-scrollbar {
+  display: none;
 }
 </style>
