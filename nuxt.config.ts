@@ -12,12 +12,9 @@ export default defineNuxtConfig({
   modules: ['@nuxt/content', '@nuxt/image', '@nuxt/ui'],
 
   image: {
-    provider: 'ipx',
-    ipx: {
-      // Relative to the project root, 'public' is the default.
-      // Ensuring it's set correctly for all environments.
-      dir: 'public'
-    }
+    // We use 'static' provider for GitHub Pages to ensure reliability.
+    // IPX can fail to pre-render images that are selected dynamically (like hero images).
+    provider: 'static'
   },
 
   colorMode: {
