@@ -37,7 +37,7 @@
         <!-- Theme Toggle -->
         <button 
           @click="cycleTheme" 
-          class="p-1 text-[#121212] dark:text-white transition-colors flex items-center justify-center hover:text-amber-600 dark:hover:text-amber-400"
+          class="p-1 text-[#121212] dark:text-white transition-colors flex items-center justify-center hover:text-primary-900 dark:hover:text-primary-400"
           :title="themeTitle"
         >
           <UIcon v-if="colorMode.preference === 'dark'" name="i-heroicons-moon" class="w-5 h-5" />

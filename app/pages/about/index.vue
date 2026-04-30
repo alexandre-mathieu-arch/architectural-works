@@ -7,12 +7,12 @@
           style="view-transition-name: page-triggers;"
         >
           <div 
-            class="flex items-center justify-between gap-1 u-h4 px-3 h-[30px] border border-amber-600 text-amber-600 bg-transparent w-full"
+            class="flex items-center justify-between gap-1 u-h4 px-3 h-[30px] border border-primary-900 text-primary-900 bg-transparent w-full"
           >
             <span>Parcours</span>
           </div>
           <div 
-            class="flex items-center justify-between gap-1 u-h4 px-3 h-[30px] border border-amber-600 text-amber-600 bg-transparent w-full"
+            class="flex items-center justify-between gap-1 u-h4 px-3 h-[30px] border border-primary-900 text-primary-900 bg-transparent w-full"
           >
             <span>Pratique</span>
           </div>

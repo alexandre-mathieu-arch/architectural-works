@@ -46,9 +46,9 @@
                 @click="!readonlyFilters ? toggleMenu(filter.id) : null"
                 class="flex items-center justify-between gap-2 u-h4 transition-all duration-300 px-3 h-[30px] border border-[#121212]/30 dark:border-white/20 -mt-[1px] bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] w-full group"
                 :class="[
-                  activeMenu === filter.id ? 'text-amber-600 border-amber-600 z-50' : 'text-[#121212] dark:text-white',
-                  filter.active ? '!text-amber-600 !border-amber-600 z-50' : '',
-                  readonlyFilters ? 'cursor-default pointer-events-none' : 'hover:border-amber-600 hover:text-amber-600 dark:hover:border-amber-400 dark:hover:text-amber-400'
+                  activeMenu === filter.id ? 'text-primary-900 border-primary-900 z-50' : 'text-[#121212] dark:text-white',
+                  filter.active ? '!text-primary-900 !border-primary-900 z-50' : '',
+                  readonlyFilters ? 'cursor-default pointer-events-none' : 'hover:border-primary-900 hover:text-primary-900 dark:hover:border-primary-400 dark:hover:text-primary-400'
                 ]"
               >
                 <div class="flex items-center gap-2 truncate">
@@ -87,7 +87,7 @@
                       <button 
                         @click="selectedTypology = null; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedTypology === null ? 'text-amber-600 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-amber-600 dark:hover:text-amber-400'"
+                        :class="selectedTypology === null ? 'text-primary-900 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-primary-900 dark:hover:text-primary-400'"
                       >
                         Toutes
                       </button>
@@ -96,7 +96,7 @@
                         :key="opt" 
                         @click="selectedTypology = opt; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedTypology === opt ? 'text-amber-600 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-amber-600 dark:hover:text-amber-400'"
+                        :class="selectedTypology === opt ? 'text-primary-900 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-primary-900 dark:hover:text-primary-400'"
                       >
                         {{ opt }}
                       </button>
@@ -105,7 +105,7 @@
                       <button 
                         @click="selectedYear = null; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedYear === null ? 'text-amber-600 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-amber-600 dark:hover:text-amber-400'"
+                        :class="selectedYear === null ? 'text-primary-900 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-primary-900 dark:hover:text-primary-400'"
                       >
                         Toutes
                       </button>
@@ -114,7 +114,7 @@
                         :key="opt" 
                         @click="selectedYear = opt; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedYear === opt ? 'text-amber-600 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-amber-600 dark:hover:text-amber-400'"
+                        :class="selectedYear === opt ? 'text-primary-900 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-primary-900 dark:hover:text-primary-400'"
                       >
                         {{ opt }}
                       </button>
@@ -123,7 +123,7 @@
                       <button 
                         @click="selectedCountry = null; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedCountry === null ? 'text-amber-600 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-amber-600 dark:hover:text-amber-400'"
+                        :class="selectedCountry === null ? 'text-primary-900 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-primary-900 dark:hover:text-primary-400'"
                       >
                         Tous
                       </button>
@@ -132,7 +132,7 @@
                         :key="opt" 
                         @click="selectedCountry = opt; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedCountry === opt ? 'text-amber-600 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-amber-600 dark:hover:text-amber-400'"
+                        :class="selectedCountry === opt ? 'text-primary-900 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-primary-900 dark:hover:text-primary-400'"
                       >
                         {{ opt }}
                       </button>
