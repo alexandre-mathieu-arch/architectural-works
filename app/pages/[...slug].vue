@@ -97,15 +97,16 @@ onMounted(() => {
 const { currentImageIndex, setCurrentImageIndex, setTotalImages } = useCarouselState();
 
 const images = computed(() => {
+  let imagePaths: string[] = [];
   if (page.value) {
     if (Array.isArray(page.value.images) && page.value.images.length > 0) {
-      return page.value.images
-    }
-    if (page.value.image) {
-      return Array.isArray(page.value.image) ? page.value.image : [page.value.image]
+      imagePaths = page.value.images;
+    } else if (page.value.image) {
+      imagePaths = Array.isArray(page.value.image) ? page.value.image : [page.value.image];
     }
   }
-  return []
+  // Normalize paths: ensure leading slash
+  return imagePaths.map(p => p.startsWith('/') ? p : '/' + p);
 })
 
 // Sync images length with global state

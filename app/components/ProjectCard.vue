@@ -13,13 +13,9 @@
         :src="displayImage"
         :alt="project.title"
         format="webp"
-        sizes="100vw sm:50vw xl:25vw"
+        width="800"
+        height="800"
         class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-        :class="[
-          isVisited(project.path) 
-            ? 'grayscale group-hover:grayscale-0' 
-            : 'grayscale-0'
-        ]"
         :style="{ viewTransitionName: 'image-' + project.path.replace(/\//g, '-') }"
       />
       <!-- Placeholder si pas d'image -->
@@ -80,10 +76,17 @@ const props = defineProps<{
 }>();
 
 const displayImage = computed(() => {
+  let imagePath: string | undefined;
   if (props.project.images && props.project.images.length > 0) {
-    return props.project.images[0];
+    imagePath = props.project.images[0];
+  } else {
+    imagePath = props.project.image;
   }
-  return props.project.image;
+  
+  if (imagePath && !imagePath.startsWith('/')) {
+    return '/' + imagePath;
+  }
+  return imagePath;
 });
 
 const formattedLocation = computed(() => {

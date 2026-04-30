@@ -4,12 +4,19 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   app: {
-    baseURL: '/architectural-works/',
+    baseURL: '/works/',
     pageTransition: { name: 'page', mode: 'out-in' },
     viewTransition: true
   },
 
   modules: ['@nuxt/content', '@nuxt/image', '@nuxt/ui'],
+
+  image: {
+    // Explicitly set the directory for IPX to ensure it finds images in the public folder
+    ipx: {
+      dir: './public'
+    }
+  },
 
   colorMode: {
     classSuffix: '',

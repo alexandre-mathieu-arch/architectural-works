@@ -5,7 +5,8 @@
         :key="currentIndex"
         :src="images[currentIndex]"
         format="webp"
-        sizes="100vw md:100vw"
+        width="1600"
+        height="900"
         class="w-full h-full object-contain absolute inset-0"
         :style="id && currentIndex === 0 ? { viewTransitionName: 'image-' + id.replace(/\//g, '-') } : {}"
       />

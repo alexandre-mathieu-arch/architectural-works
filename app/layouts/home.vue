@@ -8,7 +8,7 @@
       class="w-full absolute top-0 left-0 z-40 bg-transparent pointer-events-none"
     >
       <div class="main-container pt-[var(--header-height)] pointer-events-auto">
-        <NuxtLink to="/agence" replace class="block">
+        <NuxtLink to="/about" replace class="block">
           <PageTitle :title="displayedTitle" />
         </NuxtLink>
       </div>

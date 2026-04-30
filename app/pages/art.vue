@@ -12,10 +12,11 @@
       >
         <NuxtImg
           v-if="item.image"
-          :src="item.image"
+          :src="item.image.startsWith('/') ? item.image : '/' + item.image"
           :alt="item.title"
           format="webp"
-          sizes="100vw sm:50vw lg:33vw xl:25vw"
+          width="600"
+          height="800"
           class="w-full h-auto transition-all duration-700 group-hover:scale-105"
         />
         
@@ -46,10 +47,11 @@
       >
         <div class="relative max-w-full max-h-full flex flex-col items-center">
           <NuxtImg
-            :src="selectedImage.image"
+            :src="selectedImage.image.startsWith('/') ? selectedImage.image : '/' + selectedImage.image"
             :alt="selectedImage.title"
             format="webp"
-            sizes="100vw md:90vw"
+            width="1600"
+            height="1200"
             class="max-w-full max-h-[85vh] object-contain shadow-2xl border border-[#121212]/10"
           />
           <div class="mt-6 text-center">

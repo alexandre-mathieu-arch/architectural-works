@@ -22,4 +22,4 @@
 ---
 
 Modification a faire
-La page Soñj doit être cohérente avec la page détail projet 
+La page Agence doit être cohérente avec la page détail projet 

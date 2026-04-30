@@ -3,11 +3,11 @@
     class="relative z-40"
     :class="[
       isProjectPage ? 'pb-[18px]' : 'pb-8',
-      { 'sticky top-[var(--header-height)] bg-white dark:bg-[#121212] transition-colors duration-300 -mx-[var(--main-padding)] px-[var(--main-padding)]': (showFilters || $slots.triggers) && !noSticky }
+      { 'sticky top-[var(--header-height)] glass-fluted transition-colors duration-300 -mx-[var(--main-padding)] px-[var(--main-padding)]': (showFilters || $slots.triggers) && !noSticky }
     ]"
   >
     <!-- Project Title Slot: Permanent height to avoid folding effect -->
-    <div class="h-[40px] relative flex items-center"> 
+    <div class="h-[30px] relative flex items-center"> 
       <Transition
         enter-active-class="transition duration-300 ease-out"
         enter-from-class="opacity-0 translate-y-1"
@@ -44,15 +44,14 @@
             >
               <button 
                 @click="!readonlyFilters ? toggleMenu(filter.id) : null"
-                class="flex items-center justify-between gap-2 u-h4 transition-all duration-300 px-3 h-[30px] border border-[#121212]/30 dark:border-white/20 -mt-[1px] bg-transparent w-full group"
+                class="flex items-center justify-between gap-2 u-h4 transition-all duration-300 px-3 h-[30px] border border-[#121212]/30 dark:border-white/20 -mt-[1px] bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] w-full group"
                 :class="[
-                  activeMenu === filter.id ? 'text-indigo-500 border-indigo-500 z-50' : 'text-[#121212] dark:text-white',
-                  filter.active ? '!text-indigo-500 !border-indigo-500 z-50' : '',
-                  readonlyFilters ? 'cursor-default pointer-events-none' : 'hover:border-indigo-500 hover:text-indigo-500 dark:hover:border-indigo-400 dark:hover:text-indigo-400'
+                  activeMenu === filter.id ? 'text-amber-600 border-amber-600 z-50' : 'text-[#121212] dark:text-white',
+                  filter.active ? '!text-amber-600 !border-amber-600 z-50' : '',
+                  readonlyFilters ? 'cursor-default pointer-events-none' : 'hover:border-amber-600 hover:text-amber-600 dark:hover:border-amber-400 dark:hover:text-amber-400'
                 ]"
               >
                 <div class="flex items-center gap-2 truncate">
-                  <span class="opacity-40 font-light hidden sm:inline">{{ filter.category }}:</span>
                   <span class="truncate">{{ filter.selection }}</span>
                 </div>
                 
@@ -80,7 +79,7 @@
               >
                 <div 
                   v-if="activeMenu === filter.id" 
-                  class="absolute left-0 top-full mt-2 z-50 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] border border-[#121212]/10 dark:border-white/10 p-2 shadow-xl min-w-max"
+                  class="absolute left-0 top-full mt-2 z-50 glass-fluted border border-[#121212]/10 dark:border-white/10 p-2 shadow-xl min-w-max"
                   :class="{ 'right-0 left-auto': filter.id === 'country' && !isProjectPage }"
                 >
                   <div class="flex flex-row gap-x-6 px-2">
@@ -88,7 +87,7 @@
                       <button 
                         @click="selectedTypology = null; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedTypology === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-indigo-500 dark:hover:text-indigo-400'"
+                        :class="selectedTypology === null ? 'text-amber-600 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-amber-600 dark:hover:text-amber-400'"
                       >
                         Toutes
                       </button>
@@ -97,7 +96,7 @@
                         :key="opt" 
                         @click="selectedTypology = opt; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedTypology === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-indigo-500 dark:hover:text-indigo-400'"
+                        :class="selectedTypology === opt ? 'text-amber-600 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-amber-600 dark:hover:text-amber-400'"
                       >
                         {{ opt }}
                       </button>
@@ -106,7 +105,7 @@
                       <button 
                         @click="selectedYear = null; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedYear === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-indigo-500 dark:hover:text-indigo-400'"
+                        :class="selectedYear === null ? 'text-amber-600 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-amber-600 dark:hover:text-amber-400'"
                       >
                         Toutes
                       </button>
@@ -115,7 +114,7 @@
                         :key="opt" 
                         @click="selectedYear = opt; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedYear === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-indigo-500 dark:hover:text-indigo-400'"
+                        :class="selectedYear === opt ? 'text-amber-600 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-amber-600 dark:hover:text-amber-400'"
                       >
                         {{ opt }}
                       </button>
@@ -124,7 +123,7 @@
                       <button 
                         @click="selectedCountry = null; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedCountry === null ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-indigo-500 dark:hover:text-indigo-400'"
+                        :class="selectedCountry === null ? 'text-amber-600 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-amber-600 dark:hover:text-amber-400'"
                       >
                         Tous
                       </button>
@@ -133,7 +132,7 @@
                         :key="opt" 
                         @click="selectedCountry = opt; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedCountry === opt ? 'text-indigo-500 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-indigo-500 dark:hover:text-indigo-400'"
+                        :class="selectedCountry === opt ? 'text-amber-600 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-amber-600 dark:hover:text-amber-400'"
                       >
                         {{ opt }}
                       </button>
@@ -157,37 +156,39 @@
             </div>
 
             <!-- Column 3: Project Navigation -->
-            <div class="h-[30px] flex items-center justify-end xl:justify-start gap-6 xl:col-start-3">
-              <NuxtLink 
-                to="/projects" 
-                class="u-h4 font-medium transition-all hover:text-black dark:hover:text-white hover:font-extrabold text-[#121212] dark:text-white mr-4"
-              >
-                retour
-              </NuxtLink>
+            <div class="h-[30px] flex items-center justify-end xl:justify-start xl:col-start-3">
+              <div class="flex items-center h-full border border-[#121212]/30 dark:border-white/20 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] -mt-[1px]">
+                <NuxtLink 
+                  to="/projects" 
+                  class="u-h4 h-full px-4 flex items-center transition-all duration-300 border-r border-[#121212]/10 dark:border-white/10 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
+                >
+                  retour
+                </NuxtLink>
 
-              <NuxtLink 
-                v-if="prevProject" 
-                :to="prevProject.path" 
-                class="u-h4 font-medium transition-all hover:text-black dark:hover:text-white hover:font-extrabold text-[#121212] dark:text-white"
-                @click="setTransitionDirection('prev')"
-              >
-                &lt;
-              </NuxtLink>
-              <span v-else class="u-h4 font-medium text-gray-300 dark:text-gray-600 cursor-default">&lt;</span>
+                <NuxtLink 
+                  v-if="prevProject" 
+                  :to="prevProject.path" 
+                  class="u-h4 h-full px-3 flex items-center transition-all duration-300 border-r border-[#121212]/10 dark:border-white/10 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
+                  @click="setTransitionDirection('prev')"
+                >
+                  &lt;
+                </NuxtLink>
+                <span v-else class="u-h4 h-full px-3 flex items-center border-r border-[#121212]/10 dark:border-white/10 text-gray-300 dark:text-gray-600 cursor-default">&lt;</span>
 
-              <NuxtLink to="/projects" class="u-h4 font-medium transition-all hover:text-black dark:hover:text-white hover:font-extrabold text-[#121212] dark:text-white">
-                projets
-              </NuxtLink>
-              
-              <NuxtLink 
-                v-if="nextProject" 
-                :to="nextProject.path" 
-                class="u-h4 font-medium transition-all hover:text-black dark:hover:text-white hover:font-extrabold text-[#121212] dark:text-white"
-                @click="setTransitionDirection('next')"
-              >
-                &gt;
-              </NuxtLink>
-              <span v-else class="u-h4 font-medium text-gray-300 dark:text-gray-600 cursor-default">&gt;</span>
+                <NuxtLink to="/projects" class="u-h4 h-full px-4 flex items-center transition-all duration-300 border-r border-[#121212]/10 dark:border-white/10 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white">
+                  projets
+                </NuxtLink>
+                
+                <NuxtLink 
+                  v-if="nextProject" 
+                  :to="nextProject.path" 
+                  class="u-h4 h-full px-3 flex items-center transition-all duration-300 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
+                  @click="setTransitionDirection('next')"
+                >
+                  &gt;
+                </NuxtLink>
+                <span v-else class="u-h4 h-full px-3 flex items-center text-gray-300 dark:text-gray-600 cursor-default">&gt;</span>
+              </div>
             </div>
           </template>
 
@@ -196,7 +197,7 @@
             <button 
               v-if="hasActiveFilters"
               @click="resetFilters"
-              class="flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 dark:border-red-400/30 text-red-600 dark:text-red-400 bg-transparent hover:bg-red-600 dark:hover:bg-red-500 hover:text-white transition-all duration-300 -mt-[1px]"
+              class="flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 dark:border-red-400/30 text-red-600 dark:text-red-400 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] hover:bg-red-600 dark:hover:bg-red-500 hover:text-white transition-all duration-300 -mt-[1px]"
               title="Réinitialiser les filtres"
             >
               <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -335,7 +336,7 @@ const filters = computed(() => {
       { 
         id: 'info', 
         category: 'Info', 
-        selection: parts.join(', ') || '...',
+        selection: parts.join(', ') || 'Détails',
         active: false 
       }
     ];
@@ -347,13 +348,13 @@ const filters = computed(() => {
       category: 'Typologie',
       selection: (hp?.typologies && hp.typologies.length > 0) 
         ? hp.typologies[0] 
-        : (selectedTypology.value || 'Toutes'),
+        : (selectedTypology.value || 'Typologie'),
       active: !!selectedTypology.value
     },
     { 
       id: 'year', 
       category: 'Année',
-      selection: hpYear || (selectedYear.value || 'Toutes'),
+      selection: hpYear || (selectedYear.value || 'Année'),
       active: !!selectedYear.value
     },
     { 
@@ -361,7 +362,7 @@ const filters = computed(() => {
       category: 'Pays',
       selection: (hp?.pays && hp.pays.length > 0) 
         ? hp.pays[0] 
-        : (selectedCountry.value || 'Tous'),
+        : (selectedCountry.value || 'Pays'),
       active: !!selectedCountry.value
     }
   ];

@@ -1,12 +1,12 @@
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-[#121212] transition-colors duration-300">
+  <header class="fixed top-0 left-0 right-0 z-50 glass-fluted transition-colors duration-300">
     <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] relative">
       <!-- Logo -->
       <NuxtLink 
-        to="/agence" 
+        to="/about" 
         class="text-[#121212] dark:text-white whitespace-nowrap u-h4 logo-link"
-        @click="handleLinkClick('Studio Soñj')"
-        @mouseenter="emit('linkHover', 'Studio Soñj')"
+        @click="handleLinkClick('À propos')"
+        @mouseenter="emit('linkHover', 'À propos')"
         @mouseleave="emit('linkHover', '')"
       >
         Alexandre MATHIEU
@@ -37,7 +37,7 @@
         <!-- Theme Toggle -->
         <button 
           @click="cycleTheme" 
-          class="p-1 text-[#121212] dark:text-white transition-colors flex items-center justify-center hover:text-indigo-500 dark:hover:text-indigo-400"
+          class="p-1 text-[#121212] dark:text-white transition-colors flex items-center justify-center hover:text-amber-600 dark:hover:text-amber-400"
           :title="themeTitle"
         >
           <UIcon v-if="colorMode.preference === 'dark'" name="i-heroicons-moon" class="w-5 h-5" />
@@ -74,7 +74,7 @@
           <!-- Search Results Dropdown -->
           <div 
             v-if="isSearchExpanded && searchTerm && searchResults.length > 0" 
-            class="absolute top-full mt-2 right-0 w-64 bg-white dark:bg-[#121212] border border-gray-100 dark:border-gray-800 shadow-xl z-[100] max-h-80 overflow-y-auto"
+            class="absolute top-full mt-2 right-0 w-64 glass-fluted border border-gray-100 dark:border-gray-800 shadow-xl z-[100] max-h-80 overflow-y-auto"
           >
             <NuxtLink 
               v-for="result in searchResults" 
@@ -127,7 +127,7 @@
       </div>
 
       <!-- Mobile Navigation Overlay -->
-      <div v-if="isMenuOpen" class="md:hidden fixed inset-0 bg-white dark:bg-[#121212] z-40 flex flex-col items-center justify-center space-y-8">
+      <div v-if="isMenuOpen" class="md:hidden fixed inset-0 glass-fluted z-40 flex flex-col items-center justify-center space-y-8">
         <!-- Search Bar (Mobile) -->
         <UInput 
           v-model="searchTerm" 

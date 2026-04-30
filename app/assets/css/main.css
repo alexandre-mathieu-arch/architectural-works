@@ -11,17 +11,17 @@ html, body {
 }
 
 @theme {
-  --color-primary-50: #EEF2FF;
-  --color-primary-100: #E0E7FF;
-  --color-primary-200: #C7D2FE;
-  --color-primary-300: #A5B4FC;
-  --color-primary-400: #818CF8;
-  --color-primary-500: #6366F1;
-  --color-primary-600: #4F46E5;
-  --color-primary-700: #4338CA;
-  --color-primary-800: #3730A3;
-  --color-primary-900: #312E81;
-  --color-primary-950: #1E1B4B;
+  --color-primary-50: #FFFBEB;
+  --color-primary-100: #FEF3C7;
+  --color-primary-200: #FDE68A;
+  --color-primary-300: #FCD34D;
+  --color-primary-400: #FBBF24;
+  --color-primary-500: #F59E0B;
+  --color-primary-600: #D97706;
+  --color-primary-700: #B45309;
+  --color-primary-800: #92400E;
+  --color-primary-900: #78350F;
+  --color-primary-950: #451A03;
 }
 
 /* Force hide Nuxt UI default logo */
@@ -124,10 +124,45 @@ header a[href="https://ui.nuxt.com"] {
   @apply bg-white dark:bg-[#121212] transition-colors duration-300;
 }
 
-.doux #wrapper, 
+.doux #wrapper {
+  background-color: #E5E1E0 !important;
+}
+
 .doux header,
 .doux .sticky {
-  background-color: #E5E1E0 !important;
+  background-color: rgba(229, 225, 224, 0.8) !important;
+  backdrop-filter: blur(12px);
+}
+
+@utility glass-fluted {
+  @apply backdrop-blur-md bg-white/70 dark:bg-[#121212]/70;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 0px,
+    rgba(255, 255, 255, 0.1) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  .dark & {
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+}
+
+.doux .glass-fluted {
+  background-color: rgba(229, 225, 224, 0.7) !important;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(74, 68, 67, 0.05) 0px,
+    rgba(74, 68, 67, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  ) !important;
 }
 
 /* Typography Rationalization */
