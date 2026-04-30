@@ -16,6 +16,18 @@
       </div>
     </Transition>
 
+    <!-- Hidden images for the crawler to ensure all images are prerendered -->
+    <div class="hidden" aria-hidden="true">
+      <NuxtImg
+        v-for="img in images"
+        :key="'preload-' + img"
+        :src="img"
+        format="webp"
+        width="1600"
+        height="900"
+      />
+    </div>
+
     <!-- Invisible Click Areas for Navigation -->
     <div class="absolute inset-0 flex">
       <div
