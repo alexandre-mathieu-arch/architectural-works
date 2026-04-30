@@ -10,6 +10,6 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'default',
-  title: 'Corpus' // Title for the PageTitle component
+  displayTitle: 'Corpus' // Title for the PageTitle component
 })
 </script>

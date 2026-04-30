@@ -60,8 +60,12 @@ const { data: equipe } = await useAsyncData('about-equipe', () => {
 
 definePageMeta({
   layout: 'default',
-  title: "À propos",
+  displayTitle: "À propos",
   hideLayoutTitle: true
+})
+
+useHead({
+  title: 'À propos — Alexandre Mathieu'
 })
 </script>
 

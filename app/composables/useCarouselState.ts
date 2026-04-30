@@ -1,9 +1,9 @@
-import { ref, computed } from 'vue';
-
-const currentImageIndex = ref(0);
-const totalImages = ref(0);
+import { useState, computed } from '#app';
 
 export function useCarouselState() {
+  const currentImageIndex = useState<number>('carousel-current-index', () => 0);
+  const totalImages = useState<number>('carousel-total-images', () => 0);
+
   const setCurrentImageIndex = (index: number) => {
     currentImageIndex.value = index;
   };

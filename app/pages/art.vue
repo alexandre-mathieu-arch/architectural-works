@@ -98,7 +98,11 @@ const filteredArt = computed(() => {
 
 definePageMeta({
   layout: 'default',
-  title: 'Art'
+  displayTitle: 'Art'
+})
+
+useHead({
+  title: 'Art — Alexandre Mathieu'
 })
 
 // Keyboard navigation for closing lightbox

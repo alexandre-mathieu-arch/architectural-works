@@ -75,8 +75,8 @@ const displayedTitle = computed(() => {
     return 'Projets';
   }
   
-  if (route.meta.title) {
-    return route.meta.title;
+  if (route.meta.displayTitle) {
+    return route.meta.displayTitle;
   }
   return '';
 });

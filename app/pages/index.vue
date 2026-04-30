@@ -22,7 +22,11 @@ import { computed } from 'vue';
 
 definePageMeta({
   layout: 'home',
-  title: { main: 'Alexandre Mathieu', sub: "architecture & design" }
+  displayTitle: { main: 'Alexandre Mathieu', sub: "architecture & design" }
+})
+
+useHead({
+  title: 'Alexandre Mathieu — architecture & design'
 })
 
 const { data: projects } = await useAsyncData('home-projects', () => {

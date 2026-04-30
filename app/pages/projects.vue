@@ -76,9 +76,13 @@ import { useProjectFilters } from '~/composables/useProjectFilters';
 
 definePageMeta({
   layout: 'default',
-  title: 'Projets', // Title for the PageTitle component
+  displayTitle: 'Projets', // Title for the PageTitle component
   showFilters: true
 });
+
+useHead({
+  title: 'Projets — Alexandre Mathieu'
+})
 
 const { 
   selectedTypology, 
