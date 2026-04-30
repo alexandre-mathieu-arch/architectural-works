@@ -12,9 +12,11 @@ export default defineNuxtConfig({
   modules: ['@nuxt/content', '@nuxt/image', '@nuxt/ui'],
 
   image: {
-    // Explicitly set the directory for IPX to ensure it finds images in the public folder
+    provider: 'ipx',
     ipx: {
-      dir: './public'
+      // Relative to the project root, 'public' is the default.
+      // Ensuring it's set correctly for all environments.
+      dir: 'public'
     }
   },
 

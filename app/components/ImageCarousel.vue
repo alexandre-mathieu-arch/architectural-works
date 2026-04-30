@@ -2,6 +2,7 @@
   <div class="carousel-container relative w-full h-full overflow-hidden">
     <Transition :name="transitionName">
       <NuxtImg
+        v-if="images && images.length > 0 && images[currentIndex]"
         :key="currentIndex"
         :src="images[currentIndex]"
         format="webp"
@@ -10,6 +11,9 @@
         class="w-full h-full object-contain absolute inset-0"
         :style="id && currentIndex === 0 ? { viewTransitionName: 'image-' + id.replace(/\//g, '-') } : {}"
       />
+      <div v-else-if="images && images.length > 0" class="w-full h-full flex items-center justify-center bg-gray-50 dark:bg-[#121212]">
+         <UIcon name="i-heroicons-photo" class="w-12 h-12 text-gray-300 animate-pulse" />
+      </div>
     </Transition>
 
     <!-- Invisible Click Areas for Navigation -->

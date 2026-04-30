@@ -33,32 +33,30 @@
 
     <!-- Lightbox / Zoom Overlay -->
     <Transition
-      enter-active-class="transition duration-300 ease-out"
+      enter-active-class="transition duration-200 ease-out"
       enter-from-class="opacity-0"
       enter-to-class="opacity-100"
-      leave-active-class="transition duration-200 ease-in"
+      leave-active-class="transition duration-150 ease-in"
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
       <div 
         v-if="selectedImage" 
-        class="fixed inset-0 z-[100] bg-[#FFFFFF]/95 backdrop-blur-sm flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
+        class="fixed inset-0 z-[100] bg-white dark:bg-[#121212] flex items-center justify-center p-4 md:p-8 cursor-zoom-out"
         @click="selectedImage = null"
       >
-        <div class="relative max-w-full max-h-full flex flex-col items-center">
+        <div class="relative w-full h-full flex items-center justify-center">
           <NuxtImg
             :src="selectedImage.image.startsWith('/') ? selectedImage.image : '/' + selectedImage.image"
             :alt="selectedImage.title"
             format="webp"
-            width="1600"
-            height="1200"
-            class="max-w-full max-h-[85vh] object-contain shadow-2xl border border-[#121212]/10"
+            width="2000"
+            height="1500"
+            class="max-w-full max-h-full object-contain"
           />
-          <div class="mt-6 text-center">
-            <h3 class="u-h3 mb-1">{{ selectedImage.title }}</h3>
-            <button class="u-h4 uppercase tracking-widest text-[#121212]/40 hover:text-[#121212] transition-colors">
-              [fermer]
-            </button>
+          <!-- Title Bottom Right -->
+          <div class="absolute bottom-0 right-0 p-2 md:p-4 text-right">
+            <h3 class="u-h3 uppercase tracking-widest">{{ selectedImage.title }}</h3>
           </div>
         </div>
       </div>

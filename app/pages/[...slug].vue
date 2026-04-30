@@ -96,6 +96,11 @@ onMounted(() => {
 
 const { currentImageIndex, setCurrentImageIndex, setTotalImages } = useCarouselState();
 
+// Reset index on page change to avoid out-of-bounds index from previous project
+watch(() => route.path, () => {
+  setCurrentImageIndex(0);
+});
+
 const images = computed(() => {
   let imagePaths: string[] = [];
   if (page.value) {
@@ -105,8 +110,10 @@ const images = computed(() => {
       imagePaths = Array.isArray(page.value.image) ? page.value.image : [page.value.image];
     }
   }
-  // Normalize paths: ensure leading slash
-  return imagePaths.map(p => p.startsWith('/') ? p : '/' + p);
+  // Normalize paths: ensure leading slash and filter empty strings
+  return imagePaths
+    .filter(p => typeof p === 'string' && p.length > 0)
+    .map(p => p.startsWith('/') ? p : '/' + p);
 })
 
 // Sync images length with global state

@@ -77,13 +77,15 @@ const props = defineProps<{
 
 const displayImage = computed(() => {
   let imagePath: string | undefined;
-  if (props.project.images && props.project.images.length > 0) {
-    imagePath = props.project.images[0];
-  } else {
+  if (props.project.images && Array.isArray(props.project.images)) {
+    imagePath = props.project.images.find(img => typeof img === 'string' && img.length > 0);
+  }
+  
+  if (!imagePath) {
     imagePath = props.project.image;
   }
   
-  if (imagePath && !imagePath.startsWith('/')) {
+  if (imagePath && typeof imagePath === 'string' && !imagePath.startsWith('/')) {
     return '/' + imagePath;
   }
   return imagePath;

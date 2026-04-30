@@ -8,27 +8,27 @@
         <!-- Cas spécial pour le 6ème projet (index 5, 11, 17...) -->
         <template v-if="index % 6 === 5">
           <!-- Colonne 2 : Vide avec bordure cliquable -->
-          <NuxtLink 
-            to="/contact" 
-            class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212]"
+          <button 
+            @click="scrollToContact"
+            class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212] text-left"
           >
             <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <span class="u-h3 dark:text-white doux:text-[#4A4443]">Démarrer un projet ?</span>
             </div>
-          </NuxtLink>
+          </button>
           
           <!-- Colonne 3 : Le projet -->
           <ProjectCard :project="project" />
           
           <!-- Colonne 4 : Vide avec bordure cliquable -->
-          <NuxtLink 
-            to="/contact" 
-            class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212]"
+          <button 
+            @click="scrollToContact"
+            class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212] text-left"
           >
             <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <span class="u-h3 dark:text-white doux:text-[#4A4443]">Démarrer un projet ?</span>
             </div>
-          </NuxtLink>
+          </button>
         </template>
 
         <!-- Projets normaux (1, 2, 3, 4 et 5 du cycle) -->
@@ -41,10 +41,36 @@
     <div v-else class="text-center py-10">
       <p class="text-gray-500">Aucun projet ne correspond à votre sélection.</p>
     </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="mt-32 pb-24 border-t border-[#121212]/10 pt-16 scroll-mt-20">
+      <div class="mb-10">
+        <p class="u-h2 max-w-2xl leading-tight font-light !tracking-[0.15em]">
+          Définir un programme, donner forme à une vision, bâtir un futur, engageons le dialogue.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-y-6">
+        <a
+          href="mailto:alexandre.mat+w@protonmail.com"
+          class="u-h3 font-normal tracking-[0.2em] hover:text-gray-500 transition-colors w-fit"
+        >
+          alexandre.mat+w@protonmail.com
+        </a>
+
+        <a
+          href="tel:+33658215300"
+          class="u-h3 font-normal tracking-[0.2em] hover:text-gray-500 transition-colors w-fit"
+        >
+          +33 6 58 21 53 00
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed, watchEffect } from 'vue';
 import ProjectCard from '~/components/ProjectCard.vue';
 import { useProjectFilters } from '~/composables/useProjectFilters';
 
@@ -68,16 +94,36 @@ const {
   projectTitleOptions
 } = useProjectFilters();
 
+const route = useRoute();
+const router = useRouter();
+
 const { data: projects } = await useAsyncData('projects', () =>
   queryCollection('content')
     .where('path', 'LIKE', '/projects/%')
     .all()
 );
 
+const scrollToContact = () => {
+  const el = document.getElementById('contact');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+onMounted(() => {
+  if (route.query.scroll === 'contact') {
+    // Small delay to ensure transitions and images are settling
+    setTimeout(() => {
+      scrollToContact();
+      // Clean up the URL
+      router.replace({ query: { ...route.query, scroll: undefined } });
+    }, 500);
+  }
+});
+
 // Populate filter options from project data
 watchEffect(() => {
   if (projects.value) {
-    console.log('Extracting filters from', projects.value.length, 'projects');
     const typologies = new Set<string>();
     const sizes = new Set<string>();
     const years = new Set<string>();

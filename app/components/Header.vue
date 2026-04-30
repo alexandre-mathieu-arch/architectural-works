@@ -127,36 +127,39 @@
       </div>
 
       <!-- Mobile Navigation Overlay -->
-      <div v-if="isMenuOpen" class="md:hidden fixed inset-0 glass-fluted bg-white/70 dark:bg-[#121212]/70 z-40 flex flex-col items-center justify-center space-y-8">
+      <div v-if="isMenuOpen" class="md:hidden fixed inset-0 glass-fluted bg-white dark:bg-[#121212] z-40 flex flex-col items-center justify-start pt-24 px-6 space-y-8 overflow-y-auto">
         <!-- Search Bar (Mobile) -->
-        <UInput 
-          v-model="searchTerm" 
-          placeholder="Rechercher..." 
-          icon="i-heroicons-magnifying-glass-20-solid" 
-          class="w-full max-w-xs header-search-input"
-          color="[#121212]"
-          variant="none"
-          size="md"
-        />
+        <div class="w-full max-w-xs mb-4">
+          <UInput 
+            v-model="searchTerm" 
+            placeholder="Rechercher..." 
+            icon="i-heroicons-magnifying-glass-20-solid" 
+            class="header-search-input"
+            color="[#121212]"
+            variant="none"
+            size="lg"
+          />
+        </div>
 
-        <NuxtLink 
-          v-for="link in links" 
-          :key="link.to" 
-          :to="link.to"
-          class="u-h4 font-bold text-[30px] dark:text-white"
-          :class="{ 'text-gray-600 dark:text-gray-400': activeLink === link.label }"
-          @click="handleLinkClick(link.label); isMenuOpen = false"
-        >
-          {{ link.label }}
-        </NuxtLink>
+        <nav class="flex flex-col items-center space-y-8">
+          <NuxtLink 
+            v-for="link in links" 
+            :key="link.to" 
+            :to="link.to"
+            class="u-h2 text-[32px] text-[#121212] dark:text-white mobile-link"
+            @click="handleLinkClick(link.label); isMenuOpen = false"
+          >
+            {{ link.label }}
+          </NuxtLink>
 
-        <UButton
-          :label="currentLang"
-          variant="ghost"
-          color="[#121212]"
-          class="p-0 hover:bg-transparent u-h4 font-bold text-[30px] dark:text-white"
-          @click="toggleLang"
-        />
+          <UButton
+            :label="currentLang"
+            variant="ghost"
+            color="[#121212]"
+            class="p-0 hover:bg-transparent u-h2 text-[32px] dark:text-white mobile-link"
+            @click="toggleLang"
+          />
+        </nav>
       </div>
     </div>
   </header>
@@ -276,6 +279,10 @@ const links = [{
 
 .doux .logo-link {
   color: #4A4443;
+}
+
+.doux .mobile-link {
+  color: #4A4443 !important;
 }
 
 .header-search-input .icon {
