@@ -1,3 +1,7 @@
+---
+title: "L'équipe"
+description: "Présentation d'Alexandre Mathieu, architecte et fondateur de l'atelier."
+---
 Fils d'ébéniste et sculpteur, Alexandre Mathieu forge sa pratique architecturale à la croisée de l'artisanat et de la pensée spatiale. Son parcours atypique le distingue : du génie climatique de terrain aux agences d'architecture, il a d'abord appris à construire avant de concevoir.
 
 Diplômé de l'ENSA Nantes et Clermont-Ferrand, il développe son expertise sur des projets exigeants – construction bois et biosourcée, Passivhaus, promotion de standing, architecture intérieure. Cette polyvalence lui donne une maîtrise rare : celle qui relie le geste technique à l'intention architecturale.

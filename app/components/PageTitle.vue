@@ -18,12 +18,20 @@
         leave-to-class="opacity-0 -translate-y-1"
       >
         <div 
-          v-if="hoveredProjectTitle || (hideMainTitle && title)" 
-          :key="hoveredProjectTitle || (typeof title === 'string' ? title : '')"
+          v-if="hoveredProjectTitle || (!hideMainTitle && title) || (hideMainTitle && title)" 
+          :key="hoveredProjectTitle || (typeof title === 'string' ? title : title.main)"
           class="text-[18px] sm:text-[20px] font-bold leading-none text-[#121212] dark:text-white whitespace-nowrap overflow-hidden text-ellipsis w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] h-full flex items-center"
           :style="{ viewTransitionName: route.path.startsWith('/projects/') ? 'title-' + route.path.replace(/\//g, '-') : 'project-title-continuity' }"
         >
-          {{ hoveredProjectTitle || (hideMainTitle ? (typeof title === 'string' ? title : '') : '') }}
+          <template v-if="hoveredProjectTitle">
+            {{ hoveredProjectTitle }}
+          </template>
+          <template v-else-if="!hideMainTitle && title">
+            {{ typeof title === 'string' ? title : title.main }}
+          </template>
+          <template v-else-if="hideMainTitle && title">
+            {{ typeof title === 'string' ? title : '' }}
+          </template>
         </div>
       </Transition>
     </div>

@@ -31,8 +31,6 @@ const { data: projects } = await useAsyncData('home-projects', () => {
     .all()
 })
 
-const { app } = useRuntimeConfig()
-
 // Use useState to ensure the same image is picked on SSR and Client
 const heroImage = useState<string | null>('hero-image', () => {
   if (!projects.value || projects.value.length === 0) {
@@ -46,10 +44,7 @@ const heroImage = useState<string | null>('hero-image', () => {
   ]
   
   const allImages = projects.value.flatMap(project => {
-    if (project.heroImages && Array.isArray(project.heroImages) && project.heroImages.length > 0) {
-      return project.heroImages
-    }
-
+    // Schema defines images as optional array and image as optional string
     const imgs = project.images || project.image || []
     const imageList = Array.isArray(imgs) ? imgs : [imgs]
     
