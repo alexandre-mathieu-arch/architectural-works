@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-0 pb-12">
+  <div class="pt-0 pb-6">
     <PageTitle title="À propos" :hide-main-title="true">
       <template #triggers>
         <div 
@@ -24,7 +24,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-4 -mt-[10px]">
       <!-- Column 1: Equipe -->
       <div class="opacity-100">
-        <div v-if="equipe" class="prose dark:prose-invert max-w-none pb-8">
+        <div v-if="equipe" class="prose dark:prose-invert max-w-none pb-4">
           <ContentRenderer :value="equipe" />
         </div>
         <!-- Portrait positioned below Download links with a subtle zoom -->
@@ -39,7 +39,7 @@
 
       <!-- Column 2: Pratique -->
       <div class="opacity-100">
-        <div v-if="pratique" class="prose dark:prose-invert max-w-none pb-8">
+        <div v-if="pratique" class="prose dark:prose-invert max-w-none pb-4">
           <ContentRenderer :value="pratique" />
         </div>
       </div>

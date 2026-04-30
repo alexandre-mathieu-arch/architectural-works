@@ -1,7 +1,7 @@
 <template>
   <div class="pt-0 pb-0">
 
-    <div v-if="filteredProjects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 items-center mt-6">
+    <div v-if="filteredProjects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 items-center mt-3">
       <template v-for="(project, index) in filteredProjects" :key="project.path">
         <!-- Cycle de 6 : 4 pleins, 1 normal, 1 vide, 1 normal, 1 vide -->
         
@@ -13,7 +13,7 @@
             class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212]"
           >
             <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span class="u-h3 text-gray-400 normal-case">Démarrer un projet ?</span>
+              <span class="u-h3 dark:text-white doux:text-[#4A4443]">Démarrer un projet ?</span>
             </div>
           </NuxtLink>
           
@@ -26,7 +26,7 @@
             class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212]"
           >
             <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span class="u-h3 text-gray-400 normal-case">Démarrer un projet ?</span>
+              <span class="u-h3 dark:text-white doux:text-[#4A4443]">Démarrer un projet ?</span>
             </div>
           </NuxtLink>
         </template>
@@ -38,7 +38,7 @@
         />
       </template>
     </div>
-    <div v-else class="text-center py-20">
+    <div v-else class="text-center py-10">
       <p class="text-gray-500">Aucun projet ne correspond à votre sélection.</p>
     </div>
   </div>

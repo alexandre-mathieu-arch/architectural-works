@@ -74,7 +74,7 @@
           <!-- Search Results Dropdown -->
           <div 
             v-if="isSearchExpanded && searchTerm && searchResults.length > 0" 
-            class="absolute top-full mt-2 right-0 w-64 glass-fluted border border-gray-100 dark:border-gray-800 shadow-xl z-[100] max-h-80 overflow-y-auto"
+            class="absolute top-full mt-2 right-0 w-64 glass-fluted bg-white/70 dark:bg-[#121212]/70 border border-gray-100 dark:border-gray-800 shadow-xl z-[100] max-h-80 overflow-y-auto"
           >
             <NuxtLink 
               v-for="result in searchResults" 
@@ -127,7 +127,7 @@
       </div>
 
       <!-- Mobile Navigation Overlay -->
-      <div v-if="isMenuOpen" class="md:hidden fixed inset-0 glass-fluted z-40 flex flex-col items-center justify-center space-y-8">
+      <div v-if="isMenuOpen" class="md:hidden fixed inset-0 glass-fluted bg-white/70 dark:bg-[#121212]/70 z-40 flex flex-col items-center justify-center space-y-8">
         <!-- Search Bar (Mobile) -->
         <UInput 
           v-model="searchTerm" 

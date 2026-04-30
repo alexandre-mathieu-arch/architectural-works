@@ -1,5 +1,5 @@
 <template>
-  <div class="sequence-navigation flex items-center h-[30px] border border-[#121212]/30 dark:border-white/20 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] -mt-[1px] overflow-x-auto whitespace-nowrap scrollbar-hide">
+  <div class="sequence-navigation flex items-center h-[30px] border border-[#121212]/30 dark:border-white/20 bg-white/50 dark:bg-white/5 -mt-[1px] overflow-x-auto whitespace-nowrap scrollbar-hide">
     <!-- Previous Project Button -->
     <NuxtLink 
       v-if="prevProject" 

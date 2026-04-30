@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 pt-0">
       <!-- Carousel Section: Natural flow - shown first on mobile -->
       <div class="col-span-1 md:col-span-1 xl:col-span-3 z-10 order-1 md:order-2 -mx-[var(--main-padding)] md:mx-0">
-        <div class="relative w-full aspect-[4/3] md:aspect-[16/9] bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] transition-colors duration-300">
+        <div class="relative w-full aspect-[4/3] md:aspect-[16/9] glass-fluted bg-white/50 dark:bg-[#121212]/50 transition-colors duration-300">
           <ImageCarousel :images="images" :model-value="currentImageIndex" @update:model-value="setCurrentImageIndex" :id="page.path" />
         </div>
       </div>
@@ -14,7 +14,7 @@
         style="view-transition-name: project-description;"
       >
         <div class="project-description min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)] flex flex-col pr-4">
-          <div class="flex-grow pb-8 md:pb-12">
+          <div class="flex-grow pb-4 md:pb-6">
             <p v-if="page.description" class="u-body mb-4">{{ page.description }}</p>
             <div class="content-renderer">
               <ContentRenderer :value="page" class="prose max-w-none" />
@@ -22,7 +22,7 @@
           </div>
           
           <!-- Static Info Section -->
-          <div class="mt-8 border-t border-[#121212]/10 pt-4 pb-8">
+          <div class="mt-8 border-t border-[#121212]/10 pt-4 pb-4">
             <div class="space-y-1">
               <div v-if="page.surface" class="flex gap-4 u-legend">
                 <span class="w-20">Surface:</span>

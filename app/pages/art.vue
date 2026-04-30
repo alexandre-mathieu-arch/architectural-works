@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-0 pb-12 relative">
+  <div class="pt-0 pb-6 relative">
     <div v-if="filteredArt?.length" class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
       <div class="col-span-full u-h4 text-gray-400 mb-4">
         {{ filteredArt.length }} œuvres chargées

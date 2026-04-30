@@ -1,9 +1,10 @@
 <template>
   <div 
-    class="relative z-40"
+    class="relative z-40 transition-colors duration-300"
     :class="[
-      isProjectPage ? 'pb-[18px]' : 'pb-8',
-      { 'sticky top-[var(--header-height)] glass-fluted transition-colors duration-300 -mx-[var(--main-padding)] px-[var(--main-padding)]': (showFilters || $slots.triggers) && !noSticky }
+      isProjectPage ? 'pb-1' : 'pb-2',
+      { 'glass-fluted -mx-[var(--main-padding)] px-[var(--main-padding)]': showFilters || $slots.triggers },
+      { 'sticky top-[var(--header-height)]': (showFilters || $slots.triggers) && !noSticky }
     ]"
   >
     <!-- Project Title Slot: Permanent height to avoid folding effect -->
@@ -44,11 +45,14 @@
             >
               <button 
                 @click="!readonlyFilters ? toggleMenu(filter.id) : null"
-                class="flex items-center justify-between gap-2 u-h4 transition-all duration-300 px-3 h-[30px] border border-[#121212]/30 dark:border-white/20 -mt-[1px] bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] w-full group"
+                class="flex items-center justify-between gap-2 u-h4 transition-all duration-300 px-3 h-[30px] -mt-[1px] w-full group"
                 :class="[
-                  activeMenu === filter.id ? 'text-primary-900 border-primary-900 z-50' : 'text-[#121212] dark:text-white',
-                  filter.active ? '!text-primary-900 !border-primary-900 z-50' : '',
-                  readonlyFilters ? 'cursor-default pointer-events-none' : 'hover:border-primary-900 hover:text-primary-900 dark:hover:border-primary-400 dark:hover:text-primary-400'
+                  readonlyFilters 
+                    ? 'bg-transparent border border-primary-900 text-primary-900 dark:border-primary-400 dark:text-primary-400 cursor-default pointer-events-none' 
+                    : 'bg-white/50 dark:bg-white/5 border border-[#121212]/30 dark:border-white/20',
+                  activeMenu === filter.id ? 'text-primary-900 border-primary-900 dark:text-primary-400 dark:border-primary-400 z-50' : (!readonlyFilters ? 'text-[#121212] dark:text-white' : ''),
+                  filter.active ? '!text-primary-900 !border-primary-900 dark:!text-primary-400 dark:!border-primary-400 z-50' : '',
+                  !readonlyFilters ? 'hover:border-primary-900 hover:text-primary-900 dark:hover:border-primary-400 dark:hover:text-primary-400' : ''
                 ]"
               >
                 <div class="flex items-center gap-2 truncate">
@@ -79,7 +83,7 @@
               >
                 <div 
                   v-if="activeMenu === filter.id" 
-                  class="absolute left-0 top-full mt-2 z-50 glass-fluted border border-[#121212]/10 dark:border-white/10 p-2 shadow-xl min-w-max"
+                  class="absolute left-0 top-full mt-2 z-50 glass-fluted bg-white/70 dark:bg-[#121212]/70 border border-[#121212]/10 dark:border-white/10 p-2 shadow-xl min-w-max"
                   :class="{ 'right-0 left-auto': filter.id === 'country' && !isProjectPage }"
                 >
                   <div class="flex flex-row gap-x-6 px-2">
@@ -87,7 +91,7 @@
                       <button 
                         @click="selectedTypology = null; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedTypology === null ? 'text-primary-900 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-primary-900 dark:hover:text-primary-400'"
+                        :class="selectedTypology === null ? 'text-primary-900 dark:text-primary-400 font-bold' : 'text-[#121212]/60 dark:text-primary-400/70 hover:text-primary-900 dark:hover:text-primary-400'"
                       >
                         Toutes
                       </button>
@@ -96,7 +100,7 @@
                         :key="opt" 
                         @click="selectedTypology = opt; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedTypology === opt ? 'text-primary-900 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-primary-900 dark:hover:text-primary-400'"
+                        :class="selectedTypology === opt ? 'text-primary-900 dark:text-primary-400 font-bold' : 'text-[#121212]/60 dark:text-primary-400/70 hover:text-primary-900 dark:hover:text-primary-400'"
                       >
                         {{ opt }}
                       </button>
@@ -105,7 +109,7 @@
                       <button 
                         @click="selectedYear = null; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedYear === null ? 'text-primary-900 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-primary-900 dark:hover:text-primary-400'"
+                        :class="selectedYear === null ? 'text-primary-900 dark:text-primary-400 font-bold' : 'text-[#121212]/60 dark:text-primary-400/70 hover:text-primary-900 dark:hover:text-primary-400'"
                       >
                         Toutes
                       </button>
@@ -114,7 +118,7 @@
                         :key="opt" 
                         @click="selectedYear = opt; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedYear === opt ? 'text-primary-900 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-primary-900 dark:hover:text-primary-400'"
+                        :class="selectedYear === opt ? 'text-primary-900 dark:text-primary-400 font-bold' : 'text-[#121212]/60 dark:text-primary-400/70 hover:text-primary-900 dark:hover:text-primary-400'"
                       >
                         {{ opt }}
                       </button>
@@ -123,7 +127,7 @@
                       <button 
                         @click="selectedCountry = null; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedCountry === null ? 'text-primary-900 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-primary-900 dark:hover:text-primary-400'"
+                        :class="selectedCountry === null ? 'text-primary-900 dark:text-primary-400 font-bold' : 'text-[#121212]/60 dark:text-primary-400/70 hover:text-primary-900 dark:hover:text-primary-400'"
                       >
                         Tous
                       </button>
@@ -132,7 +136,7 @@
                         :key="opt" 
                         @click="selectedCountry = opt; activeMenu = null" 
                         class="u-h4 h-[30px] flex items-center transition-all duration-300 bg-transparent whitespace-nowrap" 
-                        :class="selectedCountry === opt ? 'text-primary-900 font-bold' : 'text-[#121212]/60 dark:text-white/60 hover:text-primary-900 dark:hover:text-primary-400'"
+                        :class="selectedCountry === opt ? 'text-primary-900 dark:text-primary-400 font-bold' : 'text-[#121212]/60 dark:text-primary-400/70 hover:text-primary-900 dark:hover:text-primary-400'"
                       >
                         {{ opt }}
                       </button>
@@ -164,7 +168,7 @@
             <button 
               v-if="hasActiveFilters"
               @click="resetFilters"
-              class="flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 dark:border-red-400/30 text-red-600 dark:text-red-400 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] hover:bg-red-600 dark:hover:bg-red-500 hover:text-white transition-all duration-300 -mt-[1px]"
+              class="flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 dark:border-red-400/30 text-red-600 dark:text-red-400 bg-white/50 dark:bg-white/5 hover:bg-red-600 dark:hover:bg-red-500 hover:text-white transition-all duration-300 -mt-[1px]"
               title="Réinitialiser les filtres"
             >
               <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">

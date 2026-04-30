@@ -1,6 +1,6 @@
 <template>
-  <div class="pt-8 pb-12">
-    <div class="mb-12">
+  <div class="pt-4 pb-6">
+    <div class="mb-6">
       <p class="u-h2 max-w-2xl leading-tight">
         Définir un programme, donner forme à une vision, bâtir un futur, engageons le dialogue.
       </p>

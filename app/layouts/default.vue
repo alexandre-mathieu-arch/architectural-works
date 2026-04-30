@@ -2,7 +2,7 @@
   <div id="wrapper">
     <Header @linkClick="handleLinkClick" @linkHover="handleLinkHover" />
     <div :style="{ paddingTop: 'var(--header-height)' }">
-      <main class="main-container pb-24">
+      <main class="main-container pb-12">
         <PageTitle 
           v-if="!route.meta.hideLayoutTitle"
           :title="pageTitle" 
