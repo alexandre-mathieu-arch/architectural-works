@@ -170,7 +170,7 @@ header a[href="https://ui.nuxt.com"] {
   @apply text-[28px] md:text-[34px] lg:text-[40px] font-bold leading-none dark:text-white;
   font-family: var(--font-primary);
   
-  @screen lg {
+  @media (min-width: 1024px) {
     -webkit-text-stroke: 1px #121212;
     color: transparent;
     .dark & {

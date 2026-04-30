@@ -75,9 +75,6 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
-import Header from '~/components/Header.vue';
-import PageTitle from '~/components/PageTitle.vue';
-import TheFooter from '~/components/TheFooter.vue';
 
 const isRevealed = ref(false);
 const route = useRoute();

@@ -191,7 +191,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, watch, computed, onMounted, onUnmounted } from 'vue';
+import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
 import { useProjectFilters } from '~/composables/useProjectFilters';
 import { useHoverProject } from '~/composables/useHoverProject';
 import { useVisitedProjects } from '~/composables/useVisitedProjects';

@@ -12,9 +12,8 @@ export default defineNuxtConfig({
   modules: ['@nuxt/content', '@nuxt/image', '@nuxt/ui'],
 
   image: {
-    // We use 'static' provider for GitHub Pages to ensure reliability.
-    // IPX can fail to pre-render images that are selected dynamically (like hero images).
-    provider: 'static'
+    // Default provider (ipx) is used for static generation.
+    // We avoid 'static' provider as it caused 500 errors during prerendering.
   },
 
   colorMode: {

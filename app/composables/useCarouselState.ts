@@ -1,4 +1,5 @@
-import { useState, computed } from '#app';
+import { computed } from 'vue';
+import { useState } from '#app';
 
 export function useCarouselState() {
   const currentImageIndex = useState<number>('carousel-current-index', () => 0);
