@@ -14,8 +14,8 @@
         style="view-transition-name: project-description;"
       >
         <div class="project-description min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)] flex flex-col pr-4">
-          <div class="flex-grow pb-12 md:pb-24">
-            <p v-if="page.description" class="u-body mb-8">{{ page.description }}</p>
+          <div class="flex-grow pb-8 md:pb-12">
+            <p v-if="page.description" class="u-body mb-4">{{ page.description }}</p>
             <div class="content-renderer">
               <ContentRenderer :value="page" class="prose max-w-none" />
             </div>

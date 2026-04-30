@@ -16,6 +16,4 @@ phase: "Prototype"
 statut: "Réalisé"
 ---
 
-## Description
-
 Support minimaliste pour ordinateur portable réalisé en bois.

@@ -18,5 +18,3 @@ region: "Bretagne"
 collaboration: "Pascal Debard, KLOUDE architecte et Achraf Benbouzid, ABA architecte"
 ---
 
-## Description
-

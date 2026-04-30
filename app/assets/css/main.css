@@ -227,7 +227,7 @@ header a[href="https://ui.nuxt.com"] {
 .prose h2 { @apply u-h2 mb-4; }
 .prose h3 { @apply u-h3 mb-2; }
 .prose h4 { @apply u-h4 mb-2; }
-.prose p, .prose li { @apply u-body mb-4; }
+.prose p, .prose li { @apply u-body mb-3; }
 .dark .prose { @apply prose-invert; }
 
 /* View Transitions animations */
