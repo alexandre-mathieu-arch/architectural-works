@@ -1,28 +1,35 @@
 <template>
-  <div class="pt-0 pb-6 relative">
-    <div v-if="filteredArt?.length" class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-      <div class="col-span-full u-h4 text-gray-400 mb-4">
-        {{ filteredArt.length }} œuvres chargées
-      </div>
+  <div class="pt-8 pb-40 relative">
+    <div v-if="filteredArt?.length" class="grid grid-cols-1 md:grid-cols-12 gap-y-24 md:gap-y-48 gap-x-4 md:gap-x-12">
+      
       <div 
-        v-for="item in filteredArt" 
+        v-for="(item, index) in filteredArt" 
         :key="item.path"
-        class="break-inside-avoid relative group overflow-hidden border border-[#121212]/10 cursor-zoom-in"
-        @click="selectedImage = item"
+        class="flex flex-col group transition-all duration-1000 ease-curtain"
+        :class="getItemLayout(index)"
       >
-        <NuxtImg
-          v-if="item.image"
-          :src="item.image.startsWith('/') ? item.image : '/' + item.image"
-          :alt="item.title"
-          format="webp"
-          width="600"
-          height="800"
-          class="w-full h-auto transition-all duration-700 group-hover:scale-105"
-        />
+        <div 
+          class="relative overflow-hidden cursor-zoom-in bg-gray-50 dark:bg-gray-900 shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-700"
+          @click="selectedImage = item"
+        >
+          <NuxtImg
+            v-if="item.image"
+            :src="item.image.startsWith('/') ? item.image : '/' + item.image"
+            :alt="item.title"
+            format="webp"
+            width="1200"
+            class="w-full h-auto transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03]"
+          />
+          <!-- Subtle overlay for texture -->
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-10 dark:bg-white bg-black transition-opacity duration-700 pointer-events-none"></div>
+        </div>
         
-        <!-- Hover Info Overlay -->
-        <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center bg-[#FFFFFF] border-b border-[#121212]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          <span class="u-h4 font-bold truncate">{{ item.title }}</span>
+        <!-- Sober Legend -->
+        <div class="mt-4 flex flex-col space-y-0.5 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+          <span class="u-h4 font-medium tracking-wider text-[#121212] dark:text-white">{{ item.title }}</span>
+          <p v-if="item.description" class="u-legend font-normal opacity-50 max-w-[300px] leading-tight">
+            {{ item.description }}
+          </p>
         </div>
       </div>
     </div>
@@ -31,57 +38,48 @@
       <p class="text-gray-500 italic">La section Art sera bientôt disponible...</p>
     </div>
 
-    <!-- Lightbox / Zoom Overlay -->
+    <!-- Exhibition Lightbox -->
     <Transition
-      enter-active-class="transition duration-200 ease-out"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition duration-150 ease-in"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
+      enter-active-class="transition duration-500 ease-curtain"
+      enter-from-class="opacity-0 scale-95"
+      enter-to-class="opacity-100 scale-100"
+      leave-active-class="transition duration-400 ease-curtain"
+      leave-from-class="opacity-100 scale-100"
+      leave-to-class="opacity-0 scale-95"
     >
       <div 
         v-if="selectedImage" 
-        class="fixed inset-0 z-[100] bg-white dark:bg-[#121212] flex items-center justify-center p-4 md:p-8 cursor-zoom-out"
+        class="fixed inset-0 z-[100] bg-white/95 dark:bg-[#121212]/95 backdrop-blur-md flex items-center justify-center p-6 md:p-16 cursor-zoom-out"
         @click="selectedImage = null"
       >
-        <div class="relative w-full h-full flex items-center justify-center">
+        <div class="relative w-full h-full flex flex-col items-center justify-center">
           <NuxtImg
             :src="selectedImage.image.startsWith('/') ? selectedImage.image : '/' + selectedImage.image"
             :alt="selectedImage.title"
             format="webp"
-            width="2000"
-            height="1500"
-            class="max-w-full max-h-full object-contain"
+            width="2400"
+            class="max-w-full max-h-[85vh] object-contain shadow-2xl"
           />
-          <!-- Title Bottom Right -->
-          <div class="absolute bottom-0 right-0 p-2 md:p-4 text-right">
-            <h3 class="u-h3 uppercase tracking-widest">{{ selectedImage.title }}</h3>
+          
+          <div class="mt-12 text-center max-w-2xl">
+            <h3 class="u-h2 uppercase tracking-[0.4em] mb-4">{{ selectedImage.title }}</h3>
+            <p v-if="selectedImage.description" class="u-body italic opacity-70">
+              {{ selectedImage.description }}
+            </p>
           </div>
         </div>
+        
+        <!-- Close button (minimal) -->
+        <button class="absolute top-8 right-8 u-h4 opacity-40 hover:opacity-100 transition-opacity">FERMER</button>
       </div>
     </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const selectedImage = ref<any>(null)
-
-const staticArtItems = [
-  { title: 'Cité de la voile', image: '/images/art/cite-de-la-voile.jpg', path: 'cite-de-la-voile' },
-  { title: 'Faucon', image: '/images/art/faucon-pastels-seche.jpg', path: 'faucon' },
-  { title: 'Lac de Garde', image: '/images/art/lac-de-garde.jpg', path: 'lac-de-garde' },
-  { title: 'Laverie 23h', image: '/images/art/laverie-23h-encre.jpg', path: 'laverie-23h' },
-  { title: 'Nu de Dos', image: '/images/art/nu-dos-pastel-seche.jpg', path: 'nu-de-dos' },
-  { title: 'Rough Nature morte', image: '/images/art/rough-nature-morte-ail-rose.jpg', path: 'rough-nature-morte' },
-  { title: 'Surf à Uluwatu', image: '/images/art/surf-uluwatu.jpg', path: 'surf-uluwatu' },
-  { title: 'Vague', image: '/images/art/vague.jpg', path: 'vague' },
-  { title: 'Drapé 01', image: '/images/art/drape.jpg', path: 'drape' },
-  { title: 'Drapé 02', image: '/images/art/drape02.jpg', path: 'drape02' },
-  { title: 'Nu au graphite', image: '/images/art/nu-graphite.jpg', path: 'nu-graphite' }
-]
 
 const { data: artItems } = await useAsyncData('art-content', () => {
   return queryCollection('content')
@@ -89,12 +87,26 @@ const { data: artItems } = await useAsyncData('art-content', () => {
 })
 
 const filteredArt = computed(() => {
-  // If content query returns nothing, use static fallback
-  if (!artItems.value || artItems.value.length === 0) return staticArtItems
-  
-  const fromContent = artItems.value.filter(item => item.path.startsWith('/art/'))
-  return fromContent.length > 0 ? fromContent : staticArtItems
+  if (!artItems.value) return []
+  return artItems.value.filter(item => item.path.startsWith('/art/'))
 })
+
+// Logic to create a "Studio Wall" rhythm
+const getItemLayout = (index: number) => {
+  const layouts = [
+    'md:col-span-8 md:col-start-1',
+    'md:col-span-5 md:col-start-8 md:-mt-24',
+    'md:col-span-6 md:col-start-3 md:mt-12',
+    'md:col-span-4 md:col-start-1 md:-mt-16',
+    'md:col-span-7 md:col-start-6',
+    'md:col-span-5 md:col-start-2 md:-mt-32',
+    'md:col-span-4 md:col-start-8 md:mt-8',
+    'md:col-span-9 md:col-start-4 md:-mt-12',
+    'md:col-span-5 md:col-start-1 md:mt-16',
+    'md:col-span-6 md:col-start-7 md:-mt-20'
+  ]
+  return layouts[index % layouts.length]
+}
 
 definePageMeta({
   layout: 'default',
@@ -105,7 +117,6 @@ useHead({
   title: 'Art — Alexandre Mathieu'
 })
 
-// Keyboard navigation for closing lightbox
 const handleKeydown = (e: KeyboardEvent) => {
   if (e.key === 'Escape') selectedImage.value = null
 }
@@ -120,10 +131,5 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-@reference "../assets/css/main.css";
-
-/* Avoid layout jumps when images load in masonry */
-.columns-1 img {
-  display: block;
-}
+/* Optional: specific styles for the studio wall if needed */
 </style>

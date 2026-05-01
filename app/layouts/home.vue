@@ -7,16 +7,16 @@
       @linkHover="handleLinkHover" 
     />
     
-    <!-- Curtain Overlay (Left) -->
+    <!-- Curtain Overlay (Top) -->
     <div 
-      class="fixed inset-y-0 left-0 w-1/2 z-[60] glass-fluted transition-transform duration-[1200ms] ease-curtain border-r border-white/10 dark:border-white/5 shadow-[20px_0_50px_rgba(0,0,0,0.1)]"
-      :class="isRevealed ? '-translate-x-full' : 'translate-x-0 cursor-pointer'"
+      class="fixed inset-x-0 top-0 h-1/2 z-[60] glass-fluted transition-transform duration-[1200ms] ease-curtain border-b border-white/10 dark:border-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.1)]"
+      :class="isRevealed ? '-translate-y-full' : 'translate-y-0 cursor-pointer'"
       @click="isRevealed = true"
     ></div>
-    <!-- Curtain Overlay (Right) -->
+    <!-- Curtain Overlay (Bottom) -->
     <div 
-      class="fixed inset-y-0 right-0 w-1/2 z-[60] glass-fluted transition-transform duration-[1200ms] ease-curtain border-l border-white/10 dark:border-white/5 shadow-[-20px_0_50px_rgba(0,0,0,0.1)]"
-      :class="isRevealed ? 'translate-x-full' : 'translate-x-0 cursor-pointer'"
+      class="fixed inset-x-0 bottom-0 h-1/2 z-[60] glass-fluted transition-transform duration-[1200ms] ease-curtain border-t border-white/10 dark:border-white/5 shadow-[0_-20px_50px_rgba(0,0,0,0.1)]"
+      :class="isRevealed ? 'translate-y-full' : 'translate-y-0 cursor-pointer'"
       @click="isRevealed = true"
     ></div>
 
@@ -28,7 +28,7 @@
     >
       <!-- Top Info -->
       <div class="absolute top-12 w-full flex justify-center">
-        <span class="u-h4 text-[#121212] dark:text-white opacity-60">Alexandre Mathieu — Architectural & Design works</span>
+        <span class="u-h4 text-[#121212] dark:text-white opacity-60">alexandre mathieu | architectural & design works |</span>
       </div>
 
       <!-- Main Title -->

@@ -13,6 +13,7 @@ tailles: ["L"]
 pays: ["France"]
 lieu: "Lorient"
 surface: "4200 m²"
+collaboration: "DDL Architectes"
 phase: "Concours"
 statut: "En projet"
 ---

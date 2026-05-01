@@ -1,11 +1,11 @@
 <template>
-  <div v-if="project" class="w-full relative bg-white dark:bg-[#121212]">
-    <div class="main-container" :class="isHero ? 'pt-32 pb-24' : 'pt-0 pb-12'">
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+  <div v-if="project" class="w-full relative bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] transition-colors duration-300">
+    <div :class="isHero ? 'pt-32 pb-24' : 'pt-0 pb-12'">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8">
         <!-- Carousel Section -->
         <div class="col-span-1 md:col-span-1 xl:col-span-3 z-0 order-1 md:order-2" :class="isHero ? '' : '-mx-[var(--main-padding)] md:mx-0'">
           <div 
-            class="relative w-full aspect-[4/3] md:aspect-[16/9] bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+            class="relative w-full aspect-[4/3] md:aspect-[16/9] transition-colors duration-300"
           >
             <ImageCarousel :images="images" :model-value="currentImageIndex" @update:model-value="setCurrentImageIndex" :id="project.path" />
           </div>
@@ -13,13 +13,11 @@
 
         <!-- Info / Description -->
         <div class="col-span-1 pt-0 z-0 order-2 md:order-1" :style="!isHero ? 'view-transition-name: project-description;' : ''">
-          <div class="project-description flex flex-col pr-4" :class="!isHero ? 'min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)]' : ''">
+          <div class="project-description flex flex-col pr-8 py-0 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] transition-colors duration-300" :class="!isHero ? 'min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)]' : ''">
             <div class="flex-grow pb-4 md:pb-6">
-              <h2 v-if="project.date" class="u-h2 mb-2 opacity-50">{{ project.date }}</h2>
-              <h1 class="u-h1 mb-6">{{ project.title }}</h1>
-              <p v-if="project.description" class="u-body mb-4">{{ project.description }}</p>
+              <p v-if="project.description" class="u-body mb-8 font-medium italic opacity-80 border-l-2 border-[#121212]/20 dark:border-white/20 pl-4 leading-relaxed">{{ project.description }}</p>
               <div class="content-renderer">
-                <ContentRenderer :value="project" class="prose max-w-none" />
+                <ContentRenderer :value="project" class="prose max-w-none prose-sm md:prose-base dark:prose-invert" />
               </div>
             </div>
 
@@ -34,18 +32,10 @@
                   <span class="w-20 opacity-50">Lieu:</span>
                   <span>{{ project.lieu }}</span>
                 </div>
-                <div v-if="project.statut" class="flex gap-4 u-legend">
-                  <span class="w-20 opacity-50">Statut:</span>
-                  <span>{{ project.statut }}</span>
-                </div>
                 <!-- Additional fields -->
                 <div v-if="project.cout" class="flex gap-4 u-legend">
                   <span class="w-20 opacity-50 text-nowrap">Coût:</span>
                   <span>{{ project.cout }}</span>
-                </div>
-                <div v-if="project.phase" class="flex gap-4 u-legend">
-                  <span class="w-20 opacity-50 text-nowrap">Phase:</span>
-                  <span>{{ project.phase }}</span>
                 </div>
                 <div v-if="project.materiaux" class="flex gap-4 u-legend">
                   <span class="w-20 opacity-50 text-nowrap">Matériaux:</span>

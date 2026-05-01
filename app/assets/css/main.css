@@ -1,3 +1,8 @@
+/* Force no-underline globally */
+* {
+  text-decoration: none !important;
+}
+
 html, body {
   height: 100%;
   @apply bg-white dark:bg-[#121212] transition-colors duration-300;

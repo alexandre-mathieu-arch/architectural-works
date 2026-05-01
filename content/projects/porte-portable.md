@@ -10,7 +10,6 @@ description: "Support pour ordinateur portable en multiplis d'okoumé. Un design
 typologies: ["Objet"]
 tailles: ["S"]
 pays: ["France"]
-lieu: "Lorient"
 materiaux: ["Multiplis d'okoumé"]
 phase: "Prototype"
 statut: "Réalisé"

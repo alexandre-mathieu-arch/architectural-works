@@ -15,7 +15,7 @@ description: "Le projet Cap-Horn s'érige comme une figure de proue tertiaire su
 typologies: ["Tertiaire", "Santé"]
 tailles: ["M"]
 pays: ["France"]
-lieu: "Lorient"
+lieu: "Quimper"
 surface: "850 m²"
 phase: "Études en cours"
 statut: "En projet"
