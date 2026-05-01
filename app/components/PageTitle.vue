@@ -74,7 +74,7 @@
                     class="w-4 h-4 flex-shrink-0 transition-transform duration-300"
                     :class="{ 'rotate-180': activeMenu === filter.id }"
                   >
-                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                   </svg>
                 </template>
               </button>
@@ -235,14 +235,16 @@ const currentProjectIndex = computed(() => {
 
 const prevProject = computed(() => {
   if (currentProjectIndex.value > 0) {
-    return projects.value[currentProjectIndex.value - 1];
+    const p = projects.value[currentProjectIndex.value - 1];
+    return p;
   }
   return null;
 });
 
 const nextProject = computed(() => {
   if (currentProjectIndex.value < projects.value.length - 1) {
-    return projects.value[currentProjectIndex.value + 1];
+    const p = projects.value[currentProjectIndex.value + 1];
+    return p;
   }
   return null;
 });

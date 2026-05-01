@@ -134,23 +134,48 @@ header a[href="https://ui.nuxt.com"] {
   backdrop-filter: blur(12px);
 }
 
+@utility ease-curtain {
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+}
+
 @utility glass-fluted {
-  @apply backdrop-blur-md bg-white/70 dark:bg-[#121212]/70;
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.1) 0px,
-    rgba(255, 255, 255, 0.1) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  .dark & {
-    background-image: repeating-linear-gradient(
+  @apply backdrop-blur-xl bg-white/40 dark:bg-[#121212]/40;
+  background: 
+    repeating-linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.03) 0px,
-      rgba(255, 255, 255, 0.03) 1px,
-      transparent 1px,
-      transparent 3px
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.05) 2px,
+      rgba(255, 255, 255, 0.05) 4px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 25%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.05) 75%,
+      rgba(255, 255, 255, 0.1) 100%
     );
+  background-size: 100% 100%, 8px 100%;
+  
+  .dark & {
+    background: 
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.02) 2px,
+        rgba(255, 255, 255, 0.02) 4px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.03) 0%,
+        rgba(255, 255, 255, 0.01) 25%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.03) 75%,
+        rgba(255, 255, 255, 0.03) 100%
+      );
+    background-size: 100% 100%, 8px 100%;
   }
 }
 

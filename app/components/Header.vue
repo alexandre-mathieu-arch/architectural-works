@@ -33,7 +33,7 @@
       <div class="flex-grow"></div>
 
       <!-- Desktop Search Bar, Theme Toggle & Lang Toggle -->
-      <div class="hidden md:flex items-center gap-[40px]">
+      <div class="hidden md:flex items-center gap-[30px]">
         <!-- Theme Toggle -->
         <button 
           @click="cycleTheme" 
@@ -44,6 +44,15 @@
           <UIcon v-else-if="colorMode.preference === 'doux'" name="i-heroicons-sparkles" class="w-5 h-5" />
           <UIcon v-else name="i-heroicons-sun" class="w-5 h-5" />
         </button>
+
+        <!-- Lang Toggle -->
+        <UButton
+          :label="currentLang"
+          variant="ghost"
+          color="[#121212]"
+          class="p-0 hover:bg-transparent u-h4 font-medium transition-all hover:text-black dark:hover:text-gray-300 dark:text-white hover:font-extrabold"
+          @click="toggleLang"
+        />
 
         <!-- Search Bar -->
         <div class="flex items-center relative">
@@ -56,7 +65,7 @@
               v-model="searchTerm" 
               placeholder="Rechercher..." 
               icon="i-heroicons-magnifying-glass-20-solid" 
-              class="w-full header-search-input dark:text-white"
+              class="header-search-input dark:text-white"
               color="[#121212]"
               variant="none"
               size="md"
@@ -86,27 +95,18 @@
               <div class="text-[12px] font-bold text-[#121212] dark:text-white tracking-wider group-hover:text-black dark:group-hover:text-gray-300 transition-colors">{{ result.title }}</div>
               <div v-if="result.description" class="text-[10px] text-gray-400 mt-1 line-clamp-1">{{ result.description }}</div>
             </NuxtLink>
-            </div>
-            <div 
+          </div>
+          <div 
             v-else-if="isSearchExpanded && searchTerm && !isSearching" 
             class="absolute top-full mt-2 right-0 w-64 bg-white dark:bg-[#121212] border border-gray-100 dark:border-gray-800 p-4 shadow-xl z-[100] text-[10px] text-gray-400 tracking-widest text-center"
-            >
+          >
             Aucun résultat
-            </div>        </div>
-
-        <UButton
-          :label="currentLang"
-          variant="ghost"
-          color="[#121212]"
-          class="p-0 hover:bg-transparent u-h4 font-medium transition-all hover:text-black dark:hover:text-gray-300 dark:text-white hover:font-extrabold"
-          @click="toggleLang"
-          @mouseenter="emit('linkHover', 'Langue')"
-          @mouseleave="emit('linkHover', '')"
-        />
+          </div>        
+        </div>
       </div>
 
       <!-- Mobile Toggle Button -->
-      <div class="md:hidden flex items-center gap-4">
+      <div class="md:hidden flex items-center gap-2">
         <button 
           @click="cycleTheme" 
           class="p-1 text-[#121212] dark:text-white"
@@ -115,6 +115,13 @@
           <UIcon v-else-if="colorMode.preference === 'doux'" name="i-heroicons-sparkles" class="w-5 h-5" />
           <UIcon v-else name="i-heroicons-sun" class="w-5 h-5" />
         </button>
+        <UButton
+          :label="currentLang"
+          variant="ghost"
+          color="[#121212]"
+          class="p-1 hover:bg-transparent u-h4 font-medium transition-all dark:text-white"
+          @click="toggleLang"
+        />
         <button 
           @click="toggleMenu" 
           class="p-2 rounded-md text-[#121212] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
@@ -127,9 +134,9 @@
       </div>
 
       <!-- Mobile Navigation Overlay -->
-      <div v-if="isMenuOpen" class="md:hidden fixed inset-0 glass-fluted bg-white dark:bg-[#121212] z-40 flex flex-col items-center justify-start pt-24 px-6 space-y-8 overflow-y-auto">
+      <div v-if="isMenuOpen" class="md:hidden fixed inset-0 h-screen w-screen glass-fluted bg-white dark:bg-[#121212] z-50 flex flex-col items-end justify-start pt-24 px-6 space-y-4">
         <!-- Search Bar (Mobile) -->
-        <div class="w-full max-w-xs mb-4">
+        <div class="w-full max-w-xs mb-8">
           <UInput 
             v-model="searchTerm" 
             placeholder="Rechercher..." 
@@ -141,24 +148,16 @@
           />
         </div>
 
-        <nav class="flex flex-col items-center space-y-8">
+        <nav class="flex flex-col items-end space-y-4 w-full">
           <NuxtLink 
             v-for="link in links" 
             :key="link.to" 
             :to="link.to"
-            class="u-h2 text-[32px] text-[#121212] dark:text-white mobile-link"
+            class="u-h2 text-[24px] text-[#121212] dark:text-white mobile-link px-4 py-2 border border-[#121212]/10 dark:border-white/10 w-fit"
             @click="handleLinkClick(link.label); isMenuOpen = false"
           >
             {{ link.label }}
           </NuxtLink>
-
-          <UButton
-            :label="currentLang"
-            variant="ghost"
-            color="[#121212]"
-            class="p-0 hover:bg-transparent u-h2 text-[32px] dark:text-white mobile-link"
-            @click="toggleLang"
-          />
         </nav>
       </div>
     </div>
@@ -166,7 +165,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick, computed } from 'vue';
+import { ref, watch, nextTick, computed, onUnmounted } from 'vue';
 import { UInput } from '#components';
 import { useHoverProject } from '~/composables/useHoverProject';
 
@@ -248,18 +247,28 @@ const toggleLang = () => {
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
+  if (import.meta.client) {
+    document.body.style.overflow = isMenuOpen.value ? 'hidden' : '';
+  }
 };
 
-const links = [{
-  label: 'Projets',
-  to: '/projects'
-}, {
-  label: 'Corpus',
-  to: '/corpus'
-}, {
-  label: 'Art',
-  to: '/art'
-}]
+watch(isMenuOpen, (newValue) => {
+  if (import.meta.client) {
+    document.body.style.overflow = newValue ? 'hidden' : '';
+  }
+});
+
+onUnmounted(() => {
+  if (import.meta.client) {
+    document.body.style.overflow = '';
+  }
+});
+
+const links = [
+  { label: 'Projets', to: '/projects' },
+  { label: 'Corpus', to: '/corpus' },
+  { label: 'Art', to: '/art' }
+];
 </script>
 
 <style scoped>

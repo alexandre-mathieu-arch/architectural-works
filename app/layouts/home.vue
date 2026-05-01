@@ -1,22 +1,29 @@
 <template>
-  <div id="wrapper" class="h-screen overflow-hidden" @click="isRevealed = true">
-    <!-- Header removed for immersive Hero experience -->
+  <div id="wrapper" class="h-screen overflow-hidden">
+    <Header 
+      v-if="isRevealed" 
+      class="transition-opacity duration-1000"
+      @linkClick="handleLinkClick" 
+      @linkHover="handleLinkHover" 
+    />
     
     <!-- Curtain Overlay (Left) -->
     <div 
-      class="fixed inset-y-0 left-0 w-1/2 z-10 glass-fluted transition-transform duration-1000 ease-in-out pointer-events-none border-r border-white/5 dark:border-white/5"
-      :class="isRevealed ? '-translate-x-full' : 'translate-x-0'"
+      class="fixed inset-y-0 left-0 w-1/2 z-[60] glass-fluted transition-transform duration-[1200ms] ease-curtain border-r border-white/10 dark:border-white/5 shadow-[20px_0_50px_rgba(0,0,0,0.1)]"
+      :class="isRevealed ? '-translate-x-full' : 'translate-x-0 cursor-pointer'"
+      @click="isRevealed = true"
     ></div>
     <!-- Curtain Overlay (Right) -->
     <div 
-      class="fixed inset-y-0 right-0 w-1/2 z-10 glass-fluted transition-transform duration-1000 ease-in-out pointer-events-none"
-      :class="isRevealed ? 'translate-x-full' : 'translate-x-0'"
+      class="fixed inset-y-0 right-0 w-1/2 z-[60] glass-fluted transition-transform duration-[1200ms] ease-curtain border-l border-white/10 dark:border-white/5 shadow-[-20px_0_50px_rgba(0,0,0,0.1)]"
+      :class="isRevealed ? 'translate-x-full' : 'translate-x-0 cursor-pointer'"
+      @click="isRevealed = true"
     ></div>
 
     <!-- UI Overlay (Title & Info) -->
     <div 
       v-if="displayedTitle"
-      class="fixed inset-0 z-40 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-700"
+      class="fixed inset-0 z-[55] flex flex-col items-center justify-center pointer-events-none transition-opacity duration-700"
       :class="isRevealed ? 'opacity-0' : 'opacity-100'"
     >
       <!-- Top Info -->
@@ -34,7 +41,7 @@
 
     <!-- Background Click Hint (visible only when not revealed) -->
     <div 
-      class="fixed bottom-12 inset-x-0 z-40 flex justify-center pointer-events-none transition-opacity duration-700"
+      class="fixed bottom-12 inset-x-0 z-[55] flex justify-center pointer-events-none transition-opacity duration-700"
       :class="isRevealed ? 'opacity-0' : 'opacity-100'"
     >
       <span class="u-h4 text-[#121212]/40 dark:text-white/40 animate-pulse uppercase tracking-[0.3em]">Découvrir</span>
@@ -60,7 +67,7 @@
     >
       <NuxtLink 
         to="/projects" 
-        class="u-sub-link px-8 py-3 border border-[#121212]/20 dark:border-white/20 hover:border-primary-900 dark:hover:border-primary-400 bg-white/10 dark:bg-black/10 backdrop-blur-sm transition-all"
+        class="u-sub-link px-8 py-3 border border-[#121212]/20 dark:border-white/20 hover:border-primary-900 dark:hover:text-primary-400 bg-white/10 dark:bg-black/10 backdrop-blur-sm transition-all"
       >
         Entrer
       </NuxtLink>
@@ -110,6 +117,3 @@ const displayedTitle = computed(() => {
   return '';
 });
 </script>
-
-<style scoped>
-</style>
