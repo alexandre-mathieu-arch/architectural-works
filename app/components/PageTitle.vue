@@ -176,10 +176,11 @@
             <button 
               v-if="hasActiveFilters"
               @click="resetFilters"
-              class="flex-shrink-0 flex items-center justify-center w-[30px] h-[30px] border border-red-600/30 dark:border-red-400/30 text-red-600 dark:text-red-400 bg-white/50 dark:bg-white/5 hover:bg-red-600 dark:hover:bg-red-500 hover:text-white transition-all duration-700 -mt-[1px]"
+              class="flex items-center gap-2 u-h4 px-3 h-[30px] border border-primary-900/30 dark:border-primary-400/30 text-primary-900 dark:text-primary-400 bg-white/50 dark:bg-white/5 hover:bg-primary-900 hover:text-white dark:hover:bg-primary-400 dark:hover:text-[#121212] transition-all duration-700 -mt-[1px] whitespace-nowrap group/reset"
               title="Réinitialiser les filtres"
             >
-              <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+              <span class="text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-medium">Tout effacer</span>
+              <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 opacity-50 group-hover/reset:opacity-100 transition-opacity">
                 <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 101.06 1.06L10 11.06l3.72 3.72a.75.75 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
               </svg>
             </button>

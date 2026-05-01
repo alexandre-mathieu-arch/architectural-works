@@ -109,6 +109,19 @@ watchEffect(() => {
 onMounted(() => {
   if (props.project) {
     setHoveredProject(props.project);
+    // Reset carousel and scroll on entry
+    setCurrentImageIndex(0);
+    if (import.meta.client) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+  }
+});
+
+// Also reset when the project changes (e.g. via navigation in the same component)
+watch(() => props.project?.path, () => {
+  setCurrentImageIndex(0);
+  if (import.meta.client) {
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
 });
 

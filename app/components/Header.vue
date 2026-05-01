@@ -269,6 +269,7 @@ onUnmounted(() => {
 
 const links = [
   { label: 'Projets', to: '/projects' },
+  { label: 'À propos', to: '/about' },
   { label: 'Corpus', to: '/corpus' },
   { label: 'Art', to: '/art' }
 ];
