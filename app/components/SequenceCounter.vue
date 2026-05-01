@@ -4,7 +4,7 @@
     <NuxtLink 
       v-if="prevProject" 
       :to="prevProject.path" 
-      class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center transition-all duration-300 border-r border-[#121212]/10 dark:border-white/10 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
+      class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center transition-all duration-700 border-r border-[#121212]/10 dark:border-white/10 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
       @click="$emit('nav', 'prev')"
       title="Projet précédent"
     >
@@ -17,11 +17,11 @@
       v-for="index in total"
       :key="index"
       @click="$emit('update:modelValue', index - 1)"
-      class="u-h4 h-full px-2 sm:px-3 flex-shrink-0 flex items-center justify-center transition-all duration-300 border-r border-[#121212]/10 dark:border-white/10 bg-transparent"
+      class="u-h4 h-full px-2 sm:px-3 flex-shrink-0 flex items-center justify-center transition-all duration-700 border-r border-[#121212]/10 dark:border-white/10 bg-transparent"
       :class="[
         modelValue === index - 1 
-          ? 'font-bold text-[#121212] dark:text-white doux:text-[#4A4443] opacity-100' 
-          : 'font-normal text-[#121212]/20 dark:text-white/20 doux:text-[#4A4443]/20 hover:text-[#121212] dark:hover:text-white doux:hover:text-[#4A4443] hover:opacity-100 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5'
+          ? 'font-bold text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] opacity-100' 
+          : 'font-normal text-[#121212]/20 dark:text-white/20 doux:text-[#4A4443]/20 nuit:text-[#CDD6F4]/20 hover:text-[#121212] dark:hover:text-white doux:hover:text-[#4A4443] nuit:hover:text-[#CDD6F4] hover:opacity-100 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5'
       ]"
     >
       {{ index }}
@@ -31,7 +31,7 @@
     <NuxtLink 
       v-if="nextProject" 
       :to="nextProject.path" 
-      class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center transition-all duration-300 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
+      class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center transition-all duration-700 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
       @click="$emit('nav', 'next')"
       title="Projet suivant"
     >

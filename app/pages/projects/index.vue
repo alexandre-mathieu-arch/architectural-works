@@ -10,9 +10,9 @@
           <!-- Colonne 2 : Vide avec bordure cliquable -->
           <button 
             @click="scrollToContact"
-            class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212] text-left"
+            class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-700 hover:border-[#121212] text-left"
           >
-            <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
               <span class="u-h3 dark:text-white doux:text-[#4A4443]">Démarrer un projet ?</span>
             </div>
           </button>
@@ -23,9 +23,9 @@
           <!-- Colonne 4 : Vide avec bordure cliquable -->
           <button 
             @click="scrollToContact"
-            class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-300 hover:border-[#121212] text-left"
+            class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-700 hover:border-[#121212] text-left"
           >
-            <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
               <span class="u-h3 dark:text-white doux:text-[#4A4443]">Démarrer un projet ?</span>
             </div>
           </button>

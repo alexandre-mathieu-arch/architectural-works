@@ -15,7 +15,7 @@
         {{ page.title }}
       </h1>
       
-      <p v-if="page.description" class="mt-6 u-body text-[18px] md:text-[21px] font-light italic opacity-80 leading-relaxed border-l-2 border-[#121212]/20 dark:border-white/20 pl-6">
+      <p v-if="page.description" class="mt-6 u-body text-[18px] md:text-[21px] font-light italic opacity-80 leading-relaxed">
         {{ page.description }}
       </p>
     </header>
@@ -33,8 +33,8 @@
 
     <!-- Back Navigation -->
     <div class="mt-20 pt-8 border-t border-[#121212]/10 dark:border-white/10">
-      <NuxtLink to="/corpus" class="inline-flex items-center gap-4 u-h4 uppercase tracking-widest text-[#121212] dark:text-white group transition-all duration-300">
-        <span class="transform transition-transform duration-300 group-hover:-translate-x-2">←</span>
+      <NuxtLink to="/corpus" class="inline-flex items-center gap-4 u-h4 uppercase tracking-widest text-[#121212] dark:text-white group transition-all duration-700">
+        <span class="transform transition-transform duration-700 group-hover:-translate-x-2">←</span>
         <span>Retour au Corpus</span>
       </NuxtLink>
     </div>

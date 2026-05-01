@@ -32,7 +32,7 @@ const clickedTitle = ref<string | object>('');
 // Smart Reset: Clear filters if navigating away from projects section
 watch(() => route.path, (newPath, oldPath) => {
   const isFromProjects = oldPath?.startsWith('/projects') || oldPath === '/';
-  const isToProjects = newPath.startsWith('/projects');
+  const isToProjects = newPath.startsWith('/projects') || newPath === '/';
   
   if (isFromProjects && !isToProjects) {
     resetFilters();

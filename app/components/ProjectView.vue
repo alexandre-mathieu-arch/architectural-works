@@ -15,7 +15,7 @@
         <div class="col-span-1 pt-0 z-0 order-2 md:order-1" :style="!isHero ? 'view-transition-name: project-description;' : ''">
           <div class="project-description flex flex-col pr-8 py-0 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] transition-colors duration-300" :class="!isHero ? 'min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)]' : ''">
             <div class="flex-grow pb-4 md:pb-6">
-              <p v-if="project.description" class="u-body mb-8 font-medium italic opacity-80 border-l-2 border-[#121212]/20 dark:border-white/20 pl-4 leading-relaxed">{{ project.description }}</p>
+              <p v-if="project.description" class="u-body mb-8 font-medium italic opacity-80 leading-relaxed">{{ project.description }}</p>
               <div class="content-renderer">
                 <ContentRenderer :value="project" class="prose max-w-none prose-sm md:prose-base dark:prose-invert" />
               </div>
@@ -59,12 +59,18 @@
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
           <!-- We place details under the carousel (columns 2-4 on XL) -->
           <div class="col-span-1 md:col-span-1 xl:col-span-3 xl:col-start-2">
-            <div v-for="detail in detailImages" :key="detail" class="mb-12">
+            <div 
+              v-for="(detail, idx) in detailImages" 
+              :key="detail" 
+              class="mb-12 overflow-hidden"
+            >
               <NuxtImg 
+                :ref="el => setDetailImgRef(el, idx)"
                 :src="detail" 
                 format="webp" 
                 width="1600"
-                class="w-full h-auto border border-[#121212]/10 dark:border-white/10"
+                class="w-full h-auto border border-[#121212]/10 dark:border-white/10 transition-transform duration-1000 ease-out scale-105"
+                :style="getParallaxStyle(detailImgRefs[idx])"
               />
             </div>
           </div>
@@ -75,9 +81,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch, watchEffect, onMounted } from 'vue';
+import { ref, computed, watch, watchEffect, onMounted } from 'vue';
 import { useCarouselState } from '~/composables/useCarouselState';
 import { useHoverProject } from '~/composables/useHoverProject';
+import { useParallax } from '~/composables/useParallax';
 
 const props = defineProps<{
   project: any;
@@ -86,6 +93,12 @@ const props = defineProps<{
 
 const { currentImageIndex, setCurrentImageIndex, setTotalImages } = useCarouselState();
 const { setHoveredProject } = useHoverProject();
+const { getParallaxStyle } = useParallax(30);
+
+const detailImgRefs = ref<HTMLElement[]>([]);
+const setDetailImgRef = (el: any, index: number) => {
+  if (el) detailImgRefs.value[index] = el.$el || el;
+};
 
 watchEffect(() => {
   if (props.project) {

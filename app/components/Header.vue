@@ -1,12 +1,12 @@
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50 glass-fluted transition-colors duration-300">
+  <header class="fixed top-0 left-0 right-0 z-50 glass-fluted transition-colors duration-700">
     <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] relative">
       <!-- Logo -->
       <NuxtLink 
-        to="/about" 
-        class="text-[#121212] dark:text-white whitespace-nowrap u-h4 logo-link"
-        @click="handleLinkClick('À propos')"
-        @mouseenter="emit('linkHover', 'À propos')"
+        to="/" 
+        class="text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap u-h4 logo-link"
+        @click="handleLinkClick('Projets')"
+        @mouseenter="emit('linkHover', 'Projets')"
         @mouseleave="emit('linkHover', '')"
       >
         Alexandre MATHIEU
@@ -19,7 +19,7 @@
             v-for="link in links" 
             :key="link.to" 
             :to="link.to"
-            class="u-h4 transition-all hover:text-black dark:hover:text-gray-300 text-[#121212] dark:text-white"
+            class="u-h4 transition-all hover:text-black dark:hover:text-gray-300 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
             @click="handleLinkClick(link.label)"
             @mouseenter="emit('linkHover', link.label)"
             @mouseleave="emit('linkHover', '')"
@@ -58,7 +58,7 @@
         <!-- Search Bar -->
         <div class="flex items-center relative">
           <div 
-            class="flex items-center transition-all duration-300 ease-in-out overflow-hidden"
+            class="flex items-center transition-all duration-700 ease-in-out overflow-hidden"
             :class="isSearchExpanded ? 'w-64 opacity-100' : 'w-0 opacity-0'"
           >
             <UInput 
@@ -93,7 +93,7 @@
               class="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-900 border-b border-gray-50 dark:border-gray-800 last:border-0 group"
               @click="clearSearch"
             >
-              <div class="text-[12px] font-bold text-[#121212] dark:text-white tracking-wider group-hover:text-black dark:group-hover:text-gray-300 transition-colors">{{ result.title }}</div>
+              <div class="text-[12px] font-bold text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] tracking-wider group-hover:text-black dark:group-hover:text-gray-300 transition-colors">{{ result.title }}</div>
               <div v-if="result.description" class="text-[10px] text-gray-400 mt-1 line-clamp-1">{{ result.description }}</div>
             </NuxtLink>
           </div>
@@ -155,7 +155,7 @@
             v-for="link in links" 
             :key="link.to" 
             :to="link.to"
-            class="u-h2 text-[24px] text-[#121212] dark:text-white mobile-link px-4 py-2 border border-[#121212]/10 dark:border-white/10 w-fit"
+            class="u-h2 text-[24px] text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] mobile-link px-4 py-2 border border-[#121212]/10 dark:border-white/10 w-fit"
             @click="handleLinkClick(link.label); isMenuOpen = false"
           >
             {{ link.label }}
@@ -285,6 +285,10 @@ const links = [
   color: #4A4443;
 }
 
+.nuit .router-link-active:not(.logo-link) {
+  color: #CDD6F4;
+}
+
 .logo-link.router-link-active {
   @apply text-[#121212] dark:text-white;
 }
@@ -293,8 +297,16 @@ const links = [
   color: #4A4443;
 }
 
+.nuit .logo-link {
+  color: #CDD6F4;
+}
+
 .doux .mobile-link {
   color: #4A4443 !important;
+}
+
+.nuit .mobile-link {
+  color: #CDD6F4 !important;
 }
 
 .header-search-input .icon {

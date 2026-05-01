@@ -3,29 +3,39 @@
     ref="cardRef"
     :to="project.path" 
     class="block w-full group"
-    @mouseenter="setHoveredProject(project)"
-    @mouseleave="setHoveredProject(null)"
-    @click="addVisited(project.path)"
+    :class="{ 'pointer-events-none': !isRevealed }"
+    @mouseenter="isRevealed ? setHoveredProject(project) : null"
+    @mouseleave="isRevealed ? setHoveredProject(null) : null"
+    @click="isRevealed ? addVisited(project.path) : (e) => e.preventDefault()"
   >
-    <div class="relative w-full aspect-square overflow-hidden">
-      <!-- Image qui remplit toute la zone -->
-      <NuxtImg
-        v-if="displayImage"
-        :src="displayImage"
-        :alt="project.title"
-        format="webp"
-        width="800"
-        height="800"
-        class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-        :style="{ viewTransitionName: 'image-' + project.path.replace(/\//g, '-') }"
-      />
+    <div class="relative w-full aspect-square overflow-hidden" ref="parallaxRef">
+      <template v-if="displayImage">
+        <!-- Parallax Wrapper -->
+        <div 
+          class="absolute inset-0 w-full h-full transition-transform duration-700 ease-out"
+          :style="getParallaxStyle(parallaxRef)"
+        >
+          <!-- Image with smooth zoom -->
+          <NuxtImg
+            :src="displayImage"
+            :alt="project.title"
+            format="webp"
+            width="800"
+            height="800"
+            class="w-full h-full object-cover transition-transform duration-1000 ease-in-out group-hover:scale-110 scale-105"
+            :style="{ 
+              viewTransitionName: 'image-' + project.path.replace(/\//g, '-') 
+            }"
+          />
+        </div>
+      </template>
       <!-- Placeholder si pas d'image -->
       <div v-else class="absolute inset-0 w-full h-full bg-gray-100 dark:bg-gray-800 doux:bg-[#DED9D8] nuit:bg-[#131929] flex items-center justify-center">
         <UIcon name="i-heroicons-photo" class="w-12 h-12 text-gray-400" />
       </div>
       
       <!-- Infos affichées au survol -->
-      <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10">
+      <div v-if="isRevealed" class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 z-10">
         <div class="absolute top-0 left-0 w-full border border-[#121212]/30 dark:border-white/20 px-2 h-[30px] flex items-center gap-3 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] overflow-hidden">
           <h3 
             class="u-h3 normal-case dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap overflow-hidden text-ellipsis flex-shrink"
@@ -55,11 +65,16 @@
 import { computed, ref, onMounted, onUnmounted } from 'vue';
 import { useVisitedProjects } from '~/composables/useVisitedProjects';
 import { useHoverProject } from '~/composables/useHoverProject';
+import { useParallax } from '~/composables/useParallax';
+import { useRevealedState } from '~/composables/useRevealedState';
 
 const { setHoveredProject } = useHoverProject();
 const { addVisited, isVisited } = useVisitedProjects();
+const { getParallaxStyle } = useParallax(15);
+const { isRevealed } = useRevealedState();
 
 const cardRef = ref<any>(null);
+const parallaxRef = ref<HTMLElement | null>(null);
 let observer: IntersectionObserver | null = null;
 
 const props = defineProps<{
@@ -93,7 +108,7 @@ onMounted(() => {
 
     observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && isRevealed.value) {
           setHoveredProject(props.project);
         }
       });
