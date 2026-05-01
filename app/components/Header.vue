@@ -42,6 +42,7 @@
         >
           <UIcon v-if="colorMode.preference === 'dark'" name="i-heroicons-moon" class="w-5 h-5" />
           <UIcon v-else-if="colorMode.preference === 'doux'" name="i-heroicons-sparkles" class="w-5 h-5" />
+          <UIcon v-else-if="colorMode.preference === 'nuit'" name="i-heroicons-star" class="w-5 h-5" />
           <UIcon v-else name="i-heroicons-sun" class="w-5 h-5" />
         </button>
 
@@ -113,6 +114,7 @@
         >
           <UIcon v-if="colorMode.preference === 'dark'" name="i-heroicons-moon" class="w-5 h-5" />
           <UIcon v-else-if="colorMode.preference === 'doux'" name="i-heroicons-sparkles" class="w-5 h-5" />
+          <UIcon v-else-if="colorMode.preference === 'nuit'" name="i-heroicons-star" class="w-5 h-5" />
           <UIcon v-else name="i-heroicons-sun" class="w-5 h-5" />
         </button>
         <UButton
@@ -171,7 +173,7 @@ import { useHoverProject } from '~/composables/useHoverProject';
 
 const colorMode = useColorMode();
 const cycleTheme = () => {
-  const modes = ['light', 'dark', 'doux'];
+  const modes = ['light', 'dark', 'doux', 'nuit'];
   const currentIndex = modes.indexOf(colorMode.preference);
   const nextIndex = (currentIndex + 1) % modes.length;
   colorMode.preference = modes[nextIndex];
@@ -180,6 +182,7 @@ const cycleTheme = () => {
 const themeTitle = computed(() => {
   if (colorMode.preference === 'light') return 'Passer au mode sombre';
   if (colorMode.preference === 'dark') return 'Passer au mode doux';
+  if (colorMode.preference === 'doux') return 'Passer au mode nuit';
   return 'Passer au mode clair';
 });
 

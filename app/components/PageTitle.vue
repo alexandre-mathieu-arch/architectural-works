@@ -41,7 +41,7 @@
       <slot name="triggers">
         <!-- Grid aligned triggers -->
         <div 
-          class="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 items-start"
+          class="grid grid-cols-3 xl:grid-cols-4 gap-2 md:gap-8 items-start"
           style="view-transition-name: page-triggers;"
         >
           <!-- Standard Filters (Grid) or Project Info (Detail) -->
@@ -53,7 +53,7 @@
             >
               <button 
                 @click="!readonlyFilters ? toggleMenu(filter.id) : null"
-                class="flex items-center justify-between gap-2 u-h4 transition-all duration-300 px-3 h-[30px] -mt-[1px] w-full group"
+                class="flex items-center justify-between gap-1 md:gap-2 u-h4 transition-all duration-300 px-1 md:px-3 h-[30px] -mt-[1px] w-full group"
                 :class="[
                   readonlyFilters 
                     ? 'bg-transparent border border-primary-900 text-primary-900 dark:border-primary-400 dark:text-primary-400 cursor-default pointer-events-none' 

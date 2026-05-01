@@ -1,5 +1,5 @@
 <template>
-  <div v-if="project" class="w-full relative bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] transition-colors duration-300">
+  <div v-if="project" class="w-full relative bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] transition-colors duration-300">
     <div :class="isHero ? 'pt-32 pb-24' : 'pt-0 pb-12'">
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8">
         <!-- Carousel Section -->
@@ -13,7 +13,7 @@
 
         <!-- Info / Description -->
         <div class="col-span-1 pt-0 z-0 order-2 md:order-1" :style="!isHero ? 'view-transition-name: project-description;' : ''">
-          <div class="project-description flex flex-col pr-8 py-0 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] transition-colors duration-300" :class="!isHero ? 'min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)]' : ''">
+          <div class="project-description flex flex-col pr-8 py-0 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] transition-colors duration-300" :class="!isHero ? 'min-h-0 md:min-h-[calc(100vh-var(--header-height)-120px)]' : ''">
             <div class="flex-grow pb-4 md:pb-6">
               <p v-if="project.description" class="u-body mb-8 font-medium italic opacity-80 border-l-2 border-[#121212]/20 dark:border-white/20 pl-4 leading-relaxed">{{ project.description }}</p>
               <div class="content-renderer">

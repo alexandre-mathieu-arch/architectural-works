@@ -15,6 +15,11 @@ html, body {
   color: #4A4443;
 }
 
+.nuit body {
+  background-color: #1A2238; /* Bleu Nuit Doux */
+  color: #CDD6F4;
+}
+
 @theme {
   --color-primary-50: #ECFDF5;
   --color-primary-100: #D1FAE5;
@@ -56,6 +61,7 @@ header a[href="https://ui.nuxt.com"] {
 @import "tailwindcss";
 @variant dark (&:where(.dark, .dark *));
 @variant doux (&:where(.doux, .doux *));
+@variant nuit (&:where(.nuit, .nuit *));
 @plugin "@tailwindcss/typography";
 
 
@@ -133,9 +139,19 @@ header a[href="https://ui.nuxt.com"] {
   background-color: #E5E1E0 !important;
 }
 
+.nuit #wrapper {
+  background-color: #1A2238 !important;
+}
+
 .doux header,
 .doux .sticky {
   background-color: rgba(229, 225, 224, 0.8) !important;
+  backdrop-filter: blur(12px);
+}
+
+.nuit header,
+.nuit .sticky {
+  background-color: rgba(26, 34, 56, 0.8) !important;
   backdrop-filter: blur(12px);
 }
 
@@ -195,6 +211,17 @@ header a[href="https://ui.nuxt.com"] {
   ) !important;
 }
 
+.nuit .glass-fluted {
+  background-color: rgba(26, 34, 56, 0.7) !important;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(205, 214, 244, 0.05) 0px,
+    rgba(205, 214, 244, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  ) !important;
+}
+
 /* Typography Rationalization */
 @utility u-h1 {
   @apply text-[28px] md:text-[34px] lg:text-[40px] font-bold leading-none dark:text-white;
@@ -211,6 +238,10 @@ header a[href="https://ui.nuxt.com"] {
       -webkit-text-stroke: 1px #4A4443;
       color: transparent;
     }
+    .nuit & {
+      -webkit-text-stroke: 1px #CDD6F4;
+      color: transparent;
+    }
   }
 }
 
@@ -219,18 +250,21 @@ header a[href="https://ui.nuxt.com"] {
   letter-spacing: 0.2em;
   font-family: var(--font-primary);
   .doux & { color: #4A4443; }
+  .nuit & { color: #CDD6F4; }
 }
 
 @utility u-sub-link {
   @apply font-medium text-[#121212] dark:text-white hover:text-gray-400 tracking-widest text-[21px] transition-colors uppercase;
   letter-spacing: 0.2em;
   .doux & { color: #4A4443; }
+  .nuit & { color: #CDD6F4; }
 }
 
 @utility u-h3 {
   @apply text-[15px] font-bold tracking-[0.1em] dark:text-white;
   font-family: var(--font-primary);
   .doux & { color: #4A4443; }
+  .nuit & { color: #CDD6F4; }
 }
 
 @utility u-h4 {
@@ -238,18 +272,21 @@ header a[href="https://ui.nuxt.com"] {
   letter-spacing: 0.2em;
   font-family: var(--font-primary);
   .doux & { color: #4A4443; }
+  .nuit & { color: #CDD6F4; }
 }
 
 @utility u-body {
   @apply text-[15px] font-normal leading-[1.3] text-[#121212] dark:text-white subpixel-antialiased;
   font-family: var(--font-body);
   .doux & { color: #5B5453; }
+  .nuit & { color: #CDD6F4; }
 }
 
 @utility u-legend {
   @apply text-[12px] font-normal tracking-[0.1em] leading-tight text-[#121212] dark:text-white;
   font-family: var(--font-primary);
   .doux & { color: #4A4443; }
+  .nuit & { color: #CDD6F4; }
 }
 
 /* Prose overrides for Markdown content */
