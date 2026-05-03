@@ -23,7 +23,8 @@ export default defineNuxtConfig({
     modes: {
       light: 'light',
       dark: 'dark',
-      doux: 'doux'
+      doux: 'doux',
+      nuit: 'nuit'
     }
   },
 

@@ -31,8 +31,9 @@ const clickedTitle = ref<string | object>('');
 
 // Smart Reset: Clear filters if navigating away from projects section
 watch(() => route.path, (newPath, oldPath) => {
-  const isFromProjects = oldPath?.startsWith('/projects') || oldPath === '/';
-  const isToProjects = newPath.startsWith('/projects') || newPath === '/';
+  const projectRoutes = ['/architecture', '/design', '/projects'];
+  const isFromProjects = projectRoutes.some(r => oldPath?.startsWith(r)) || oldPath === '/';
+  const isToProjects = projectRoutes.some(r => newPath.startsWith(r)) || newPath === '/';
   
   if (isFromProjects && !isToProjects) {
     resetFilters();
@@ -66,11 +67,6 @@ const displayedTitle = computed(() => {
   // For project detail pages, show the project title
   if (route.path.startsWith('/projects/') && route.meta.dynamicTitle) {
     return route.meta.dynamicTitle;
-  }
-  
-  // For the projects grid or any projects page
-  if (route.path.startsWith('/projects')) {
-    return 'Projets';
   }
   
   if (route.meta.displayTitle) {

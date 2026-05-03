@@ -9,7 +9,7 @@ images:
   - "/images/projects/atrium/night-shift-bis.jpg"
   - "/images/projects/atrium/perspective.jpg"
 description: "Au cœur de la rigueur orthogonale d'un siège bancaire, des structures organiques en toiles tendues créent une rupture inattendue. Un dialogue entre la géométrie réglée de l'espace et la fluidité de bulles programmatiques."
-typologies: ["Bureaux"]
+typologies: ["Intérieur", "Bureaux"]
 tailles: ["L"]
 pays: ["France"]
 lieu: "Vannes"

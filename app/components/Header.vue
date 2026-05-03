@@ -37,7 +37,7 @@
         <!-- Theme Toggle -->
         <button 
           @click="cycleTheme" 
-          class="p-1 text-[#121212] dark:text-white transition-colors flex items-center justify-center hover:text-primary-900 dark:hover:text-primary-400"
+          class="p-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] transition-colors flex items-center justify-center hover:text-primary-900 dark:hover:text-primary-400"
           :title="themeTitle"
         >
           <UIcon v-if="colorMode.preference === 'dark'" name="i-heroicons-moon" class="w-5 h-5" />
@@ -51,7 +51,7 @@
           :label="currentLang"
           variant="ghost"
           color="[#121212]"
-          class="p-0 hover:bg-transparent u-h4 font-medium transition-all hover:text-black dark:hover:text-gray-300 dark:text-white hover:font-extrabold"
+          class="p-0 hover:bg-transparent u-h4 font-medium transition-all hover:text-black dark:hover:text-gray-300 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:font-extrabold"
           @click="toggleLang"
         />
 
@@ -66,7 +66,7 @@
               v-model="searchTerm" 
               placeholder="Rechercher..." 
               icon="i-heroicons-magnifying-glass-20-solid" 
-              class="header-search-input dark:text-white"
+              class="header-search-input text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
               color="[#121212]"
               variant="none"
               size="md"
@@ -76,7 +76,7 @@
           <button 
             v-if="!isSearchExpanded"
             @click="isSearchExpanded = true"
-            class="p-1 text-[#121212] dark:text-white hover:text-black dark:hover:text-gray-300 hover:font-extrabold transition-all flex items-center justify-center"
+            class="p-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:text-black dark:hover:text-gray-300 hover:font-extrabold transition-all flex items-center justify-center"
           >
             <UIcon name="i-heroicons-magnifying-glass-20-solid" class="w-5 h-5" />
           </button>
@@ -110,7 +110,7 @@
       <div class="md:hidden flex items-center gap-2">
         <button 
           @click="cycleTheme" 
-          class="p-1 text-[#121212] dark:text-white"
+          class="p-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
         >
           <UIcon v-if="colorMode.preference === 'dark'" name="i-heroicons-moon" class="w-5 h-5" />
           <UIcon v-else-if="colorMode.preference === 'doux'" name="i-heroicons-sparkles" class="w-5 h-5" />
@@ -121,12 +121,12 @@
           :label="currentLang"
           variant="ghost"
           color="[#121212]"
-          class="p-1 hover:bg-transparent u-h4 font-medium transition-all dark:text-white"
+          class="p-1 hover:bg-transparent u-h4 font-medium transition-all text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
           @click="toggleLang"
         />
         <button 
           @click="toggleMenu" 
-          class="p-2 rounded-md text-[#121212] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
+          class="p-2 rounded-md text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-gray-200 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
         >
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path :class="{ 'hidden': isMenuOpen, 'block': !isMenuOpen }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -268,7 +268,8 @@ onUnmounted(() => {
 });
 
 const links = [
-  { label: 'Projets', to: '/projects' },
+  { label: 'Architecture', to: '/architecture' },
+  { label: 'Design', to: '/design' },
   { label: 'À propos', to: '/about' },
   { label: 'Corpus', to: '/corpus' },
   { label: 'Art', to: '/art' }

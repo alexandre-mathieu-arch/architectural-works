@@ -4,9 +4,8 @@
     <NuxtLink 
       v-if="prevProject" 
       :to="prevProject.path" 
-      class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center transition-all duration-700 border-r border-[#121212]/10 dark:border-white/10 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
+      class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center transition-all duration-700 border-r border-[#121212]/10 dark:border-white/10 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
       @click="$emit('nav', 'prev')"
-      title="Projet précédent"
     >
       &lt;
     </NuxtLink>
@@ -31,7 +30,7 @@
     <NuxtLink 
       v-if="nextProject" 
       :to="nextProject.path" 
-      class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center transition-all duration-700 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white"
+      class="u-h4 h-full px-3 flex-shrink-0 flex items-center justify-center transition-all duration-700 hover:bg-[#121212]/5 dark:hover:bg-white/5 doux:hover:bg-[#4A4443]/5 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
       @click="$emit('nav', 'next')"
       title="Projet suivant"
     >

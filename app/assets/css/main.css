@@ -21,7 +21,7 @@ html, body {
 }
 
 /* Global overrides for black text in Nuit mode */
-.nuit .text-\[#121212\],
+.nuit .text-\[\#121212\],
 .nuit .u-body,
 .nuit .u-h1,
 .nuit .u-h2,
@@ -31,23 +31,23 @@ html, body {
   color: #CDD6F4 !important;
 }
 
-.nuit .text-\[#121212\]\/30 {
+.nuit .text-\[\#121212\]\/30 {
   color: rgba(205, 214, 244, 0.3) !important;
 }
 
-.nuit .text-\[#121212\]\/40 {
+.nuit .text-\[\#121212\]\/40 {
   color: rgba(205, 214, 244, 0.4) !important;
 }
 
-.nuit .text-\[#121212\]\/60 {
+.nuit .text-\[\#121212\]\/60 {
   color: rgba(205, 214, 244, 0.6) !important;
 }
 
-.nuit .text-\[#121212\]\/70 {
+.nuit .text-\[\#121212\]\/70 {
   color: rgba(205, 214, 244, 0.7) !important;
 }
 
-.nuit .text-\[#121212\]\/80 {
+.nuit .text-\[\#121212\]\/80 {
   color: rgba(205, 214, 244, 0.8) !important;
 }
 
@@ -192,42 +192,22 @@ header a[href="https://ui.nuxt.com"] {
 
 @utility glass-fluted {
   @apply backdrop-blur-xl bg-white/40 dark:bg-[#121212]/40;
-  background: 
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 2px,
-      rgba(255, 255, 255, 0.05) 2px,
-      rgba(255, 255, 255, 0.05) 4px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.05) 25%,
-      transparent 50%,
-      rgba(0, 0, 0, 0.05) 75%,
-      rgba(255, 255, 255, 0.1) 100%
-    );
-  background-size: 100% 100%, 8px 100%;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
   
   .dark & {
-    background: 
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 2px,
-        rgba(255, 255, 255, 0.02) 2px,
-        rgba(255, 255, 255, 0.02) 4px
-      ),
-      linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.03) 0%,
-        rgba(255, 255, 255, 0.01) 25%,
-        transparent 50%,
-        rgba(0, 0, 0, 0.03) 75%,
-        rgba(255, 255, 255, 0.03) 100%
-      );
-    background-size: 100% 100%, 8px 100%;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 3px
+    );
   }
 }
 

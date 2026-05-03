@@ -1,0 +1,162 @@
+\documentclass[10pt,a5paper,landscape]{article}
+
+% --- Packages ---
+\usepackage[french]{babel}
+\usepackage{fontspec}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tocloft}
+\usepackage{multicol}
+\usepackage{afterpage}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+% --- Configuration des liens ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkgray,
+    urlcolor=mediumgray
+}
+
+% --- Configuration des marges ---
+\geometry{
+    left=1.2cm,
+    right=1.2cm,
+    top=1.2cm,
+    bottom=1.2cm,
+    footskip=0.8cm
+}
+
+% --- Couleurs ---
+\definecolor{warmdark}{HTML}{1A1614} % Sombre ton chaud
+\definecolor{warmwhite}{HTML}{FDFBF7} % Blanc chaud
+\definecolor{archiblue}{HTML}{1E1B4B} % Bleu indigo profond, presque violet et très foncé
+\definecolor{paleblue}{HTML}{F0F4FF}  % Bleu extrêmement pâle, presque blanc
+\definecolor{darkgray}{HTML}{121212}
+\definecolor{mediumgray}{HTML}{4A4443}
+\definecolor{lightgray}{HTML}{999999}
+
+% --- Typographie ---
+\setmainfont{Satoshi-Regular.otf}[
+    Path = ../font/,
+    BoldFont = Satoshi-Bold.otf,
+    ItalicFont = Satoshi-Italic.otf
+]
+\newfontfamily\titlefont{Satoshi-Bold.otf}[Path = ../font/]
+\newfontfamily\lightfont{Satoshi-Light.otf}[Path = ../font/]
+\newfontfamily\mediumfont{Satoshi-Medium.otf}[Path = ../font/]
+
+% --- Personnalisation du Sommaire ---
+\renewcommand{\contentsname}{S O M M A I R E}
+\renewcommand{\cfttoctitlefont}{\hfill\Huge\titlefont\color{darkgray}}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftsecfont}{\mediumfont\scriptsize}
+\renewcommand{\cftsecpagefont}{\mediumfont\scriptsize}
+\renewcommand{\cftsecleader}{\textcolor{lightgray!30}{\cftdotfill{0.5}}}
+\renewcommand{\cftsecindent}{0pt}
+\setlength{\cftbeforesecskip}{0.2cm}
+
+% --- Commandes de mise en page ---
+
+\newcommand{\projectIntroPage}[4]{
+    \newpage
+    \thispagestyle{empty}
+    \begin{flushleft}
+        \vspace*{0.2cm}
+        {\scriptsize \mediumfont \color{mediumgray} #3} \par
+        \vspace{0.1cm}
+        {\Huge \titlefont \color{darkgray} #1} \hfill {\large \lightfont \color{lightgray} #2} \par
+        \vspace{0.2cm}
+        \hrule height 0.3pt \par
+        \vspace{0.8cm}
+        \ifx&#4&\else
+            \begin{center}
+                \includegraphics[height=8.5cm,width=18cm,keepaspectratio]{#4}
+            \end{center}
+        \fi
+    \end{flushleft}
+}
+
+\newcommand{\projectDetailsPage}[2]{
+    \newpage
+    \begin{minipage}[t]{0.32\textwidth}
+        \vspace{0pt}
+        {\scriptsize \mediumfont #1}
+        \par\vspace{0.6cm}
+        {\footnotesize \lightfont \interlinepenalty=10000 #2}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.64\textwidth}
+        \vspace{0pt}
+        \PROJECTIMAGES
+    \end{minipage}
+}
+
+\newcommand{\PROJECTIMAGES}{}
+
+% --- Entête et pied de page ---
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\scriptsize \lightfont Alexandre MATHIEU — Portfolio}
+\fancyfoot[R]{\scriptsize \mediumfont \thepage}
+
+\begin{document}
+
+% --- Page de garde (Hero style Sombre avec Surlignage Bleu) ---
+{
+\newpage
+\pagecolor{warmdark}
+\afterpage{\nopagecolor}
+\thispagestyle{empty}
+\begin{flushleft}
+    \color{warmwhite}
+    \vspace*{2.5cm}
+    \noindent {\fontsize{40}{40} \titlefont Alexandre} \par
+    \noindent {\fontsize{40}{40} \titlefont MATHIEU} \par
+    \vspace{0.4cm}
+    
+    % Bloc de surlignage bleu avec texte bleu pâle
+    \noindent \hspace*{-4pt} \colorbox{archiblue}{
+        \rule[-2pt]{0pt}{12pt} % Hauteur du bloc
+        \large \mediumfont \color{paleblue} architecture + design + art
+    } \par
+    
+    \vspace{0.8cm}
+    \noindent {\scriptsize \lightfont alexandre.mat+w@protonmail.com} \par
+    \noindent {\scriptsize \lightfont +336 58 21 53 00} \par
+    \noindent {\scriptsize \lightfont \url{https://alexandre-mathieu-arch.github.io/works/}} \par
+    \vspace{2.5cm}
+    \noindent {\huge \lightfont PORTFOLIO} \par
+    \vfill
+    \noindent {\scriptsize \mediumfont 2019 -- 2026}
+\end{flushleft}
+}
+
+% --- Deuxième de couverture (Blanche) ---
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+% --- Sommaire (Deux colonnes) ---
+\newpage
+\thispagestyle{plain}
+\vspace*{1cm}
+\begin{center}
+    {\Huge \titlefont S O M M A I R E} \par
+    \vspace{1cm}
+\end{center}
+\begin{multicols}{2}
+    \makeatletter
+    \@starttoc{toc}
+    \makeatother
+\end{multicols}
+
+% --- Projets ---
+%%PROJECTS_PLACEHOLDER%%
+
+\end{document}

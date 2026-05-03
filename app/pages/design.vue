@@ -1,6 +1,5 @@
 <template>
   <div class="pt-0 pb-0">
-
     <div v-if="filteredProjects?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 items-center mt-3">
       <template v-for="(project, index) in filteredProjects" :key="project.path">
         <!-- Cycle de 6 : 4 pleins, 1 normal, 1 vide, 1 normal, 1 vide -->
@@ -39,7 +38,7 @@
       </template>
     </div>
     <div v-else class="text-center py-10">
-      <p class="text-gray-500">Aucun projet ne correspond à votre sélection.</p>
+      <p class="text-gray-500">Aucun projet de design ne correspond à votre sélection.</p>
     </div>
 
     <!-- Contact Section -->
@@ -76,12 +75,12 @@ import { useProjectFilters } from '~/composables/useProjectFilters';
 
 definePageMeta({
   layout: 'default',
-  displayTitle: 'Projets', // Title for the PageTitle component
+  displayTitle: 'Design',
   showFilters: true
 });
 
 useHead({
-  title: 'Projets — Alexandre Mathieu'
+  title: 'Design — Alexandre Mathieu'
 })
 
 const { 
@@ -101,9 +100,11 @@ const {
 const route = useRoute();
 const router = useRouter();
 
-const { data: projects } = await useAsyncData('projects', () =>
+// Filter Design projects (only those that have "Design" as a typology)
+const { data: projects } = await useAsyncData('design-projects', () =>
   queryCollection('content')
     .where('path', 'LIKE', '/projects/%')
+    .where('typologies', 'LIKE', '%Design%')
     .all()
 );
 
@@ -116,16 +117,13 @@ const scrollToContact = () => {
 
 onMounted(() => {
   if (route.query.scroll === 'contact') {
-    // Small delay to ensure transitions and images are settling
     setTimeout(() => {
       scrollToContact();
-      // Clean up the URL
       router.replace({ query: { ...route.query, scroll: undefined } });
     }, 500);
   }
 });
 
-// Populate filter options from project data
 watchEffect(() => {
   if (projects.value) {
     const typologies = new Set<string>();
@@ -176,11 +174,9 @@ const filteredProjects = computed(() => {
     return matchTypology && matchSize && matchCountry && matchYear && matchTitle;
   });
 
-  // Always sort: Default to Date (latest first)
   if (sortBy.value === 'Nom') {
       result.sort((a, b) => a.title.localeCompare(b.title));
   } else {
-      // Default and 'Date' sorting
       result.sort((a, b) => {
         const dateA = new Date(a.date || 0).getTime();
         const dateB = new Date(b.date || 0).getTime();
