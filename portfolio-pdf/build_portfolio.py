@@ -77,33 +77,47 @@ def generate_tex(projects):
         meta = []
         if 'typologies' in p: meta.append(f"\\textbf{{Typologie :}} {', '.join(p['typologies'])}")
         if 'materiaux' in p: meta.append(f"\\textbf{{Matériaux :}} {', '.join(p['materiaux'])}")
+        if 'pays' in p: meta.append(f"\\textbf{{Pays :}} {', '.join(p['pays'])}")
         if 'lieu' in p: meta.append(f"\\textbf{{Lieu :}} {p['lieu']}")
         meta_str = " \\\\ ".join(meta)
 
         # Images
         all_imgs = p.get('local_images', [])
         intro_img = all_imgs[0] if len(all_imgs) > 0 else ""
+        detail_imgs = all_imgs[1:]
 
         # Sous-titre (Lieu + Phase ou Statut)
         subtitle_parts = []
         if 'lieu' in p: subtitle_parts.append(p['lieu'])
         if 'phase' in p: subtitle_parts.append(p['phase'])
         elif 'statut' in p: subtitle_parts.append(p['statut'])
-        subtitle = " // ".join(subtitle_parts).upper()
+        subtitle = " / ".join(subtitle_parts).upper()
 
-        # Construction de la galerie pour la page de détails
-        gallery_tex = ""
-        if len(all_imgs) > 1:
-            # On essaie de mettre les images par paires ou colonnes
-            for img in all_imgs[1:3]: # On en prend 2 pour rester propre sur A5
-                gallery_tex += f"\\includegraphics[width=\\textwidth,height=4.5cm,keepaspectratio]{{{img}}}\\par\\vspace{{0.4cm}}\n"
+        # Construction du corps avec images entrelacées
+        body_tex = p.get('body_tex', '')
+        paragraphs = [para.strip() for para in body_tex.split('\\par\\medskip ') if para.strip()]
+        
+        enhanced_body = ""
+        img_idx = 0
+        
+        # On répartit les images entre les paragraphes
+        for i, para in enumerate(paragraphs):
+            enhanced_body += para + "\\par\\medskip "
+            # Insérer une image tous les 2 paragraphes ou à la fin s'il en reste
+            if img_idx < len(detail_imgs) and (i % 2 == 0 or i == len(paragraphs) - 1):
+                enhanced_body += f"\\detailImage{{{detail_imgs[img_idx]}}}"
+                img_idx += 1
+        
+        # S'il reste des images non placées
+        while img_idx < len(detail_imgs):
+            enhanced_body += f"\\detailImage{{{detail_imgs[img_idx]}}}"
+            img_idx += 1
 
-        # On crée un bloc spécifique pour les images de détails
+        # On crée l'entrée du projet
         project_entry = f"""
 \\projectIntroPage{{{title}}}{{{date}}}{{{subtitle}}}{{{intro_img}}}
 
-\\renewcommand{{\\PROJECTIMAGES}}{{{gallery_tex}}}
-\\projectDetailsPage{{{meta_str}}}{{{p['body_tex']}}}
+\\projectDetailsPage{{{meta_str}}}{{{enhanced_body}}}
 """
         projects_tex += project_entry
 

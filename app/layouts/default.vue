@@ -1,8 +1,10 @@
 <template>
   <div id="wrapper">
     <Header @linkClick="handleLinkClick" @linkHover="handleLinkHover" />
-    <div :style="{ paddingTop: 'var(--header-height)' }">
-      <main class="main-container pb-12">
+    
+    <!-- Content -->
+    <div class="min-h-screen">
+      <main class="pb-12 main-container" :style="{ paddingTop: 'var(--header-height)' }">
         <PageTitle 
           v-if="!route.meta.hideLayoutTitle"
           :title="pageTitle" 
@@ -12,8 +14,8 @@
         />
         <slot />
       </main>
+      <TheFooter />
     </div>
-    <TheFooter />
   </div>
 </template>
 
