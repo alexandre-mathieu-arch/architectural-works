@@ -1,6 +1,6 @@
 ---
 title: "Atrium Organique"
-date: 2024
+date: 2021
 ratio: "4/3"
 draft: false
 tags: ["bureaux", "aménagement", "design"]
@@ -13,8 +13,8 @@ typologies: ["Intérieur", "Bureaux"]
 tailles: ["L"]
 pays: ["France"]
 lieu: "Vannes"
-phase: "Réalisé"
-statut: "Réalisé"
+phase: "Concours privé (abandonné)"
+statut: "Abandonné"
 logiciels: ["Rhinocéros 3D", "Grasshopper", "Bridge Archicad", "Twinmotion", "Photoshop"]
 ---
 

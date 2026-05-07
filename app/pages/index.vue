@@ -1,196 +1,62 @@
 <template>
-  <div class="pt-0 pb-0">
-
-    <div 
-      v-if="filteredProjects?.length" 
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 items-center mt-3"
-      style="view-transition-name: projects-grid;"
+  <div 
+    class="-mx-[var(--main-padding)] -mt-[var(--header-height)] flex flex-col md:flex-row bg-white dark:bg-[#121212] transition-colors duration-700 overflow-hidden h-screen"
+    style="view-transition-name: projects-grid;"
+  >
+    <!-- Architecture Side -->
+    <NuxtLink 
+      to="/architecture"
+      class="flex-1 relative group overflow-hidden border-b md:border-b-0 md:border-r border-[#121212]/5 dark:border-white/5 transition-all duration-1000 hover:flex-[1.1]"
     >
-      <template v-for="(project, index) in filteredProjects" :key="project.path">
-        <!-- Cycle de 6 : 4 pleins, 1 normal, 1 vide, 1 normal, 1 vide -->
-        
-        <!-- Cas spécial pour le 6ème projet (index 5, 11, 17...) -->
-        <template v-if="index % 6 === 5">
-          <!-- Colonne 2 : Vide avec bordure cliquable -->
-          <button 
-            @click="scrollToContact"
-            class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-700 hover:border-[#121212] text-left"
-          >
-            <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-              <span class="u-h3 dark:text-white doux:text-[#4A4443]">Démarrer un projet ?</span>
-            </div>
-          </button>
-          
-          <!-- Colonne 3 : Le projet -->
-          <ProjectCard :project="project" />
-          
-          <!-- Colonne 4 : Vide avec bordure cliquable -->
-          <button 
-            @click="scrollToContact"
-            class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-700 hover:border-[#121212] text-left"
-          >
-            <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-              <span class="u-h3 dark:text-white doux:text-[#4A4443]">Démarrer un projet ?</span>
-            </div>
-          </button>
-        </template>
-
-        <!-- Projets normaux (1, 2, 3, 4 et 5 du cycle) -->
-        <ProjectCard 
-          v-else 
-          :project="project" 
-        />
-      </template>
-    </div>
-    <div v-else class="text-center py-10">
-      <p class="text-gray-500">Aucun projet ne correspond à votre sélection.</p>
-    </div>
-
-    <!-- Contact Section -->
-    <div id="contact" class="mt-32 pb-24 border-t border-[#121212]/10 pt-16 scroll-mt-20">
-      <div class="mb-10">
-        <p class="u-h2 max-w-2xl leading-tight font-light !tracking-[0.15em]">
-          Définir un programme, donner forme à une vision, bâtir un futur, engageons le dialogue.
-        </p>
+      <div class="absolute inset-0 bg-gray-50/30 dark:bg-white/2 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+      
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="flex flex-col items-center space-y-6 px-4 text-center">
+          <span class="u-h1 !font-normal !text-[32px] md:!text-[50px] lg:!text-[60px] !text-[#121212] dark:!text-white doux:!text-[#4A4443] nuit:!text-[#CDD6F4] opacity-10 group-hover:opacity-100 transition-all duration-1000 scale-95 group-hover:scale-100 uppercase !tracking-[0.3em] !webkit-text-stroke-0">
+            Architecture
+          </span>
+          <div class="h-px w-0 group-hover:w-16 bg-[#121212]/20 dark:bg-white/20 transition-all duration-1000"></div>
+          <span class="u-h4 opacity-0 group-hover:opacity-40 transition-all duration-1000 translate-y-4 group-hover:translate-y-0 !tracking-[0.2em] text-[10px] md:text-[11px]">
+            Explorer les projets
+          </span>
+        </div>
       </div>
+    </NuxtLink>
 
-      <div class="flex flex-col gap-y-6">
-        <a
-          href="mailto:alexandre.mat+w@protonmail.com"
-          class="u-h3 font-normal tracking-[0.2em] hover:text-gray-500 transition-colors w-fit"
-        >
-          alexandre.mat+w@protonmail.com
-        </a>
-
-        <a
-          href="tel:+33658215300"
-          class="u-h3 font-normal tracking-[0.2em] hover:text-gray-500 transition-colors w-fit"
-        >
-          +33 6 58 21 53 00
-        </a>
+    <!-- Design Side -->
+    <NuxtLink 
+      to="/design"
+      class="flex-1 relative group overflow-hidden transition-all duration-1000 hover:flex-[1.1]"
+    >
+      <div class="absolute inset-0 bg-gray-50/30 dark:bg-white/2 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+      
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="flex flex-col items-center space-y-6 px-4 text-center">
+          <span class="u-h1 !font-normal !text-[32px] md:!text-[50px] lg:!text-[60px] !text-[#121212] dark:!text-white doux:!text-[#4A4443] nuit:!text-[#CDD6F4] opacity-10 group-hover:opacity-100 transition-all duration-1000 scale-95 group-hover:scale-100 uppercase !tracking-[0.3em] !webkit-text-stroke-0">
+            Design
+          </span>
+          <div class="h-px w-0 group-hover:w-16 bg-[#121212]/20 dark:bg-white/20 transition-all duration-1000"></div>
+          <span class="u-h4 opacity-0 group-hover:opacity-40 transition-all duration-1000 translate-y-4 group-hover:translate-y-0 !tracking-[0.2em] text-[10px] md:text-[11px]">
+            Objets & Mobilier
+          </span>
+        </div>
       </div>
-    </div>
+    </NuxtLink>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue';
-import ProjectCard from '~/components/ProjectCard.vue';
-import { useProjectFilters } from '~/composables/useProjectFilters';
-
 definePageMeta({
   layout: 'home',
-  displayTitle: 'Projets',
-  showFilters: true
+  hideHeader: true,
+  hideLayoutTitle: true
 })
 
 useHead({
   title: 'Alexandre Mathieu — architecture & design'
 })
-
-const { 
-  selectedTypology, 
-  selectedSize, 
-  selectedYear, 
-  selectedCountry,
-  selectedProjectTitle,
-  sortBy,
-  typologyOptions,
-  sizeOptions,
-  yearOptions,
-  countryOptions,
-  projectTitleOptions
-} = useProjectFilters();
-
-const route = useRoute();
-const router = useRouter();
-
-const { data: projects } = await useAsyncData('projects-home', () =>
-  queryCollection('content')
-    .where('path', 'LIKE', '/projects/%')
-    .all()
-);
-
-const scrollToContact = () => {
-  const el = document.getElementById('contact');
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth' });
-  }
-};
-
-onMounted(() => {
-  if (route.query.scroll === 'contact') {
-    setTimeout(() => {
-      scrollToContact();
-      router.replace({ query: { ...route.query, scroll: undefined } });
-    }, 500);
-  }
-});
-
-watchEffect(() => {
-  if (projects.value) {
-    const typologies = new Set<string>();
-    const sizes = new Set<string>();
-    const years = new Set<string>();
-    const countries = new Set<string>();
-    const titles = new Set<string>();
-
-    projects.value.forEach(p => {
-      if (p.title) titles.add(p.title);
-      if (Array.isArray(p.typologies)) {
-        p.typologies.forEach(t => { if (t) typologies.add(t) });
-      }
-      if (Array.isArray(p.tailles)) {
-        p.tailles.forEach(s => { if (s) sizes.add(s) });
-      }
-      if (Array.isArray(p.pays)) {
-        p.pays.forEach(c => { if (c) countries.add(c) });
-      }
-      if (p.date) {
-        try {
-          const year = new Date(p.date).getFullYear().toString();
-          if (year !== 'NaN') years.add(year);
-        } catch (e) {
-          console.error('Invalid date for project:', p.title);
-        }
-      }
-    });
-
-    typologyOptions.value = Array.from(typologies).sort();
-    sizeOptions.value = Array.from(sizes).sort();
-    yearOptions.value = Array.from(years).sort((a, b) => b.localeCompare(a));
-    countryOptions.value = Array.from(countries).sort();
-    projectTitleOptions.value = Array.from(titles).sort();
-  }
-});
-
-const filteredProjects = computed(() => {
-  if (!projects.value) return [];
-  
-  let result = projects.value.filter(p => {
-    const matchTypology = !selectedTypology.value || (p.typologies && p.typologies.includes(selectedTypology.value));
-    const matchSize = !selectedSize.value || (p.tailles && p.tailles.includes(selectedSize.value));
-    const matchCountry = !selectedCountry.value || (p.pays && p.pays.includes(selectedCountry.value));
-    const matchYear = !selectedYear.value || (p.date && new Date(p.date).getFullYear().toString() === selectedYear.value);
-    const matchTitle = !selectedProjectTitle.value || p.title === selectedProjectTitle.value;
-    
-    return matchTypology && matchSize && matchCountry && matchYear && matchTitle;
-  });
-
-  if (sortBy.value === 'Nom') {
-      result.sort((a, b) => a.title.localeCompare(b.title));
-  } else {
-      result.sort((a, b) => {
-        const dateA = new Date(a.date || 0).getTime();
-        const dateB = new Date(b.date || 0).getTime();
-        return dateB - dateA;
-      });
-  }
-
-  return result;
-});
 </script>
 
 <style scoped>
-/* Ensure the grid looks good */
+/* Page transition logic is already in main.css via Nuxt config */
 </style>

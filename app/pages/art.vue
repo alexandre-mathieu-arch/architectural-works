@@ -9,7 +9,7 @@
         :class="getItemLayout(index)"
       >
         <div 
-          class="relative overflow-hidden cursor-zoom-in bg-gray-50 dark:bg-gray-900 shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-700"
+          class="relative overflow-hidden cursor-zoom-in transition-all duration-700 rounded-none"
           @click="selectedImage = item"
         >
           <NuxtImg
@@ -18,7 +18,7 @@
             :alt="item.title"
             format="webp"
             width="1200"
-            class="w-full h-auto transition-transform duration-[1.5s] ease-out group-hover:scale-[1.03]"
+            class="w-full h-auto transition-transform duration-[1.5s] ease-out rounded-none"
           />
           <!-- Subtle overlay for texture -->
           <div class="absolute inset-0 opacity-0 group-hover:opacity-10 dark:bg-white bg-black transition-opacity duration-700 pointer-events-none"></div>
@@ -58,7 +58,7 @@
             :alt="selectedImage.title"
             format="webp"
             width="2400"
-            class="max-w-full max-h-[85vh] object-contain shadow-2xl"
+            class="max-w-full max-h-[85vh] object-contain rounded-none"
           />
           
           <div class="mt-12 text-center max-w-2xl">

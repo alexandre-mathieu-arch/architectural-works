@@ -1,13 +1,13 @@
 ---
 title: "Bodelio"
-date: 2024
+date: 2018
 ratio: "4/3"
 draft: false
 tags: ["logement", "patrimoine", "réhabilitation"]
 images:
   - "/images/projects/bodelio/maquette.jpg"
   - "/images/projects/bodelio/bodelio-pers.jpg"
-description: "Le projet Bodelio s'inscrit dans la reconversion d'un site hospitalier historique. Il propose une réflexion sur la densité urbaine et le dialogue entre l'écriture contemporaine et la mémoire des lieux, à travers une réinterprétation des formes traditionnelles."
+description: "Le projet Bodelio s'inscrit dans la reconversion d'un site hospitalier historique à Lorient. Concours de logements résidentiels (perdu)."
 typologies: ["Résidentiel"]
 tailles: ["L"]
 pays: ["France"]
@@ -15,7 +15,7 @@ lieu: "Lorient"
 surface: "4200 m²"
 collaboration: "DDL Architectes"
 phase: "Concours"
-statut: "En projet"
+statut: "Concours perdu"
 ---
 
 Situé sur l'ancien site de l'hôpital Bodelio à Lorient, ce projet de logements collectifs s'insère dans un tissu urbain en pleine mutation. L'enjeu principal réside dans la capacité à densifier le centre-ville tout en offrant une qualité d'usage et une relation privilégiée au paysage.
@@ -25,3 +25,6 @@ Le projet se compose de plusieurs volumes fragmentés qui reprennent l'échelle 
 
 ### Entre Intimité et Partage
 Chaque unité d'habitation bénéficie d'un prolongement extérieur généreux, conçu comme une pièce supplémentaire à l'air libre. Les espaces communs au rez-de-chaussée et les jardins partagés favorisent le lien social entre les résidents, transformant l'acte d'habiter en une expérience collective et apaisée.
+
+### Détails Constructifs
+Le projet privilégie des modes constructifs bas carbone et une matérialité durable. Les plateaux sont réalisés en CLT (Cross Laminated Timber), tandis que les étages attiques sont conçus en Murs à Ossature Bois (MOB), allégeant ainsi la structure globale. Les balcons, éléments forts de la façade, sont portés par une structure bois apparente. En sous-sol, un parking souterrain assure le stationnement et regroupe l'ensemble des locaux techniques, libérant ainsi le cœur d'îlot pour des espaces paysagers.

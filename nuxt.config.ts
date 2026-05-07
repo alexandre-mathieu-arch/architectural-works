@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/works/',
     pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
     viewTransition: true
   },
 

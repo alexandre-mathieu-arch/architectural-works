@@ -45,6 +45,9 @@
       <p class="text-gray-500">Aucun projet d'architecture ne correspond à votre sélection.</p>
     </div>
 
+    <!-- Collaborations Section -->
+    <CollaborationsList />
+
     <!-- Contact Section -->
     <div id="contact" class="mt-32 pb-24 border-t border-[#121212]/10 pt-16 scroll-mt-20">
       <div class="mb-10">

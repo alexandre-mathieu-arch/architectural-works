@@ -7,6 +7,7 @@
     @click="!isRevealed ? reveal() : null"
   >
     <Header 
+      v-if="!route.meta.hideHeader"
       :class="[isRevealed ? 'opacity-100' : 'opacity-0 pointer-events-none', 'transition-opacity duration-1000']"
       @linkClick="handleLinkClick" 
       @linkHover="handleLinkHover" 
