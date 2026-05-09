@@ -15,16 +15,16 @@
     
     <!-- Curtain Overlay (Top) -->
     <div 
-      class="fixed inset-x-0 top-0 h-1/2 z-[60] glass-fluted transition-transform duration-[1200ms] ease-curtain border-b border-white/10 dark:border-white/5 pointer-events-none"
+      class="fixed inset-x-0 top-0 h-1/2 z-[60] glass-fluted transition-transform duration-[1200ms] ease-curtain pointer-events-none"
       :class="[
-        isRevealed ? '-translate-y-full' : 'translate-y-0 shadow-[0_20px_50px_rgba(0,0,0,0.1)]'
+        isRevealed ? '-translate-y-full' : 'translate-y-0'
       ]"
     ></div>
     <!-- Curtain Overlay (Bottom) -->
     <div 
-      class="fixed inset-x-0 bottom-0 h-1/2 z-[60] glass-fluted transition-transform duration-[1200ms] ease-curtain border-t border-white/10 dark:border-white/5 pointer-events-none"
+      class="fixed inset-x-0 bottom-0 h-1/2 z-[60] glass-fluted transition-transform duration-[1200ms] ease-curtain pointer-events-none"
       :class="[
-        isRevealed ? 'translate-y-full' : 'translate-y-0 shadow-[0_-20px_50px_rgba(0,0,0,0.1)]'
+        isRevealed ? 'translate-y-full' : 'translate-y-0'
       ]"
     ></div>
 
@@ -38,9 +38,15 @@
         class="main-container w-full flex flex-col items-center group/text"
       >
         <div class="relative border border-[#121212]/10 dark:border-white/10 px-8 py-10 md:px-16 md:py-12 flex flex-col items-center space-y-2 transition-colors duration-1000 group-hover/text:border-[#121212]/30 dark:group-hover/text:border-white/30">
-          <span class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] opacity-60 animate-pulse uppercase tracking-[0.3em] group-hover/text:opacity-100 transition-opacity">Alexandre MATHIEU</span>
-          <span class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] opacity-40 animate-pulse uppercase tracking-[0.2em] text-[10px] md:text-[12px] group-hover/text:opacity-80 transition-opacity">architectural + design + artistic</span>
-          <span class="u-h4 text-[#121212]/30 dark:text-white/30 doux:text-[#4A4443]/30 nuit:text-[#CDD6F4]/30 animate-pulse uppercase tracking-[0.5em] pt-4 group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 transition-colors">works</span>
+          <div class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] uppercase tracking-[0.3em] group-hover/text:opacity-100 transition-opacity">
+            Alexandre MATHIEU
+          </div>
+          <div class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] uppercase tracking-[0.2em] text-[10px] md:text-[12px] group-hover/text:opacity-80 transition-opacity wave-text">
+            <span v-for="(char, i) in 'architecture design artistic'" :key="i" :style="{ animationDelay: `${i * 0.15}s` }" :class="{ 'mr-[0.3em]': char === ' ' }">
+              {{ char === ' ' ? '&nbsp;' : char }}
+            </span>
+          </div>
+          <span class="u-h4 text-white animate-pulse uppercase tracking-[0.5em] pt-4 group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 transition-colors">works</span>
         </div>
       </div>
     </div>

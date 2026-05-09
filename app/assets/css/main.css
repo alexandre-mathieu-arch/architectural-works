@@ -19,6 +19,17 @@ html, body {
 .nuit body {
   background-color: #1A2238; /* Bleu Nuit Doux */
   color: #CDD6F4;
+  --color-primary-50: #FAF7F2;
+  --color-primary-100: #F2E8DA;
+  --color-primary-200: #E6D0B3;
+  --color-primary-300: #D4A97B;
+  --color-primary-400: #B88655;
+  --color-primary-500: #96693D;
+  --color-primary-600: #7D5733;
+  --color-primary-700: #644629;
+  --color-primary-800: #4B351F;
+  --color-primary-900: #322315;
+  --color-primary-950: #19120B;
 }
 
 /* Global overrides for black text in Nuit mode */
@@ -336,6 +347,16 @@ header a[href="https://ui.nuxt.com"] {
 
 @keyframes fade-in {
   from { opacity: 0; }
+}
+
+@keyframes wave-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+.wave-text span {
+  display: inline-block;
+  animation: wave-pulse 3s infinite ease-in-out;
 }
 
 @keyframes fade-out {

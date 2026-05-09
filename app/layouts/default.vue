@@ -20,16 +20,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { useProjectFilters } from '~/composables/useProjectFilters';
 import { useHoverProject } from '~/composables/useHoverProject';
 import { useVisitedProjects } from '~/composables/useVisitedProjects';
+import { useRevealedState } from '~/composables/useRevealedState';
 
 const route = useRoute();
 const { resetFilters } = useProjectFilters();
 const { setHoveredProject } = useHoverProject();
+const { reveal } = useRevealedState();
 const hoveredTitle = ref<string | object>('');
 const clickedTitle = ref<string | object>(''); 
+
+onMounted(() => {
+  reveal();
+});
 
 // Smart Reset: Clear filters if navigating away from projects section
 watch(() => route.path, (newPath, oldPath) => {

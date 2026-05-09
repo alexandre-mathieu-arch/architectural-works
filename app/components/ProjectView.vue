@@ -54,28 +54,6 @@
           </div>
         </div>
       </div>
-      <!-- Vertical Details Section (New) -->
-      <div v-if="detailImages.length > 0" class="col-span-1 md:col-span-2 xl:col-span-4 mt-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-          <!-- We place details under the carousel (columns 2-4 on XL) -->
-          <div class="col-span-1 md:col-span-1 xl:col-span-3 xl:col-start-2">
-            <div 
-              v-for="(detail, idx) in detailImages" 
-              :key="detail" 
-              class="mb-12 overflow-hidden"
-            >
-              <NuxtImg 
-                :ref="el => setDetailImgRef(el, idx)"
-                :src="detail" 
-                format="webp" 
-                width="1600"
-                class="w-full h-auto border border-[#121212]/10 dark:border-white/10 transition-transform duration-1000 ease-out scale-105"
-                :style="getParallaxStyle(detailImgRefs[idx])"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -127,17 +105,14 @@ watch(() => props.project?.path, () => {
 
 const images = computed(() => {
   if (!props.project) return [];
-  const imgs = props.project.images || props.project.image || [];
-  const imageList = Array.isArray(imgs) ? imgs : [imgs];
-  return imageList
-    .filter(p => typeof p === 'string' && p.length > 0)
-    .map(p => p.startsWith('/') ? p : '/' + p);
-});
-
-const detailImages = computed(() => {
-  if (!props.project || !props.project.details) return [];
-  const details = Array.isArray(props.project.details) ? props.project.details : [props.project.details];
-  return details
+  
+  const mainImgs = props.project.images || props.project.image || [];
+  const mainList = Array.isArray(mainImgs) ? mainImgs : [mainImgs];
+  
+  const detailImgs = props.project.details || [];
+  const detailList = Array.isArray(detailImgs) ? detailImgs : [detailImgs];
+  
+  return [...mainList, ...detailList]
     .filter(p => typeof p === 'string' && p.length > 0)
     .map(p => p.startsWith('/') ? p : '/' + p);
 });

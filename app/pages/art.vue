@@ -83,6 +83,7 @@ const selectedImage = ref<any>(null)
 
 const { data: artItems } = await useAsyncData('art-content', () => {
   return queryCollection('content')
+    .orderBy('order', 'asc')
     .all()
 })
 

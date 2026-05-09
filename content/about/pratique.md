@@ -2,8 +2,6 @@
 title: "La pratique"
 description: "La philosophie et l'approche architecturale de l'atelier."
 ---
-Notre pratique s'articule autour d'une approche contextuelle et matérielle de l'architecture. Nous intervenons sur des échelles variées, de la maison individuelle à l'équipement public, en plaçant toujours l'usage au centre de la conception.
+Avant de dessiner, je vis l'espace. Je me projette à la place des usagers — j'imagine les volumes, les percées visuelles, la lumière qui traverse, les matières sous la main, l'acoustique, le flux d'air, la température. L'espace a un récit avant d'avoir un plan.
 
-Notre expertise se concentre particulièrement sur la construction biosourcée et l'usage du bois, la performance énergétique (Passivhaus), la réhabilitation et la transformation du bâti existant, ainsi que le design intérieur et le mobilier sur mesure.
-
-Chaque projet est mené avec une rigueur technique constante, assurant que l'intention architecturale se traduise fidèlement dans la réalité de la construction.
+Dessiner, c'est ensuite tenir cette ligne habilement : marier technicité et esthétique, tailler dans les contraintes, arbitrer, trancher. Jusqu'à ce que l'espace s'impose — beau, robuste, pensé pour durer, fait pour être vécu.

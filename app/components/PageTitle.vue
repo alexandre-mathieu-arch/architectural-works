@@ -57,7 +57,7 @@
                 :class="[
                   readonlyFilters 
                     ? 'bg-transparent border border-primary-900 text-primary-900 dark:border-primary-400 dark:text-primary-400 cursor-default pointer-events-none' 
-                    : 'bg-white/50 dark:bg-white/5 border border-[#121212]/30 dark:border-white/20',
+                    : 'bg-white/50 dark:bg-white/5 nuit:bg-[#161D2F] border border-[#121212]/30 dark:border-white/20',
                   activeMenu === filter.id ? 'text-primary-900 border-primary-900 dark:text-primary-400 dark:border-primary-400 z-50' : (!readonlyFilters ? 'text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]' : ''),
                   filter.active ? '!text-primary-900 !border-primary-900 dark:!text-primary-400 dark:!border-primary-400 z-50' : '',
                   !readonlyFilters ? 'hover:border-primary-900 hover:text-primary-900 dark:hover:border-primary-400 dark:hover:text-primary-400' : ''
@@ -91,7 +91,7 @@
               >
                 <div 
                   v-if="activeMenu === filter.id" 
-                  class="absolute left-0 top-full mt-2 z-50 glass-fluted bg-white/70 dark:bg-[#121212]/70 border border-[#121212]/10 dark:border-white/10 p-2 shadow-xl min-w-max"
+                  class="absolute left-0 top-full mt-2 z-50 glass-fluted bg-white/70 dark:bg-[#121212]/70 nuit:bg-[#161D2F]/80 border border-[#121212]/10 dark:border-white/10 p-2 shadow-xl min-w-max"
                   :class="{ 'right-0 left-auto': filter.id === 'country' && !isProjectPage }"
                 >
                   <div class="flex flex-row gap-x-6 px-2">
@@ -157,8 +157,9 @@
 
           <!-- Project Navigation Triggers (Specific to Detail Page) -->
           <template v-if="isProjectPage">
-            <!-- Column 2: Sequence Navigation (Arrows + Counters) -->
-            <div class="h-[30px] flex items-center col-span-full md:col-span-1">
+            <!-- Column 2+: Sequence Navigation (Arrows + Counters) -->
+            <!-- We allow this column to span across the rest of the grid to accommodate many images -->
+            <div class="h-[30px] flex items-center col-span-full md:col-span-2 xl:col-span-3 w-fit">
               <SequenceCounter
                 v-if="totalImages > 0"
                 :model-value="carouselCurrentImageIndex"
@@ -176,7 +177,7 @@
             <button 
               v-if="hasActiveFilters"
               @click="resetFilters"
-              class="flex items-center gap-2 u-h4 px-3 h-[30px] border border-primary-900/30 dark:border-primary-400/30 text-primary-900 dark:text-primary-400 bg-white/50 dark:bg-white/5 hover:bg-primary-900 hover:text-white dark:hover:bg-primary-400 dark:hover:text-[#121212] transition-all duration-700 -mt-[1px] whitespace-nowrap group/reset"
+              class="flex items-center gap-2 u-h4 px-3 h-[30px] border border-primary-900/30 dark:border-primary-400/30 text-primary-900 dark:text-primary-400 bg-white/50 dark:bg-white/5 nuit:bg-[#161D2F] hover:bg-primary-900 hover:text-white dark:hover:bg-primary-400 dark:hover:text-[#121212] transition-all duration-700 -mt-[1px] whitespace-nowrap group/reset"
               title="Réinitialiser les filtres"
             >
               <span class="text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-medium">Tout effacer</span>

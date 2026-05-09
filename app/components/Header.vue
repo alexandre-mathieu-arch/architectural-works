@@ -4,7 +4,7 @@
       <!-- Logo -->
       <NuxtLink 
         to="/" 
-        class="text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap u-h4 logo-link"
+        class="text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap u-h4 logo-link px-2 py-1 transition-all duration-500 hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238]"
         @click="handleLinkClick('Projets')"
         @mouseenter="emit('linkHover', 'Projets')"
         @mouseleave="emit('linkHover', '')"
@@ -14,12 +14,12 @@
 
       <!-- Desktop Navigation -->
       <nav class="hidden md:flex items-center ml-10 flex-grow">
-        <div class="flex items-center gap-[50px]">
+        <div class="flex items-center gap-[30px]">
           <NuxtLink 
             v-for="link in links" 
             :key="link.to" 
             :to="link.to"
-            class="u-h4 transition-all hover:text-black dark:hover:text-gray-300 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
+            class="u-h4 transition-all duration-500 px-2 py-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238]"
             @click="handleLinkClick(link.label)"
             @mouseenter="emit('linkHover', link.label)"
             @mouseleave="emit('linkHover', '')"
@@ -33,17 +33,31 @@
       <div class="flex-grow"></div>
 
       <!-- Desktop Search Bar, Theme Toggle & Lang Toggle -->
-      <div class="hidden md:flex items-center gap-[30px]">
+      <div class="hidden md:flex items-center gap-[20px]">
         <!-- Theme Toggle -->
         <button 
           @click="cycleTheme" 
-          class="p-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] transition-colors flex items-center justify-center hover:text-primary-900 dark:hover:text-primary-400"
+          class="p-2 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] transition-all duration-500 flex items-center justify-center hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238]"
           :title="themeTitle"
         >
-          <UIcon v-if="colorMode.preference === 'dark'" name="i-heroicons-moon" class="w-5 h-5" />
-          <UIcon v-else-if="colorMode.preference === 'doux'" name="i-heroicons-sparkles" class="w-5 h-5" />
-          <UIcon v-else-if="colorMode.preference === 'nuit'" name="i-heroicons-star" class="w-5 h-5" />
-          <UIcon v-else name="i-heroicons-sun" class="w-5 h-5" />
+          <!-- Light: Empty Circle -->
+          <svg v-if="colorMode.preference === 'light'" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="9" />
+          </svg>
+          <!-- Dark: Half-filled Circle -->
+          <svg v-else-if="colorMode.preference === 'dark'" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 3v18c4.97 0 9-4.03 9-9s-4.03-9-9-9z" fill="currentColor" />
+          </svg>
+          <!-- Doux: Small Dot in Circle -->
+          <svg v-else-if="colorMode.preference === 'doux'" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="9" />
+            <circle cx="12" cy="12" r="3" fill="currentColor" />
+          </svg>
+          <!-- Nuit: Filled Circle -->
+          <svg v-else-if="colorMode.preference === 'nuit'" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="9" fill="currentColor" />
+          </svg>
         </button>
 
         <!-- Lang Toggle -->
@@ -51,7 +65,7 @@
           :label="currentLang"
           variant="ghost"
           color="[#121212]"
-          class="p-0 hover:bg-transparent u-h4 font-medium transition-all hover:text-black dark:hover:text-gray-300 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:font-extrabold"
+          class="px-2 py-1 hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] u-h4 font-medium transition-all duration-500 hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238] text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
           @click="toggleLang"
         />
 
@@ -76,7 +90,7 @@
           <button 
             v-if="!isSearchExpanded"
             @click="isSearchExpanded = true"
-            class="p-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:text-black dark:hover:text-gray-300 hover:font-extrabold transition-all flex items-center justify-center"
+            class="p-2 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238] transition-all duration-500 flex items-center justify-center"
           >
             <UIcon name="i-heroicons-magnifying-glass-20-solid" class="w-5 h-5" />
           </button>
@@ -112,10 +126,24 @@
           @click="cycleTheme" 
           class="p-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4]"
         >
-          <UIcon v-if="colorMode.preference === 'dark'" name="i-heroicons-moon" class="w-5 h-5" />
-          <UIcon v-else-if="colorMode.preference === 'doux'" name="i-heroicons-sparkles" class="w-5 h-5" />
-          <UIcon v-else-if="colorMode.preference === 'nuit'" name="i-heroicons-star" class="w-5 h-5" />
-          <UIcon v-else name="i-heroicons-sun" class="w-5 h-5" />
+          <!-- Light: Empty Circle -->
+          <svg v-if="colorMode.preference === 'light'" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="9" />
+          </svg>
+          <!-- Dark: Half-filled Circle -->
+          <svg v-else-if="colorMode.preference === 'dark'" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 3v18c4.97 0 9-4.03 9-9s-4.03-9-9-9z" fill="currentColor" />
+          </svg>
+          <!-- Doux: Small Dot in Circle -->
+          <svg v-else-if="colorMode.preference === 'doux'" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="9" />
+            <circle cx="12" cy="12" r="3" fill="currentColor" />
+          </svg>
+          <!-- Nuit: Filled Circle -->
+          <svg v-else-if="colorMode.preference === 'nuit'" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="9" fill="currentColor" />
+          </svg>
         </button>
         <UButton
           :label="currentLang"

@@ -4,14 +4,18 @@ date: 2018
 draft: false
 tags: ["Design", "Mobilier"]
 images:
-  - "/images/projects/230-volts/prise-multi.png"
-  - "/images/projects/230-volts/coupe-projet-230.jpg"
-  - "/images/projects/230-volts/vue-elevation.jpg"
   - "/images/projects/230-volts/realisation.jpg"
+  - "/images/projects/230-volts/prise-multi.png"
   - "/images/projects/230-volts/axonometrie.png"
   - "/images/projects/230-volts/maquette.jpg"
+  - "/images/projects/230-volts/maquette-papier.jpg"
+details:
+  - "/images/projects/230-volts/vue-elevation.jpg"
+  - "/images/projects/230-volts/coupe-projet-230.jpg"
   - "/images/projects/230-volts/schema-montage.png"
   - "/images/projects/230-volts/materialite-oc.jpg"
+  - "/images/projects/230-volts/type_onze_tole_perforee.jpg"
+  - "/images/projects/230-volts/montage-prise.png"
 description: "Le projet « 230 Volts » est un dispositif d’alimentation électrique modulable couplé à un panier vide-poche, conçu pour s'intégrer dans les studios de l'École d'Architecture de Nantes (Lacaton & Vassal)."
 typologies: ["Design"]
 tailles: ["S"]

@@ -5,8 +5,9 @@ ratio: "4/3"
 draft: false
 tags: ["logement", "patrimoine", "réhabilitation"]
 images:
-  - "/images/projects/bodelio/maquette.jpg"
   - "/images/projects/bodelio/bodelio-pers.jpg"
+details:
+  - "/images/projects/bodelio/maquette.jpg"
 description: "Le projet Bodelio s'inscrit dans la reconversion d'un site hospitalier historique à Lorient. Concours de logements résidentiels (perdu)."
 typologies: ["Résidentiel"]
 tailles: ["L"]

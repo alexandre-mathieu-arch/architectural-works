@@ -8,6 +8,7 @@ images:
   - "/images/projects/logements-saint-brieuc/3frereslg-lota-pers.jpg"
   - "/images/projects/logements-saint-brieuc/3frereslg-lota-pers-jardins.jpg"
   - "/images/projects/logements-saint-brieuc/3frereslg-lotb-pers.jpg"
+details:
   - "/images/projects/logements-saint-brieuc/3frereslg-planmasse.jpg"
 description: "Créations d'immeuble de sept logements allant du T2 au T4 avec parking privatifs sous-terrain dans la rue des trois freres le Goff à Saint Brieuc en collaboration avec l'agence DDL architectes."
 typologies: ["Résidentiel"]

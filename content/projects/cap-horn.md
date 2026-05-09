@@ -5,11 +5,11 @@ ratio: "16/9"
 draft: false
 tags: ["tertiaire", "mixité", "santé"]
 images:
-  - "/images/projects/cap-horn/terrasse-01.png"
   - "/images/projects/cap-horn/pers-horn.jpg"
+  - "/images/projects/cap-horn/terrasse-01.png"
+details:
   - "/images/projects/cap-horn/elevation-ouest.jpg"
   - "/images/projects/cap-horn/principe-facade.jpg"
-details:
   - "/images/projects/cap-horn/detail-coupe-facade-principe.jpg"
 description: "Le projet Cap-Horn s'érige comme une figure de proue tertiaire sur une parcelle aux contraintes urbaines exacerbées. Ce bâtiment vertical hybride articule un programme dense mêlant services de santé et espaces de création architecturale, tout en libérant le sol au profit des mobilités."
 typologies: ["Tertiaire", "Santé"]

@@ -25,6 +25,7 @@ export default defineContentConfig({
         phase: z.string().optional(),
         statut: z.string().optional(),
         ratio: z.string().optional(),
+        order: z.number().optional(),
         collaboration: z.string().optional(),
         logiciels: z.array(z.string()).or(z.string()).optional(),
         materiaux: z.array(z.string()).or(z.string()).optional(),
