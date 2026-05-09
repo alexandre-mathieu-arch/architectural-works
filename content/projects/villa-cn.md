@@ -1,5 +1,6 @@
 ---
-title: "Villa Atlas"
+title: "Villa CN"
+order: 2
 date: 2024
 ratio: "4/3"
 draft: false

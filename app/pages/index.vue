@@ -149,7 +149,12 @@ const filteredProjects = computed(() => {
     const matchYear = !selectedYear.value || (p.date && new Date(p.date).getFullYear().toString() === selectedYear.value);
     return matchTypology && matchCountry && matchYear;
   });
-  result.sort((a, b) => new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime());
+  result.sort((a, b) => {
+    const orderA = a.order ?? 999;
+    const orderB = b.order ?? 999;
+    if (orderA !== orderB) return orderA - orderB;
+    return new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime();
+  });
   return result;
 });
 </script>

@@ -178,6 +178,10 @@ const filteredProjects = computed(() => {
       result.sort((a, b) => a.title.localeCompare(b.title));
   } else {
       result.sort((a, b) => {
+        const orderA = a.order ?? 999;
+        const orderB = b.order ?? 999;
+        if (orderA !== orderB) return orderA - orderB;
+        
         const dateA = new Date(a.date || 0).getTime();
         const dateB = new Date(b.date || 0).getTime();
         return dateB - dateA;

@@ -57,8 +57,17 @@ def parse_projects():
                     frontmatter['body_tex'] = clean_markdown(body)
                     projects_data.append(frontmatter)
     
-    # Tri par date (plus récent en premier)
-    projects_data.sort(key=lambda x: str(x.get('date', '')), reverse=True)
+    # Tri par ordre (si défini) puis par date (plus récent en premier)
+    def sort_key(p):
+        order = p.get('order', 999)
+        date = p.get('date', 0)
+        try:
+            date_val = int(date)
+        except (ValueError, TypeError):
+            date_val = 0
+        return (order, -date_val)
+        
+    projects_data.sort(key=sort_key)
     return projects_data
 
 def generate_tex(projects):
