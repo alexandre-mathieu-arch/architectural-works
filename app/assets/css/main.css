@@ -44,23 +44,44 @@ html, body {
 }
 
 .nuit .text-\[\#121212\]\/30 {
-  color: rgba(205, 214, 244, 0.3) !important;
+  color: rgba(205, 214, 244, 0.45) !important;
 }
 
 .nuit .text-\[\#121212\]\/40 {
-  color: rgba(205, 214, 244, 0.4) !important;
+  color: rgba(205, 214, 244, 0.55) !important;
 }
 
 .nuit .text-\[\#121212\]\/60 {
-  color: rgba(205, 214, 244, 0.6) !important;
-}
-
-.nuit .text-\[\#121212\]\/70 {
   color: rgba(205, 214, 244, 0.7) !important;
 }
 
-.nuit .text-\[\#121212\]\/80 {
+.nuit .text-\[\#121212\]\/70 {
   color: rgba(205, 214, 244, 0.8) !important;
+}
+
+.nuit .text-\[\#121212\]\/80 {
+  color: rgba(205, 214, 244, 0.9) !important;
+}
+
+/* Global overrides for black text in Doux mode */
+.doux .text-\[\#121212\]\/30 {
+  color: rgba(74, 68, 67, 0.45) !important;
+}
+
+.doux .text-\[\#121212\]\/40 {
+  color: rgba(74, 68, 67, 0.55) !important;
+}
+
+.doux .text-\[\#121212\]\/60 {
+  color: rgba(74, 68, 67, 0.7) !important;
+}
+
+.doux .text-\[\#121212\]\/70 {
+  color: rgba(74, 68, 67, 0.8) !important;
+}
+
+.doux .text-\[\#121212\]\/80 {
+  color: rgba(74, 68, 67, 0.9) !important;
 }
 
 @theme {

@@ -15,14 +15,14 @@
           class="absolute inset-0 w-full h-full transition-transform duration-700 ease-out"
           :style="getParallaxStyle(parallaxRef)"
         >
-          <!-- Image with smooth zoom -->
+          <!-- Image with smooth zoom and grayscale -->
           <NuxtImg
             :src="displayImage"
             :alt="project.title"
             format="webp"
             width="800"
             height="800"
-            class="w-full h-full object-cover transition-transform duration-1000 ease-in-out group-hover:scale-110 scale-105"
+            class="w-full h-full object-cover transition-all duration-1000 ease-in-out scale-110 group-hover:scale-115 grayscale-[0.4] group-hover:grayscale-0"
             :style="{ 
               viewTransitionName: 'image-' + project.path.replace(/\//g, '-') 
             }"
@@ -34,9 +34,9 @@
         <UIcon name="i-heroicons-photo" class="w-12 h-12 text-gray-400" />
       </div>
       
-      <!-- Infos affichées au survol -->
-      <div v-if="isRevealed" class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 z-10">
-        <div class="absolute top-0 left-0 w-full border border-[#121212]/30 dark:border-white/20 px-2 h-[30px] flex items-center gap-3 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] overflow-hidden">
+      <!-- Infos affichées en permanence (avant uniquement au survol) -->
+      <div v-if="isRevealed" class="absolute inset-0 z-10">
+        <div class="absolute top-0 left-0 w-full border border-[#121212]/10 group-hover:border-[#121212]/30 dark:border-white/10 dark:group-hover:border-white/20 px-2 h-[30px] flex items-center gap-3 bg-white/80 dark:bg-[#121212]/80 doux:bg-[#E5E1E0]/80 nuit:bg-[#1A2238]/80 backdrop-blur-sm transition-all duration-700 overflow-hidden">
           <h3 
             class="u-h3 normal-case dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap overflow-hidden text-ellipsis flex-shrink"
             :style="{ viewTransitionName: 'title-' + project.path.replace(/\//g, '-') }"
@@ -44,13 +44,13 @@
             {{ project.title }}
           </h3>
           <p 
-            class="text-[12px] font-light text-[#121212] dark:text-gray-300 doux:text-[#4A4443]/70 nuit:text-[#CDD6F4]/70 tracking-[0.1em] whitespace-nowrap flex-shrink-0"
+            class="text-[12px] font-light text-[#121212] dark:text-gray-300 doux:text-[#4A4443]/70 nuit:text-[#CDD6F4]/70 tracking-[0.1em] whitespace-nowrap flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
             :style="{ viewTransitionName: 'year-' + project.path.replace(/\//g, '-') }"
           >
             {{ projectYear }}
           </p>
           <p 
-            class="text-[12px] font-light text-[#121212] dark:text-gray-400 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60 tracking-[0.1em] whitespace-nowrap overflow-hidden text-ellipsis flex-shrink-0"
+            class="text-[12px] font-light text-[#121212] dark:text-gray-400 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60 tracking-[0.1em] whitespace-nowrap overflow-hidden text-ellipsis flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
             :style="{ viewTransitionName: 'location-' + project.path.replace(/\//g, '-') }"
           >
             {{ formattedLocation }}

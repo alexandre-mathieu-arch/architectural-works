@@ -1,5 +1,10 @@
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50 glass-fluted transition-colors duration-700">
+  <header 
+    class="fixed top-0 left-0 right-0 z-50 glass-fluted transition-all duration-[1500ms] ease-in-out"
+    :class="[
+      transparent ? 'opacity-0 -translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
+    ]"
+  >
     <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] relative">
       <!-- Logo -->
       <NuxtLink 
@@ -13,18 +18,26 @@
       </NuxtLink>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center ml-10 flex-grow">
+      <nav class="hidden md:flex items-center ml-10 flex-grow group/nav">
         <div class="flex items-center gap-[30px]">
           <NuxtLink 
             v-for="link in links" 
             :key="link.to" 
             :to="link.to"
-            class="u-h4 transition-all duration-500 px-2 py-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238]"
+            class="u-h4 transition-all duration-500 px-2 py-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238] relative flex flex-col items-center group/link"
+            :class="[
+              route.path.startsWith(link.to) ? 'is-active' : 'group-hover/nav:opacity-50 hover:!opacity-100'
+            ]"
             @click="handleLinkClick(link.label)"
             @mouseenter="emit('linkHover', link.label)"
             @mouseleave="emit('linkHover', '')"
           >
             {{ link.label }}
+            <!-- Active Dot -->
+            <span 
+              class="absolute -bottom-1 w-1 h-1 rounded-full bg-current transition-all duration-500 scale-0"
+              :class="{ 'scale-100': route.path.startsWith(link.to) }"
+            ></span>
           </NuxtLink>
         </div>
       </nav>
@@ -198,6 +211,10 @@
 import { ref, watch, nextTick, computed, onUnmounted } from 'vue';
 import { UInput } from '#components';
 import { useHoverProject } from '~/composables/useHoverProject';
+
+const props = defineProps<{
+  transparent?: boolean;
+}>();
 
 const colorMode = useColorMode();
 const cycleTheme = () => {

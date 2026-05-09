@@ -1,6 +1,10 @@
 <template>
   <div id="wrapper">
-    <Header @linkClick="handleLinkClick" @linkHover="handleLinkHover" />
+    <Header 
+      :style="route.meta.transparentHeader ? { opacity: headerOpacity, transform: `translateY(${(headerOpacity - 1) * 20}px)`, pointerEvents: headerOpacity > 0.5 ? 'auto' : 'none' } : {}"
+      @linkClick="handleLinkClick" 
+      @linkHover="handleLinkHover" 
+    />
     
     <!-- Content -->
     <div class="min-h-screen">
@@ -11,16 +15,17 @@
           :show-filters="route.meta.showFilters === true" 
           :readonly-filters="route.meta.readonlyFilters === true"
           :hide-main-title="route.path.startsWith('/projects/')"
+          :style="route.meta.transparentHeader ? { opacity: headerOpacity, transform: `translateY(${(headerOpacity - 1) * 20}px)`, pointerEvents: headerOpacity > 0.5 ? 'auto' : 'none' } : {}"
         />
         <slot />
       </main>
-      <TheFooter />
+      <TheFooter :style="route.meta.transparentHeader ? { opacity: headerOpacity, transform: `translateY(${(1 - headerOpacity) * 20}px)`, pointerEvents: headerOpacity > 0.5 ? 'auto' : 'none' } : {}" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useProjectFilters } from '~/composables/useProjectFilters';
 import { useHoverProject } from '~/composables/useHoverProject';
 import { useVisitedProjects } from '~/composables/useVisitedProjects';
@@ -32,9 +37,38 @@ const { setHoveredProject } = useHoverProject();
 const { reveal } = useRevealedState();
 const hoveredTitle = ref<string | object>('');
 const clickedTitle = ref<string | object>(''); 
+const headerOpacity = ref(route.meta.transparentHeader ? 0 : 1);
+
+const handleScroll = () => {
+  if (import.meta.client && route.meta.transparentHeader) {
+    const vh = window.innerHeight;
+    const scroll = window.scrollY;
+    
+    // Start fading in at 20% of VH, full opacity at 50% of VH
+    const start = vh * 0.2;
+    const end = vh * 0.5;
+    
+    const opacity = (scroll - start) / (end - start);
+    headerOpacity.value = Math.max(0, Math.min(1, opacity));
+  } else {
+    headerOpacity.value = 1;
+  }
+};
 
 onMounted(() => {
   reveal();
+  if (route.meta.transparentHeader) {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+  } else {
+    headerOpacity.value = 1;
+  }
+});
+
+onUnmounted(() => {
+  if (import.meta.client) {
+    window.removeEventListener('scroll', handleScroll);
+  }
 });
 
 // Smart Reset: Clear filters if navigating away from projects section

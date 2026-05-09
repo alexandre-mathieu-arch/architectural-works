@@ -19,6 +19,7 @@
       :class="[
         isRevealed ? '-translate-y-full' : 'translate-y-0'
       ]"
+      :style="!isRevealed ? { transform: `translateY(-${revealProgress * 100}%)` } : {}"
     ></div>
     <!-- Curtain Overlay (Bottom) -->
     <div 
@@ -26,12 +27,14 @@
       :class="[
         isRevealed ? 'translate-y-full' : 'translate-y-0'
       ]"
+      :style="!isRevealed ? { transform: `translateY(${revealProgress * 100}%)` } : {}"
     ></div>
 
     <!-- UI Overlay (Title & Info) -->
     <div 
       class="fixed inset-0 z-[70] flex flex-col items-center justify-center pointer-events-none transition-all duration-[1200ms] ease-curtain"
       :class="isRevealed ? 'opacity-0 scale-105' : 'opacity-100 scale-100'"
+      :style="!isRevealed ? { opacity: 1 - revealProgress, transform: `scale(${1 + revealProgress * 0.05})` } : {}"
     >
       <!-- Centralized three-line info -->
       <div 
@@ -74,13 +77,55 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useRevealedState } from '~/composables/useRevealedState';
 
-const { isRevealed, reveal } = useRevealedState();
+const { isRevealed, reveal, resetReveal } = useRevealedState();
 const route = useRoute();
+const router = useRouter();
 const hoveredTitle = ref<string | object>('');
 const clickedTitle = ref<string | object>('');
+const revealProgress = ref(0);
+let autoRevealTimer: any = null;
+
+const triggerReveal = () => {
+  reveal();
+  if (route.path === '/') {
+    router.push('/architecture');
+  }
+};
+
+const handleScroll = (e: WheelEvent) => {
+  if (isRevealed.value) return;
+
+  // Sensitivity adjustment
+  revealProgress.value += e.deltaY * 0.001;
+  revealProgress.value = Math.max(0, Math.min(1, revealProgress.value));
+
+  if (revealProgress.value >= 0.8) {
+    triggerReveal();
+    window.removeEventListener('wheel', handleScroll);
+  }
+};
+
+onMounted(() => {
+  // Always reset on home page entry
+  resetReveal();
+  revealProgress.value = 0;
+
+  if (!isRevealed.value) {
+    window.addEventListener('wheel', handleScroll, { passive: true });
+    
+    autoRevealTimer = setTimeout(() => {
+      if (!isRevealed.value) triggerReveal();
+    }, 5000);
+  }
+});
+
+onUnmounted(() => {
+  window.removeEventListener('wheel', handleScroll);
+  if (autoRevealTimer) clearTimeout(autoRevealTimer);
+});
 
 // Reset titles on route change
 watch(() => route.fullPath, () => {
