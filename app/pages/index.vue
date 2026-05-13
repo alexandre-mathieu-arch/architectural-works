@@ -2,11 +2,14 @@
   <div>
     <!-- Hero Section -->
     <div class="-mt-[var(--header-height)]">
-      <HeroSection :scroll-progress="scrollProgress" />
+      <HeroSection 
+        :scroll-progress="scrollProgress" 
+        @scroll-to-projects="scrollToProjects"
+      />
     </div>
 
     <!-- Project Grid (from architecture.vue) -->
-    <div class="pt-0 pb-0 min-h-screen">
+    <div id="projects-grid" class="pt-0 pb-0 min-h-screen scroll-mt-20">
       <div 
         v-if="filteredProjects?.length" 
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 items-center mt-3"
@@ -117,9 +120,39 @@ const { data: projects } = await useAsyncData('home-projects', () =>
     .all()
 );
 
+const smoothScrollTo = (targetId: string, duration: number = 1500) => {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80;
+  const startPosition = window.pageYOffset;
+  const distance = targetPosition - startPosition;
+  let startTime: number | null = null;
+
+  const animation = (currentTime: number) => {
+    if (startTime === null) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const run = ease(timeElapsed, startPosition, distance, duration);
+    window.scrollTo(0, run);
+    if (timeElapsed < duration) requestAnimationFrame(animation);
+  };
+
+  const ease = (t: number, b: number, c: number, d: number) => {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
+  };
+
+  requestAnimationFrame(animation);
+};
+
 const scrollToContact = () => {
-  const el = document.getElementById('contact');
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
+  smoothScrollTo('contact', 1200);
+};
+
+const scrollToProjects = () => {
+  smoothScrollTo('projects-grid', 2000);
 };
 
 watchEffect(() => {

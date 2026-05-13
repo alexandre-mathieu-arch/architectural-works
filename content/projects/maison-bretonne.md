@@ -4,9 +4,15 @@ description: "Extension et rénovation complète d'une maison néo-bretonne à L
 images:
   - "/images/projects/maison-bretonne/maison-bretonne-ext.jpg"
   - "/images/projects/maison-bretonne/maison-bretonne-int.jpg"
-details:
-  - "/images/projects/maison-bretonne/maison-bretonne-facade.jpg"
+  - "/images/projects/maison-bretonne/maison-bretonne-situation.jpg"
+  - "/images/projects/maison-bretonne/maison-bretonne-rdc.jpg"
+  - "/images/projects/maison-bretonne/maison-bretonne-etage.jpg"
+  - "/images/projects/maison-bretonne/maison-bretonne-facade-sud.jpg"
+  - "/images/projects/maison-bretonne/maison-bretonne-facade-ouest.jpg"
+  - "/images/projects/maison-bretonne/maison-bretonne-extrait-coupes.jpg"
+  - "/images/projects/maison-bretonne/maison-bretonne-extrait-coupe.jpg"
   - "/images/projects/maison-bretonne/maison-bretonne-avant.jpg"
+  - "/images/projects/maison-bretonne/maison-bretonne-photogrammetrie.jpg"
 date: 2020
 tags: ["rénovation", "maison"]
 typologies: ["Résidentiel"]

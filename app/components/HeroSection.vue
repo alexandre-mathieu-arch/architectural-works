@@ -10,7 +10,10 @@
         transform: `translateY(${-scrollProgress * 100}px) scale(${1 + scrollProgress * 0.05})`
       }"
     >
-      <div class="relative border border-[#121212]/10 dark:border-white/10 px-8 py-10 md:px-16 md:py-12 flex flex-col items-center space-y-2 transition-colors duration-1000 group-hover/text:border-[#121212]/30 dark:group-hover/text:border-white/30">
+      <div 
+        @click="$emit('scroll-to-projects')"
+        class="relative border border-[#121212]/10 dark:border-white/10 px-8 py-10 md:px-16 md:py-12 flex flex-col items-center space-y-2 transition-colors duration-1000 group-hover/text:border-[#121212]/30 dark:group-hover/text:border-white/30 cursor-pointer"
+      >
         <div class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] uppercase tracking-[0.3em] group-hover/text:opacity-100 transition-opacity">
           Alexandre MATHIEU
         </div>
@@ -25,10 +28,11 @@
 
     <!-- Scroll Indicator -->
     <div 
-      class="absolute bottom-10 left-1/2 -translate-x-1/2 transition-opacity duration-500"
+      @click="$emit('scroll-to-projects')"
+      class="absolute bottom-10 left-1/2 -translate-x-1/2 transition-opacity duration-500 cursor-pointer group/scroll"
       :style="{ opacity: 1 - scrollProgress * 5 }"
     >
-      <div class="w-px h-12 bg-gradient-to-b from-transparent via-[#121212]/20 dark:via-white/20 to-transparent animate-bounce"></div>
+      <div class="w-px h-12 bg-gradient-to-b from-transparent via-[#121212]/20 dark:via-white/20 to-transparent animate-bounce group-hover/scroll:via-[#121212]/40 dark:group-hover/scroll:via-white/40"></div>
     </div>
   </section>
 </template>
@@ -36,6 +40,10 @@
 <script setup lang="ts">
 defineProps<{
   scrollProgress: number;
+}>();
+
+defineEmits<{
+  (e: 'scroll-to-projects'): void;
 }>();
 </script>
 
