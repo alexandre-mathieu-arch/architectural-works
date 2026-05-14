@@ -44,12 +44,16 @@
           <div class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] uppercase tracking-[0.3em] group-hover/text:opacity-100 transition-opacity">
             Alexandre MATHIEU
           </div>
-          <div class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] uppercase tracking-[0.2em] text-[10px] md:text-[12px] group-hover/text:opacity-80 transition-opacity wave-text">
-            <span v-for="(char, i) in 'architecture design artistic'" :key="i" :style="{ animationDelay: `${i * 0.15}s` }" :class="{ 'mr-[0.3em]': char === ' ' }">
-              {{ char === ' ' ? '&nbsp;' : char }}
-            </span>
-          </div>
-          <span class="u-h4 text-white animate-pulse uppercase tracking-[0.5em] pt-4 group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 transition-colors">works</span>
+          <span class="u-h4 text-white animate-pulse uppercase tracking-[0.5em] pt-4 group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 transition-colors text-[14px] md:text-[16px]">works</span>
+          <svg 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="1.5" 
+            class="w-5 h-5 text-white group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 transition-colors animate-bounce mt-2 opacity-60"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+          </svg>
         </div>
       </div>
     </div>

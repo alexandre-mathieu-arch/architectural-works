@@ -12,18 +12,21 @@
     >
       <div 
         @click="$emit('scroll-to-projects')"
-        class="relative border border-[#121212]/10 dark:border-white/10 px-8 py-10 md:px-16 md:py-12 flex flex-col items-center space-y-2 transition-colors duration-1000 group-hover/text:border-[#121212]/30 dark:group-hover/text:border-white/30 cursor-pointer"
+        class="relative px-8 py-10 md:px-16 md:py-12 flex flex-col items-center space-y-2 transition-colors duration-1000 cursor-pointer"
       >
-        <div class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] uppercase tracking-[0.3em] group-hover/text:opacity-100 transition-opacity">
+        <div class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] tracking-[0.3em] group-hover/text:opacity-100 transition-opacity">
           Alexandre MATHIEU
         </div>
-        <div class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] uppercase tracking-[0.2em] text-[10px] md:text-[12px] group-hover/text:opacity-80 transition-opacity wave-text">
-          <span v-for="(char, i) in 'architecture design artistic'" :key="i" :style="{ animationDelay: `${i * 0.15}s` }" :class="{ 'mr-[0.3em]': char === ' ' }">
-            {{ char === ' ' ? '&nbsp;' : char }}
-          </span>
-        </div>
-        <span class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] opacity-40 animate-pulse uppercase tracking-[0.5em] pt-4 group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 group-hover/text:opacity-100 transition-all duration-700">works</span>
-      </div>
+        <span class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] opacity-40 animate-pulse uppercase tracking-[0.5em] pt-4 group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 group-hover/text:opacity-100 transition-all duration-700 text-[14px] md:text-[16px]">works</span>
+        <svg 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="1.5" 
+          class="w-5 h-5 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] opacity-40 group-hover/text:opacity-100 transition-all duration-700 animate-bounce mt-2"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+        </svg>      </div>
     </div>
 
     <!-- Scroll Indicator -->

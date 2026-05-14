@@ -1,6 +1,7 @@
 ---
 title: "Coliving Etel"
 date: 2026
+thumbnail: "/images/projects/coliving-etel/title-coliving.jpg"
 images:
   - "/images/projects/coliving-etel/coliving-etel-01-extension.jpg"
   - "/images/projects/coliving-etel/coliving-etel-02-entree.jpg"

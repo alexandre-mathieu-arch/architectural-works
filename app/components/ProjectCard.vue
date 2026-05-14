@@ -36,7 +36,7 @@
       
       <!-- Infos affichées en permanence (avant uniquement au survol) -->
       <div v-if="isRevealed" class="absolute inset-0 z-10">
-        <div class="absolute top-0 left-0 w-full border border-[#121212]/10 group-hover:border-[#121212]/30 dark:border-white/10 dark:group-hover:border-white/20 px-2 h-[30px] flex items-center gap-3 bg-white/80 dark:bg-[#121212]/80 doux:bg-[#E5E1E0]/80 nuit:bg-[#1A2238]/80 backdrop-blur-sm transition-all duration-700 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full border border-[#121212]/10 group-hover:border-[#121212]/30 dark:border-white/10 dark:group-hover:border-white/20 px-2 h-[30px] flex items-center gap-3 bg-white dark:bg-[#121212] doux:bg-[#E5E1E0] nuit:bg-[#1A2238] transition-all duration-700 overflow-hidden">
           <h3 
             class="u-h3 normal-case dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap overflow-hidden text-ellipsis flex-shrink"
             :style="{ viewTransitionName: 'title-' + project.path.replace(/\//g, '-') }"
@@ -82,6 +82,7 @@ const props = defineProps<{
     path: string;
     title: string;
     description: string;
+    thumbnail?: string;
     image?: string;
     images?: string[];
     tags?: string[];
@@ -126,6 +127,11 @@ onUnmounted(() => {
 });
 
 const displayImage = computed(() => {
+  if (props.project.thumbnail) {
+    const thumb = props.project.thumbnail;
+    return thumb.startsWith('/') ? thumb : '/' + thumb;
+  }
+
   let imagePath: string | undefined;
   if (props.project.images && Array.isArray(props.project.images)) {
     imagePath = props.project.images.find(img => typeof img === 'string' && img.length > 0);

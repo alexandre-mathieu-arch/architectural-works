@@ -31,23 +31,23 @@
     </PageTitle>
 
     <!-- Content: Integrated desktop grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-4 -mt-[10px]">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-4 -mt-[10px] items-start">
       <!-- Column 1: Equipe -->
-      <div class="opacity-100">
+      <div class="opacity-100 pt-0">
         <div v-if="equipe" class="prose dark:prose-invert max-w-none pb-4">
           <ContentRenderer :value="equipe" />
         </div>
       </div>
 
       <!-- Column 2: Pratique -->
-      <div class="opacity-100">
+      <div class="opacity-100 md:mt-[30vh] xl:mt-[50vh]">
         <div v-if="pratique" class="prose dark:prose-invert max-w-none pb-4">
           <ContentRenderer :value="pratique" />
         </div>
       </div>
 
       <!-- Column 3: Portrait -->
-      <div class="opacity-100">
+      <div class="opacity-100 sticky top-24">
         <div class="overflow-hidden w-full aspect-[4/5]">
           <NuxtImg 
             src="/profil.jpg" 
@@ -58,9 +58,9 @@
       </div>
 
       <!-- Column 4: Download CV -->
-      <div class="opacity-100 flex flex-col items-start gap-y-4">
+      <div class="opacity-100 flex flex-col items-start gap-y-4 md:mt-[30vh] xl:mt-[80vh]">
         <a 
-          href="/works/cv-alexandre-mathieu-fr.pdf" 
+          href="/cv-alexandre-mathieu-fr.pdf" 
           target="_blank" 
           download 
           class="inline-flex items-center gap-2 px-0 py-1 u-h4 hover:text-black dark:hover:text-white transition-all duration-300 no-underline group"
@@ -71,7 +71,7 @@
           <span class="whitespace-nowrap">Télécharger le CV (FR)</span>
         </a>
         <a 
-          href="/works/cv-alexandre-mathieu-en.pdf" 
+          href="/cv-alexandre-mathieu-en.pdf" 
           target="_blank" 
           download 
           class="inline-flex items-center gap-2 px-0 py-1 u-h4 hover:text-black dark:hover:text-white transition-all duration-300 no-underline group"

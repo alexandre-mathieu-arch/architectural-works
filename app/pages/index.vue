@@ -9,7 +9,7 @@
     </div>
 
     <!-- Project Grid (from architecture.vue) -->
-    <div id="projects-grid" class="pt-0 pb-0 min-h-screen scroll-mt-20">
+    <div id="projects-grid" class="pt-0 pb-0 min-h-screen scroll-mt-40">
       <div 
         v-if="filteredProjects?.length" 
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 items-center mt-3"
@@ -124,7 +124,7 @@ const smoothScrollTo = (targetId: string, duration: number = 1500) => {
   const target = document.getElementById(targetId);
   if (!target) return;
 
-  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 80;
+  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 120;
   const startPosition = window.pageYOffset;
   const distance = targetPosition - startPosition;
   let startTime: number | null = null;
