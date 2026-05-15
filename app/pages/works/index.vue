@@ -45,6 +45,9 @@
         <p class="text-gray-500">Aucun projet ne correspond à votre sélection.</p>
       </div>
 
+      <!-- Collaborations & Parcours Section -->
+      <CollaborationsList />
+
       <!-- Contact Section -->
       <div id="contact" class="mt-32 pb-24 border-t border-[#121212]/10 pt-16 scroll-mt-20">
         <div class="mb-10">
@@ -69,6 +72,7 @@
 import { ref, computed, watchEffect, onMounted, onUnmounted } from 'vue';
 import ProjectCard from '~/components/ProjectCard.vue';
 import HeroSection from '~/components/HeroSection.vue';
+import CollaborationsList from '~/components/CollaborationsList.vue';
 import { useProjectFilters } from '~/composables/useProjectFilters';
 
 definePageMeta({
