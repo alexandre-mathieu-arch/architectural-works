@@ -22,14 +22,14 @@ const router = useRouter();
 
 const handleContactClick = async () => {
   // If we're already on the projects page, just scroll
-  if (router.currentRoute.value.path === '/projects') {
+  if (router.currentRoute.value.path === '/works') {
     const el = document.getElementById('contact');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   } else {
     // Navigate with a query param to trigger scroll on mount
-    await router.push({ path: '/projects', query: { scroll: 'contact' } });
+    await router.push({ path: '/works', query: { scroll: 'contact' } });
   }
 };
 </script>

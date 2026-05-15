@@ -4,7 +4,7 @@ import yaml
 import subprocess
 
 # Chemins
-PROJECTS_DIR = "../content/projects"
+PROJECTS_DIR = "../content/works"
 PUBLIC_DIR = "../public"
 OUTPUT_DIR = "output"
 TEMPLATE_FILE = "template.tex"

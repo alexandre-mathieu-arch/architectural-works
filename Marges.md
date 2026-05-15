@@ -104,7 +104,7 @@ Les filtres situés sous le titre principal de la page Projets suivent ces règl
 
 ---
 
-## 6. Grille de Projets (`app/pages/projects.vue`)
+## 6. Grille de Projets (`app/pages/works/index.vue`)
 La grille d'affichage des projets utilise les caractéristiques suivantes :
 
 - **Colonnes (Responsive)** :

@@ -73,7 +73,7 @@ onUnmounted(() => {
 
 // Smart Reset: Clear filters if navigating away from projects section
 watch(() => route.path, (newPath, oldPath) => {
-  const projectRoutes = ['/architecture', '/design', '/projects'];
+  const projectRoutes = ['/works'];
   const isFromProjects = projectRoutes.some(r => oldPath?.startsWith(r)) || oldPath === '/';
   const isToProjects = projectRoutes.some(r => newPath.startsWith(r)) || newPath === '/';
   
