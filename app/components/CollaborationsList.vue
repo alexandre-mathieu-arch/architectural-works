@@ -41,8 +41,9 @@
           <li>• Logements Passivhaus Kerfeunteun & maisons Quimper.</li>
           <li>• Cabinet médical à Plonévez.</li>
           <li>• Rénovation & extension menuiserie MCA, Plonévez-du-Faou.</li>
-          <li>• <span class="text-primary-900/50 uppercase text-[10px] tracking-widest mr-1">Concours & Études :</span> ISEN Brest, Siège COPERL, Atrium bancaire, Agence bancaire Quimper, Collège Isigny-Sur-Mer.</li>
-          <li>• <span class="text-primary-900/50 uppercase text-[10px] tracking-widest mr-1">Intérieur & Design :</span> Bar-resto "Du Vin dans les Voiles", Appartement sous combles, Tertiaire Passivhaus bois/paille Quimper.</li>
+          <li>• ISEN Brest, Siège COPERL, Atrium bancaire, Agence bancaire Quimper, Collège Isigny-Sur-Mer.</li>
+          <li>• Design intérieur du Bar-restaurant "Du Vin dans les Voiles".</li>
+          <li>• Appartement sous combles.</li>
         </ul>
       </div>
 
