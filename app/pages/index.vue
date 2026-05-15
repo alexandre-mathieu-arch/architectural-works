@@ -73,7 +73,7 @@ import { useProjectFilters } from '~/composables/useProjectFilters';
 
 definePageMeta({
   layout: 'default',
-  displayTitle: 'Architecture',
+  displayTitle: 'Works',
   showFilters: true,
   transparentHeader: true
 })
@@ -116,7 +116,6 @@ const {
 const { data: projects } = await useAsyncData('home-projects', () =>
   queryCollection('content')
     .where('path', 'LIKE', '/projects/%')
-    .where('typologies', 'NOT LIKE', '%Design%')
     .all()
 );
 

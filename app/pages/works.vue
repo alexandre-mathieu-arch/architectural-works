@@ -82,12 +82,12 @@ import { useProjectFilters } from '~/composables/useProjectFilters';
 
 definePageMeta({
   layout: 'default',
-  displayTitle: 'Architecture',
+  displayTitle: 'Works',
   showFilters: true
 });
 
 useHead({
-  title: 'Architecture — Alexandre Mathieu'
+  title: 'Works — Alexandre Mathieu'
 })
 
 const { 
@@ -107,11 +107,10 @@ const {
 const route = useRoute();
 const router = useRouter();
 
-// Filter Architecture projects (exclude those that have "Design" as a typology)
-const { data: projects } = await useAsyncData('architecture-projects', () =>
+// Fetch all projects (no longer excluding Design)
+const { data: projects } = await useAsyncData('all-projects', () =>
   queryCollection('content')
     .where('path', 'LIKE', '/projects/%')
-    .where('typologies', 'NOT LIKE', '%Design%')
     .all()
 );
 

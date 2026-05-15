@@ -1,6 +1,6 @@
 ---
 title: "Les 3 Frères"
-date: 2018
+date: "2018"
 ratio: "4/3"
 draft: false
 tags: ["résidentiel", "2018"]
@@ -13,7 +13,7 @@ details:
 description: "Créations d'immeuble de sept logements allant du T2 au T4 avec parking privatifs sous-terrain dans la rue des trois freres le Goff à Saint Brieuc en collaboration avec l'agence DDL architectes."
 typologies: ["Résidentiel"]
 tailles: ["L"]
-pays: ["France"]
+pays: ["France", "Bretagne"]
 lieu: "Saint-Brieuc"
 surface: "565 m²"
 cout: "NC"

@@ -1,5 +1,5 @@
 ---
-title: "Maison B"
+title: "Maison Bretonne"
 description: "Dialogue entre héritage néo-breton et légèreté contemporaine : rénovation et extension d'une maison côtière en structure bois et zinc blanc."
 collaboration: "Pascal Debard (KLOUDE)"
 images:
@@ -14,11 +14,11 @@ images:
   - "/images/projects/maison-bretonne/maison-bretonne-extrait-coupe.jpg"
   - "/images/projects/maison-bretonne/maison-bretonne-avant.jpg"
   - "/images/projects/maison-bretonne/maison-bretonne-photogrammetrie.jpg"
-date: 2020
+date: "2020"
 tags: ["rénovation", "maison", "bois", "zinc"]
 typologies: ["Résidentiel"]
 tailles: ["S"]
-pays: ["France"]
+pays: ["France", "Bretagne"]
 lieu: "La Trinité-sur-Mer"
 surface: "150 m²"
 cout: "nc"

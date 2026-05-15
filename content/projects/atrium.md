@@ -1,6 +1,6 @@
 ---
 title: "Atrium Organique"
-date: 2021
+date: "2022"
 ratio: "4/3"
 draft: false
 tags: ["bureaux", "aménagement", "design"]
@@ -9,9 +9,9 @@ images:
   - "/images/projects/atrium/night-shift-bis.jpg"
   - "/images/projects/atrium/perspective.jpg"
 description: "Au cœur de la rigueur orthogonale d'un siège bancaire, des structures organiques en toiles tendues créent une rupture inattendue. Un dialogue entre la géométrie réglée de l'espace et la fluidité de bulles programmatiques."
-typologies: ["Intérieur", "Bureaux"]
+typologies: ["Tertiaire", "Bureau"]
 tailles: ["L"]
-pays: ["France"]
+pays: ["France", "Bretagne"]
 lieu: "Vannes"
 phase: "Concours privé (abandonné)"
 statut: "Abandonné"

@@ -1,6 +1,6 @@
 ---
 title: "Bodelio"
-date: 2018
+date: "2019"
 ratio: "4/3"
 draft: false
 tags: ["logement", "patrimoine", "réhabilitation"]
@@ -11,7 +11,7 @@ details:
 description: "Le projet Bodelio s'inscrit dans la reconversion d'un site hospitalier historique à Lorient. Concours de logements résidentiels (perdu)."
 typologies: ["Résidentiel"]
 tailles: ["L"]
-pays: ["France"]
+pays: ["France", "Bretagne"]
 lieu: "Lorient"
 surface: "4200 m²"
 collaboration: "DDL Architectes"

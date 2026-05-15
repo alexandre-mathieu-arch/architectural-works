@@ -1,6 +1,6 @@
 ---
 title: "Cap-Horn"
-date: 2025
+date: "2022"
 ratio: "16/9"
 draft: false
 tags: ["tertiaire", "mixité", "santé"]
@@ -13,9 +13,9 @@ details:
   - "/images/projects/cap-horn/cap-horn-05-detail-coupe.jpg"
   - "/images/projects/cap-horn/cap-horn-06-plan-masse.png"
 description: "Le projet Cap-Horn s'érige comme une figure de proue tertiaire sur une parcelle aux contraintes urbaines exacerbées. Ce bâtiment vertical hybride articule un programme dense mêlant services de santé et espaces de création architecturale, tout en libérant le sol au profit des mobilités."
-typologies: ["Tertiaire", "Santé"]
+typologies: ["Tertiaire", "Bureau"]
 tailles: ["M"]
-pays: ["France"]
+pays: ["France", "Bretagne"]
 lieu: "Quimper"
 surface: "850 m²"
 phase: "Études en cours"

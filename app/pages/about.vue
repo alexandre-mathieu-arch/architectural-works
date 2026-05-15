@@ -3,7 +3,7 @@
     <PageTitle title="À propos" :hide-main-title="true">
       <template #triggers>
         <div 
-          class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8"
+          class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8"
           style="view-transition-name: page-triggers;"
         >
           <div 
@@ -21,17 +21,12 @@
           >
             <span>Portrait</span>
           </div>
-          <div 
-            class="flex items-center justify-between gap-1 u-h4 px-3 h-[30px] border border-primary-900 text-primary-900 bg-transparent w-full"
-          >
-            <span>Documents</span>
-          </div>
         </div>
       </template>
     </PageTitle>
 
     <!-- Content: Integrated desktop grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-4 -mt-[10px] items-start">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-4 -mt-[10px] items-start">
       <!-- Column 1: Equipe -->
       <div class="opacity-100 pt-0">
         <div v-if="equipe" class="prose dark:prose-invert max-w-none pb-4">
@@ -40,7 +35,7 @@
       </div>
 
       <!-- Column 2: Pratique -->
-      <div class="opacity-100 md:mt-[30vh] xl:mt-[50vh]">
+      <div class="opacity-100">
         <div v-if="pratique" class="prose dark:prose-invert max-w-none pb-4">
           <ContentRenderer :value="pratique" />
         </div>
@@ -56,9 +51,19 @@
           />
         </div>
       </div>
+    </div>
 
-      <!-- Column 4: Download CV -->
-      <div class="opacity-100 flex flex-col items-start gap-y-4 md:mt-[30vh] xl:mt-[80vh]">
+    <!-- Bottom section: Parcours & Downloads, breaks free from columns -->
+    <div class="mt-20 pt-8 border-t border-primary-900/10 flex flex-col gap-12">
+      <!-- Parcours -->
+      <div v-if="parcours">
+        <div class="prose dark:prose-invert max-w-none">
+          <ContentRenderer :value="parcours" />
+        </div>
+      </div>
+
+      <!-- Downloads -->
+      <div class="flex flex-col md:flex-row items-start gap-x-12 gap-y-4">
         <a 
           href="/cv-alexandre-mathieu-fr.pdf" 
           target="_blank" 
@@ -95,6 +100,10 @@ const { data: pratique } = await useAsyncData('about-pratique', () => {
 
 const { data: equipe } = await useAsyncData('about-equipe', () => {
   return queryCollection('content').path('/about/equipe').first()
+})
+
+const { data: parcours } = await useAsyncData('about-parcours', () => {
+  return queryCollection('content').path('/about/parcours').first()
 })
 
 definePageMeta({

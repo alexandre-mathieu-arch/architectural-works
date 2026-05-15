@@ -1,7 +1,7 @@
 ---
 title: "Villa CN"
 order: 2
-date: 2024
+date: "2024"
 ratio: "4/3"
 draft: false
 tags: ["luxe", "montagne"]
@@ -12,7 +12,7 @@ description: "Une villa d'exception nichée dans les contreforts de l'Atlas. Les
 typologies: ["Résidentiel"]
 tailles: ["XL"]
 pays: ["Maroc"]
-lieu: "Imlil"
+lieu: "Tahanaout, Marrakech"
 surface: "650 m²"
 cout: "2.4 M€"
 phase: "Livré"

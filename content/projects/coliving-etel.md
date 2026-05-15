@@ -1,6 +1,6 @@
 ---
 title: "Coliving Etel"
-date: 2026
+date: "2023"
 thumbnail: "/images/projects/coliving-etel/title-coliving.jpg"
 images:
   - "/images/projects/coliving-etel/coliving-etel-01-extension.jpg"
@@ -14,7 +14,7 @@ images:
 description: "Projet de coliving à Etel."
 typologies: ["Résidentiel"]
 tailles: ["M"]
-pays: ["France"]
+pays: ["France", "Bretagne"]
 lieu: "Etel"
 phase: "En cours"
 statut: "Projet"

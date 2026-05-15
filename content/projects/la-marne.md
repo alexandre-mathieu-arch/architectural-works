@@ -1,7 +1,7 @@
 ---
 title: "La Marne"
 order: 1
-date: 2021
+date: "2021"
 ratio: "4/3"
 draft: false
 tags: ["rénovation", "résidentiel", "densification"]
@@ -23,7 +23,7 @@ details:
 description: "Situé dans un jardin en intérieur d'îlot urbain, ce local commun a été transformé en résidence de 5 logements, du T2 au T4. Une renaissance architecturale privilégiant la lumière et l'intimité."
 typologies: ["Résidentiel"]
 tailles: ["M"]
-pays: ["France"]
+pays: ["France", "Bretagne"]
 lieu: "Lorient"
 surface: "286 m²"
 collaboration: "Pascal Debard (KLOUDE) & Achraf Benbouzid (ABA)"

@@ -1,6 +1,6 @@
 ---
 title: "230 Volts"
-date: 2018
+date: "2018"
 draft: false
 tags: ["Design", "Mobilier"]
 images:
