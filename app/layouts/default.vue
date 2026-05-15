@@ -14,7 +14,7 @@
           :title="pageTitle" 
           :show-filters="route.meta.showFilters === true" 
           :readonly-filters="route.meta.readonlyFilters === true"
-          :hide-main-title="route.path.startsWith('/projects/')"
+          :hide-main-title="(route.path.startsWith('/works/') && route.path !== '/works')"
           :style="route.meta.transparentHeader ? { opacity: headerOpacity, transform: `translateY(${(headerOpacity - 1) * 20}px)`, pointerEvents: headerOpacity > 0.5 ? 'auto' : 'none' } : {}"
         />
         <slot />
@@ -107,7 +107,7 @@ const displayedTitle = computed(() => {
   }
   
   // For project detail pages, show the project title
-  if (route.path.startsWith('/projects/') && route.meta.dynamicTitle) {
+  if ((route.path.startsWith('/works/') && route.path !== '/works') && route.meta.dynamicTitle) {
     return route.meta.dynamicTitle;
   }
   

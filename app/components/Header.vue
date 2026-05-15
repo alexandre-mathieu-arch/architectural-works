@@ -8,7 +8,7 @@
     <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] relative">
       <!-- Logo -->
       <NuxtLink 
-        to="/" 
+        to="/works" 
         class="text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap u-h4 logo-link px-2 py-1 transition-all duration-500 hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238]"
         @click="handleLinkClick('Works')"
         @mouseenter="emit('linkHover', 'Works')"

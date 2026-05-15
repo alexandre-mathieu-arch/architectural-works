@@ -21,7 +21,7 @@
           v-if="hoveredProjectTitle || (!hideMainTitle && title) || (hideMainTitle && title)" 
           :key="hoveredProjectTitle || (typeof title === 'string' ? title : title.main)"
           class="text-[18px] sm:text-[20px] font-bold leading-none text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap overflow-hidden text-ellipsis w-full md:w-[calc((100%-32px)/2)] xl:w-[calc((100%-96px)/4)] h-full flex items-center"
-          :style="{ viewTransitionName: route.path.startsWith('/projects/') ? 'title-' + route.path.replace(/\//g, '-') : 'project-title-continuity' }"
+          :style="{ viewTransitionName: (route.path.startsWith('/works/') && route.path !== '/works') ? 'title-' + route.path.replace(/\//g, '-') : 'project-title-continuity' }"
         >
           <template v-if="hoveredProjectTitle">
             {{ hoveredProjectTitle }}
@@ -217,7 +217,7 @@ const route = useRoute();
 const { data: allContent } = await useAsyncData('all-projects-nav', () =>
   queryCollection('content')
     .select('path', 'title', 'date')
-    .where('path', 'LIKE', '/projects/%')
+    .where('path', 'LIKE', '/works/%')
     .where('draft', '<>', true)
     .all()
 );
@@ -251,7 +251,7 @@ const nextProject = computed(() => {
   return null;
 });
 
-const isProjectPage = computed(() => route.path.startsWith('/projects/') && route.path !== '/projects');
+const isProjectPage = computed(() => route.path.startsWith('/works/') && route.path !== '/works');
 
 const setTransitionDirection = (direction: 'next' | 'prev') => {
   if (import.meta.client) {
