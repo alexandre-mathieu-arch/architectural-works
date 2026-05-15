@@ -113,6 +113,20 @@ onMounted(() => {
   }
 });
 
+const { 
+  selectedTypology, 
+  selectedSize, 
+  selectedYear, 
+  selectedCountry,
+  selectedProjectTitle,
+  sortBy,
+  typologyOptions,
+  sizeOptions,
+  yearOptions,
+  countryOptions,
+  projectTitleOptions
+} = useProjectFilters();
+
 // Watch filters and scroll to grid when they change
 watch([selectedTypology, selectedYear, selectedCountry], () => {
   if (import.meta.client) {
@@ -127,30 +141,6 @@ watch([selectedTypology, selectedYear, selectedCountry], () => {
     }
   }
 }, { deep: true });
-
-watch(() => route.query.view, (newView) => {
-  if (newView === 'grid') {
-    jumpToProjects();
-  }
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
-
-const { 
-  selectedTypology, 
-  selectedSize, 
-  selectedYear, 
-  selectedCountry,
-  selectedProjectTitle,
-  sortBy,
-  typologyOptions,
-  sizeOptions,
-  yearOptions,
-  countryOptions,
-  projectTitleOptions
-} = useProjectFilters();
 
 const { data: projects } = await useAsyncData('home-projects', () =>
   queryCollection('content')
