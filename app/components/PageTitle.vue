@@ -79,27 +79,27 @@
                 </template>
               </button>
 
-              <!-- Local Dropdown Menu (Horizontal Ribbon) -->
+              <!-- Local Dropdown Menu (Vertical List) -->
               <Transition
                 mode="out-in"
-                enter-active-class="transition duration-500 ease-out"
+                enter-active-class="transition duration-400 ease-out"
                 enter-from-class="opacity-0 -translate-y-2"
                 enter-to-class="opacity-100 translate-y-0"
-                leave-active-class="transition duration-700 ease-in"
+                leave-active-class="transition duration-300 ease-in"
                 leave-from-class="opacity-100 translate-y-0"
                 leave-to-class="opacity-0 -translate-y-2"
               >
                 <div 
                   v-if="activeMenu === filter.id" 
-                  class="absolute left-0 top-full mt-2 z-50 glass-fluted bg-white/70 dark:bg-[#121212]/70 nuit:bg-[#161D2F]/80 border border-[#121212]/10 dark:border-white/10 p-2 shadow-xl min-w-max"
+                  class="absolute left-0 top-full mt-1 z-50 bg-white dark:bg-[#1A1A1A] doux:bg-[#E5E1E0] nuit:bg-[#1E2538] border border-[#121212]/10 dark:border-white/10 shadow-lg min-w-full overflow-hidden"
                   :class="{ 'right-0 left-auto': filter.id === 'country' && !isProjectPage }"
                 >
-                  <div class="flex flex-row gap-x-6 px-2">
+                  <div class="flex flex-col py-1">
                     <template v-if="activeMenu === 'typology'">
                       <button 
                         @click="selectedTypology = null; activeMenu = null" 
-                        class="u-h4 h-[30px] flex items-center transition-all duration-700 bg-transparent whitespace-nowrap" 
-                        :class="selectedTypology === null ? 'text-primary-900 dark:text-primary-400 font-bold' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60 hover:text-primary-900 dark:hover:text-primary-400'"
+                        class="u-h4 h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        :class="selectedTypology === null ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         Toutes
                       </button>
@@ -107,8 +107,8 @@
                         v-for="opt in typologyOptions" 
                         :key="opt" 
                         @click="selectedTypology = opt; activeMenu = null" 
-                        class="u-h4 h-[30px] flex items-center transition-all duration-700 bg-transparent whitespace-nowrap" 
-                        :class="selectedTypology === opt ? 'text-primary-900 dark:text-primary-400 font-bold' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60 hover:text-primary-900 dark:hover:text-primary-400'"
+                        class="u-h4 h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        :class="selectedTypology === opt ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         {{ opt }}
                       </button>
@@ -116,8 +116,8 @@
                     <template v-if="activeMenu === 'year'">
                       <button 
                         @click="selectedYear = null; activeMenu = null" 
-                        class="u-h4 h-[30px] flex items-center transition-all duration-700 bg-transparent whitespace-nowrap" 
-                        :class="selectedYear === null ? 'text-primary-900 dark:text-primary-400 font-bold' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60 hover:text-primary-900 dark:hover:text-primary-400'"
+                        class="u-h4 h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        :class="selectedYear === null ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         Toutes
                       </button>
@@ -125,8 +125,8 @@
                         v-for="opt in yearOptions" 
                         :key="opt" 
                         @click="selectedYear = opt; activeMenu = null" 
-                        class="u-h4 h-[30px] flex items-center transition-all duration-700 bg-transparent whitespace-nowrap" 
-                        :class="selectedYear === opt ? 'text-primary-900 dark:text-primary-400 font-bold' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60 hover:text-primary-900 dark:hover:text-primary-400'"
+                        class="u-h4 h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        :class="selectedYear === opt ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         {{ opt }}
                       </button>
@@ -134,8 +134,8 @@
                     <template v-if="activeMenu === 'country'">
                       <button 
                         @click="selectedCountry = null; activeMenu = null" 
-                        class="u-h4 h-[30px] flex items-center transition-all duration-700 bg-transparent whitespace-nowrap" 
-                        :class="selectedCountry === null ? 'text-primary-900 dark:text-primary-400 font-bold' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60 hover:text-primary-900 dark:hover:text-primary-400'"
+                        class="u-h4 h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        :class="selectedCountry === null ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         Tous
                       </button>
@@ -143,8 +143,8 @@
                         v-for="opt in countryOptions" 
                         :key="opt" 
                         @click="selectedCountry = opt; activeMenu = null" 
-                        class="u-h4 h-[30px] flex items-center transition-all duration-700 bg-transparent whitespace-nowrap" 
-                        :class="selectedCountry === opt ? 'text-primary-900 dark:text-primary-400 font-bold' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60 hover:text-primary-900 dark:hover:text-primary-400'"
+                        class="u-h4 h-[34px] px-4 flex items-center transition-colors duration-300 whitespace-nowrap hover:bg-[#121212]/5 dark:hover:bg-white/5" 
+                        :class="selectedCountry === opt ? 'text-primary-900 dark:text-primary-400 font-bold bg-[#121212]/5 dark:bg-white/5' : 'text-[#121212]/60 dark:text-white/60 doux:text-[#4A4443]/60 nuit:text-[#CDD6F4]/60'"
                       >
                         {{ opt }}
                       </button>
