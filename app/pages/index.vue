@@ -1,9 +1,224 @@
+<template>
+  <div>
+    <!-- Hero Section -->
+    <div class="-mt-[var(--header-height)]">
+      <HeroSection 
+        :scroll-progress="scrollProgress" 
+        @scroll-to-projects="scrollToProjects"
+      />
+    </div>
+
+    <!-- Project Grid (from architecture.vue) -->
+    <div id="projects-grid" class="pt-0 pb-0 min-h-screen scroll-mt-40">
+      <div 
+        v-if="filteredProjects?.length" 
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 items-center mt-3"
+        style="view-transition-name: projects-grid;"
+      >
+        <template v-for="(project, index) in filteredProjects" :key="project.path">
+          <template v-if="index % 6 === 5">
+            <button 
+              @click="scrollToContact"
+              class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-700 hover:border-[#121212] text-left"
+            >
+              <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                <span class="u-h3 dark:text-white doux:text-[#4A4443]">Démarrer un projet ?</span>
+              </div>
+            </button>
+            <ProjectCard :project="project" />
+            <button 
+              @click="scrollToContact"
+              class="hidden xl:block aspect-square border border-[#121212]/30 relative group transition-colors duration-700 hover:border-[#121212] text-left"
+            >
+              <div class="absolute top-0 left-0 w-full px-2 h-[30px] flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                <span class="u-h3 dark:text-white doux:text-[#4A4443]">Démarrer un projet ?</span>
+              </div>
+            </button>
+          </template>
+          <ProjectCard 
+            v-else 
+            :project="project" 
+          />
+        </template>
+      </div>
+      <div v-else class="text-center py-10">
+        <p class="text-gray-500">Aucun projet ne correspond à votre sélection.</p>
+      </div>
+
+      <!-- Collaborations & Parcours Section -->
+      <CollaborationsList />
+
+      <!-- Contact Section -->
+      <div id="contact" class="mt-32 pb-24 border-t border-[#121212]/10 pt-16 scroll-mt-20">
+        <div class="mb-10">
+          <p class="u-h2 max-w-2xl leading-tight font-light !tracking-[0.15em]">
+            Définir un programme, donner forme à une vision, bâtir un futur, engageons le dialogue.
+          </p>
+        </div>
+        <div class="flex flex-col gap-y-6">
+          <a href="mailto:alexandre.mat+w@protonmail.com" class="u-h3 font-normal tracking-[0.2em] hover:text-gray-500 transition-colors w-fit">
+            alexandre.mat+w@protonmail.com
+          </a>
+          <a href="tel:+33658215300" class="u-h3 font-normal tracking-[0.2em] hover:text-gray-500 transition-colors w-fit">
+            +33 6 58 21 53 00
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
+import { ref, computed, watchEffect, onMounted, onUnmounted } from 'vue';
+import ProjectCard from '~/components/ProjectCard.vue';
+import HeroSection from '~/components/HeroSection.vue';
+import CollaborationsList from '~/components/CollaborationsList.vue';
+import { useProjectFilters } from '~/composables/useProjectFilters';
+
 definePageMeta({
-  middleware: [
-    function (to, from) {
-      return navigateTo('/works', { redirectCode: 301 })
-    }
-  ]
+  layout: 'default',
+  displayTitle: 'Projets',
+  showFilters: true,
+  transparentHeader: true
 })
+
+useHead({
+  title: 'Alexandre Mathieu — architecture & design'
+})
+
+const route = useRoute();
+const scrollProgress = ref(0);
+
+const handleScroll = () => {
+  if (import.meta.client) {
+    scrollProgress.value = Math.min(1, window.scrollY / window.innerHeight);
+  }
+};
+
+const jumpToProjects = () => {
+  const target = document.getElementById('projects-grid');
+  if (target) {
+    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 120;
+    window.scrollTo({ top: targetPosition, behavior: 'instant' as any });
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
+  
+  if (route.query.view === 'grid') {
+    // Immediate jump if view=grid is present
+    setTimeout(jumpToProjects, 50);
+  } else if (route.query.scroll === 'contact') {
+    // Scroll to contact if requested
+    setTimeout(scrollToContact, 100);
+  }
+});
+
+const { 
+  selectedTypology, 
+  selectedSize, 
+  selectedYear, 
+  selectedCountry,
+  selectedProjectTitle,
+  sortBy,
+  typologyOptions,
+  sizeOptions,
+  yearOptions,
+  countryOptions,
+  projectTitleOptions
+} = useProjectFilters();
+
+// Watch filters and scroll to grid when they change
+watch([selectedTypology, selectedYear, selectedCountry], () => {
+  if (import.meta.client) {
+    // Only scroll if we're not already at the grid or below
+    const target = document.getElementById('projects-grid');
+    if (target) {
+      const rect = target.getBoundingClientRect();
+      // If the top of the grid is not visible (scrolled up too far), scroll to it
+      if (rect.top > 150 || rect.top < 0) {
+        scrollToProjects(1000);
+      }
+    }
+  }
+}, { deep: true });
+
+const { data: projects } = await useAsyncData('home-projects', () =>
+  queryCollection('content')
+    .where('path', 'LIKE', '/projets/%')
+    .all()
+);
+
+const smoothScrollTo = (targetId: string, duration: number = 1500) => {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 120;
+  const startPosition = window.pageYOffset;
+  const distance = targetPosition - startPosition;
+  let startTime: number | null = null;
+
+  const animation = (currentTime: number) => {
+    if (startTime === null) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const run = ease(timeElapsed, startPosition, distance, duration);
+    window.scrollTo(0, run);
+    if (timeElapsed < duration) requestAnimationFrame(animation);
+  };
+
+  const ease = (t: number, b: number, c: number, d: number) => {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
+  };
+
+  requestAnimationFrame(animation);
+};
+
+const scrollToContact = () => {
+  smoothScrollTo('contact', 1200);
+};
+
+const scrollToProjects = (duration: number = 2000) => {
+  smoothScrollTo('projects-grid', duration);
+};
+
+watchEffect(() => {
+  if (projects.value) {
+    const typologies = new Set<string>();
+    const years = new Set<string>();
+    const countries = new Set<string>();
+    projects.value.forEach(p => {
+      if (Array.isArray(p.typologies)) p.typologies.forEach(t => t && typologies.add(t));
+      if (Array.isArray(p.pays)) p.pays.forEach(c => c && countries.add(c));
+      if (p.date) {
+        const year = new Date(p.date).getFullYear().toString();
+        if (year !== 'NaN') years.add(year);
+      }
+    });
+    typologyOptions.value = Array.from(typologies).sort();
+    yearOptions.value = Array.from(years).sort((a, b) => b.localeCompare(a));
+    countryOptions.value = Array.from(countries).sort();
+  }
+});
+
+const filteredProjects = computed(() => {
+  if (!projects.value) return [];
+  let result = projects.value.filter(p => {
+    const matchTypology = !selectedTypology.value || (p.typologies && p.typologies.includes(selectedTypology.value));
+    const matchCountry = !selectedCountry.value || (p.pays && p.pays.includes(selectedCountry.value));
+    const matchYear = !selectedYear.value || (p.date && new Date(p.date).getFullYear().toString() === selectedYear.value);
+    return matchTypology && matchCountry && matchYear;
+  });
+  result.sort((a, b) => {
+    const orderA = a.order ?? 999;
+    const orderB = b.order ?? 999;
+    if (orderA !== orderB) return orderA - orderB;
+    return new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime();
+  });
+  return result;
+});
 </script>

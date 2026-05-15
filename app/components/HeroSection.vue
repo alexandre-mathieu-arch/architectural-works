@@ -17,7 +17,7 @@
         <div class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] tracking-[0.3em] group-hover/text:opacity-100 transition-opacity">
           Alexandre MATHIEU
         </div>
-        <span class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] opacity-40 animate-pulse uppercase tracking-[0.5em] pt-4 group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 group-hover/text:opacity-100 transition-all duration-700 text-[14px] md:text-[16px]">works</span>
+        <span class="u-h4 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] opacity-40 animate-pulse uppercase tracking-[0.5em] pt-4 group-hover/text:text-primary-900 dark:group-hover/text:text-primary-400 group-hover/text:opacity-100 transition-all duration-700 text-[14px] md:text-[16px]">projets</span>
         <svg 
           viewBox="0 0 24 24" 
           fill="none" 

@@ -8,10 +8,10 @@
     <div class="main-container h-[var(--header-height)] flex items-center gap-[20px] relative">
       <!-- Logo -->
       <NuxtLink 
-        :to="{ path: '/works', query: { view: 'grid' } }" 
+        :to="{ path: '/', query: { view: 'grid' } }" 
         class="text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] whitespace-nowrap u-h4 logo-link px-2 py-1 transition-all duration-500 hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238]"
-        @click="handleLinkClick('Works')"
-        @mouseenter="emit('linkHover', 'Works')"
+        @click="handleLinkClick('Projets')"
+        @mouseenter="emit('linkHover', 'Projets')"
         @mouseleave="emit('linkHover', '')"
       >
         Alexandre MATHIEU
@@ -23,10 +23,10 @@
           <NuxtLink 
             v-for="link in links" 
             :key="link.to" 
-            :to="link.to === '/works' ? { path: '/works', query: { view: 'grid' } } : link.to"
+            :to="link.to === '/' ? { path: '/', query: { view: 'grid' } } : link.to"
             class="u-h4 transition-all duration-500 px-2 py-1 text-[#121212] dark:text-white doux:text-[#4A4443] nuit:text-[#CDD6F4] hover:bg-[#121212] dark:hover:bg-white doux:hover:bg-[#4A4443] nuit:hover:bg-[#CDD6F4] hover:!text-white dark:hover:!text-[#121212] doux:hover:!text-[#E5E1E0] nuit:hover:!text-[#1A2238] relative flex flex-col items-center group/link"
             :class="[
-              route.path.startsWith(link.to) ? 'is-active' : 'group-hover/nav:opacity-50 hover:!opacity-100'
+              (link.to === '/' ? route.path === '/' : route.path.startsWith(link.to)) ? 'is-active' : 'group-hover/nav:opacity-50 hover:!opacity-100'
             ]"
             @click="handleLinkClick(link.label)"
             @mouseenter="emit('linkHover', link.label)"
@@ -36,7 +36,7 @@
             <!-- Active Dot -->
             <span 
               class="absolute -bottom-1 w-1 h-1 rounded-full bg-current transition-all duration-500 scale-0"
-              :class="{ 'scale-100': route.path.startsWith(link.to) }"
+              :class="{ 'scale-100': (link.to === '/' ? route.path === '/' : route.path.startsWith(link.to)) }"
             ></span>
           </NuxtLink>
         </div>
@@ -313,7 +313,7 @@ onUnmounted(() => {
 });
 
 const links = [
-  { label: 'Works', to: '/works' },
+  { label: 'Projets', to: '/' },
   { label: 'À propos', to: '/about' },
   { label: 'Corpus', to: '/corpus' },
   { label: 'Art', to: '/art' }

@@ -1,6 +1,6 @@
 ---
 title: "Atelier Archi"
-description: "Portfolio d'Alexandre Mathieu — Architectural & Design works"
+description: "Portfolio d'Alexandre Mathieu — Projets d'architecture & design"
 ---
 
 # Welcome to Nuxt Content Starter

@@ -14,7 +14,7 @@
           :title="pageTitle" 
           :show-filters="route.meta.showFilters === true" 
           :readonly-filters="route.meta.readonlyFilters === true"
-          :hide-main-title="(route.path.startsWith('/works/') && route.path !== '/works')"
+          :hide-main-title="(route.path.startsWith('/projets/') && route.path !== '/projets')"
           :style="route.meta.transparentHeader ? { opacity: headerOpacity, transform: `translateY(${(headerOpacity - 1) * 20}px)`, pointerEvents: headerOpacity > 0.5 ? 'auto' : 'none' } : {}"
         />
         <slot />
@@ -73,9 +73,9 @@ onUnmounted(() => {
 
 // Smart Reset: Clear filters if navigating away from projects section
 watch(() => route.path, (newPath, oldPath) => {
-  const projectRoutes = ['/works'];
-  const isFromProjects = projectRoutes.some(r => oldPath?.startsWith(r)) || oldPath === '/';
-  const isToProjects = projectRoutes.some(r => newPath.startsWith(r)) || newPath === '/';
+  const projectRoutes = ['/projets', '/'];
+  const isFromProjects = projectRoutes.some(r => oldPath === r || oldPath?.startsWith('/projets/'));
+  const isToProjects = projectRoutes.some(r => newPath === r || newPath.startsWith('/projets/'));
   
   if (isFromProjects && !isToProjects) {
     resetFilters();
@@ -107,7 +107,7 @@ const displayedTitle = computed(() => {
   }
   
   // For project detail pages, show the project title
-  if ((route.path.startsWith('/works/') && route.path !== '/works') && route.meta.dynamicTitle) {
+  if ((route.path.startsWith('/projets/') && route.path !== '/projets') && route.meta.dynamicTitle) {
     return route.meta.dynamicTitle;
   }
   
