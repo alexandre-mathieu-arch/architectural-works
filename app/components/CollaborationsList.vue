@@ -37,47 +37,23 @@
       <!-- 2018-2021 -->
       <div>
         <h3 class="u-h3 mb-1">2018 — 2021 — Architecte Collaborateur — Brulé Architectes Associés</h3>
-        <div class="space-y-3">
-          <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90">
-            <li>Logements Passivhaus Kerfeunteun & maisons Quimper.</li>
-            <li>Cabinet médical à Plonévez.</li>
-            <li>Rénovation & extension menuiserie MCA, Plonévez-du-Faou.</li>
-          </ul>
-          
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 pt-1">
-            <div>
-              <p class="text-[9px] uppercase tracking-[0.2em] text-primary-900/40 mb-1">Concours & Études</p>
-              <p class="text-[12px] leading-relaxed opacity-70">
-                ISEN Brest, Siège COPERL, Atrium bancaire, Agence bancaire Quimper, Collège Isigny-Sur-Mer.
-              </p>
-            </div>
-            <div>
-              <p class="text-[9px] uppercase tracking-[0.2em] text-primary-900/40 mb-1">Intérieur & Design</p>
-              <p class="text-[12px] leading-relaxed opacity-70">
-                Bar-resto "Du Vin dans les Voiles", Appartement sous combles, Tertiaire Passivhaus bois/paille Quimper.
-              </p>
-            </div>
-          </div>
-        </div>
+        <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90">
+          <li>Logements Passivhaus Kerfeunteun & maisons Quimper.</li>
+          <li>Cabinet médical à Plonévez.</li>
+          <li>Rénovation & extension menuiserie MCA, Plonévez-du-Faou.</li>
+          <li><span class="text-primary-900/50 uppercase text-[10px] tracking-widest mr-2">Concours & Études</span> ISEN Brest, Siège COPERL, Atrium bancaire, Agence bancaire Quimper, Collège Isigny-Sur-Mer.</li>
+          <li><span class="text-primary-900/50 uppercase text-[10px] tracking-widest mr-2">Intérieur & Design</span> Bar-resto "Du Vin dans les Voiles", Appartement sous combles, Tertiaire Passivhaus bois/paille Quimper.</li>
+        </ul>
       </div>
 
       <!-- 2018 -->
       <div>
-        <h3 class="u-h3 mb-2">2018 — Parcours & Expériences</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-3">
-          <div>
-            <p class="text-[9px] uppercase tracking-[0.2em] text-primary-900/40 mb-1">MATAL</p>
-            <p class="text-[12px] leading-relaxed opacity-70">Rénovations, extensions Sud Bretagne, Collectif Avenue de la Marne Lorient.</p>
-          </div>
-          <div>
-            <p class="text-[9px] uppercase tracking-[0.2em] text-primary-900/40 mb-1">DDL Architectes</p>
-            <p class="text-[12px] leading-relaxed opacity-70">Aménagement urbain rive gauche de Vannes (KCAP Zurich).</p>
-          </div>
-          <div>
-            <p class="text-[9px] uppercase tracking-[0.2em] text-primary-900/40 mb-1">Rich Designer</p>
-            <p class="text-[12px] leading-relaxed opacity-70">Conception lumière Club Med Cefalù & Marbella.</p>
-          </div>
-        </div>
+        <h3 class="u-h3 mb-1">2018 — Parcours & Expériences</h3>
+        <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90">
+          <li><span class="font-medium text-primary-900">MATAL :</span> Rénovations, extensions Sud Bretagne, Collectif Avenue de la Marne Lorient.</li>
+          <li><span class="font-medium text-primary-900">DDL Architectes :</span> Aménagement urbain rive gauche de Vannes (KCAP Zurich).</li>
+          <li><span class="font-medium text-primary-900">Rich Designer :</span> Conception lumière Club Med Cefalù & Marbella.</li>
+        </ul>
       </div>
     </div>
   </div>
