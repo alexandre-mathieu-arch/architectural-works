@@ -113,6 +113,21 @@ onMounted(() => {
   }
 });
 
+// Watch filters and scroll to grid when they change
+watch([selectedTypology, selectedYear, selectedCountry], () => {
+  if (import.meta.client) {
+    // Only scroll if we're not already at the grid or below
+    const target = document.getElementById('projects-grid');
+    if (target) {
+      const rect = target.getBoundingClientRect();
+      // If the top of the grid is not visible (scrolled up too far), scroll to it
+      if (rect.top > 150 || rect.top < 0) {
+        scrollToProjects(1000);
+      }
+    }
+  }
+}, { deep: true });
+
 watch(() => route.query.view, (newView) => {
   if (newView === 'grid') {
     jumpToProjects();
