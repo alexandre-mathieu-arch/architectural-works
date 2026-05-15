@@ -5,54 +5,53 @@
     <div class="space-y-8 max-w-5xl">
       <!-- 2024-2025 -->
       <div>
-        <h3 class="u-h3 mb-1">2024 — 2025 — Architecte Collaborateur — Archivolto</h3>
-        <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90">
-          <li>Collectifs de standing & maisons individuelles à Larmor-Plage.</li>
-          <li>Usine de biométhanisation & lagune de stockage à Limoges.</li>
-          <li>Aménagement lotissement (23 maisons, 12 logements) à Guidel.</li>
+        <h3 class="u-h3 mb-1">2024 — 2025 — Architecte Collaborateur | Archivolto</h3>
+        <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90 list-none p-0">
+          <li>• Collectifs de standing & maisons individuelles à Larmor-Plage.</li>
+          <li>• Usine de biométhanisation & lagune de stockage à Limoges.</li>
+          <li>• Aménagement lotissement (23 maisons, 12 logements) à Guidel.</li>
         </ul>
       </div>
 
       <!-- 2023 -->
       <div>
-        <h3 class="u-h3 mb-1">2023 — Architecte Indépendant — MATAL</h3>
-        <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90">
-          <li><span class="font-medium text-primary-900">Bangkok :</span> Transformation immeuble en studio de podcast (Sunikwartz HK).</li>
-          <li><span class="font-medium text-primary-900">Port-Louis :</span> Rénovation maison individuelle.</li>
-          <li><span class="font-medium text-primary-900">Marrakech :</span> Conception de deux villas jumelles.</li>
+        <h3 class="u-h3 mb-1">2023 — Architecte en Indépendant</h3>
+        <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90 list-none p-0">
+          <li>• Transformation immeuble en studio de podcast (Sunikwartz HK) à Bangkok.</li>
+          <li>• Rénovation maison individuelle à Port-Louis.</li>
+          <li>• Conception de deux villas jumelles au Maroc.</li>
         </ul>
       </div>
 
       <!-- 2022 -->
       <div>
-        <h3 class="u-h3 mb-1">2022 — Architecte Collaborateur — Riguidel</h3>
-        <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90">
-          <li>Lotissements maisons individuelles (social & accession).</li>
-          <li>Collectif de logements sociaux à Étel.</li>
-          <li>Maison individuelle en logement partagé.</li>
-          <li>MOE d'exécution Collège de Goh Lanno, Plouharnel.</li>
+        <h3 class="u-h3 mb-1">2022 — Architecte Collaborateur | Riguidel</h3>
+        <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90 list-none p-0">
+          <li>• Lotissements maisons individuelles (social & accession).</li>
+          <li>• Collectif de logements sociaux à Étel.</li>
+          <li>• Maison individuelle en logement partagé.</li>
+          <li>• MOE d'exécution Collège de Goh Lanno, Plouharnel.</li>
         </ul>
       </div>
 
       <!-- 2018-2021 -->
       <div>
-        <h3 class="u-h3 mb-1">2018 — 2021 — Architecte Collaborateur — Brulé Architectes Associés</h3>
-        <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90">
-          <li>Logements Passivhaus Kerfeunteun & maisons Quimper.</li>
-          <li>Cabinet médical à Plonévez.</li>
-          <li>Rénovation & extension menuiserie MCA, Plonévez-du-Faou.</li>
-          <li><span class="text-primary-900/50 uppercase text-[10px] tracking-widest mr-2">Concours & Études</span> ISEN Brest, Siège COPERL, Atrium bancaire, Agence bancaire Quimper, Collège Isigny-Sur-Mer.</li>
-          <li><span class="text-primary-900/50 uppercase text-[10px] tracking-widest mr-2">Intérieur & Design</span> Bar-resto "Du Vin dans les Voiles", Appartement sous combles, Tertiaire Passivhaus bois/paille Quimper.</li>
+        <h3 class="u-h3 mb-1">2018 — 2021 — Architecte Collaborateur | Brulé Architectes Associés</h3>
+        <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90 list-none p-0">
+          <li>• Logements Passivhaus Kerfeunteun & maisons Quimper.</li>
+          <li>• Cabinet médical à Plonévez.</li>
+          <li>• Rénovation & extension menuiserie MCA, Plonévez-du-Faou.</li>
+          <li>• <span class="text-primary-900/50 uppercase text-[10px] tracking-widest mr-1">Concours & Études :</span> ISEN Brest, Siège COPERL, Atrium bancaire, Agence bancaire Quimper, Collège Isigny-Sur-Mer.</li>
+          <li>• <span class="text-primary-900/50 uppercase text-[10px] tracking-widest mr-1">Intérieur & Design :</span> Bar-resto "Du Vin dans les Voiles", Appartement sous combles, Tertiaire Passivhaus bois/paille Quimper.</li>
         </ul>
       </div>
 
       <!-- 2018 -->
       <div>
-        <h3 class="u-h3 mb-1">2018 — Parcours & Expériences</h3>
-        <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90">
-          <li><span class="font-medium text-primary-900">MATAL :</span> Rénovations, extensions Sud Bretagne, Collectif Avenue de la Marne Lorient.</li>
-          <li><span class="font-medium text-primary-900">DDL Architectes :</span> Aménagement urbain rive gauche de Vannes (KCAP Zurich).</li>
-          <li><span class="font-medium text-primary-900">Rich Designer :</span> Conception lumière Club Med Cefalù & Marbella.</li>
+        <h3 class="u-h3 mb-1">2018 — Collaboration</h3>
+        <ul class="space-y-0.5 text-[13px] leading-relaxed u-body opacity-90 list-none p-0">
+          <li>• <span class="font-medium text-primary-900">DDL Architectes :</span> Aménagement urbain rive gauche de Vannes (KCAP Zurich).</li>
+          <li>• <span class="font-medium text-primary-900">Rich Designer :</span> Conception lumière Club Med Cefalù & Marbella.</li>
         </ul>
       </div>
     </div>
