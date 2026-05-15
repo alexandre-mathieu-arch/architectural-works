@@ -86,6 +86,7 @@ useHead({
   title: 'Alexandre Mathieu — architecture & design'
 })
 
+const route = useRoute();
 const scrollProgress = ref(0);
 
 const handleScroll = () => {
@@ -94,9 +95,28 @@ const handleScroll = () => {
   }
 };
 
+const jumpToProjects = () => {
+  const target = document.getElementById('projects-grid');
+  if (target) {
+    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 120;
+    window.scrollTo({ top: targetPosition, behavior: 'instant' as any });
+  }
+};
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
   handleScroll();
+  
+  if (route.query.view === 'grid') {
+    // Immediate jump if view=grid is present
+    setTimeout(jumpToProjects, 50);
+  }
+});
+
+watch(() => route.query.view, (newView) => {
+  if (newView === 'grid') {
+    jumpToProjects();
+  }
 });
 
 onUnmounted(() => {
@@ -154,8 +174,8 @@ const scrollToContact = () => {
   smoothScrollTo('contact', 1200);
 };
 
-const scrollToProjects = () => {
-  smoothScrollTo('projects-grid', 2000);
+const scrollToProjects = (duration: number = 2000) => {
+  smoothScrollTo('projects-grid', duration);
 };
 
 watchEffect(() => {
