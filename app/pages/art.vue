@@ -7,17 +7,20 @@
         class="flex flex-col group transition-all duration-1000"
       >
         <div 
-          class="relative overflow-hidden cursor-zoom-in transition-all duration-700 rounded-none"
+          class="relative overflow-hidden cursor-zoom-in transition-all duration-700 rounded-none bg-gray-50 dark:bg-gray-900 flex items-center justify-center min-h-[200px]"
           @click="selectedImage = item"
         >
-          <NuxtImg
+          <img
             v-if="item.image"
             :src="formatImagePath(item.image)"
             :alt="item.title"
-            format="webp"
-            width="1200"
             class="w-full h-auto transition-transform duration-[1.5s] ease-out rounded-none"
+            @error="(e) => console.error('Image load error:', formatImagePath(item.image))"
           />
+          <div v-else class="flex flex-col items-center gap-2 opacity-20">
+            <UIcon name="i-heroicons-photo" class="w-10 h-10" />
+            <span class="u-legend">{{ item.title }}</span>
+          </div>
           <!-- Subtle overlay for texture -->
           <div class="absolute inset-0 opacity-0 group-hover:opacity-10 dark:bg-white bg-black transition-opacity duration-700 pointer-events-none"></div>
         </div>
@@ -54,11 +57,9 @@
         @click="selectedImage = null"
       >
         <div class="relative w-full h-full flex flex-col items-center justify-center">
-          <NuxtImg
+          <img
             :src="formatImagePath(selectedImage.image)"
             :alt="selectedImage.title"
-            format="webp"
-            width="2400"
             class="max-w-full max-h-[85vh] object-contain rounded-none"
           />
           
@@ -81,19 +82,14 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const selectedImage = ref<any>(null)
-const config = useRuntimeConfig()
-const baseURL = config.app.baseURL || '/'
 
 const formatImagePath = (path: string) => {
   if (!path) return ''
-  // If it's already an absolute URL, return it
   if (path.startsWith('http')) return path
   
-  // Ensure we have a leading slash but no double slash with baseURL
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path
-  const base = baseURL.endsWith('/') ? baseURL : baseURL + '/'
-  
-  return base + cleanPath
+  // Try relative path (no leading slash)
+  // If we are at /works/art, images/art/vague.jpg resolves to /works/images/art/vague.jpg
+  return path.startsWith('/') ? path.slice(1) : path
 }
 
 // Robust data fetching for Art section
