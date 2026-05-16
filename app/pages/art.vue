@@ -1,12 +1,11 @@
 <template>
   <div class="pt-8 pb-40 relative">
-    <div v-if="filteredArt?.length" class="grid grid-cols-1 md:grid-cols-12 gap-y-24 md:gap-y-48 gap-x-4 md:gap-x-12">
+    <div v-if="filteredArt?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
       
       <div 
         v-for="(item, index) in filteredArt" 
         :key="item.path"
-        class="flex flex-col group transition-all duration-1000 ease-curtain"
-        :class="getItemLayout(index)"
+        class="flex flex-col group transition-all duration-1000"
       >
         <div 
           class="relative overflow-hidden cursor-zoom-in transition-all duration-700 rounded-none"
@@ -92,23 +91,6 @@ const filteredArt = computed(() => {
   if (!artItems.value) return []
   return artItems.value.filter(item => item.path.startsWith('/art/'))
 })
-
-// Logic to create a "Studio Wall" rhythm
-const getItemLayout = (index: number) => {
-  const layouts = [
-    'md:col-span-8 md:col-start-1',
-    'md:col-span-5 md:col-start-8 md:-mt-24',
-    'md:col-span-6 md:col-start-3 md:mt-12',
-    'md:col-span-4 md:col-start-1 md:-mt-16',
-    'md:col-span-7 md:col-start-6',
-    'md:col-span-5 md:col-start-2 md:-mt-32',
-    'md:col-span-4 md:col-start-8 md:mt-8',
-    'md:col-span-9 md:col-start-4 md:-mt-12',
-    'md:col-span-5 md:col-start-1 md:mt-16',
-    'md:col-span-6 md:col-start-7 md:-mt-20'
-  ]
-  return layouts[index % layouts.length]
-}
 
 definePageMeta({
   layout: 'default',
