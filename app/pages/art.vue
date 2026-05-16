@@ -1,7 +1,6 @@
 <template>
   <div class="pt-8 pb-40 relative">
     <div v-if="filteredArt?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-      
       <div 
         v-for="(item, index) in filteredArt" 
         :key="item.path"
@@ -13,7 +12,7 @@
         >
           <NuxtImg
             v-if="item.image"
-            :src="item.image.startsWith('/') ? item.image : '/' + item.image"
+            :src="formatImagePath(item.image)"
             :alt="item.title"
             format="webp"
             width="1200"
@@ -34,7 +33,10 @@
     </div>
     
     <div v-else class="text-center py-20">
-      <p class="text-gray-500 italic">La section Art sera bientôt disponible...</p>
+      <p class="u-body opacity-60 italic">La section Art est en cours de chargement ou sera bientôt disponible...</p>
+      <div v-if="allContentItems?.length" class="mt-4 text-[10px] opacity-20">
+        {{ allContentItems.length }} items total en base
+      </div>
     </div>
 
     <!-- Exhibition Lightbox -->
@@ -53,7 +55,7 @@
       >
         <div class="relative w-full h-full flex flex-col items-center justify-center">
           <NuxtImg
-            :src="selectedImage.image.startsWith('/') ? selectedImage.image : '/' + selectedImage.image"
+            :src="formatImagePath(selectedImage.image)"
             :alt="selectedImage.title"
             format="webp"
             width="2400"
@@ -79,15 +81,34 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const selectedImage = ref<any>(null)
-const { data: artItems } = await useAsyncData('art-content', () => {
-  return queryCollection('content')
-    .where('path', 'LIKE', '/art/%')
-    .where('draft', '<>', true)
-    .orderBy('order', 'asc')
-    .all()
+const config = useRuntimeConfig()
+const baseURL = config.app.baseURL || '/'
+
+const formatImagePath = (path: string) => {
+  if (!path) return ''
+  // If it's already an absolute URL, return it
+  if (path.startsWith('http')) return path
+  
+  // Ensure we have a leading slash but no double slash with baseURL
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path
+  const base = baseURL.endsWith('/') ? baseURL : baseURL + '/'
+  
+  return base + cleanPath
+}
+
+// Robust data fetching for Art section
+const { data: allContentItems } = await useAsyncData('all-content-for-art-v3', () => {
+  return queryCollection('content').all()
 })
 
-const filteredArt = computed(() => artItems.value || [])
+const filteredArt = computed(() => {
+  if (!allContentItems.value) return []
+  // Match any path that contains 'art/' to be safe with different indexing styles
+  return allContentItems.value
+    .filter(item => item.path && item.path.toLowerCase().includes('art/'))
+    .filter(item => !item.draft)
+    .sort((a, b) => (a.order || 999) - (b.order || 999))
+})
 
 definePageMeta({
   layout: 'default',
@@ -112,5 +133,5 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Optional: specific styles for the studio wall if needed */
+/* Studio wall layout styles */
 </style>

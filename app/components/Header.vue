@@ -233,6 +233,13 @@ const themeTitle = computed(() => {
 
 const { hoveredProjectTitle } = useHoverProject();
 
+const links = [
+  { label: 'Projets', to: '/' },
+  { label: 'À propos', to: '/about' },
+  { label: 'Corpus', to: '/corpus' },
+  { label: 'Art', to: '/art' }
+];
+
 const emit = defineEmits(['linkClick', 'linkHover']);
 
 const activeLink = ref('');
@@ -311,13 +318,6 @@ onUnmounted(() => {
     document.body.style.overflow = '';
   }
 });
-
-const links = [
-  { label: 'Projets', to: '/' },
-  { label: 'À propos', to: '/about' },
-  { label: 'Corpus', to: '/corpus' },
-  { label: 'Art', to: '/art' }
-];
 </script>
 
 <style scoped>
