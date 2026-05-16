@@ -148,6 +148,7 @@ watch([selectedTypology, selectedYear, selectedCountry], () => {
 const { data: projects } = await useAsyncData('home-projects', () =>
   queryCollection('content')
     .where('path', 'LIKE', '/projets/%')
+    .where('draft', '<>', true)
     .all()
 );
 

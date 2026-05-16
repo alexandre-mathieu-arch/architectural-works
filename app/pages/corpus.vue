@@ -48,6 +48,7 @@ import { computed } from 'vue'
 const { data: allArticles } = await useAsyncData('corpus-articles', () => {
   return queryCollection('content')
     .where('path', 'LIKE', '/corpus/%')
+    .where('draft', '<>', true)
     .all()
 })
 

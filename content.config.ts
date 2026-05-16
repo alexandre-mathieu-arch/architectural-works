@@ -16,7 +16,7 @@ export default defineContentConfig({
         date: z.date().or(z.string()).optional(),
         tags: z.array(z.string()).optional(),
         gallery: z.array(z.string()).optional(),
-        draft: z.boolean().optional(),
+        draft: z.boolean().default(false),
         typologies: z.array(z.string()).optional(),
         tailles: z.array(z.string()).optional(),
         pays: z.array(z.string()).optional(),
