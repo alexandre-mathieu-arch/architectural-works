@@ -14,6 +14,8 @@ images:
   - "/images/projects/maison-bretonne/maison-bretonne-extrait-coupe.jpg"
   - "/images/projects/maison-bretonne/maison-bretonne-avant.jpg"
   - "/images/projects/maison-bretonne/maison-bretonne-photogrammetrie.jpg"
+  - "/images/projects/maison-bretonne/non-visible-detail-volet-roulant.jpg"
+  - "/images/projects/maison-bretonne/non-visible-facades.jpg"
 date: "2020"
 tags: ["rénovation", "maison", "bois", "zinc"]
 typologies: ["Résidentiel"]

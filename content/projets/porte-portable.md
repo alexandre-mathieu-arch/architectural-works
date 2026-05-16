@@ -6,7 +6,10 @@ draft: false
 tags: ["design", "objet"]
 images:
   - "/images/projects/porte-portable/porte-portable-okume.jpg"
-description: "Support pour smartphone en multiplis d'okoumé, cuir et inox. Un objet d'une simplicité absolue, sans mécanisme, offrant quatre inclinaisons possibles pour accompagner un bureau en bois et métal."
+  - "/images/projects/porte-portable/okume-2.jpg"
+  - "/images/projects/porte-portable/okume-3.jpg"
+  - "/images/projects/porte-portable/av-marne-_00035_.png"
+description: "Série de prototypes pour smartphone en multiplis d'okoumé, cuir et inox. Ces objets ont été conçus pour accompagner la création d'un bureau en bois et acier, offrant une simplicité absolue sans mécanisme."
 typologies: ["Design", "Objet"]
 tailles: ["S"]
 pays: ["France"]
@@ -15,8 +18,8 @@ phase: "Prototype"
 statut: "Réalisé"
 ---
 
-Lors de la conception d'un bureau alliant bois et métal, la question des équipements et accessoires s'est posée naturellement. Pour accompagner cet ensemble, j'ai réalisé un objet utile au quotidien, guidé par une recherche de simplicité absolue.
+Dans le cadre de la création d'un bureau alliant bois et acier, la question des équipements et accessoires s'est posée naturellement. Pour accompagner cet ensemble, j'ai développé une série de prototypes guidés par une recherche de simplicité absolue.
 
-Le porte-portable est un objet unique, sans aucun mécanisme. Il combine trois matériaux choisis pour leur complémentarité : le multiplis d'okoumé pour la structure, le cuir de vachette pour le contact et la protection, et un profilé en U en inox. Ce dernier vient rappeler l'esthétique métallique des piétements du bureau associé.
+Le porte-portable est un objet unique, sans aucun mécanisme. Il combine trois matériaux choisis pour leur complémentarité : le multiplis d'okoumé pour la structure, le cuir de vachette pour le contact et la protection, et un profilé en U en inox. Ce dernier vient rappeler l'esthétique métallique des piétements du bureau en acier associé.
 
 Sa géométrie permet quatre positions d'utilisation : deux inclinaisons différentes et deux orientations (portrait ou paysage). Entièrement fabriqué par mes soins, il incarne une vision du design où l'économie de moyens sert la fonctionnalité.
