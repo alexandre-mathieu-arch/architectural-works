@@ -79,18 +79,15 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const selectedImage = ref<any>(null)
-
 const { data: artItems } = await useAsyncData('art-content', () => {
   return queryCollection('content')
+    .where('path', 'LIKE', '/art/%')
     .where('draft', '<>', true)
     .orderBy('order', 'asc')
     .all()
 })
 
-const filteredArt = computed(() => {
-  if (!artItems.value) return []
-  return artItems.value.filter(item => item.path.startsWith('/art/'))
-})
+const filteredArt = computed(() => artItems.value || [])
 
 definePageMeta({
   layout: 'default',
