@@ -95,7 +95,7 @@ let autoRevealTimer: any = null;
 const triggerReveal = () => {
   reveal();
   if (route.path === '/') {
-    router.push('/works');
+    router.push({ path: '/', query: { view: 'grid' } });
   }
 };
 
