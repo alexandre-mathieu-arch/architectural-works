@@ -8,7 +8,6 @@ images:
   - "/images/projects/porte-portable/porte-portable-okume.jpg"
   - "/images/projects/porte-portable/okume-2.jpg"
   - "/images/projects/porte-portable/okume-3.jpg"
-  - "/images/projects/porte-portable/av-marne-_00035_.png"
 description: "Série de prototypes pour smartphone en multiplis d'okoumé, cuir et inox. Ces objets ont été conçus pour accompagner la création d'un bureau en bois et acier, offrant une simplicité absolue sans mécanisme."
 typologies: ["Design", "Objet"]
 tailles: ["S"]
